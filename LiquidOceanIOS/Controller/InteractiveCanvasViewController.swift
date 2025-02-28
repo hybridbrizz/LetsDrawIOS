@@ -59,8 +59,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var gridLinesButton: ButtonFrame!
     @IBOutlet weak var summaryButton: ButtonFrame!
     
-    @IBOutlet weak var toolboxButton: ButtonFrame!
-    
     @IBOutlet var toolboxActionLeading: NSLayoutConstraint!
     @IBOutlet var toolboxActionTrailing: NSLayoutConstraint!
     
@@ -118,9 +116,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet var summaryButtonTrailing: NSLayoutConstraint!
     @IBOutlet var summaryActionLeading: NSLayoutConstraint!
     @IBOutlet var summaryActionTrailing: NSLayoutConstraint!
-    
-    @IBOutlet var toolboxButtonLeading: NSLayoutConstraint!
-    @IBOutlet var toolboxButtonTrailing: NSLayoutConstraint!
     
     @IBOutlet var recentColorsButtonLeading: NSLayoutConstraint!
     @IBOutlet var recentColorsButtonTrailing: NSLayoutConstraint!
@@ -365,21 +360,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         //self.paintPanelWidth.constant = 0
         self.colorPickerFrameWidth.constant = 0
         self.colorPickerFrame.isHidden = true
-        
-        // toolbox
-        //self.toggleToolbox(open: false)
-        
+
         self.paintPanel.isHidden = true
-        
-        // toolbox
-        self.toolboxButton.setOnClickListener {
-            self.toggleToolbox(open: self.exportButton.isHidden)
-        }
-        
-        exportButton.isHidden = true
-        changeBackgroundButton.isHidden = true
-        gridLinesButton.isHidden = true
-        summaryButton.isHidden = true
         
         // recent colors
         self.recentColorsButton.setOnClickListener {
@@ -700,20 +682,20 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             colorPickerFrameTrailing.isActive = true
             
             // toolbox button
-            toolboxButtonLeading.isActive = true
-            toolboxButtonTrailing.isActive = false
+//            toolboxButtonLeading.isActive = true
+//            toolboxButtonTrailing.isActive = false
             
             // toolbox action
-            toolboxActionLeading.isActive = true
-            toolboxActionTrailing.isActive = false
+//            toolboxActionLeading.isActive = true
+//            toolboxActionTrailing.isActive = false
             
             // recent colors button
             recentColorsButtonLeading.isActive = false
             recentColorsButtonTrailing.isActive = true
             
             // recent colors action
-            recentColorsActionLeading.isActive = false
-            recentColorsActionTrailing.isActive = true
+//            recentColorsActionLeading.isActive = false
+//            recentColorsActionTrailing.isActive = true
             
             // recent colors container
             recentColorsContainerLeading.isActive = false
@@ -728,10 +710,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             deviceViewportSummaryViewTrailing.isActive = true
             
             // toolbox buttons
-            let leadingConstraints = [exportButtonLeading, exportActionLeading, changeBackgroundButtonLeading,  changeBackgroundActionLeading, gridLinesButtonLeading, gridLinesActionLeading, summaryButtonLeading,
-                summaryActionLeading]
-            let trailingConstraints = [exportButtonTrailing, exportActionTrailing, changeBackgroundButtonTrailing, changeBackgroundActionTrailing, gridLinesButtonTrailing, gridLinesActionTrailing, summaryButtonTrailing,
-                summaryActionTrailing]
+            let leadingConstraints = [exportButtonLeading, changeBackgroundButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
+            let trailingConstraints = [exportButtonTrailing, changeBackgroundButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
             
             for i in 0...trailingConstraints.count - 1 {
                 let leadingConstraint = leadingConstraints[i]!
@@ -763,10 +743,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             // color picker frame
             colorPIckerFrameLeading.isActive = true
             colorPickerFrameTrailing.isActive = false
-            
-            // toolbox button
-            toolboxButtonLeading.isActive = false
-            toolboxButtonTrailing.isActive = true
             
             // toolbox action
             toolboxActionLeading.isActive = false
@@ -1250,10 +1226,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.toggleSummary(show: false)
             
-            self.toggleToolbox(open: false)
-            
-            toolboxButton.isHidden = false
-            
             self.hideCanvasFrameView()
             
             //toggleMenu(show: false)
@@ -1269,8 +1241,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             self.paintPanel.isHidden = true
             
             self.paintPanelWidth.constant = 0
-            
-            self.toolboxButton.isHidden = true
             
             //toggleToolbox(open: false)
         }
@@ -1308,34 +1278,34 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         palettesView.isHidden = !show
     }
     
-    func toggleToolbox(open: Bool) {
-        if open {
-            exportButton.isHidden = false
-            changeBackgroundButton.isHidden = false
-            gridLinesButton.isHidden = false
-            summaryButton.isHidden = false
-            
-            if SessionSettings.instance.rightHanded {
-                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
-                    [summaryButton]], cascade: false, moveOut: false, inverse: true)
-            }
-            else {
-                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
-                    [summaryButton]], cascade: false, moveOut: false, inverse: false)
-            }
-        }
-        else {
-            if SessionSettings.instance.rightHanded {
-                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
-                    [summaryButton]], cascade: false, moveOut: true, inverse: true)
-            }
-            else {
-                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
-                    [summaryButton]], cascade: false, moveOut: true, inverse: false)
-            }
-        }
-        SessionSettings.instance.toolboxOpen = open
-    }
+//    func toggleToolbox(open: Bool) {
+//        if open {
+//            exportButton.isHidden = false
+//            changeBackgroundButton.isHidden = false
+//            gridLinesButton.isHidden = false
+//            summaryButton.isHidden = false
+//            
+//            if SessionSettings.instance.rightHanded {
+//                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
+//                    [summaryButton]], cascade: false, moveOut: false, inverse: true)
+//            }
+//            else {
+//                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
+//                    [summaryButton]], cascade: false, moveOut: false, inverse: false)
+//            }
+//        }
+//        else {
+//            if SessionSettings.instance.rightHanded {
+//                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
+//                    [summaryButton]], cascade: false, moveOut: true, inverse: true)
+//            }
+//            else {
+//                Animator.animateMenuButtons(views: [[exportButton], [changeBackgroundButton], [gridLinesButton],
+//                    [summaryButton]], cascade: false, moveOut: true, inverse: false)
+//            }
+//        }
+//        SessionSettings.instance.toolboxOpen = open
+//    }
     
     func toggleRecentColors(open: Bool) {
         if open {
@@ -1372,7 +1342,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             self.toggleMenu(show: true)
         }
         else {
-            self.toggleToolbox(open: SessionSettings.instance.toolboxOpen)
             self.togglePaintPanel(open: SessionSettings.instance.paintPanelOpen)
         }
     }
@@ -1861,7 +1830,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         if !SessionSettings.instance.darkIcons {
             self.menuButton.isLight = true
             self.paintPanelButton.isLight = true
-            self.toolboxButton.isLight = true
+//            self.toolboxButton.isLight = true
             self.recentColorsButton.isLight = true
             self.exportButton.isLight = true
             self.changeBackgroundButton.isLight = true
@@ -1871,7 +1840,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         else {
             self.menuButton.isLight = false
             self.paintPanelButton.isLight = false
-            self.toolboxButton.isLight = false
+//            self.toolboxButton.isLight = false
             self.recentColorsButton.isLight = false
             self.exportButton.isLight = false
             self.changeBackgroundButton.isLight = false

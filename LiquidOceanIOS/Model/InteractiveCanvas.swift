@@ -65,7 +65,7 @@ class InteractiveCanvas: NSObject {
     var basePpu = 100
     var ppu: Int!
     
-    var gridLineThreshold = 19
+    var gridLineThreshold = 9
     
     var deviceViewport: CGRect!
     

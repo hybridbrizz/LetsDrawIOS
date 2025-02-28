@@ -59,7 +59,7 @@ protocol InteractiveCanvasSelectedObjectMoveViewDelegate: AnyObject {
     func selectedObjectMoveEnded()
 }
 
-class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveCanvasScaleCallback, InteractiveCanvasDeviceViewportResetDelegate, InteractiveCanvasSelectedObjectDelegate {
+class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveCanvasScaleCallback, InteractiveCanvasDeviceViewportResetDelegate, InteractiveCanvasSelectedObjectDelegate, UIGestureRecognizerDelegate {
 
     enum Mode {
         case exploring
@@ -85,6 +85,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     var panGestureRecognizer: UIPanGestureRecognizer!
     var tapGestureRecognizer: UITapGestureRecognizer!
     var drawGestureRecognizer: UIDrawGestureRecognizer!
+    var pinchGestureRecognizer: UIPinchGestureRecognizer!
     
     weak var paintActionDelegate: PaintActionDelegate?
     weak var paintDelegate: InteractiveCanvasPaintDelegate?
@@ -119,6 +120,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         
         // gestures
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
+        self.panGestureRecognizer.maximumNumberOfTouches = 2
         addPan()
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(sender:)))
@@ -129,8 +131,18 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(sender:)))
         self.addGestureRecognizer(pinchGestureRecognizer)
+        self.pinchGestureRecognizer = pinchGestureRecognizer
+        self.pinchGestureRecognizer.delegate = self
         
         self.drawGestureRecognizer = UIDrawGestureRecognizer(target: self, action: #selector(didDraw(sender:)))
+        
+        // additional gesture setup
+        // Make the pinch recognizer more sensitive
+        pinchGestureRecognizer.delaysTouchesBegan = false
+        pinchGestureRecognizer.delaysTouchesEnded = false
+        
+        // Ensure the pinch can interrupt the pan
+        panGestureRecognizer.cancelsTouchesInView = false
         
         /*Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { (tmr) in
             let rT = arc4random() % 20 + 1
@@ -353,6 +365,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     func addPan() {
         if !hasGestureRecognizer(gestureRecognizer: self.panGestureRecognizer) {
             self.addGestureRecognizer(self.panGestureRecognizer)
+            self.panGestureRecognizer.delegate = self
         }
     }
     
@@ -846,7 +859,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                     }
                 }
                 else {
-                    fillColor = UIColor.black.cgColor
+                    fillColor = UIColor.darkGray.cgColor
                     
                 }
                 
@@ -881,4 +894,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         ctx.move(to: s)
         ctx.addLine(to: e)
     }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { true }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { true }
 }
