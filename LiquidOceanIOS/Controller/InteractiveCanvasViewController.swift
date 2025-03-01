@@ -15,7 +15,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
-    @IBOutlet var overlaysContainerView: UIView!
+    
+    @IBOutlet var canvasClientIndicatorsContainer: UIView!
+    @IBOutlet var summaryClientIndicatorsContainer: UIView!
     
     @IBOutlet var paintPanel: UIView!
     
@@ -300,7 +302,14 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             interactiveCanvas: self.surfaceView.interactiveCanvas
         )
         
-        addSwiftUIViewToContainer(swiftUIView: canvasClientIndicatorsView, containerView: self.overlaysContainerView)
+        addSwiftUIViewToContainer(swiftUIView: canvasClientIndicatorsView, containerView: self.canvasClientIndicatorsContainer)
+        
+        let summaryClientIndicatorsView = SummaryClientIndicatorsView(
+            surfaceView: self.surfaceView,
+            interactiveCanvas: self.surfaceView.interactiveCanvas
+        )
+        
+        addSwiftUIViewToContainer(swiftUIView: summaryClientIndicatorsView, containerView: self.summaryClientIndicatorsContainer)
         
         // surfaceView.setInitalScale()
         

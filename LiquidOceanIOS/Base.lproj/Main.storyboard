@@ -3013,6 +3013,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-I6-Tuf">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </containerView>
                             <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYW-Te-7QB">
                                 <rect key="frame" x="0.0" y="0.0" width="696" height="414"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3700,10 +3703,19 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-Br-pXl" customClass="UIImageView">
                                 <rect key="frame" x="64" y="84" width="300" height="300"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLq-ba-skA">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    </containerView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="HIU-IG-Wh5"/>
+                                    <constraint firstAttribute="trailing" secondItem="jLq-ba-skA" secondAttribute="trailing" id="MMt-2s-LoO"/>
+                                    <constraint firstAttribute="bottom" secondItem="jLq-ba-skA" secondAttribute="bottom" id="Wuc-FI-f96"/>
+                                    <constraint firstItem="jLq-ba-skA" firstAttribute="leading" secondItem="hfq-Br-pXl" secondAttribute="leading" id="big-po-gEZ"/>
                                     <constraint firstAttribute="width" constant="300" id="esi-4k-n42"/>
+                                    <constraint firstItem="jLq-ba-skA" firstAttribute="top" secondItem="hfq-Br-pXl" secondAttribute="top" id="t06-qC-EjE"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCY-AR-gsM" customClass="DeviceViewportSummaryView" customModule="LiquidOceanIOS" customModuleProvider="target">
@@ -3755,9 +3767,6 @@
                                     <constraint firstAttribute="trailing" secondItem="8Xj-Za-JZQ" secondAttribute="trailing" constant="16" id="xod-0L-XKc"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-I6-Tuf">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3855,6 +3864,7 @@
                         <outlet property="bannerText" destination="8Xj-Za-JZQ" id="Cgm-Z9-gYb"/>
                         <outlet property="bannerView" destination="HLu-eR-GQ6" id="oL6-cY-cOc"/>
                         <outlet property="bannerWidth" destination="KXZ-AI-nn8" id="rNZ-OT-AVS"/>
+                        <outlet property="canvasClientIndicatorsContainer" destination="P5c-I6-Tuf" id="5yz-I2-RlS"/>
                         <outlet property="canvasFrameView" destination="hVZ-1b-A3N" id="hgi-dE-wPf"/>
                         <outlet property="canvasFrameViewLeading" destination="BiG-YW-U0X" id="hMB-4L-KaD"/>
                         <outlet property="canvasFrameViewTop" destination="KPc-XP-DtV" id="uee-JC-NZT"/>
@@ -3908,7 +3918,6 @@
                         <outlet property="objectMoveUpButtonLeading" destination="0eI-nR-qfw" id="hZP-Ed-yoS"/>
                         <outlet property="objectMoveUpButtonTop" destination="dbF-Me-bp2" id="Vi4-0b-uJh"/>
                         <outlet property="objectSelectionView" destination="JhC-0g-hiD" id="en0-ze-p1v"/>
-                        <outlet property="overlaysContainerView" destination="P5c-I6-Tuf" id="g6t-fB-mxF"/>
                         <outlet property="paintColorAccept" destination="dAw-EJ-sTU" id="jgi-2t-bYo"/>
                         <outlet property="paintColorCancel" destination="py9-Zf-Ycq" id="giV-pk-5ei"/>
                         <outlet property="paintColorIndicator" destination="gi1-s8-Ps3" id="s1B-8p-Syz"/>
@@ -3958,6 +3967,7 @@
                         <outlet property="summaryButton" destination="ZmC-9f-OkI" id="xx7-Am-apT"/>
                         <outlet property="summaryButtonLeading" destination="w8H-5M-679" id="uEv-xP-oUa"/>
                         <outlet property="summaryButtonTrailing" destination="SdG-YV-QTf" id="Q8F-qM-6RX"/>
+                        <outlet property="summaryClientIndicatorsContainer" destination="jLq-ba-skA" id="UMh-jg-kfs"/>
                         <outlet property="summaryView" destination="hfq-Br-pXl" id="JId-SU-mDY"/>
                         <outlet property="summaryViewLeading" destination="CLK-T5-VUI" id="YFk-rm-xCZ"/>
                         <outlet property="summaryViewTrailing" destination="70h-Uj-IPc" id="IZR-VE-suB"/>
@@ -5571,6 +5581,20 @@ If any person on any canvas uses pixels to give out any personal information abo
             </objects>
             <point key="canvasLocation" x="-1197" y="-512"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Ffl-7J-eSt">
+            <objects>
+                <viewController id="VJk-La-ppk" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8lp-1I-hDK">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ARi-gk-s5G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="-346"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xNZ-J9-gls"/>
@@ -5596,13 +5620,13 @@ If any person on any canvas uses pixels to give out any personal information abo
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
