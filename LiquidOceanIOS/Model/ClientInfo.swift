@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ClientInfo: NSObject {
+class ClientInfo: NSObject, Identifiable {
     var name: String
     var color: Int32
     var center: Int

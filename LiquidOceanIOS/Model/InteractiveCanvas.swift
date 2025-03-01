@@ -1289,6 +1289,26 @@ class InteractiveCanvas: NSObject, ObservableObject {
         return CGPoint(x: absXPx - leftViewportPx, y: absYPx - topViewportPx)
     }
     
+//    fun jumpToUnit(context: Context, x: Int, y: Int) {
+//            deviceViewport?.let {
+//                val cvX = it.centerX()
+//                val cvY = it.centerY()
+//
+//                translateBy(
+//                    context = context,
+//                    x = (x - cvX) * ppu,
+//                    y = (y - cvY) * ppu
+//                )
+//            }
+//        }
+    
+    func jumpToUnit(x: CGFloat, y: CGFloat) {
+        let cMidX = deviceViewport.midX
+        let cMidY = deviceViewport.midY
+        
+        translateBy(x: (x - cMidX) * CGFloat(ppu), y: (y - cMidY) * CGFloat(ppu))
+    }
+    
     func translateBy(x: CGFloat, y: CGFloat) {
         let margin = CGFloat(200) / CGFloat(ppu)
         

@@ -18,6 +18,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @IBOutlet var canvasClientIndicatorsContainer: UIView!
     @IBOutlet var summaryClientIndicatorsContainer: UIView!
+    @IBOutlet var clientListContainer: UIView!
     
     @IBOutlet var paintPanel: UIView!
     
@@ -218,6 +219,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var socketStatusImage: UIImageView!
     @IBOutlet weak var latencyText: UILabel!
     
+    @IBOutlet weak var latencyContainer: UIView!
+    
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
     let unwindToLoading = "UnwindToLoading"
@@ -310,6 +313,12 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         )
         
         addSwiftUIViewToContainer(swiftUIView: summaryClientIndicatorsView, containerView: self.summaryClientIndicatorsContainer)
+        
+        let clientListView = ClientListView(interactiveCanvas: self.surfaceView.interactiveCanvas)
+        addSwiftUIViewToContainer(swiftUIView: clientListView, containerView: self.clientListContainer)
+        
+        let latencyTGR = UITapGestureRecognizer(target: self, action: #selector(didTapLatencyContainer))
+        latencyContainer.addGestureRecognizer(latencyTGR)
         
         // surfaceView.setInitalScale()
         
@@ -1001,6 +1010,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @objc func didTapPaintPanel() {
         self.togglePalettesView(show: false)
+    }
+    
+    @objc func didTapLatencyContainer() {
+        self.clientListContainer.isHidden = !self.clientListContainer.isHidden
     }
     
 //    func startServerStatusChecks() {
