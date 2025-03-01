@@ -40,7 +40,8 @@
 		0744E8832D61918F00C9DD29 /* red_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0744E87F2D61918E00C9DD29 /* red_circle.png */; };
 		0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744E8842D625E7300C9DD29 /* ErrorPixel.swift */; };
 		074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A76002D7179EB00D487EC /* CombinedGestureView.swift */; };
-		075DE94A2D7288A8007C664D /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* OverlaysView.swift */; };
+		075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */; };
+		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
 		0788E47D25FBD1D8004FC782 /* iOSDeviceModelMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */; };
 		0788E47F25FBD3F5004FC782 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */; };
 		0788E48125FC58BC004FC782 /* ColorPickerOutletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */; };
@@ -186,7 +187,8 @@
 		0744E8802D61918E00C9DD29 /* yellow_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_circle.png; sourceTree = "<group>"; };
 		0744E8842D625E7300C9DD29 /* ErrorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPixel.swift; sourceTree = "<group>"; };
 		074A76002D7179EB00D487EC /* CombinedGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedGestureView.swift; sourceTree = "<group>"; };
-		075DE9492D7288A8007C664D /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
+		075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClientIndicatorsView.swift; sourceTree = "<group>"; };
+		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
 		0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iOSDeviceModelMapping.plist; sourceTree = "<group>"; };
 		0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerOutletsViewController.swift; sourceTree = "<group>"; };
@@ -356,7 +358,7 @@
 		075DE9382D728815007C664D /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				075DE9492D7288A8007C664D /* OverlaysView.swift */,
+				075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -539,6 +541,7 @@
 				07A9B16F25ED611C009A47DF /* PanelThemeConfig.swift */,
 				0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */,
 				07A7C842272AEEC9003AD69C /* UITouchGestureRecognizer.swift */,
+				076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -777,7 +780,7 @@
 				070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */,
 				0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */,
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
-				075DE94A2D7288A8007C664D /* OverlaysView.swift in Sources */,
+				075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */,
 				07A9B16E25ED2941009A47DF /* HowtoViewController.swift in Sources */,
 				07BBBABA2896E3B3008A6B9E /* QueueSocket.swift in Sources */,
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,
@@ -832,6 +835,7 @@
 				07FF5EFF25DF5833003E19AE /* ArtView.swift in Sources */,
 				07D0ED24272DCE5F00755C1D /* InteractiveCanvasSummaryView.swift in Sources */,
 				07D0ED26272DFC9000755C1D /* DeviceViewportSummaryView.swift in Sources */,
+				076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */,
 				07BD25F925D450CF00CF812E /* SessionSettings.swift in Sources */,
 				073663782608F16600E5403F /* PincodeViewController.swift in Sources */,
 			);

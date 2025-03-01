@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct OverlaysView: View {
+struct CanvasClientIndicatorsView: View {
     @ObservedObject var surfaceView: InteractiveCanvasView
     @ObservedObject var interactiveCanvas: InteractiveCanvas
     

@@ -294,22 +294,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.selectedObjectView = self
         self.surfaceView.selectedObjectMoveView = self
         
-        // Swift UI Overlays
-        let overlaysView = OverlaysView(
+        // canvas client indiactors
+        let canvasClientIndicatorsView = CanvasClientIndicatorsView(
             surfaceView: self.surfaceView,
             interactiveCanvas: self.surfaceView.interactiveCanvas
         )
         
-        let overlaysHostingController = UIHostingController(rootView: overlaysView)
-        overlaysHostingController.view.backgroundColor = UIColor.clear
-        
-        self.overlaysContainerView.backgroundColor = UIColor.clear
-        self.overlaysContainerView.addSubview(overlaysHostingController.view)
-        
-        addChild(overlaysHostingController)
-        
-        overlaysHostingController.view.frame = self.overlaysContainerView.bounds
-        overlaysHostingController.didMove(toParent: self)
+        addSwiftUIViewToContainer(swiftUIView: canvasClientIndicatorsView, containerView: self.overlaysContainerView)
         
         // surfaceView.setInitalScale()
         
