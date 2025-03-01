@@ -4288,10 +4288,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MqO-ne-2SR" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="17" y="17" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="m7v-Ag-XjP">
-                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="17" y="17" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="4WJ-iL-22I"/>
                                             <constraint firstAttribute="width" constant="24" id="AGM-ce-W8a"/>
@@ -4300,17 +4300,17 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="m7v-Ag-XjP" firstAttribute="top" secondItem="MqO-ne-2SR" secondAttribute="top" id="Bve-sr-sk3"/>
-                                    <constraint firstAttribute="width" constant="40" id="NDI-ss-5z1"/>
-                                    <constraint firstItem="m7v-Ag-XjP" firstAttribute="leading" secondItem="MqO-ne-2SR" secondAttribute="leading" id="aY6-X3-UgM"/>
-                                    <constraint firstAttribute="height" constant="40" id="szt-P7-bFK"/>
+                                    <constraint firstItem="m7v-Ag-XjP" firstAttribute="centerY" secondItem="MqO-ne-2SR" secondAttribute="centerY" id="Jzm-8Z-m2l"/>
+                                    <constraint firstAttribute="width" constant="58" id="NDI-ss-5z1"/>
+                                    <constraint firstItem="m7v-Ag-XjP" firstAttribute="centerX" secondItem="MqO-ne-2SR" secondAttribute="centerX" id="eZL-YD-63P"/>
+                                    <constraint firstAttribute="height" constant="58" id="szt-P7-bFK"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bw-r1-aTY" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="839" y="17" width="40" height="40"/>
+                                <rect key="frame" x="838" y="0.0" width="58" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="Oje-a8-g7i">
-                                        <rect key="frame" x="16" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="17" y="17" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="979-Xa-F4h"/>
                                             <constraint firstAttribute="height" constant="24" id="ifQ-oG-y44"/>
@@ -4319,17 +4319,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="Cj4-nk-goY"/>
-                                    <constraint firstItem="Oje-a8-g7i" firstAttribute="top" secondItem="4bw-r1-aTY" secondAttribute="top" id="DvF-bJ-Ti8"/>
-                                    <constraint firstAttribute="trailing" secondItem="Oje-a8-g7i" secondAttribute="trailing" id="MYJ-0L-LTW"/>
-                                    <constraint firstAttribute="height" constant="40" id="NGM-gD-qgb"/>
+                                    <constraint firstItem="Oje-a8-g7i" firstAttribute="centerY" secondItem="4bw-r1-aTY" secondAttribute="centerY" id="3FO-gQ-z6g"/>
+                                    <constraint firstItem="Oje-a8-g7i" firstAttribute="centerX" secondItem="4bw-r1-aTY" secondAttribute="centerX" id="CLq-Pd-ab4"/>
+                                    <constraint firstAttribute="width" constant="58" id="Cj4-nk-goY"/>
+                                    <constraint firstAttribute="height" constant="58" id="NGM-gD-qgb"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghr-rn-ObS" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="799" y="17" width="40" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghr-rn-ObS" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                <rect key="frame" x="780" y="0.0" width="58" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="2Mk-BU-M5n">
-                                        <rect key="frame" x="16" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="17" y="17" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="NGh-uz-oG5"/>
                                             <constraint firstAttribute="height" constant="24" id="i6g-6V-6Yu"/>
@@ -4338,10 +4338,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="7jr-ZD-sOX"/>
-                                    <constraint firstAttribute="trailing" secondItem="2Mk-BU-M5n" secondAttribute="trailing" id="SjF-eG-5A2"/>
-                                    <constraint firstAttribute="height" constant="40" id="Yjs-xU-zrb"/>
-                                    <constraint firstItem="2Mk-BU-M5n" firstAttribute="top" secondItem="Ghr-rn-ObS" secondAttribute="top" id="iEg-A7-vXq"/>
+                                    <constraint firstAttribute="width" constant="58" id="7jr-ZD-sOX"/>
+                                    <constraint firstItem="2Mk-BU-M5n" firstAttribute="centerX" secondItem="Ghr-rn-ObS" secondAttribute="centerX" id="Ndn-Y0-bbo"/>
+                                    <constraint firstAttribute="height" constant="58" id="Yjs-xU-zrb"/>
+                                    <constraint firstItem="2Mk-BU-M5n" firstAttribute="centerY" secondItem="Ghr-rn-ObS" secondAttribute="centerY" id="qoh-ih-9uq"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pixel Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Ag-cNh">
@@ -4378,18 +4378,18 @@
                         <viewLayoutGuide key="safeArea" id="JR0-q5-Asy"/>
                         <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MqO-ne-2SR" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="top" constant="17" id="0gT-cm-Zus"/>
+                            <constraint firstItem="MqO-ne-2SR" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="top" id="0gT-cm-Zus"/>
                             <constraint firstItem="wff-Ag-cNh" firstAttribute="leading" secondItem="HCR-md-Wjq" secondAttribute="trailing" constant="15" id="1Bj-ay-C82"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="leading" secondItem="Kwd-vz-DyL" secondAttribute="trailing" constant="15" id="DEY-xD-RR8"/>
-                            <constraint firstItem="4bw-r1-aTY" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="top" constant="17" id="Imd-4H-OG7"/>
-                            <constraint firstAttribute="trailing" secondItem="4bw-r1-aTY" secondAttribute="trailing" constant="17" id="Jfa-mO-qnX"/>
+                            <constraint firstItem="4bw-r1-aTY" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="top" id="Imd-4H-OG7"/>
+                            <constraint firstAttribute="trailing" secondItem="4bw-r1-aTY" secondAttribute="trailing" id="Jfa-mO-qnX"/>
                             <constraint firstItem="wff-Ag-cNh" firstAttribute="centerY" secondItem="HCR-md-Wjq" secondAttribute="centerY" id="MaF-Z9-TVA"/>
                             <constraint firstItem="GIL-ip-Skh" firstAttribute="centerY" secondItem="YlS-jE-YaY" secondAttribute="centerY" id="Q9E-kb-RKt"/>
                             <constraint firstItem="4bw-r1-aTY" firstAttribute="leading" secondItem="Ghr-rn-ObS" secondAttribute="trailing" id="cfR-im-o1U"/>
-                            <constraint firstItem="Ghr-rn-ObS" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="topMargin" constant="17" id="lH7-d4-nm1"/>
+                            <constraint firstItem="Ghr-rn-ObS" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="topMargin" id="lH7-d4-nm1"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="topMargin" constant="15" id="mSo-b3-BWE"/>
                             <constraint firstItem="GIL-ip-Skh" firstAttribute="centerX" secondItem="YlS-jE-YaY" secondAttribute="centerX" id="u1M-n0-X19"/>
-                            <constraint firstItem="MqO-ne-2SR" firstAttribute="leading" secondItem="YlS-jE-YaY" secondAttribute="leading" constant="17" id="vW3-Vt-cOj"/>
+                            <constraint firstItem="MqO-ne-2SR" firstAttribute="leading" secondItem="YlS-jE-YaY" secondAttribute="leading" id="vW3-Vt-cOj"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="centerX" secondItem="YlS-jE-YaY" secondAttribute="centerX" id="w34-JX-Dzg"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="centerY" secondItem="Kwd-vz-DyL" secondAttribute="centerY" id="xcg-Vm-wcS"/>
                         </constraints>
@@ -5566,8 +5566,8 @@ If any person on any canvas uses pixels to give out any personal information abo
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xNZ-J9-gls"/>
-        <segue reference="XGn-H2-2Wq"/>
-        <segue reference="N4G-oK-EKi"/>
+        <segue reference="DhC-cG-tnL"/>
+        <segue reference="cg6-8E-NGn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add" width="24" height="24"/>
