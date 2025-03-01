@@ -8,6 +8,7 @@
 
 import UIKit
 import SocketIO
+import SwiftUI
 
 protocol InteractiveCanvasDrawCallback: AnyObject {
     func notifyCanvasRedraw()
@@ -55,7 +56,7 @@ protocol InteractiveCanvasSocketLatencyDelegate: AnyObject {
     func notifyConnectionCount(count: Int)
 }
 
-class InteractiveCanvas: NSObject {
+class InteractiveCanvas: NSObject, ObservableObject {
     var rows = 0
     var cols = 0
     
@@ -394,16 +395,45 @@ class InteractiveCanvas: NSObject {
         
         socket.on("res") { (data, ack) in
             let data = data[0] as! String
-            let t = data.components(separatedBy: "&")
+            let t = data[..<data.index(data.endIndex, offsetBy: -1)].components(separatedBy: "&")
+            
+            var connectionCount = 0
+            
+            var name = ""
+            var center = -1
+            
+            var clientsInfo = [ClientInfo]()
+            
+            var i = 0
+            for s in t {
+                if i == 0 {
+                    connectionCount = Int(s)!
+                }
+                else if i % 3 == 1 {
+                    name = s
+                }
+                else if i % 3 == 2 {
+                    center = Int(s)!
+                }
+                else {
+                    clientsInfo.append(ClientInfo(name: name, color: Int32(exactly: Double(s)!)!, center: center))
+                }
+                
+                i += 1
+            }
+            
+            self.clientsInfo = clientsInfo
             
             let latency = Int(1000 * (NSDate().timeIntervalSince1970 - self.lastPingTime))
             self.latency = latency
             self.latencyDelegate?.notifyLatency(latency: latency)
-            self.latencyDelegate?.notifyConnectionCount(count: Int(t[0])!)
+            self.latencyDelegate?.notifyConnectionCount(count: connectionCount)
             
             print("latency check: got latency \(latency)")
         }
     }
+    
+    @Published var clientsInfo = [ClientInfo]()
     
     func receivePixels(pixelInfo: String) {
         var index = -1
@@ -1228,8 +1258,8 @@ class InteractiveCanvas: NSObject {
         let offsetX = (CGFloat(x) - deviceViewport.origin.x) * CGFloat(ppu)
         let offsetY = (CGFloat(y) - deviceViewport.origin.y) * CGFloat(ppu)
         
-        screenSpaceRect.origin.x = round(max(offsetX, 0.0))
-        screenSpaceRect.origin.y = round(max(offsetY, 0.0))
+        screenSpaceRect.origin.x = round(offsetX)
+        screenSpaceRect.origin.y = round(offsetY)
         screenSpaceRect.size.width = round(CGFloat(ppu)) + 1
         screenSpaceRect.size.height = round(CGFloat(ppu)) + 1
         

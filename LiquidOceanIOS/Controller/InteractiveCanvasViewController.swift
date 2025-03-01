@@ -9,11 +9,13 @@
 import UIKit
 import FlexColorPicker
 import Kingfisher
+import SwiftUI
 
 class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
     InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
+    @IBOutlet var overlaysContainerView: UIView!
     
     @IBOutlet var paintPanel: UIView!
     
@@ -292,6 +294,22 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.selectedObjectView = self
         self.surfaceView.selectedObjectMoveView = self
         
+        // Swift UI Overlays
+        let overlaysView = OverlaysView(
+            surfaceView: self.surfaceView,
+            interactiveCanvas: self.surfaceView.interactiveCanvas
+        )
+        
+        let overlaysHostingController = UIHostingController(rootView: overlaysView)
+        overlaysHostingController.view.backgroundColor = UIColor.clear
+        
+        self.overlaysContainerView.backgroundColor = UIColor.clear
+        self.overlaysContainerView.addSubview(overlaysHostingController.view)
+        
+        addChild(overlaysHostingController)
+        
+        overlaysHostingController.view.frame = self.overlaysContainerView.bounds
+        overlaysHostingController.didMove(toParent: self)
         
         // surfaceView.setInitalScale()
         
@@ -1991,6 +2009,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
                 self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
             }
         }
+        
+        self.surfaceView.interactiveCanvas.startLatencyTask()
     }
     
     func notifySocketDisconnect() {

@@ -59,7 +59,7 @@ protocol InteractiveCanvasSelectedObjectMoveViewDelegate: AnyObject {
     func selectedObjectMoveEnded()
 }
 
-class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveCanvasScaleCallback, InteractiveCanvasDeviceViewportResetDelegate, InteractiveCanvasSelectedObjectDelegate, UIGestureRecognizerDelegate {
+class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveCanvasScaleCallback, InteractiveCanvasDeviceViewportResetDelegate, InteractiveCanvasSelectedObjectDelegate, UIGestureRecognizerDelegate, ObservableObject {
 
     enum Mode {
         case exploring
@@ -106,6 +106,8 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     var startScaleFactor: CGFloat = 0
     
     var touchedCanvasEdge = false
+    
+    @Published var redrawCount = 0
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -352,12 +354,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         self.interactiveCanvas.ppu = Int(CGFloat(interactiveCanvas.basePpu) * self.scaleFactor)
         
         // position
-        if SessionSettings.instance.restoreDeviceViewportCenterX == 0.0 {
-            interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: CGFloat(SessionSettings.instance.canvasSize / 2), canvasCenterY: CGFloat(SessionSettings.instance.canvasSize / 2))
-        }
-        else {
-            interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: SessionSettings.instance.restoreDeviceViewportCenterX, canvasCenterY: SessionSettings.instance.restoreDeviceViewportCenterY)
-        }
+        interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: CGFloat(SessionSettings.instance.canvasSize / 2), canvasCenterY: CGFloat(SessionSettings.instance.canvasSize / 2))
         
         self.interactiveCanvas.startLatencyTask()
     }
@@ -755,6 +752,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         }
         
         drawInteractiveCanvas(ctx: context)
+        redrawCount += 1
     }
     
     func drawInteractiveCanvas(ctx: CGContext) {
@@ -861,6 +859,12 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 else {
                     fillColor = UIColor.darkGray.cgColor
                     
+                }
+                
+                if unitX == 128 && unitY == 128 {
+                    fillColor = UIColor.orange.cgColor
+                    let testScreenSpace = interactiveCanvas.getScreenSpaceForUnit(x: unitX, y: unitY)
+                    print("Being drawn at (\(testScreenSpace.origin.x), \(testScreenSpace.origin.y)")
                 }
                 
                 if isObjectSelected {

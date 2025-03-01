@@ -40,11 +40,13 @@
 		0744E8832D61918F00C9DD29 /* red_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0744E87F2D61918E00C9DD29 /* red_circle.png */; };
 		0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744E8842D625E7300C9DD29 /* ErrorPixel.swift */; };
 		074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A76002D7179EB00D487EC /* CombinedGestureView.swift */; };
+		075DE94A2D7288A8007C664D /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* OverlaysView.swift */; };
 		0788E47D25FBD1D8004FC782 /* iOSDeviceModelMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */; };
 		0788E47F25FBD3F5004FC782 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */; };
 		0788E48125FC58BC004FC782 /* ColorPickerOutletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */; };
 		078AF007260119DE00AB4CE4 /* InteractiveCanvasSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078AF006260119DE00AB4CE4 /* InteractiveCanvasSocket.swift */; };
 		078AF00926016CCB00AB4CE4 /* PaintQuantityCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078AF00826016CCB00AB4CE4 /* PaintQuantityCircle.swift */; };
+		078D406B2D72B9E8003C57F2 /* ClientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D406A2D72B9E8003C57F2 /* ClientInfo.swift */; };
 		07A246D625D4A83500C73CA6 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A246D525D4A83500C73CA6 /* LoadingViewController.swift */; };
 		07A246D825D4BF0800C73CA6 /* URLSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A246D725D4BF0800C73CA6 /* URLSessionHandler.swift */; };
 		07A305F325D5B6F5003A6CEA /* ActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A305F225D5B6F5003A6CEA /* ActionButtonView.swift */; };
@@ -184,11 +186,13 @@
 		0744E8802D61918E00C9DD29 /* yellow_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_circle.png; sourceTree = "<group>"; };
 		0744E8842D625E7300C9DD29 /* ErrorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPixel.swift; sourceTree = "<group>"; };
 		074A76002D7179EB00D487EC /* CombinedGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedGestureView.swift; sourceTree = "<group>"; };
+		075DE9492D7288A8007C664D /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 		0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iOSDeviceModelMapping.plist; sourceTree = "<group>"; };
 		0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerOutletsViewController.swift; sourceTree = "<group>"; };
 		078AF006260119DE00AB4CE4 /* InteractiveCanvasSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveCanvasSocket.swift; sourceTree = "<group>"; };
 		078AF00826016CCB00AB4CE4 /* PaintQuantityCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintQuantityCircle.swift; sourceTree = "<group>"; };
+		078D406A2D72B9E8003C57F2 /* ClientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfo.swift; sourceTree = "<group>"; };
 		07A246D525D4A83500C73CA6 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		07A246D725D4BF0800C73CA6 /* URLSessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHandler.swift; sourceTree = "<group>"; };
 		07A305F225D5B6F5003A6CEA /* ActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonView.swift; sourceTree = "<group>"; };
@@ -349,6 +353,14 @@
 			path = font;
 			sourceTree = "<group>";
 		};
+		075DE9382D728815007C664D /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				075DE9492D7288A8007C664D /* OverlaysView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		07A305EF25D5B55B003A6CEA /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +453,7 @@
 		07BD25C525D43FB500CF812E /* LiquidOceanIOS */ = {
 			isa = PBXGroup;
 			children = (
+				075DE9382D728815007C664D /* SwiftUI */,
 				0704FB75273982CE009799E1 /* font */,
 				07A9B15225EC86B1009A47DF /* json */,
 				07006C4525DEB54600DF9A64 /* Controller */,
@@ -510,6 +523,7 @@
 				07F573C7289EA65D00D4C9EF /* Server.swift */,
 				0744E8842D625E7300C9DD29 /* ErrorPixel.swift */,
 				0707C5E52D63AAA5008E0120 /* PendingUndo.swift */,
+				078D406A2D72B9E8003C57F2 /* ClientInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -763,6 +777,7 @@
 				070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */,
 				0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */,
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
+				075DE94A2D7288A8007C664D /* OverlaysView.swift in Sources */,
 				07A9B16E25ED2941009A47DF /* HowtoViewController.swift in Sources */,
 				07BBBABA2896E3B3008A6B9E /* QueueSocket.swift in Sources */,
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,
@@ -783,6 +798,7 @@
 				0788E47F25FBD3F5004FC782 /* UIView+SafeAnchors.swift in Sources */,
 				07FF5F0B25E481BB003E19AE /* Animator.swift in Sources */,
 				07FF5F0325E41EF9003E19AE /* StatsViewController.swift in Sources */,
+				078D406B2D72B9E8003C57F2 /* ClientInfo.swift in Sources */,
 				07BD25F725D44FE900CF812E /* UIColor+Conversions.swift in Sources */,
 				07A305F525D5D348003A6CEA /* PaintColorIndicator.swift in Sources */,
 				074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */,

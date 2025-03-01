@@ -3755,6 +3755,9 @@
                                     <constraint firstAttribute="trailing" secondItem="8Xj-Za-JZQ" secondAttribute="trailing" constant="16" id="xod-0L-XKc"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-I6-Tuf">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3767,6 +3770,7 @@
                             <constraint firstItem="hsl-8Q-RoJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" constant="116" id="2wL-mw-dC3"/>
                             <constraint firstItem="JBK-ya-sQZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="3n0-Hr-AW4"/>
                             <constraint firstItem="Noh-3c-qct" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4cV-Mk-PDL"/>
+                            <constraint firstAttribute="bottom" secondItem="P5c-I6-Tuf" secondAttribute="bottom" id="4vP-LZ-T7b"/>
                             <constraint firstItem="ZTj-sF-O5I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="5BV-hO-1ao"/>
                             <constraint firstItem="tjQ-fj-IaW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Q3-Ni-uh4"/>
                             <constraint firstAttribute="trailing" secondItem="hfq-Br-pXl" secondAttribute="trailing" priority="999" constant="64" id="70h-Uj-IPc"/>
@@ -3785,6 +3789,7 @@
                             <constraint firstItem="0af-Id-wac" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="68" id="CMp-7O-VLW"/>
                             <constraint firstAttribute="trailing" secondItem="xoZ-vF-uEO" secondAttribute="trailing" priority="999" id="DY5-I4-pWG"/>
                             <constraint firstItem="3Wc-83-toh" firstAttribute="trailing" secondItem="xoZ-vF-uEO" secondAttribute="leading" priority="999" id="GnW-Xy-fqt"/>
+                            <constraint firstAttribute="trailing" secondItem="P5c-I6-Tuf" secondAttribute="trailing" id="IWa-26-duC"/>
                             <constraint firstItem="HLu-eR-GQ6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Isy-cg-FSy"/>
                             <constraint firstItem="I8I-kz-GVV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="JdQ-iN-jtc"/>
                             <constraint firstItem="xoZ-vF-uEO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jh7-I7-tfX"/>
@@ -3806,11 +3811,13 @@
                             <constraint firstAttribute="bottom" secondItem="Noh-3c-qct" secondAttribute="bottom" id="YXr-5N-gI1"/>
                             <constraint firstItem="1T9-L7-JKj" firstAttribute="trailing" secondItem="xoZ-vF-uEO" secondAttribute="leading" priority="999" constant="-40" id="aPJ-QW-QTd"/>
                             <constraint firstItem="ape-vj-wQL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" constant="58" id="agt-F0-cq6"/>
+                            <constraint firstItem="P5c-I6-Tuf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bNz-8k-5Vk"/>
                             <constraint firstItem="Dcg-RG-ceO" firstAttribute="leading" secondItem="H6q-cy-JFe" secondAttribute="trailing" id="bPP-YN-eDF"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cgX-kE-orb"/>
                             <constraint firstItem="ydz-ew-c1z" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dbF-Me-bp2"/>
                             <constraint firstItem="vhR-03-8Ib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="e1J-Uu-p3F"/>
                             <constraint firstItem="DcD-dU-48h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fED-BH-SYM"/>
+                            <constraint firstItem="P5c-I6-Tuf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fa1-NG-Afa"/>
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fhI-VV-iE3"/>
                             <constraint firstItem="okW-yE-v0s" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="h9O-tS-eQI"/>
                             <constraint firstAttribute="bottom" secondItem="UYW-Te-7QB" secondAttribute="bottom" id="iYx-f0-fMa"/>
@@ -3901,6 +3908,7 @@
                         <outlet property="objectMoveUpButtonLeading" destination="0eI-nR-qfw" id="hZP-Ed-yoS"/>
                         <outlet property="objectMoveUpButtonTop" destination="dbF-Me-bp2" id="Vi4-0b-uJh"/>
                         <outlet property="objectSelectionView" destination="JhC-0g-hiD" id="en0-ze-p1v"/>
+                        <outlet property="overlaysContainerView" destination="P5c-I6-Tuf" id="g6t-fB-mxF"/>
                         <outlet property="paintColorAccept" destination="dAw-EJ-sTU" id="jgi-2t-bYo"/>
                         <outlet property="paintColorCancel" destination="py9-Zf-Ycq" id="giV-pk-5ei"/>
                         <outlet property="paintColorIndicator" destination="gi1-s8-Ps3" id="s1B-8p-Syz"/>
@@ -5566,8 +5574,8 @@ If any person on any canvas uses pixels to give out any personal information abo
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xNZ-J9-gls"/>
-        <segue reference="DhC-cG-tnL"/>
-        <segue reference="cg6-8E-NGn"/>
+        <segue reference="XGn-H2-2Wq"/>
+        <segue reference="N4G-oK-EKi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add" width="24" height="24"/>
