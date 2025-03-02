@@ -24,6 +24,8 @@ class InteractiveCanvasSocket: NSObject, URLSessionDelegate {
     var manager: SocketManager!
     var socket: SocketIOClient? = nil
     
+    var isConnected = false
+    
     func startSocket(server: Server) {
         // socket init
         //manager = SocketManager(socketURL: URL(string: "https://192.168.200.69:5010")!, config: [.log(true), .compress, .selfSigned(true), .sessionDelegate(self)])
@@ -38,6 +40,7 @@ class InteractiveCanvasSocket: NSObject, URLSessionDelegate {
             print(data)
             self.socket?.emit("connect2")
             self.socketConnectionDelegate?.notifySocketConnect()
+            self.isConnected = true
         }
         
         socket?.on(clientEvent: .disconnect) { (data, ack) in
@@ -46,6 +49,7 @@ class InteractiveCanvasSocket: NSObject, URLSessionDelegate {
             DispatchQueue.main.async {
                 self.socketConnectionDelegate?.notifySocketDisconnect()
             }
+            self.isConnected = false
         }
         
         socket?.on(clientEvent: .error) { (data, ack) in
@@ -54,12 +58,13 @@ class InteractiveCanvasSocket: NSObject, URLSessionDelegate {
             DispatchQueue.main.async {
                 self.socketConnectionDelegate?.notifySocketConnectionError()
             }
+            self.isConnected = false
         }
     }
     
     func disconnect() {
-        self.socketConnectionDelegate = nil
         socket?.disconnect()
+        //self.socketConnectionDelegate = nil
     }
     
     /*func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {

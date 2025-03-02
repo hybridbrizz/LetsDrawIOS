@@ -17,7 +17,7 @@ class PendingUndo {
         self.message = message
         
         self.task = Task {
-            try await Task.sleep(for: .milliseconds(500))
+            try await Task.sleep(for: .milliseconds(1500))
             
             if !Task.isCancelled {
                 DispatchQueue.main.async {

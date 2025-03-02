@@ -3741,10 +3741,10 @@
                                 </constraints>
                             </view>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yzu-bO-Iw1">
-                                <rect key="frame" x="248" y="94.5" width="400" height="225"/>
+                                <rect key="frame" x="248" y="57" width="400" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="MlA-kN-p5L"/>
-                                    <constraint firstAttribute="height" constant="225" id="mrj-t2-Wn7"/>
+                                    <constraint firstAttribute="height" constant="300" id="mrj-t2-Wn7"/>
                                 </constraints>
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcD-dU-48h">
@@ -5629,13 +5629,13 @@ If any person on any canvas uses pixels to give out any personal information abo
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -1013,7 +1013,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     @objc func didTapLatencyContainer() {
-        self.clientListContainer.isHidden = !self.clientListContainer.isHidden
+        if InteractiveCanvasSocket.instance.isConnected {
+            self.clientListContainer.isHidden = !self.clientListContainer.isHidden
+        }
     }
     
 //    func startServerStatusChecks() {
@@ -2024,10 +2026,14 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.surfaceView.interactiveCanvas.startLatencyTask()
+        self.latencyText.isHidden = false
+        updateSocketStatus(connected: true)
     }
     
     func notifySocketDisconnect() {
-        
+        self.surfaceView.interactiveCanvas.cancelLatencyTask()
+        self.latencyText.isHidden = true
+        updateSocketStatus(connected: false)
     }
     
     func notifySocketConnectionError() {

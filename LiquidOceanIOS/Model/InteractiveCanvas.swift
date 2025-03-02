@@ -154,6 +154,14 @@ class InteractiveCanvas: NSObject, ObservableObject {
     var cSelectedStartUnit: CGPoint!
     var cSelectedEndUnit: CGPoint!
     
+    private var mapMarkerModes = ["On", "Off", "Canvas Only", "Minimap Only"]
+    
+    @Published var clientsInfo = [ClientInfo]()
+    @Published var mapMarkerMode = "On"
+    
+    @Published var showCanvasClientIndicators = true
+    @Published var showSummaryClientIndicators = true
+    
     enum Direction {
         case up
         case down
@@ -432,8 +440,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
             print("latency check: got latency \(latency)")
         }
     }
-    
-    @Published var clientsInfo = [ClientInfo]()
     
     func receivePixels(pixelInfo: String) {
         var index = -1
@@ -1385,12 +1391,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
             while !Task.isCancelled {
                 print("Sending latency check")
                 
-                var name = SessionSettings.instance.displayName
-                if name == "" {
-                    name = String(SessionSettings.instance.uniqueId.prefix(4))
-                }
-                
-                InteractiveCanvasSocket.instance.socket?.emit("lat", "\(name)&\(pixelId(x: self.deviceViewport.midX, y: deviceViewport.midY))")
+                InteractiveCanvasSocket.instance.socket?.emit("lat", "\(SessionSettings.instance.displayNameOrId())&\(pixelId(x: self.deviceViewport.midX, y: deviceViewport.midY))")
                 self.lastPingTime = NSDate().timeIntervalSince1970
                 try await Task.sleep(for: .milliseconds(4200))
             }
@@ -1404,5 +1405,36 @@ class InteractiveCanvas: NSObject, ObservableObject {
     
     func pixelId(x: CGFloat, y: CGFloat) -> Int {
         return Int(y) * cols + Int(x)
+    }
+    
+    func switchToNextMapMarkerMode() {
+        var index = -1
+        for i in 0..<mapMarkerMode.count {
+            let mode = mapMarkerModes[i]
+            if mode == mapMarkerMode {
+                index = i
+                break
+            }
+        }
+        
+        let nextIndex = (index + 1) % mapMarkerModes.count
+        mapMarkerMode = mapMarkerModes[nextIndex]
+        
+        if nextIndex == 0 {
+            showCanvasClientIndicators = true
+            showSummaryClientIndicators = true
+        }
+        else if nextIndex == 1 {
+            showCanvasClientIndicators = false
+            showSummaryClientIndicators = false
+        }
+        else if nextIndex == 2 {
+            showCanvasClientIndicators = true
+            showSummaryClientIndicators = false
+        }
+        else if nextIndex == 3 {
+            showCanvasClientIndicators = false
+            showSummaryClientIndicators = true
+        }
     }
 }

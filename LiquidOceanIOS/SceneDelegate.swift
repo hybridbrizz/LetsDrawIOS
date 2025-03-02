@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        save()
+        
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -42,9 +42,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
+        SessionSettings.instance.interactiveCanvas?.cancelLatencyTask()
+        
         save()
         
-        SessionSettings.instance.interactiveCanvas?.cancelLatencyTask()
         InteractiveCanvasSocket.instance.disconnect()
     
         SessionSettings.instance.canvasPauseTime = NSDate().timeIntervalSince1970

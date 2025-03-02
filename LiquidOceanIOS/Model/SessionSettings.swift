@@ -183,6 +183,8 @@ class SessionSettings: NSObject {
     
     var sceneDelegateDelegate: SceneDelegateDeleage? = nil
     
+    private var uniqueId2 = ""
+    
     func save() {
         print("Save session settings")
         
@@ -625,4 +627,16 @@ class SessionSettings: NSObject {
 //        userDefaults().set(restoreDeviceViewportCenterY, forKey: "restore_device_viewport_center_y")
 //        userDefaults().set(restoreCanvasScaleFactor, forKey: "restore_canvas_scale_factor")
 //    }
+    
+    func displayNameOrId() -> String {
+        if displayName != "" {
+            return displayName
+        }
+        else {
+            if uniqueId == "" {
+                uniqueId2 = UUID().uuidString
+            }
+            return String(uniqueId2.prefix(4))
+        }
+    }
 }

@@ -858,13 +858,6 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 }
                 else {
                     fillColor = UIColor.darkGray.cgColor
-                    
-                }
-                
-                if unitX == 128 && unitY == 128 {
-                    fillColor = UIColor.orange.cgColor
-                    let testScreenSpace = interactiveCanvas.getScreenSpaceForUnit(x: unitX, y: unitY)
-                    print("Being drawn at (\(testScreenSpace.origin.x), \(testScreenSpace.origin.y)")
                 }
                 
                 if isObjectSelected {

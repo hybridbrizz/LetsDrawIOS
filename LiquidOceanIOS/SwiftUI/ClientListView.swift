@@ -11,10 +11,29 @@ import SwiftUI
 struct ClientListView: View {
     @ObservedObject var interactiveCanvas: InteractiveCanvas
 
+    let cClientName = SessionSettings.instance.displayNameOrId()
+    
     var body: some View {
-        ZStack {
-            Color(UIColor.darkGray)
-            
+        VStack(spacing: 0) {
+            HStack(alignment: .center) {
+                Text("Map markers:")
+                    .foregroundStyle(.white)
+                    .font(.custom("Inter", size: 16))
+                    .fontWeight(.regular)
+                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
+                Spacer().frame(maxWidth: .infinity)
+                ZStack(alignment: .center) {
+                    Text(interactiveCanvas.mapMarkerMode)
+                        .foregroundStyle(.white)
+                        .font(.custom("Inter", size: 16))
+                        .fontWeight(.bold)
+                }
+                .frame(width: 150, height: 50)
+                .clickable(bgColor: Color.black.opacity(0.2), selectionColor: Color.black.opacity(0.5)) {
+                    interactiveCanvas.switchToNextMapMarkerMode()
+                }
+            }
+            .frame(maxWidth: .infinity)
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach(interactiveCanvas.clientsInfo) { info in
@@ -27,17 +46,22 @@ struct ClientListView: View {
                                 .frame(width: 20, height: 20)
                                 .background(Color(UIColor(argb: info.color)), in: Circle())
                                 Spacer().frame(width: 8)
-                                Text(info.name)
+                                
+                                let name = info.name == cClientName ? "\(info.name) (me)" : info.name
+                                
+                                Text(name)
                                     .foregroundStyle(.white)
                                     .font(.custom("Inter", size: 24))
                                     .fontWeight(.regular)
-                                Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .frame(maxWidth: .infinity)
                             .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                         }
-                        .clickable {
-                            handleTap(info: info, interactiveCanvas: interactiveCanvas)
+                        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
+                            if info.name != SessionSettings.instance.displayNameOrId() {
+                                handleTap(info: info, interactiveCanvas: interactiveCanvas)
+                            }
                         }
                     }
                 }
@@ -45,6 +69,7 @@ struct ClientListView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor.darkGray))
     }
 }
 
@@ -67,6 +92,8 @@ struct ClickableModifier: ViewModifier {
     @State private var isPressed = false
     @State private var viewFrame = CGRect.zero
     
+    var bgColor: Color
+    var selectionColor: Color
     var onClick: () -> Void
     
     func body(content: Content) -> some View {
@@ -74,7 +101,7 @@ struct ClickableModifier: ViewModifier {
             .contentShape(Rectangle())
             .background(
                 GeometryReader { geometry in
-                    (isPressed ? Color.blue : Color.clear).onAppear {
+                    (isPressed ? selectionColor : bgColor).onAppear {
                         self.viewFrame = geometry.frame(in: .local)
                     }
                 }
@@ -104,7 +131,7 @@ struct ClickableModifier: ViewModifier {
 }
 
 extension View {
-    func clickable(onClick: @escaping () -> Void) -> some View {
-        self.modifier(ClickableModifier(onClick: onClick))
+    func clickable(bgColor: Color, selectionColor: Color, onClick: @escaping () -> Void) -> some View {
+        self.modifier(ClickableModifier(bgColor: bgColor, selectionColor: selectionColor, onClick: onClick))
     }
 }
