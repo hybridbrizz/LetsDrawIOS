@@ -27,6 +27,10 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var artSizeSwitchTop: NSLayoutConstraint!
     
+    @IBOutlet weak var canvasImageView: UIImageView!
+    
+    private var canvasImage: UIImage?
+    
     var _art: [InteractiveCanvas.RestorePoint]?
     var art: [InteractiveCanvas.RestorePoint]? {
         set {
@@ -43,6 +47,32 @@ class ExportViewController: UIViewController {
         }
         get {
             return _art
+        }
+    }
+    
+    var _canvas: InteractiveCanvas?
+    var canvas: InteractiveCanvas? {
+        set {
+            _canvas = newValue
+            
+            if newValue == nil {
+                canvasImage = nil
+                canvasImageView.isHidden = true
+                return
+            }
+            
+            artView.showBackground = true
+            canvasImage = createImageFromColorArray(newValue!.arr, width: newValue!.cols, height: newValue!.rows)
+            if canvasImage != nil {
+                canvasImageView.layer.magnificationFilter = .nearest
+                canvasImageView.layer.minificationFilter = .nearest
+                canvasImageView.contentMode = .scaleToFill
+                canvasImageView.image = canvasImage!
+                canvasImageView.isHidden = false
+            }
+        }
+        get {
+            return _canvas
         }
     }
     
@@ -67,7 +97,13 @@ class ExportViewController: UIViewController {
         
         shareButton.setOnClickListener {
             // set up activity view controller
-            let imageToShare = self.artView.getArtImage()
+            var imageToShare: Data
+            if self.art != nil {
+                imageToShare = self.artView.getArtImage().pngData()!
+            }
+            else {
+                imageToShare = self.canvasImage!.pngData()!
+            }
             let activityViewController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
 
@@ -138,5 +174,72 @@ class ExportViewController: UIViewController {
         actualSizeLabel.isHidden = false
         
         artView.actualSize = true
+    }
+    
+    // Thanks Claude!
+    func createImageFromColorArray(_ colorArray: [[Int32]], width: Int, height: Int) -> UIImage? {
+        guard !colorArray.isEmpty, width > 0, height > 0 else { return nil }
+        
+        // Create a bitmap with raw, uncompressed data
+        let bitsPerComponent = 8
+        let bytesPerPixel = 4
+        let bytesPerRow = width * bytesPerPixel
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        // Use BGRA format with no compression
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue)
+        
+        // Allocate memory for the bitmap data
+        let dataSize = height * bytesPerRow
+        let rawData = malloc(dataSize)
+        defer { free(rawData) }
+        
+        guard let pixelData = rawData else { return nil }
+        let pixelBuffer = pixelData.bindMemory(to: UInt32.self, capacity: width * height)
+        
+        // Fill the buffer with color data
+        for y in 0..<min(colorArray.count, height) {
+            let row = colorArray[y]
+            for x in 0..<min(row.count, width) {
+                let pixelIndex = y * width + x
+                
+                // Get the ARGB color from the array
+                var argbColor = colorArray[y][x]
+                if argbColor == 0 {
+                    argbColor = Utils.int32FromColorHex(hex: "0xFF000000")
+                }
+                
+                // Extract components
+                let alpha = UInt8((argbColor >> 24) & 0xFF)
+                let red = UInt8((argbColor >> 16) & 0xFF)
+                let green = UInt8((argbColor >> 8) & 0xFF)
+                let blue = UInt8(argbColor & 0xFF)
+                
+                // Repack as BGRA for iOS
+                let rgbaColor = UInt32(alpha) << 24 | UInt32(red) << 16 | UInt32(green) << 8 | UInt32(blue)
+                pixelBuffer[pixelIndex] = rgbaColor
+            }
+        }
+        
+        // Create context with our allocated memory
+        guard let context = CGContext(data: pixelData,
+                                     width: width,
+                                     height: height,
+                                     bitsPerComponent: bitsPerComponent,
+                                     bytesPerRow: bytesPerRow,
+                                     space: colorSpace,
+                                     bitmapInfo: bitmapInfo.rawValue,
+                                     releaseCallback: nil,
+                                     releaseInfo: nil) else {
+            return nil
+        }
+        
+        // Create CGImage from context
+        guard let cgImage = context.makeImage() else { return nil }
+        
+        // Create UIImage from CGImage with no scaling or interpolation
+        let image = UIImage(cgImage: cgImage, scale: 1.0, orientation: .up)
+        
+        return image
     }
 }

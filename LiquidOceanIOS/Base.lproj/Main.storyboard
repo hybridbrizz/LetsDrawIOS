@@ -4338,6 +4338,13 @@
                                     <constraint firstAttribute="width" constant="500" id="Ubd-MB-MXj"/>
                                 </constraints>
                             </view>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lm8-KB-x6N">
+                                <rect key="frame" x="323" y="82" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="GE7-xi-tX0"/>
+                                    <constraint firstAttribute="width" constant="250" id="Qvt-YT-fL2"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MqO-ne-2SR" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                                 <subviews>
@@ -4376,7 +4383,7 @@
                                     <constraint firstAttribute="height" constant="58" id="NGM-gD-qgb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghr-rn-ObS" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghr-rn-ObS" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
                                 <rect key="frame" x="780" y="0.0" width="58" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="2Mk-BU-M5n">
@@ -4437,8 +4444,10 @@
                             <constraint firstItem="wff-Ag-cNh" firstAttribute="centerY" secondItem="HCR-md-Wjq" secondAttribute="centerY" id="MaF-Z9-TVA"/>
                             <constraint firstItem="GIL-ip-Skh" firstAttribute="centerY" secondItem="YlS-jE-YaY" secondAttribute="centerY" id="Q9E-kb-RKt"/>
                             <constraint firstItem="4bw-r1-aTY" firstAttribute="leading" secondItem="Ghr-rn-ObS" secondAttribute="trailing" id="cfR-im-o1U"/>
+                            <constraint firstItem="Lm8-KB-x6N" firstAttribute="centerX" secondItem="YlS-jE-YaY" secondAttribute="centerX" id="evw-fc-L2H"/>
                             <constraint firstItem="Ghr-rn-ObS" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="topMargin" id="lH7-d4-nm1"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="top" secondItem="YlS-jE-YaY" secondAttribute="topMargin" constant="15" id="mSo-b3-BWE"/>
+                            <constraint firstItem="Lm8-KB-x6N" firstAttribute="centerY" secondItem="YlS-jE-YaY" secondAttribute="centerY" id="rbQ-Ta-BaI"/>
                             <constraint firstItem="GIL-ip-Skh" firstAttribute="centerX" secondItem="YlS-jE-YaY" secondAttribute="centerX" id="u1M-n0-X19"/>
                             <constraint firstItem="MqO-ne-2SR" firstAttribute="leading" secondItem="YlS-jE-YaY" secondAttribute="leading" id="vW3-Vt-cOj"/>
                             <constraint firstItem="HCR-md-Wjq" firstAttribute="centerX" secondItem="YlS-jE-YaY" secondAttribute="centerX" id="w34-JX-Dzg"/>
@@ -4454,6 +4463,7 @@
                         <outlet property="artViewWidth" destination="Ubd-MB-MXj" id="pg4-hn-a9D"/>
                         <outlet property="backButton" destination="MqO-ne-2SR" id="otm-2L-rem"/>
                         <outlet property="backButtonLeading" destination="vW3-Vt-cOj" id="2zV-YE-11r"/>
+                        <outlet property="canvasImageView" destination="Lm8-KB-x6N" id="5dF-dH-cY6"/>
                         <outlet property="saveButton" destination="Ghr-rn-ObS" id="Xwm-dQ-knG"/>
                         <outlet property="screenSizeLabel" destination="Kwd-vz-DyL" id="k3d-h5-Tfp"/>
                         <outlet property="shareButton" destination="4bw-r1-aTY" id="dhl-R0-UGK"/>

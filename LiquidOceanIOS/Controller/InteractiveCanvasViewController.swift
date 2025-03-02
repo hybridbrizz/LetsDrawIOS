@@ -1537,6 +1537,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.exportButton.layer.borderWidth = 0
         
         surfaceView.endExporting()
+        
+        exportViewController.art = nil
+        exportViewController.canvas = nil
     }
     
     // art export delegate
@@ -2178,6 +2181,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func notifyYankCanvasClicked() {
         self.canvasMenuContainer.isHidden = true
+        exportViewController.canvas = surfaceView.interactiveCanvas
+        exportContainer.isHidden = false
     }
     
     func notifyHelpClicked() {
