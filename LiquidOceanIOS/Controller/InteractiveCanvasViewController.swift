@@ -12,13 +12,14 @@ import Kingfisher
 import SwiftUI
 
 class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
-    InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate {
+                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
     
     @IBOutlet var canvasClientIndicatorsContainer: UIView!
     @IBOutlet var summaryClientIndicatorsContainer: UIView!
     @IBOutlet var clientListContainer: UIView!
+    @IBOutlet var canvasMenuContainer: UIView!
     
     @IBOutlet var paintPanel: UIView!
     
@@ -317,6 +318,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         let clientListView = ClientListView(interactiveCanvas: self.surfaceView.interactiveCanvas)
         addSwiftUIViewToContainer(swiftUIView: clientListView, containerView: self.clientListContainer)
         
+        let canvasMenuView = CanvasMenuView(delegate: self)
+        addSwiftUIViewToContainer(swiftUIView: canvasMenuView, containerView: self.canvasMenuContainer)
+        
         let latencyTGR = UITapGestureRecognizer(target: self, action: #selector(didTapLatencyContainer))
         latencyContainer.addGestureRecognizer(latencyTGR)
         
@@ -354,7 +358,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
                 }*/
                 //self.toggleMenu(show: self.menuContainer.isHidden)
                 self.surfaceView.interactiveCanvas.saveDeviceViewport()
-                self.performSegue(withIdentifier: self.showOptions, sender: self)
+//                self.performSegue(withIdentifier: self.showOptions, sender: self)
+                self.clientListContainer.isHidden = true
+                self.canvasMenuContainer.isHidden = !self.canvasMenuContainer.isHidden
             }
         }
         
@@ -2148,6 +2154,42 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @objc func clickedBannerView() {
         UIApplication.shared.openURL(URL(string: server.iconLink)!)
+    }
+    
+    // Menu Delegate
+    func notifyPersonListClicked() {
+        self.canvasMenuContainer.isHidden = true
+        self.clientListContainer.isHidden = false
+    }
+    
+    func notifyCommunityClicked() {
+        self.canvasMenuContainer.isHidden = true
+        let url = URL(string: server.iconLink)
+        
+        if url != nil {
+            UIApplication.shared.openURL(url!)
+        }
+    }
+    
+    func notifyOptionsClicked() {
+        self.canvasMenuContainer.isHidden = true
+        self.performSegue(withIdentifier: self.showOptions, sender: self)
+    }
+    
+    func notifyYankCanvasClicked() {
+        self.canvasMenuContainer.isHidden = true
+    }
+    
+    func notifyHelpClicked() {
+        self.canvasMenuContainer.isHidden = true
+        self.performSegue(withIdentifier: self.showHowto, sender: self)
+    }
+    
+    func notifyLeaveClicked() {
+        self.surfaceView.interactiveCanvas.cancelLatencyTask()
+        InteractiveCanvasSocket.instance.socketConnectionDelegate = nil
+        InteractiveCanvasSocket.instance.disconnect()
+        self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
     }
 }
 

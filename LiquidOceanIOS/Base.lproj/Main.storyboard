@@ -3757,6 +3757,12 @@
                                     <segue destination="MHS-hk-8CL" kind="embed" identifier="MenuEmbed" id="aVI-Vb-GxK"/>
                                 </connections>
                             </containerView>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vip-aI-b8W">
+                                <rect key="frame" x="262" y="0.0" width="372" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="372" id="XpL-Ld-3gj"/>
+                                </constraints>
+                            </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLu-eR-GQ6">
                                 <rect key="frame" x="328" y="10" width="240" height="30"/>
                                 <subviews>
@@ -3803,6 +3809,7 @@
                             <constraint firstAttribute="bottom" secondItem="P5c-I6-Tuf" secondAttribute="bottom" id="4vP-LZ-T7b"/>
                             <constraint firstItem="Yzu-bO-Iw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5oO-uZ-PHs"/>
                             <constraint firstItem="tjQ-fj-IaW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Q3-Ni-uh4"/>
+                            <constraint firstItem="Vip-aI-b8W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6hm-A3-uOo"/>
                             <constraint firstAttribute="trailing" secondItem="hfq-Br-pXl" secondAttribute="trailing" priority="999" constant="64" id="70h-Uj-IPc"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="7Yu-Jz-Xaf"/>
                             <constraint firstAttribute="bottom" secondItem="hsl-8Q-RoJ" secondAttribute="bottom" id="7tt-CE-gu1"/>
@@ -3841,12 +3848,14 @@
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VgR-ke-MNW"/>
                             <constraint firstItem="0af-Id-wac" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="328" id="Vzr-rr-hEP"/>
                             <constraint firstAttribute="bottom" secondItem="Noh-3c-qct" secondAttribute="bottom" id="YXr-5N-gI1"/>
+                            <constraint firstItem="Vip-aI-b8W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZFZ-4I-RRu"/>
                             <constraint firstItem="1T9-L7-JKj" firstAttribute="trailing" secondItem="xoZ-vF-uEO" secondAttribute="leading" priority="999" constant="-98" id="aPJ-QW-QTd"/>
                             <constraint firstItem="ape-vj-wQL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" constant="116" id="agt-F0-cq6"/>
                             <constraint firstItem="P5c-I6-Tuf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bNz-8k-5Vk"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cgX-kE-orb"/>
                             <constraint firstItem="ydz-ew-c1z" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dbF-Me-bp2"/>
                             <constraint firstItem="vhR-03-8Ib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="58" id="e1J-Uu-p3F"/>
+                            <constraint firstAttribute="bottom" secondItem="Vip-aI-b8W" secondAttribute="bottom" id="eDe-6e-G2m"/>
                             <constraint firstItem="DcD-dU-48h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fED-BH-SYM"/>
                             <constraint firstItem="P5c-I6-Tuf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fa1-NG-Afa"/>
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fhI-VV-iE3"/>
@@ -3894,6 +3903,7 @@
                         <outlet property="canvasLockTrailing" destination="SMr-fv-78B" id="cCE-dm-KRX"/>
                         <outlet property="canvasLockTrailingRight" destination="SoR-45-8CS" id="U1C-r5-EbL"/>
                         <outlet property="canvasLockView" destination="UYW-Te-7QB" id="VMS-EO-PCb"/>
+                        <outlet property="canvasMenuContainer" destination="Vip-aI-b8W" id="s5K-rV-suM"/>
                         <outlet property="changeBackgroundButton" destination="hsl-8Q-RoJ" id="6xY-my-8JF"/>
                         <outlet property="changeBackgroundButtonLeading" destination="2wL-mw-dC3" id="e6i-xH-5MY"/>
                         <outlet property="changeBackgroundButtonTrailing" destination="ABH-ha-y6s" id="7Sf-vK-mct"/>

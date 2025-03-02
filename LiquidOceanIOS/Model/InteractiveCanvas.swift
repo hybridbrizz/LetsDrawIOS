@@ -56,6 +56,15 @@ protocol InteractiveCanvasSocketLatencyDelegate: AnyObject {
     func notifyConnectionCount(count: Int)
 }
 
+protocol InteractiveCanvasMenuDelegate: AnyObject {
+    func notifyPersonListClicked()
+    func notifyCommunityClicked()
+    func notifyOptionsClicked()
+    func notifyYankCanvasClicked()
+    func notifyHelpClicked()
+    func notifyLeaveClicked()
+}
+
 class InteractiveCanvas: NSObject, ObservableObject {
     var rows = 0
     var cols = 0
