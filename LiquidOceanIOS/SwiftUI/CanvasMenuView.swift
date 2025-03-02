@@ -27,7 +27,7 @@ struct CanvasMenuView: View {
             Spacer()
             
             VStack {
-                Text("Canvas Title")
+                Text(SessionSettings.instance.lastVisitedServer!.name)
                     .font(.custom("Inter", size: 14))
                     .fontWeight(.black)
                     .foregroundStyle(.white)

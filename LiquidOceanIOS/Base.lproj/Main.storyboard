@@ -3809,7 +3809,6 @@
                             <constraint firstAttribute="bottom" secondItem="P5c-I6-Tuf" secondAttribute="bottom" id="4vP-LZ-T7b"/>
                             <constraint firstItem="Yzu-bO-Iw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5oO-uZ-PHs"/>
                             <constraint firstItem="tjQ-fj-IaW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Q3-Ni-uh4"/>
-                            <constraint firstItem="Vip-aI-b8W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6hm-A3-uOo"/>
                             <constraint firstAttribute="trailing" secondItem="hfq-Br-pXl" secondAttribute="trailing" priority="999" constant="64" id="70h-Uj-IPc"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="7Yu-Jz-Xaf"/>
                             <constraint firstAttribute="bottom" secondItem="hsl-8Q-RoJ" secondAttribute="bottom" id="7tt-CE-gu1"/>
@@ -3821,6 +3820,7 @@
                             <constraint firstAttribute="bottomMargin" secondItem="BCY-AR-gsM" secondAttribute="bottom" constant="30" id="ABM-R5-0g2"/>
                             <constraint firstAttribute="trailing" secondItem="Xy2-vk-Qhk" secondAttribute="trailing" id="AQ7-KZ-Zr8"/>
                             <constraint firstAttribute="bottom" secondItem="ZmC-9f-OkI" secondAttribute="bottom" id="BUN-3X-GAC"/>
+                            <constraint firstAttribute="bottom" secondItem="Vip-aI-b8W" secondAttribute="bottom" id="BWb-jp-5fc"/>
                             <constraint firstItem="hVZ-1b-A3N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="248" id="BiG-YW-U0X"/>
                             <constraint firstItem="hfq-Br-pXl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="64" id="CLK-T5-VUI"/>
                             <constraint firstItem="0af-Id-wac" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="68" id="CMp-7O-VLW"/>
@@ -3837,6 +3837,7 @@
                             <constraint firstItem="3Wc-83-toh" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="trailing" id="LbT-aO-inW"/>
                             <constraint firstAttribute="bottom" secondItem="3Wc-83-toh" secondAttribute="bottom" id="Niy-ET-z8Z"/>
                             <constraint firstItem="xoZ-vF-uEO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Ow3-n7-mfO"/>
+                            <constraint firstAttribute="bottom" secondItem="Vip-aI-b8W" secondAttribute="bottom" priority="999" id="QTa-c9-eDr"/>
                             <constraint firstItem="tjQ-fj-IaW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" id="QZU-0q-YRz"/>
                             <constraint firstItem="DcD-dU-48h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QyE-k3-clE"/>
                             <constraint firstItem="HLu-eR-GQ6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="10" id="RJO-bM-7hv"/>
@@ -3847,6 +3848,7 @@
                             <constraint firstAttribute="bottom" secondItem="tjQ-fj-IaW" secondAttribute="bottom" id="T2S-q7-raM"/>
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VgR-ke-MNW"/>
                             <constraint firstItem="0af-Id-wac" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="328" id="Vzr-rr-hEP"/>
+                            <constraint firstItem="Vip-aI-b8W" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XC3-mU-6Yd"/>
                             <constraint firstAttribute="bottom" secondItem="Noh-3c-qct" secondAttribute="bottom" id="YXr-5N-gI1"/>
                             <constraint firstItem="Vip-aI-b8W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZFZ-4I-RRu"/>
                             <constraint firstItem="1T9-L7-JKj" firstAttribute="trailing" secondItem="xoZ-vF-uEO" secondAttribute="leading" priority="999" constant="-98" id="aPJ-QW-QTd"/>
@@ -3855,7 +3857,6 @@
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cgX-kE-orb"/>
                             <constraint firstItem="ydz-ew-c1z" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dbF-Me-bp2"/>
                             <constraint firstItem="vhR-03-8Ib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="58" id="e1J-Uu-p3F"/>
-                            <constraint firstAttribute="bottom" secondItem="Vip-aI-b8W" secondAttribute="bottom" id="eDe-6e-G2m"/>
                             <constraint firstItem="DcD-dU-48h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fED-BH-SYM"/>
                             <constraint firstItem="P5c-I6-Tuf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fa1-NG-Afa"/>
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fhI-VV-iE3"/>
@@ -3882,6 +3883,11 @@
                             <constraint firstAttribute="bottom" secondItem="Xy2-vk-Qhk" secondAttribute="bottom" id="z3v-uJ-l54"/>
                             <constraint firstItem="ape-vj-wQL" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="zld-kZ-7I5"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QTa-c9-eDr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="osP-bh-i3x"/>
                     <connections>
@@ -4020,7 +4026,7 @@
             <objects>
                 <viewController id="vlp-4O-A3P" customClass="ColorPickerOutletsViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5r5-D9-GHB">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-Yu-uP0" customClass="ActionButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
@@ -4064,7 +4070,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQc-ZZ-5IN" customClass="RadialPaletteControl" customModule="FlexColorPicker">
-                                <rect key="frame" x="55" y="87" width="240" height="240"/>
+                                <rect key="frame" x="55" y="80" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="SPU-B7-fss"/>
@@ -4072,7 +4078,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2Z-sl-HLi" customClass="BrightnessSliderControl" customModule="FlexColorPicker">
-                                <rect key="frame" x="55" y="359" width="240" height="15"/>
+                                <rect key="frame" x="55" y="352" width="240" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="6dJ-mr-B18"/>
@@ -4327,11 +4333,11 @@
             <objects>
                 <viewController id="8fZ-ml-M6r" customClass="ExportViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YlS-jE-YaY">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIL-ip-Skh" customClass="ArtView" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="198" y="57" width="500" height="300"/>
+                                <rect key="frame" x="198" y="50" width="500" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="MA1-Ll-daa"/>
@@ -4339,7 +4345,7 @@
                                 </constraints>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lm8-KB-x6N">
-                                <rect key="frame" x="323" y="82" width="250" height="250"/>
+                                <rect key="frame" x="323" y="75" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="GE7-xi-tX0"/>
                                     <constraint firstAttribute="width" constant="250" id="Qvt-YT-fL2"/>

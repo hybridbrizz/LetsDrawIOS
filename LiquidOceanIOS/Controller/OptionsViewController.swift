@@ -466,7 +466,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBAction func resetButtonPressed(_ sender: UIButton) {
         if sender == paintMeterColorResetButton {
-            SessionSettings.instance.paintIndicatorColor = Utils.int32FromColorHex(hex: "0xff999999")
+            SessionSettings.instance.paintIndicatorColor = Utils.int32FromColorHex(hex: "0xffffffff")
             paintMeterColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.paintIndicatorColor)
         }
         else if sender == gridLineColorResetButton {

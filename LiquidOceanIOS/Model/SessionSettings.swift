@@ -295,7 +295,7 @@ class SessionSettings: NSObject {
         
         showPaintCircle = userDefaultsBool(forKey: "show_paint_circle", defaultVal: false)
         
-        paintIndicatorColor = userDefaultsInt32(forKey: "paint_indicator_color", defaultVal: Utils.int32FromColorHex(hex: "0xffAAAAAA"))
+        paintIndicatorColor = userDefaultsInt32(forKey: "paint_indicator_color", defaultVal: Utils.int32FromColorHex(hex: "0xffffffff"))
         
         rightHanded = userDefaultsBool(forKey: "right_handed", defaultVal: rightHanded)
         
@@ -633,7 +633,7 @@ class SessionSettings: NSObject {
             return displayName
         }
         else {
-            if uniqueId == "" {
+            if uniqueId2 == "" {
                 uniqueId2 = UUID().uuidString
             }
             return String(uniqueId2.prefix(4))
