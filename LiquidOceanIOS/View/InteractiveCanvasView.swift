@@ -354,7 +354,12 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         self.interactiveCanvas.ppu = Int(CGFloat(interactiveCanvas.basePpu) * self.scaleFactor)
         
         // position
-        interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: CGFloat(SessionSettings.instance.canvasSize / 2), canvasCenterY: CGFloat(SessionSettings.instance.canvasSize / 2))
+        if SessionSettings.instance.restoreDeviceViewportCenterX == 0.0 {
+            interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: CGFloat(SessionSettings.instance.canvasSize / 2), canvasCenterY: CGFloat(SessionSettings.instance.canvasSize / 2))
+        }
+        else {
+            interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: SessionSettings.instance.restoreDeviceViewportCenterX, canvasCenterY: SessionSettings.instance.restoreDeviceViewportCenterY)
+        }
         
         self.interactiveCanvas.startLatencyTask()
     }

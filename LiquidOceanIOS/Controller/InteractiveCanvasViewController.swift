@@ -1269,6 +1269,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.latencyText.isHidden = true
             self.socketStatusImage.isHidden = true
+            
+            self.changeBackgroundButton.isHidden = true
         }
         else if softHide {
             self.paintPanel.isHidden = true
@@ -1297,6 +1299,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.latencyText.isHidden = false
             self.socketStatusImage.isHidden = false
+            
+            self.changeBackgroundButton.isHidden = false
         }
     }
     
