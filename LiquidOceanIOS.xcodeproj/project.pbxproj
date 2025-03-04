@@ -44,9 +44,12 @@
 		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
 		076120E22D73932C0030DAA9 /* SummaryClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */; };
 		076120E42D73A1450030DAA9 /* ClientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E32D73A1450030DAA9 /* ClientListView.swift */; };
+		0783F3BE2D767B7A006DA53F /* ServerListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */; };
 		0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916A2D74AF4700B4041B /* CanvasMenuView.swift */; };
 		0788916D2D74AF8700B4041B /* CanvasMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */; };
 		0788916F2D74BCA400B4041B /* server_person.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0788916E2D74BCA400B4041B /* server_person.svg */; };
+		078891722D750E5300B4041B /* ServerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078891712D750E5300B4041B /* ServerListViewModel.swift */; };
+		078891762D750ECC00B4041B /* ServerListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078891752D750ECC00B4041B /* ServerListsView.swift */; };
 		0788E47D25FBD1D8004FC782 /* iOSDeviceModelMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */; };
 		0788E47F25FBD3F5004FC782 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */; };
 		0788E48125FC58BC004FC782 /* ColorPickerOutletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */; };
@@ -196,9 +199,12 @@
 		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
 		076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120E32D73A1450030DAA9 /* ClientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientListView.swift; sourceTree = "<group>"; };
+		0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListItemView.swift; sourceTree = "<group>"; };
 		0788916A2D74AF4700B4041B /* CanvasMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuView.swift; sourceTree = "<group>"; };
 		0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuItemView.swift; sourceTree = "<group>"; };
 		0788916E2D74BCA400B4041B /* server_person.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = server_person.svg; sourceTree = "<group>"; };
+		078891712D750E5300B4041B /* ServerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListViewModel.swift; sourceTree = "<group>"; };
+		078891752D750ECC00B4041B /* ServerListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListsView.swift; sourceTree = "<group>"; };
 		0788E47C25FBD1D8004FC782 /* iOSDeviceModelMapping.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iOSDeviceModelMapping.plist; sourceTree = "<group>"; };
 		0788E47E25FBD3F5004FC782 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		0788E48025FC58BC004FC782 /* ColorPickerOutletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerOutletsViewController.swift; sourceTree = "<group>"; };
@@ -368,13 +374,39 @@
 		075DE9382D728815007C664D /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				078891732D750E8800B4041B /* Menu */,
+				078891742D750E9300B4041B /* Canvas */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		078891702D750E3000B4041B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				078891712D750E5300B4041B /* ServerListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		078891732D750E8800B4041B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				078891752D750ECC00B4041B /* ServerListsView.swift */,
+				0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		078891742D750E9300B4041B /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
 				075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */,
 				076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */,
 				076120E32D73A1450030DAA9 /* ClientListView.swift */,
 				0788916A2D74AF4700B4041B /* CanvasMenuView.swift */,
 				0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */,
 			);
-			path = SwiftUI;
+			path = Canvas;
 			sourceTree = "<group>";
 		};
 		07A305EF25D5B55B003A6CEA /* Images */ = {
@@ -470,6 +502,7 @@
 		07BD25C525D43FB500CF812E /* LiquidOceanIOS */ = {
 			isa = PBXGroup;
 			children = (
+				078891702D750E3000B4041B /* ViewModel */,
 				075DE9382D728815007C664D /* SwiftUI */,
 				0704FB75273982CE009799E1 /* font */,
 				07A9B15225EC86B1009A47DF /* json */,
@@ -812,6 +845,7 @@
 				07BD25F525D44F2A00CF812E /* Utils.swift in Sources */,
 				07FF5F0D25E54DCF003E19AE /* SignInViewController.swift in Sources */,
 				07270EE0272B92B300DB35CE /* PalettesViewController.swift in Sources */,
+				078891762D750ECC00B4041B /* ServerListsView.swift in Sources */,
 				07BD25CB25D43FB500CF812E /* InteractiveCanvasViewController.swift in Sources */,
 				07FF5F0525E421A9003E19AE /* StatAchievementCollectionViewCell.swift in Sources */,
 				0788916D2D74AF8700B4041B /* CanvasMenuItemView.swift in Sources */,
@@ -822,10 +856,12 @@
 				07BD25F725D44FE900CF812E /* UIColor+Conversions.swift in Sources */,
 				076120E22D73932C0030DAA9 /* SummaryClientIndicatorsView.swift in Sources */,
 				07A305F525D5D348003A6CEA /* PaintColorIndicator.swift in Sources */,
+				0783F3BE2D767B7A006DA53F /* ServerListItemView.swift in Sources */,
 				074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */,
 				07270EE2272C214300DB35CE /* Palette.swift in Sources */,
 				07C9CCE6272ECA2900C9D0A1 /* CanvasFrameViewController.swift in Sources */,
 				07006C4025D6CEF200DF9A64 /* MenuViewController.swift in Sources */,
+				078891722D750E5300B4041B /* ServerListViewModel.swift in Sources */,
 				07270EE4272C333A00DB35CE /* PaletteCollectionViewCell.swift in Sources */,
 				07A305F325D5B6F5003A6CEA /* ActionButtonView.swift in Sources */,
 				07006C3C25D607D500DF9A64 /* UIDrawGestureRecognizer.swift in Sources */,

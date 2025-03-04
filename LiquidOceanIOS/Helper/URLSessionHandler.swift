@@ -255,13 +255,11 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
     }
     
     func sendDeviceId(server: Server, completionHandler: @escaping (Bool) -> (Void)) {
-        let uniqueId = UUID().uuidString
-        
         var request = URLRequest(url: URL(string: "\(server.serviceUrl())api/v1/devices/register")!)
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
         request.httpMethod = "POST"
 
-        let params = ["uuid": uniqueId] as Dictionary<String, String>
+        let params = ["uuid": server.uuid] as Dictionary<String, String>
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
 
@@ -278,14 +276,13 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
                     return
                 }
             
-                server.uuid = uniqueId
                 SessionSettings.instance.saveServers()
                 
                 let jsonDict = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
             
                 SessionSettings.instance.deviceId = jsonDict["id"] as! Int
                 SessionSettings.instance.dropsAmt = jsonDict["paint_qty"] as? Int
-                SessionSettings.instance.uniqueId = uniqueId
+                //SessionSettings.instance.uniqueId = uniqueId
                 SessionSettings.instance.sentUniqueId = true
                 
                 DispatchQueue.main.async {
@@ -897,6 +894,52 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
             }
             catch {
                 
+            }
+        })
+
+        task.resume()
+    }
+    
+    func getPublicServers(completionHandler: @escaping ([Server]) -> Void) {
+        var request = URLRequest(url: URL(string: serversUrl + "api/v1/serverlist")!)
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        
+        request.httpMethod = "GET"
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            do {
+                if error != nil {
+                    DispatchQueue.main.async {
+                        completionHandler([])
+                    }
+                    return
+                }
+                
+                var code = 0
+                if let httpReponse = response as? HTTPURLResponse {
+                    code = httpReponse.statusCode
+                    if code != 200 {
+                        DispatchQueue.main.async {
+                            completionHandler([])
+                        }
+                    }
+                }
+                
+                let jsonArr = try JSONSerialization.jsonObject(with: data!, options: []) as! [[String: AnyObject]]
+                
+                DispatchQueue.main.async {
+                    var servers = [Server]()
+                    for jsonObj in jsonArr {
+                        servers.append(Server(fromJson: jsonObj))
+                    }
+                    completionHandler(servers)
+                }
+            }
+            catch {
+                completionHandler([])
             }
         })
 

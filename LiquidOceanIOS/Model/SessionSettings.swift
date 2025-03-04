@@ -185,6 +185,9 @@ class SessionSettings: NSObject {
     
     private var uniqueId2 = ""
     
+    var publicServerUniqueIds = [String: String]()
+    var publicServerLastVisitedTimes = [String: Double]()
+    
     func save() {
         print("Save session settings")
         
@@ -228,6 +231,12 @@ class SessionSettings: NSObject {
         userDefaults().set(paintPanelOpen, forKey: "paint_panel_open")
         userDefaults().set(canvasOpen, forKey: "canvas_open")
         userDefaults().set(colorPaletteSize, forKey: "palette_size")
+        
+        let publicServerUniqueIdsStr = try! JSONSerialization.data(withJSONObject: publicServerUniqueIds, options: [])
+        userDefaults().set(String(data: publicServerUniqueIdsStr, encoding: .utf8)!, forKey: "public_server_unique_ids")
+        
+        let publicServerLastVisitedStr = try! JSONSerialization.data(withJSONObject: publicServerLastVisitedTimes, options: [])
+        userDefaults().set(String(data: publicServerLastVisitedStr, encoding: .utf8)!, forKey: "public_server_last_visited_times")
     }
     
     func quickSave() {
@@ -339,6 +348,12 @@ class SessionSettings: NSObject {
                 break
             }
         }
+        
+        let publicServerUniqueIdsStr = userDefaultsString(forKey: "public_server_unique_ids", defaultVal: "{}")
+        publicServerUniqueIds = try! JSONSerialization.jsonObject(with: publicServerUniqueIdsStr.data(using: .utf8)!, options: []) as! [String: String]
+        
+        let publicServerLastVisitedStr = userDefaultsString(forKey: "public_server_last_visited_times", defaultVal: "{}")
+        publicServerLastVisitedTimes = try! JSONSerialization.jsonObject(with: publicServerLastVisitedStr.data(using: .utf8)!, options: []) as! [String: Double]
     }
     
     func userDefaults() -> UserDefaults {

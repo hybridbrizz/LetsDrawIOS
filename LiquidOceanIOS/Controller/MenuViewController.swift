@@ -12,6 +12,10 @@ protocol MenuButtonDelegate: AnyObject {
     func menuButtonPressed(menuButtonType: MenuButtonType)
 }
 
+protocol ServerSelectionDelegate: AnyObject {
+    func onServerSelected(server: Server)
+}
+
 enum MenuButtonType {
     case options
     case howto
@@ -19,7 +23,7 @@ enum MenuButtonType {
     case righty
 }
 
-class MenuViewController: UIViewController, AchievementListener, UICollectionViewDataSource,
+class MenuViewController: UIViewController, AchievementListener, ServerSelectionDelegate, UICollectionViewDataSource,
                             UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
 
     let showSinglePlay = "ShowSinglePlay"
@@ -27,6 +31,8 @@ class MenuViewController: UIViewController, AchievementListener, UICollectionVie
     let showStats = "ShowStats"
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
+    
+    @IBOutlet weak var serverListsContainer: UIView?
     
     @IBOutlet weak var connectButton: ButtonFrame?
     @IBOutlet weak var optionsButton: ButtonFrame!
@@ -100,6 +106,13 @@ class MenuViewController: UIViewController, AchievementListener, UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let serverListsView = ServerListsView(serverSelectionDelegate: self)
+        
+        if self.serverListsContainer != nil {
+            addSwiftUIViewToContainer(swiftUIView: serverListsView, containerView: self.serverListsContainer!)
+            self.serverListsContainer!.backgroundColor = UIColor.darkGray
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -710,10 +723,10 @@ class MenuViewController: UIViewController, AchievementListener, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedServer = SessionSettings.instance.servers[indexPath.item]
         self.performSegue(withIdentifier: showLoadingScreen, sender: nil)
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(onServerSelected), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(afterServerLoadStarted), userInfo: nil, repeats: false)
     }
     
-    @objc func onServerSelected() {
+    @objc func afterServerLoadStarted() {
         self.backButtonClicked()
     }
     
@@ -812,5 +825,11 @@ class MenuViewController: UIViewController, AchievementListener, UICollectionVie
         }
         
         accessKeyTextField.frame = CGRect(x: accessKeyTextField.frame.origin.x, y: textFieldY!, width: accessKeyTextField.frame.size.width, height: accessKeyTextField.frame.size.height)
+    }
+    
+    func onServerSelected(server: Server) {
+        self.selectedServer = server
+        self.performSegue(withIdentifier: showLoadingScreen, sender: nil)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(afterServerLoadStarted), userInfo: nil, repeats: false)
     }
 }

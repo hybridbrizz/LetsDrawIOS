@@ -2194,6 +2194,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.interactiveCanvas.cancelLatencyTask()
         InteractiveCanvasSocket.instance.socketConnectionDelegate = nil
         InteractiveCanvasSocket.instance.disconnect()
+        SessionSettings.instance.restoreDeviceViewportCenterX = 0.0
+        SessionSettings.instance.restoreDeviceViewportCenterY = 0.0
+        SessionSettings.instance.restoreCanvasScaleFactor = 0
         self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
     }
 }

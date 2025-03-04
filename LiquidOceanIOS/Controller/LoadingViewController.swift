@@ -121,6 +121,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
         
         URLSessionHandler.instance.findServer(accessKey: accessKey) { success, code, server in
             let storeduuid = self.server.uuid
+            let storedpublic = self.server.isPublic
             
             if server == nil && code >= 400 && code < 500 {
                 SessionSettings.instance.removeServer(server: self.server)
@@ -132,7 +133,9 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
                 return
             }
             
-            SessionSettings.instance.removeServer(server: self.server)
+            if !self.server.isPublic {
+                SessionSettings.instance.removeServer(server: self.server)
+            }
             
             self.canvasImage.alpha = 0
             self.canvasImage.kf.setImage(
@@ -165,14 +168,23 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
             }
             
             server!.uuid = storeduuid
+            server!.isPublic = storedpublic
+            server!.lastVisited = NSDate().timeIntervalSince1970
+            
             self.server = server!
+            
+            if self.server.isPublic {
+                SessionSettings.instance.publicServerLastVisitedTimes["\(self.server.uid)"] = self.server.lastVisited
+            }
+            else {
+                SessionSettings.instance.addServer(server: self.server)
+            }
             
             SessionSettings.instance.uniqueId = self.server.uuid
             SessionSettings.instance.maxPaintAmt = server!.maxPixels
             SessionSettings.instance.maxSend = server!.maxSend
             SessionSettings.instance.canvasSize = server!.size
             
-            SessionSettings.instance.addServer(server: self.server)
             SessionSettings.instance.lastVisitedServer = server!
             SessionSettings.instance.lastVisitedServerId = server!.uid
             
@@ -353,7 +365,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
                 }
                 
                 if !self.server.isAdmin {
-                    URLSessionHandler.instance.logIp(server: self.server, uuid: SessionSettings.instance.uniqueId) { response in
+                    URLSessionHandler.instance.logIp(server: self.server, uuid: self.server.uuid) { response in
                         if response == nil {
                             self.showError(type: self.errorTypeServer)
                             return
@@ -379,14 +391,22 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     }
     
     func sendDeviceId() {
+        self.server.uuid = UUID().uuidString
+        if self.server.isPublic {
+            SessionSettings.instance.publicServerUniqueIds["\(self.server.uid)"] = self.server.uuid
+            SessionSettings.instance.save()
+        }
+        
         URLSessionHandler.instance.sendDeviceId(server: server) { (success) -> (Void) in
             if success {
+                SessionSettings.instance.saveServers()
+                
                 self.doneSyncDevice = true
                 
                 self.downloadFinished()
                 
                 if !self.server.isAdmin {
-                    URLSessionHandler.instance.logIp(server: self.server, uuid: SessionSettings.instance.uniqueId) { response in
+                    URLSessionHandler.instance.logIp(server: self.server, uuid: self.server.uuid) { response in
                         if response == nil {
                             self.showError(type: self.errorTypeServer)
                             return
