@@ -13,7 +13,14 @@ class ServerListViewModel: ObservableObject {
     @Published var publicServers = [Server]()
     @Published var isPublicLoading = false
     
+    private var lastPublicDownload = 0.0
+    
     func getPublicServers() {
+        let cTime = NSDate().timeIntervalSince1970
+        if cTime - lastPublicDownload < 15 {
+            return
+        }
+        
         isPublicLoading = true
         
         URLSessionHandler.instance.getPublicServers { servers in
@@ -28,6 +35,7 @@ class ServerListViewModel: ObservableObject {
             })
             
             self.isPublicLoading = false
+            self.lastPublicDownload = NSDate().timeIntervalSince1970
         }
     }
 }

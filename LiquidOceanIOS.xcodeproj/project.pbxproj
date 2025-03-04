@@ -44,6 +44,7 @@
 		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
 		076120E22D73932C0030DAA9 /* SummaryClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */; };
 		076120E42D73A1450030DAA9 /* ClientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E32D73A1450030DAA9 /* ClientListView.swift */; };
+		076ADE6F2D77BCFB0059827A /* PublicServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */; };
 		0783F3BE2D767B7A006DA53F /* ServerListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */; };
 		0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916A2D74AF4700B4041B /* CanvasMenuView.swift */; };
 		0788916D2D74AF8700B4041B /* CanvasMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */; };
@@ -199,6 +200,7 @@
 		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
 		076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120E32D73A1450030DAA9 /* ClientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientListView.swift; sourceTree = "<group>"; };
+		076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicServerListView.swift; sourceTree = "<group>"; };
 		0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListItemView.swift; sourceTree = "<group>"; };
 		0788916A2D74AF4700B4041B /* CanvasMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuView.swift; sourceTree = "<group>"; };
 		0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuItemView.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 			children = (
 				078891752D750ECC00B4041B /* ServerListsView.swift */,
 				0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */,
+				076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				07D0ED24272DCE5F00755C1D /* InteractiveCanvasSummaryView.swift in Sources */,
 				07D0ED26272DFC9000755C1D /* DeviceViewportSummaryView.swift in Sources */,
 				076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */,
+				076ADE6F2D77BCFB0059827A /* PublicServerListView.swift in Sources */,
 				07BD25F925D450CF00CF812E /* SessionSettings.swift in Sources */,
 				073663782608F16600E5403F /* PincodeViewController.swift in Sources */,
 			);

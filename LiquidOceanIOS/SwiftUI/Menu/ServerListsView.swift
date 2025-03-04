@@ -13,12 +13,39 @@ struct ServerListsView: View {
     var serverSelectionDelegate: ServerSelectionDelegate
     
     var body: some View {
-        ZStack {
-            if viewModel.isPublicLoading {
-                ProgressView()
-            }
-            else {
+        HStack(spacing: 0) {
+            ZStack {}
+                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            Spacer()
+                .frame(width: 10)
+            ZStack {}
+                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            ZStack {
                 VStack(spacing: 0) {
+                    ZStack {
+                        ZStack {
+                            ZStack {
+                                Text("PIXELS: TOGETHER")
+                                    .foregroundStyle(.white)
+                                    .font(.custom("Inter", size: 15))
+                                    .fontWeight(.black)
+                                    .padding(5)
+                            }
+                            .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
+                            .padding(5)
+                        }
+                        .border(.white, width: 1)
+                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFF90D5FF"))))
+                    
+                    ZStack {}
+                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    
                     HStack(spacing: 0) {
                         ZStack {
                             Text("PUBLIC")
@@ -43,41 +70,43 @@ struct ServerListsView: View {
                             
                         }
                     }
-                    .ignoresSafeArea()
                     .frame(maxWidth: .infinity)
+                    
+                    ZStack {}
+                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
                     
                     HStack(spacing: 0) {
                         Spacer()
+                        Button(action: {
+                            viewModel.getPublicServers()
+                        }) {
+                            Image(systemName: "arrow.clockwise")
+                                .resizable()
+                                .foregroundStyle(.white)
+                                .frame(width: 24, height: 24)
+                                .padding(10)
+                        }
                     }
                     .frame(maxWidth: .infinity)
+                    .background(.black.opacity(0.1))
                     
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 0) {
-                            VStack(spacing: 0) {
-                                ZStack {}
-                                    .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
-                                HStack(spacing: 0) {
-                                    Text("Servers")
-                                        .foregroundStyle(.white)
-                                        .font(.custom("Inter", size: 13))
-                                        .fontWeight(.bold)
-                                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                                    Spacer()
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            ForEach(viewModel.publicServers) { server in
-                                ServerListItemView(server: server, selectionDelegate: serverSelectionDelegate)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                    .ignoresSafeArea()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    PublicServerListView(
+                        viewModel: viewModel,
+                        selectionDelegate: serverSelectionDelegate
+                    )
                 }
             }
+            ZStack {}
+                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            Spacer()
+                .frame(width: 10)
+            ZStack {}
+                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
         }
+        .clipped()
         .task {
             viewModel.getPublicServers()
         }

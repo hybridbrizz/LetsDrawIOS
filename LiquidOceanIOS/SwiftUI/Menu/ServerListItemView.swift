@@ -42,7 +42,6 @@ struct ServerListItemView: View {
                     .foregroundStyle(.white)
                     .font(.custom("Inter", size: 16))
                     .fontWeight(.regular)
-                Spacer().frame(width: 20)
             }
             .frame(maxWidth: .infinity)
             .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
