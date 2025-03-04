@@ -14,13 +14,11 @@ struct SummaryClientIndicatorsView: View {
     
     let circleSize = CGFloat(4)
     
-    let cClientName = SessionSettings.instance.displayNameOrId()
-    
     var body: some View {
         if interactiveCanvas.showSummaryClientIndicators {
             Canvas { context, size in
                 for info in interactiveCanvas.clientsInfo {
-                    if info.name == cClientName {
+                    if info.name == SessionSettings.instance.displayNameOrId() {
                         continue
                     }
                     
