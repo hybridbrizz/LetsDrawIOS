@@ -264,6 +264,21 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     weak var canvasFrameViewController: CanvasFrameViewController!
     weak var menuViewController: MenuViewController!
     
+    var landscapeLockTask: Task<(), any Error>? = nil
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+        
+        landscapeLockTask = Task {
+            print("\((UIApplication.shared.delegate as? AppDelegate)?.orientationLock == UIInterfaceOrientationMask.all)")
+            AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        layoutSubviews()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -802,8 +817,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             deviceViewportSummaryViewTrailing.isActive = false
             
             // toolbox buttons
-            let leadingConstraints = [exportButtonLeading, changeBackgroundButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
-            let trailingConstraints = [exportButtonTrailing, changeBackgroundButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
+            let leadingConstraints = [changeBackgroundButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
+            let trailingConstraints = [changeBackgroundButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
             
             for i in 0...leadingConstraints.count - 1 {
                 let leadingConstraint = leadingConstraints[i]!

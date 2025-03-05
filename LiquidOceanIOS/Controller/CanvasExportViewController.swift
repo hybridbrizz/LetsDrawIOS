@@ -24,6 +24,10 @@ class CanvasExportViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     func setBackground() {
         let gradient = CAGradientLayer()
 

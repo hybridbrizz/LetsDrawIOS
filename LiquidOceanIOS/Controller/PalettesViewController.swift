@@ -70,6 +70,10 @@ class PalettesViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.addGestureRecognizer(lpgr)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     func updatePanelThemeConfig(panelThemeConfig: PanelThemeConfig) {
         self.panelThemeConfig = panelThemeConfig
         

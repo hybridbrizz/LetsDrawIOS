@@ -52,6 +52,10 @@ class CanvasFrameViewController: UIViewController, UITextFieldDelegate {
         //view.addGestureRecognizer(lpgr)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     override func viewDidLayoutSubviews() {
         setBackground()
     }

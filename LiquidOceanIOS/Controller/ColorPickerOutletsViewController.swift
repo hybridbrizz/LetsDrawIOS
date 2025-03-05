@@ -43,6 +43,10 @@ class ColorPickerOutletsViewController: CustomColorPickerViewController {
         defaultWhiteButton.actionButtonView = defaultWhiteAction
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     override func viewDidLayoutSubviews() {
         layoutDelegate?.colorPickerDidLayoutSubviews(colorPickerViewController: self)
         

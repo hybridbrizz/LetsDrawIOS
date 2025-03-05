@@ -137,6 +137,8 @@ class HowtoViewController: UIViewController {
             Animator.animateHorizontalViewEnter(view: step1Text, left: true)
             Animator.animateHorizontalViewEnter(view: paintAction, left: true)
         }
+        
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
     }
 
     func setGradientBackground() {

@@ -31,6 +31,10 @@ class CanvasImportViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     @IBAction func importButtonPressed(_ sender: Any) {
         let urlStr = urlTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if urlStr.count == 0 {

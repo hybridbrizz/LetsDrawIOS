@@ -278,6 +278,10 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         Animator.animateMenuButtons(views: [[self.optionsLabel], [self.howtoLabel]], cascade: true, moveOut: false, inverse: false)
     }*/
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.all)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         /*if SessionSettings.instance.canvasOpen {
             self.performSegue(withIdentifier: self.showSinglePlay, sender: nil)
@@ -313,6 +317,7 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
             let vc = segue.destination as! LoadingViewController
             vc.realmId = realmId
             vc.server = selectedServer
+            vc.lockToLandscape = true
         }
         
         showcaseTimer.invalidate()

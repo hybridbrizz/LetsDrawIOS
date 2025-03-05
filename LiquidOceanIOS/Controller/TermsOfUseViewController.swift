@@ -20,6 +20,10 @@ class TermsOfUseViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var termsOfServiceTextHeight: NSLayoutConstraint!
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     override func viewDidLayoutSubviews() {
         if UIDevice.current.userInterfaceIdiom == .phone {
             let h = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat.greatestFiniteMagnitude)).height + 100

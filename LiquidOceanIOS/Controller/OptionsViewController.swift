@@ -404,6 +404,8 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             Animator.animateHorizontalViewEnter(view: canvasBackgroundPrimaryColorContainer, left: true)
             Animator.animateHorizontalViewEnter(view: canvasBackgroundSecondaryColorContainer, left: true)
         }
+        
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
     }
     
     override func viewDidAppear(_ animated: Bool) {

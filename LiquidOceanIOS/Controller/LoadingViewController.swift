@@ -91,6 +91,8 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     var queuePos = 0
     var queuePosTimer: Timer? = nil
     
+    var lockToLandscape = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -205,6 +207,13 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
             }
             
             self.downloadFinished()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if lockToLandscape {
+            AppDelegate.OrientationUtility.lockAndApplyOrientation(UIInterfaceOrientationMask.landscape)
+            lockToLandscape = false
         }
     }
     
@@ -619,6 +628,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
         self.presentingViewController?.dismiss(animated: false, completion: nil)
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.all)
     }
     
     func processAgreedToTermsOfService() {

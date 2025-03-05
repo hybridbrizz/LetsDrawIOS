@@ -90,6 +90,10 @@ class StatsViewController: UIViewController, UICollectionViewDataSource, UIColle
         initial = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     @objc func didTapIconBackground() {
         for v in iconContainer.subviews {
             v.removeFromSuperview()

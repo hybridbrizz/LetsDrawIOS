@@ -44,6 +44,10 @@ class ExportViewController: UIViewController {
                     SessionSettings.instance.save()
                 }
             }
+            
+            screenSizeLabel.isHidden = false
+            actualSizeLabel.isHidden = false
+            artSizeSwitch.isHidden = false
         }
         get {
             return _art
@@ -70,6 +74,10 @@ class ExportViewController: UIViewController {
                 canvasImageView.image = canvasImage!
                 canvasImageView.isHidden = false
             }
+            
+            screenSizeLabel.isHidden = true
+            actualSizeLabel.isHidden = true
+            artSizeSwitch.isHidden = true
         }
         get {
             return _canvas
@@ -117,6 +125,10 @@ class ExportViewController: UIViewController {
         screenSizeLabel.addGestureRecognizer(UITouchGestureRecognizer(target: self, action: #selector(touchedScreenSizeLabel(sender:))))
         
         actualSizeLabel.addGestureRecognizer(UITouchGestureRecognizer(target: self, action: #selector(touchedActualSizeLabel(sender:))))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
     }
     
     override func viewDidLayoutSubviews() {

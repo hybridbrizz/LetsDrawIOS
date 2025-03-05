@@ -35,10 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return .landscape
-    }
 
     // MARK: UISceneSession Lifecycle
 
@@ -96,6 +92,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    // Thanks Nahid Raihan - https://stackoverflow.com/questions/28938660/how-to-lock-orientation-of-one-view-controller-to-portrait-mode-only
+    var orientationLock = UIInterfaceOrientationMask.all
+        
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
+    }
+    
+    struct OrientationUtility {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = orientation
+            }
+        }
+        
+        static func lockAndApplyOrientation(_ orientation: UIInterfaceOrientationMask) {
+            self.lockOrientation(orientation)
+            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
         }
     }
 }

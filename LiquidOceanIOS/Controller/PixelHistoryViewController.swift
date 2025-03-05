@@ -22,6 +22,10 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     var selectedIndices = [IndexPath]()
     
     func clearSelections() {

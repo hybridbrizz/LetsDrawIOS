@@ -42,6 +42,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         statusLabel.textColor = UIColor(argb: ActionButtonView.altGreenColor)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
+    }
+    
     override func viewDidLayoutSubviews() {
         let backX = self.backAction.frame.origin.x
         if backX < 0 {
