@@ -32,7 +32,11 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
     
-    @IBOutlet weak var serverListsContainer: UIView?
+    @IBOutlet weak var serverListsContainerPortrait: UIView?
+    private var serverListViewForPortrait: ServerListsView? = nil
+    
+    @IBOutlet weak var serverListsContainerLandscape: UIView?
+    private var serverListViewForLandscape: ServerListsView? = nil
     
     @IBOutlet weak var connectButton: ButtonFrame?
     @IBOutlet weak var optionsButton: ButtonFrame!
@@ -75,6 +79,8 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     
     weak var menuButtonDelegate: MenuButtonDelegate?
     
+    var lastViewFrameSize: CGSize!
+    
     var realmId = 0
     
     var showcaseTimer: Timer!
@@ -104,15 +110,10 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     var keyboardHeight = CGFloat(0)
     var textFieldY: CGFloat?
     
+    private var serverListViewModel = ServerListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let serverListsView = ServerListsView(serverSelectionDelegate: self)
-        
-        if self.serverListsContainer != nil {
-            addSwiftUIViewToContainer(swiftUIView: serverListsView, containerView: self.serverListsContainer!)
-            self.serverListsContainer!.backgroundColor = UIColor.darkGray
-        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -227,6 +228,8 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         StatTracker.instance.achievementListener = self
         
         startShowcase()
+        
+        lastViewFrameSize = CGSize(width: 0, height: 0)
     }
     
     func backButtonClicked() {
@@ -270,6 +273,13 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         }
         
         startPixels()
+        
+        // rotation
+        if lastViewFrameSize.width != view!.frame.size.width || lastViewFrameSize.height != view!.frame.size.height {
+            updateServerListsContraints()
+            
+            lastViewFrameSize = view!.frame.size
+        }
     }
     
     /*override func viewWillAppear(_ animated: Bool) {
@@ -295,12 +305,33 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        view!.backgroundColor = UIColor.black
-        view.setNeedsDisplay()
-        artView.setNeedsDisplay()
+    func updateServerListsContraints() {
+        let orientation = UIDevice.current.orientation
         
-        /*setGradient(bounds: CGRect(x: 0, y: 0, width: size.width, height: size.height), index: cBackgroundGradientIndex)*/
+        let isPortrait = orientation.isPortrait || orientation == .unknown
+        print("Is portrait = \(isPortrait)")
+        
+        if isPortrait {
+            if serverListViewForPortrait == nil {
+                serverListViewForPortrait = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: true)
+                if self.serverListsContainerPortrait != nil {
+                    addSwiftUIViewToContainer(swiftUIView: serverListViewForPortrait!, containerView: self.serverListsContainerPortrait!)
+                    self.serverListsContainerPortrait!.backgroundColor = UIColor.darkGray
+                }
+            }
+        }
+        else {
+            if serverListViewForLandscape == nil {
+                serverListViewForLandscape = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: false)
+                if self.serverListsContainerLandscape != nil {
+                    addSwiftUIViewToContainer(swiftUIView: serverListViewForLandscape!, containerView: self.serverListsContainerLandscape!)
+                    self.serverListsContainerLandscape!.backgroundColor = UIColor.darkGray
+                }
+            }
+        }
+        
+        serverListsContainerLandscape?.isHidden = isPortrait
+        serverListsContainerPortrait?.isHidden = !isPortrait
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -9,19 +9,22 @@
 import SwiftUI
 
 struct ServerListsView: View {
-    @StateObject var viewModel = ServerListViewModel()
+    @ObservedObject var viewModel: ServerListViewModel
     var serverSelectionDelegate: ServerSelectionDelegate
+    var isPortrait: Bool
     
     var body: some View {
         HStack(spacing: 0) {
-            ZStack {}
-                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
-            Spacer()
-                .frame(width: 10)
-            ZStack {}
-                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            if !isPortrait {
+                ZStack {}
+                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                Spacer()
+                    .frame(width: 10)
+                ZStack {}
+                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            }
             ZStack {
                 VStack(spacing: 0) {
                     ZStack {
@@ -97,14 +100,16 @@ struct ServerListsView: View {
                     )
                 }
             }
-            ZStack {}
-                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
-            Spacer()
-                .frame(width: 10)
-            ZStack {}
-                .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            if !isPortrait {
+                ZStack {}
+                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                Spacer()
+                    .frame(width: 10)
+                ZStack {}
+                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+            }
         }
         .clipped()
         .task {

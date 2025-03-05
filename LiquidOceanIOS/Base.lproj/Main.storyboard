@@ -773,7 +773,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLn-mO-5pb">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbc-eb-pMK">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbc-eb-pMK">
                                         <rect key="frame" x="344" y="0.0" width="208" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="208" id="8bk-pm-Aat"/>
@@ -5576,16 +5576,20 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstAttribute="width" constant="480" id="y15-qE-CWt"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7im-aY-OjV">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTf-xu-uJp">
                                 <rect key="frame" x="434" y="0.0" width="414" height="414"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7im-aY-OjV" secondAttribute="height" multiplier="1:1" id="yf8-zu-Ro3"/>
+                                    <constraint firstAttribute="width" constant="414" id="rro-H9-0Xd"/>
                                 </constraints>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7im-aY-OjV">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dgZ-cA-Ezl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="UTf-xu-uJp" firstAttribute="leading" secondItem="6mT-dj-jUR" secondAttribute="trailing" id="2xJ-rs-dDU"/>
                             <constraint firstAttribute="trailing" secondItem="xv7-mI-1F4" secondAttribute="trailing" constant="50" id="7zy-Tt-cnE"/>
                             <constraint firstItem="6mT-dj-jUR" firstAttribute="centerY" secondItem="Xcf-WA-Qco" secondAttribute="centerY" id="9zi-DF-gMm"/>
                             <constraint firstItem="1OW-V0-ecU" firstAttribute="top" secondItem="Xcf-WA-Qco" secondAttribute="topMargin" constant="20" id="Byh-Wr-wet"/>
@@ -5594,14 +5598,17 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="7im-aY-OjV" firstAttribute="top" secondItem="Xcf-WA-Qco" secondAttribute="top" id="HWg-tJ-ti3"/>
                             <constraint firstItem="6mT-dj-jUR" firstAttribute="leading" secondItem="dgZ-cA-Ezl" secondAttribute="leading" id="Nyz-Av-Re8"/>
                             <constraint firstItem="Hda-PN-1Gv" firstAttribute="top" secondItem="Xcf-WA-Qco" secondAttribute="topMargin" id="S1q-nH-BTH"/>
-                            <constraint firstItem="7im-aY-OjV" firstAttribute="leading" secondItem="6mT-dj-jUR" secondAttribute="trailing" id="Sur-py-7bu"/>
+                            <constraint firstItem="7im-aY-OjV" firstAttribute="leading" secondItem="Xcf-WA-Qco" secondAttribute="leading" id="Spx-Fv-m5k"/>
                             <constraint firstAttribute="trailing" secondItem="Hda-PN-1Gv" secondAttribute="trailing" id="TpI-fl-Q2M"/>
+                            <constraint firstAttribute="trailing" secondItem="7im-aY-OjV" secondAttribute="trailing" id="VvB-P1-Ks5"/>
+                            <constraint firstItem="UTf-xu-uJp" firstAttribute="top" secondItem="Xcf-WA-Qco" secondAttribute="top" id="WOO-7Z-NWm"/>
+                            <constraint firstItem="dgZ-cA-Ezl" firstAttribute="trailing" secondItem="UTf-xu-uJp" secondAttribute="trailing" id="cK6-pi-CmG"/>
                             <constraint firstAttribute="trailing" secondItem="PIA-eD-3bn" secondAttribute="trailing" id="fDI-B4-eau"/>
                             <constraint firstItem="Z6s-CB-VpD" firstAttribute="top" secondItem="dgZ-cA-Ezl" secondAttribute="top" id="j2t-yL-q1B"/>
                             <constraint firstAttribute="bottom" secondItem="7im-aY-OjV" secondAttribute="bottom" id="kU4-kD-LcQ"/>
                             <constraint firstItem="PIA-eD-3bn" firstAttribute="top" secondItem="Xcf-WA-Qco" secondAttribute="top" id="kij-ep-LVa"/>
-                            <constraint firstItem="dgZ-cA-Ezl" firstAttribute="trailing" secondItem="7im-aY-OjV" secondAttribute="trailing" id="mP1-MQ-LGa"/>
                             <constraint firstItem="xv7-mI-1F4" firstAttribute="centerY" secondItem="Xcf-WA-Qco" secondAttribute="centerY" id="qyP-BT-wTW"/>
+                            <constraint firstAttribute="bottom" secondItem="UTf-xu-uJp" secondAttribute="bottom" id="zt5-jK-gPB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NEd-tf-Ysf"/>
@@ -5626,7 +5633,8 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <outlet property="menuContainerWidth" destination="jVm-g0-zIR" id="aSB-0R-nkK"/>
                         <outlet property="optionsButton" destination="YG3-8a-G7f" id="gBP-DD-Vow"/>
                         <outlet property="rightyButton" destination="iVb-p6-yVv" id="9B8-pD-Ry1"/>
-                        <outlet property="serverListsContainer" destination="7im-aY-OjV" id="7ZR-8J-Dvp"/>
+                        <outlet property="serverListsContainerLandscape" destination="UTf-xu-uJp" id="nqd-3v-j1g"/>
+                        <outlet property="serverListsContainerPortrait" destination="7im-aY-OjV" id="omj-Pb-xUw"/>
                         <outlet property="serversCollectionView" destination="OKa-Xj-NoU" id="7ae-2o-Nyu"/>
                         <outlet property="singleButton" destination="Apc-sy-eHH" id="b6F-nk-Pqn"/>
                         <outlet property="singleButtonBottomLayer" destination="oWa-9L-bBr" id="Wgp-GH-yro"/>

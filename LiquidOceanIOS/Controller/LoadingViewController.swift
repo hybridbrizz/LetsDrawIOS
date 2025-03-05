@@ -629,6 +629,9 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
         self.presentingViewController?.dismiss(animated: false, completion: nil)
         AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.all)
+        if self.presentingViewController is MenuViewController {
+            (self.presentingViewController as! MenuViewController).updateServerListsContraints()
+        }
     }
     
     func processAgreedToTermsOfService() {
