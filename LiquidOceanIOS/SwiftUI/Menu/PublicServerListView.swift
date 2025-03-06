@@ -32,10 +32,14 @@ struct PublicServerListView: View {
                                     .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                                 Spacer()
                             }
+                            
+                            ZStack {}
+                                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
                         }
                         .frame(maxWidth: .infinity)
                         ForEach(viewModel.publicServers) { server in
-                            ServerListItemView(server: server, selectionDelegate: selectionDelegate)
+                            ServerListItemView(viewModel: viewModel, server: server, selectionDelegate: selectionDelegate, isPrivate: false)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -19,9 +19,6 @@ struct AddPrivateServerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {}
-                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
             HStack {
                 Spacer().frame(width: 16)
                 TextField(
@@ -81,6 +78,10 @@ struct AddPrivateServerView: View {
                         .padding(10)
                 }
             }
+            
+            ZStack {}
+                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
         }
     }
 }

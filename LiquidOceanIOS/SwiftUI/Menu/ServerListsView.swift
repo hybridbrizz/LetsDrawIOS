@@ -117,6 +117,10 @@ struct ServerListsView: View {
                     .frame(maxWidth: .infinity)
                     .background(.black.opacity(0.1))
                     
+                    ZStack {}
+                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    
                     if showAddPrivateServerInput && !showPublicServers {
                         AddPrivateServerView(viewModel: viewModel) {
                             showAddPrivateServerInput = false

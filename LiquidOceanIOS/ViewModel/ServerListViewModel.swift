@@ -121,4 +121,10 @@ class ServerListViewModel: ObservableObject {
             self.isPrivateLoading = false
         }
     }
+    
+    func removePrivateServer(server: Server) {
+        SessionSettings.instance.removeServer(server: server)
+        self.privateServers = SessionSettings.instance.privateServers()
+        self.adminServers = SessionSettings.instance.adminServers()
+    }
 }

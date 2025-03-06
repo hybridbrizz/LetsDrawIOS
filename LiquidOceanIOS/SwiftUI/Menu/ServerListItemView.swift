@@ -9,14 +9,15 @@
 import SwiftUI
 
 struct ServerListItemView: View {
+    @ObservedObject var viewModel: ServerListViewModel
     var server: Server
     var selectionDelegate: ServerSelectionDelegate
+    var isPrivate: Bool
+    
+    @State var showDeleteAlert = false
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {}
-                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
             HStack(alignment: .center) {
                 Image(uiImage: server.statusImage())
                     .resizable()
@@ -45,9 +46,36 @@ struct ServerListItemView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
+            
+            ZStack {}
+                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
         }
-        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-            selectionDelegate.onServerSelected(server: server)
+//        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
+//            selectionDelegate.onServerSelected(server: server)
+//        }
+        // Thanks Jensie - https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
+        .simultaneousGesture(
+            LongPressGesture()
+                .onEnded { _ in
+                    showDeleteAlert = true
+                }
+        )
+        .highPriorityGesture(
+            TapGesture()
+                .onEnded { _ in
+                    selectionDelegate.onServerSelected(server: server)
+                }
+        )
+        // Thanks Cluade!
+        .alert("Remove", isPresented: $showDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            
+            Button("Remove", role: .destructive) {
+                viewModel.removePrivateServer(server: server)
+            }
+        } message: {
+            Text("Are you sure you want to remove \(server.name)?")
         }
     }
 }
