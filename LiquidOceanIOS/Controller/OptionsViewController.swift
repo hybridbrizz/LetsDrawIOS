@@ -365,7 +365,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             pincodeButton.setTitle("Set Access Pincode", for: .normal)
         }
         
-        if SessionSettings.instance.uniqueId == "" {
+        if SessionSettings.instance.lastVisitedServer?.uuid == "" {
             changeNameLabel.isHidden = true
             changeNameTextField.isHidden = true
             changeNameButton.isHidden = true

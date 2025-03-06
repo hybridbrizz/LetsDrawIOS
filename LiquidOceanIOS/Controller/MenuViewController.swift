@@ -278,6 +278,7 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         }
         
         startPixels()
+        artView.setNeedsDisplay()
         
         // rotation
         if lastViewFrameSize.width != view!.frame.size.width || lastViewFrameSize.height != view!.frame.size.height {

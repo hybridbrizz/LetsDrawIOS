@@ -1214,7 +1214,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         // tablet
         if view.frame.size.height > 600 && !resizedColorPicker {
             colorPickerFrameWidth.constant = 330
-            colorPickerFrameWidth.constant *= 2
+            colorPickerFrameWidth.constant *= 1.5
             
             colorPickerViewController.hsbWheelWidth.constant *= 2
             colorPickerViewController.hsbWheelHeight.constant *= 2
@@ -2212,6 +2212,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         SessionSettings.instance.restoreDeviceViewportCenterX = 0.0
         SessionSettings.instance.restoreDeviceViewportCenterY = 0.0
         SessionSettings.instance.restoreCanvasScaleFactor = 0
+        SessionSettings.instance.save()
         self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
     }
 }

@@ -1417,7 +1417,6 @@
                                             <constraint firstAttribute="width" constant="200" id="NL1-o9-9UU"/>
                                             <constraint firstAttribute="height" constant="40" id="OgX-it-fa8"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Inter-Medium" family="Inter" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
@@ -5652,8 +5651,8 @@ If any person on any canvas uses pixels to give out any personal information abo
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xNZ-J9-gls"/>
-        <segue reference="DhC-cG-tnL"/>
-        <segue reference="cg6-8E-NGn"/>
+        <segue reference="XGn-H2-2Wq"/>
+        <segue reference="N4G-oK-EKi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add" width="24" height="24"/>
