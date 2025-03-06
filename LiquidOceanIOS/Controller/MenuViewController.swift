@@ -96,6 +96,8 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         (gradient1: Utils.int32FromColorHex(hex: "0xff242e8f"), gradient2: Utils.int32FromColorHex(hex: "0xff8f3234")),
         (gradient1: Utils.int32FromColorHex(hex: "0xff898f1d"), gradient2: Utils.int32FromColorHex(hex: "0xff158f86"))]
     
+    var rIndex = 0
+    
     var cBackgroundGradientIndex = 0
     var insertedSublayer = false
     
@@ -129,7 +131,6 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
 //        }
         
         // self.view.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xFF333333"))
-        randomGradientBackground()
         
         //defaultLabelColor = drawLabel.textColor.argb()
         //defaultLabelColor = optionsLabel.textColor.argb()
@@ -137,6 +138,8 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
         /*menuContainer.layer.cornerRadius = 10
         menuContainer.layer.borderWidth = 1
         menuContainer.layer.borderColor = Utils.UIColorFromColorHex(hex: "0xFF333333").cgColor*/
+        
+        rIndex = Int(arc4random() % UInt32(backgrounds.count))
         
         singleButtonBottomLayer.type = .single
         singleButtonBottomLayer.selectable = false
@@ -266,6 +269,8 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     }
     
     override func viewDidLayoutSubviews() {
+        randomGradientBackground()
+        
         let backX = self.backButton?.frame.origin.x
         
         if backX != nil && backX! < 0 {
@@ -307,31 +312,38 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     
     func updateServerListsContraints() {
         let orientation = UIDevice.current.orientation
-        
-        let isPortrait = orientation.isPortrait || orientation == .unknown
+        let isPortrait = orientation.isPortrait || orientation.isFlat
         print("Is portrait = \(isPortrait)")
         
-        if isPortrait {
-            if serverListViewForPortrait == nil {
-                serverListViewForPortrait = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: true)
-                if self.serverListsContainerPortrait != nil {
-                    addSwiftUIViewToContainer(swiftUIView: serverListViewForPortrait!, containerView: self.serverListsContainerPortrait!)
-                    self.serverListsContainerPortrait!.backgroundColor = UIColor.darkGray
+        // Thanks Claude!
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            let interfaceOrientation = windowScene.interfaceOrientation
+            
+            if interfaceOrientation.isPortrait {
+                if serverListViewForPortrait == nil {
+                    serverListViewForPortrait = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: true)
+                    if self.serverListsContainerPortrait != nil {
+                        addSwiftUIViewToContainer(swiftUIView: serverListViewForPortrait!, containerView: self.serverListsContainerPortrait!)
+                        self.serverListsContainerPortrait!.backgroundColor = UIColor.darkGray
+                    }
                 }
+                
+                serverListsContainerPortrait?.isHidden = false
+                serverListsContainerLandscape?.isHidden = true
+            }
+            else if interfaceOrientation.isLandscape {
+                if serverListViewForLandscape == nil {
+                    serverListViewForLandscape = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: false)
+                    if self.serverListsContainerLandscape != nil {
+                        addSwiftUIViewToContainer(swiftUIView: serverListViewForLandscape!, containerView: self.serverListsContainerLandscape!)
+                        self.serverListsContainerLandscape!.backgroundColor = UIColor.darkGray
+                    }
+                }
+                
+                serverListsContainerPortrait?.isHidden = true
+                serverListsContainerLandscape?.isHidden = false
             }
         }
-        else {
-            if serverListViewForLandscape == nil {
-                serverListViewForLandscape = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: false)
-                if self.serverListsContainerLandscape != nil {
-                    addSwiftUIViewToContainer(swiftUIView: serverListViewForLandscape!, containerView: self.serverListsContainerLandscape!)
-                    self.serverListsContainerLandscape!.backgroundColor = UIColor.darkGray
-                }
-            }
-        }
-        
-        serverListsContainerLandscape?.isHidden = isPortrait
-        serverListsContainerPortrait?.isHidden = !isPortrait
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -480,8 +492,6 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     }
     
     func randomGradientBackground() {
-        var rIndex = Int(arc4random() % UInt32(backgrounds.count))
-        
         if SessionSettings.instance.defaultBg {
             rIndex = 5
             
@@ -495,7 +505,9 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
             setGradient(bounds: CGRect(x: 0, y: 0, width: 500, height: 300), index: rIndex)
         }
         else {
-            setGradient(bounds: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), index: rIndex)
+            if let screen = self.view.window?.windowScene?.screen {
+                setGradient(bounds: CGRect(x: 0, y: 0, width: screen.bounds.width, height: screen.bounds.height), index: rIndex)
+            }
         }
     }
     

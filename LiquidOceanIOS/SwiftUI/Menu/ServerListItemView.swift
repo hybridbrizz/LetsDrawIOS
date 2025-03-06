@@ -51,22 +51,18 @@ struct ServerListItemView: View {
                 .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
                 .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
         }
-//        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-//            selectionDelegate.onServerSelected(server: server)
-//        }
         // Thanks Jensie - https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
         .simultaneousGesture(
             LongPressGesture()
                 .onEnded { _ in
-                    showDeleteAlert = true
+                    if isPrivate {
+                        showDeleteAlert = true
+                    }
                 }
         )
-        .highPriorityGesture(
-            TapGesture()
-                .onEnded { _ in
-                    selectionDelegate.onServerSelected(server: server)
-                }
-        )
+        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
+            selectionDelegate.onServerSelected(server: server)
+        }
         // Thanks Cluade!
         .alert("Remove", isPresented: $showDeleteAlert) {
             Button("Cancel", role: .cancel) {}

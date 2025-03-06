@@ -107,7 +107,7 @@ struct ClickableModifier: ViewModifier {
                 }
             )
             // Thanks Claude!
-            .gesture(
+            .highPriorityGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { _ in
                         // Touch down - finger is on the screen

@@ -631,6 +631,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
         AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.all)
         if self.presentingViewController is MenuViewController {
             (self.presentingViewController as! MenuViewController).updateServerListsContraints()
+            (self.presentingViewController as! MenuViewController).startShowcase()
         }
     }
     
