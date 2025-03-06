@@ -116,3 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// Thanks rraphael - https://stackoverflow.com/questions/56491386/how-to-hide-keyboard-when-using-swiftui
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+

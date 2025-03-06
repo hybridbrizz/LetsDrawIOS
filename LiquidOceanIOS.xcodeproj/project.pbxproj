@@ -116,6 +116,8 @@
 		07D0ED26272DFC9000755C1D /* DeviceViewportSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0ED25272DFC9000755C1D /* DeviceViewportSummaryView.swift */; };
 		07D6934328BA57A300F2EBE7 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D6934228BA57A300F2EBE7 /* TermsOfUseViewController.swift */; };
 		07D6934528BA993D00F2EBE7 /* OptionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D6934428BA993C00F2EBE7 /* OptionContainerView.swift */; };
+		07DA42F02D78C34100275BC2 /* PrivateServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */; };
+		07DA42F22D793E4E00275BC2 /* AddPrivateServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */; };
 		07E5FAAB28BAA3C700C4717D /* Solid_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E5FAAA28BAA3C700C4717D /* Solid_black.png */; };
 		07F573C8289EA65D00D4C9EF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F573C7289EA65D00D4C9EF /* Server.swift */; };
 		07FF5EFF25DF5833003E19AE /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF5EFE25DF5833003E19AE /* ArtView.swift */; };
@@ -277,6 +279,8 @@
 		07D0ED25272DFC9000755C1D /* DeviceViewportSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewportSummaryView.swift; sourceTree = "<group>"; };
 		07D6934228BA57A300F2EBE7 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		07D6934428BA993C00F2EBE7 /* OptionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionContainerView.swift; sourceTree = "<group>"; };
+		07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerListView.swift; sourceTree = "<group>"; };
+		07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrivateServerView.swift; sourceTree = "<group>"; };
 		07E5FAAA28BAA3C700C4717D /* Solid_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Solid_black.png; sourceTree = "<group>"; };
 		07F573C7289EA65D00D4C9EF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		07FF5EFE25DF5833003E19AE /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 				078891752D750ECC00B4041B /* ServerListsView.swift */,
 				0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */,
 				076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */,
+				07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */,
+				07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 			files = (
 				07BD25F025D4461400CF812E /* InteractiveCanvas.swift in Sources */,
 				0712053625DEDF1100AE0F52 /* ActionButtonFrame.swift in Sources */,
+				07DA42F22D793E4E00275BC2 /* AddPrivateServerView.swift in Sources */,
 				070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */,
 				0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */,
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
@@ -874,6 +881,7 @@
 				0731602B28A0159B00466BC4 /* ButtonFrame.swift in Sources */,
 				07BD25C725D43FB500CF812E /* AppDelegate.swift in Sources */,
 				0704FB7427397D3B009799E1 /* PaletteHeaderCollectionReusableView.swift in Sources */,
+				07DA42F02D78C34100275BC2 /* PrivateServerListView.swift in Sources */,
 				0736637A260E148700E5403F /* AchievementIcon.swift in Sources */,
 				07FF5F0725E42C1C003E19AE /* ActionButtonReusableView.swift in Sources */,
 				07006C3E25D6C2D500DF9A64 /* PaintQuantityBar.swift in Sources */,

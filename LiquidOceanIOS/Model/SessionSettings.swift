@@ -633,6 +633,24 @@ class SessionSettings: NSObject {
         userDefaults().set(String(data: jsonData, encoding: .utf8)!, forKey: "server_list_json")
     }
     
+    func syncServerStatus(remoteServers: [Server]) {
+        for server in servers {
+            var remoteServer: Server? = nil
+            for serverItem in remoteServers {
+                if serverItem.uid == server.uid {
+                    remoteServer = serverItem
+                }
+            }
+            
+            if remoteServer != nil {
+                server.isOnline = remoteServer!.isOnline
+                server.connectionCount = remoteServer!.connectionCount
+                server.maxConnections = remoteServer!.maxConnections
+            }
+        }
+        saveServers()
+    }
+    
     func saveAgreedToTermsOfService() {
         userDefaults().set(agreedToTermsOfService, forKey: "agreed_to_terms_of_service")
     }

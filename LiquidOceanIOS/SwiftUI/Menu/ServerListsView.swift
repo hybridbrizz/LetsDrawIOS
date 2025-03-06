@@ -13,6 +13,9 @@ struct ServerListsView: View {
     var serverSelectionDelegate: ServerSelectionDelegate
     var isPortrait: Bool
     
+    @State var showPublicServers = true
+    @State var showAddPrivateServerInput = false
+    
     var body: some View {
         HStack(spacing: 0) {
             if !isPortrait {
@@ -44,6 +47,9 @@ struct ServerListsView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFF90D5FF"))))
+                    .clickable(bgColor: Color.clear, selectionColor: Color.clear) {
+                        UIApplication.shared.endEditing()
+                    }
                     
                     ZStack {}
                         .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
@@ -59,7 +65,7 @@ struct ServerListsView: View {
                         .frame(maxWidth: .infinity)
                         .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                         .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-                            
+                            showPublicServers = true
                         }
                         ZStack {
                             Text("PRIVATE")
@@ -70,7 +76,7 @@ struct ServerListsView: View {
                         .frame(maxWidth: .infinity)
                         .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                         .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-                            
+                            showPublicServers = false
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -82,7 +88,12 @@ struct ServerListsView: View {
                     HStack(spacing: 0) {
                         Spacer()
                         Button(action: {
-                            viewModel.getPublicServers()
+                            if showPublicServers {
+                                viewModel.getPublicServers()
+                            }
+                            else {
+                                viewModel.getPrivateServers()
+                            }
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 .resizable()
@@ -90,14 +101,40 @@ struct ServerListsView: View {
                                 .frame(width: 24, height: 24)
                                 .padding(10)
                         }
+                        if !showPublicServers {
+                            Spacer().frame(width: 5)
+                            Button(action: {
+                                showAddPrivateServerInput = true
+                            }) {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .foregroundStyle(.white)
+                                    .frame(width: 24, height: 24)
+                                    .padding(10)
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .background(.black.opacity(0.1))
                     
-                    PublicServerListView(
-                        viewModel: viewModel,
-                        selectionDelegate: serverSelectionDelegate
-                    )
+                    if showAddPrivateServerInput && !showPublicServers {
+                        AddPrivateServerView {
+                            showAddPrivateServerInput = false
+                        }
+                    }
+                    
+                    if showPublicServers {
+                        PublicServerListView(
+                            viewModel: viewModel,
+                            selectionDelegate: serverSelectionDelegate
+                        )
+                    }
+                    else {
+                        PrivateServerListView(
+                            viewModel: viewModel,
+                            selectionDelegate: serverSelectionDelegate
+                        )
+                    }
                 }
             }
             if !isPortrait {
@@ -114,6 +151,7 @@ struct ServerListsView: View {
         .clipped()
         .task {
             viewModel.getPublicServers()
+            viewModel.getPrivateServers()
         }
     }
 }

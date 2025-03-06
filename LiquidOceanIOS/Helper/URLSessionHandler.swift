@@ -724,35 +724,7 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
                 let jsonDict = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: AnyObject]
                 
                 DispatchQueue.main.async {
-                    let server = Server()
-                    
-                    server.uid = jsonDict["id"] as! Int
-                    server.name = jsonDict["name"] as! String
-                    server.color = jsonDict["color"] as! Int32
-                    server.baseUrl = jsonDict["base_url"] as! String
-                    server.iconUrl = jsonDict["icon_url"] as! String
-                    server.iconLink = jsonDict["icon_link"] as! String
-                    server.showBanner = jsonDict["show_banner"] as! Bool
-                    server.bannerText = jsonDict["banner_text"] as! String
-                    server.pixelInterval = jsonDict["pixel_interval"] as! Int
-                    server.maxPixels = jsonDict["max_pixels"] as! Int
-                    server.isAdmin = jsonDict["is_admin"] as! Bool
-                    
-                    if server.isAdmin {
-                        server.adminKey = jsonDict["admin_key"] as! String
-                    }
-                    else {
-                        server.accessKey = jsonDict["access_key"] as! String
-                    }
-                    
-                    server.apiPort = jsonDict["api_port"] as! Int
-                    server.altPort = jsonDict["alt_port"] as! Int
-                    server.socketPort = jsonDict["socket_port"] as! Int
-                    server.queuePort = jsonDict["queue_port"] as! Int
-                    
-                    server.size = jsonDict["size"] as! Int
-                    server.maxSend = jsonDict["max_send"] as! Int
-                    
+                    let server = Server(fromJson: jsonDict)
                     completionHandler(true, code, server)
                 }
             }
@@ -905,6 +877,102 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
         
         request.httpMethod = "GET"
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            do {
+                if error != nil {
+                    DispatchQueue.main.async {
+                        completionHandler([])
+                    }
+                    return
+                }
+                
+                var code = 0
+                if let httpReponse = response as? HTTPURLResponse {
+                    code = httpReponse.statusCode
+                    if code != 200 {
+                        DispatchQueue.main.async {
+                            completionHandler([])
+                        }
+                    }
+                }
+                
+                let jsonArr = try JSONSerialization.jsonObject(with: data!, options: []) as! [[String: AnyObject]]
+                
+                DispatchQueue.main.async {
+                    var servers = [Server]()
+                    for jsonObj in jsonArr {
+                        servers.append(Server(fromJson: jsonObj))
+                    }
+                    completionHandler(servers)
+                }
+            }
+            catch {
+                completionHandler([])
+            }
+        })
+
+        task.resume()
+    }
+    
+    func getPrivateServers(keys: [String], completionHandler: @escaping ([Server]) -> Void) {
+        var request = URLRequest(url: URL(string: serversUrl + "api/v1/private/serverlist")!)
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        
+        request.httpMethod = "POST"
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: keys, options: [])
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            do {
+                if error != nil {
+                    DispatchQueue.main.async {
+                        completionHandler([])
+                    }
+                    return
+                }
+                
+                var code = 0
+                if let httpReponse = response as? HTTPURLResponse {
+                    code = httpReponse.statusCode
+                    if code != 200 {
+                        DispatchQueue.main.async {
+                            completionHandler([])
+                        }
+                    }
+                }
+                
+                let jsonArr = try JSONSerialization.jsonObject(with: data!, options: []) as! [[String: AnyObject]]
+                
+                DispatchQueue.main.async {
+                    var servers = [Server]()
+                    for jsonObj in jsonArr {
+                        servers.append(Server(fromJson: jsonObj))
+                    }
+                    completionHandler(servers)
+                }
+            }
+            catch {
+                completionHandler([])
+            }
+        })
+
+        task.resume()
+    }
+    
+    func getPrivateAdminServers(keys: [String], completionHandler: @escaping ([Server]) -> Void) {
+        var request = URLRequest(url: URL(string: serversUrl + "api/v1/private/admin/serverlist")!)
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        
+        request.httpMethod = "POST"
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: keys, options: [])
 
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
