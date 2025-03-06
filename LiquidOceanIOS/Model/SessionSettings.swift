@@ -568,6 +568,7 @@ class SessionSettings: NSObject {
             for jsonObj in jsonArray {
                 let server = Server()
                 
+                server.uid = jsonObj["id"] as! Int
                 server.name = jsonObj["name"] as! String
                 server.color = jsonObj["color"] as! Int32
                 server.baseUrl = jsonObj["base_url"] as! String
@@ -646,9 +647,30 @@ class SessionSettings: NSObject {
                 server.isOnline = remoteServer!.isOnline
                 server.connectionCount = remoteServer!.connectionCount
                 server.maxConnections = remoteServer!.maxConnections
+                server.size = remoteServer!.size
             }
         }
         saveServers()
+    }
+    
+    func adminServers() -> [Server] {
+        var newList = [Server]()
+        for server in servers {
+            if server.isAdmin {
+                newList.append(server)
+            }
+        }
+        return newList
+    }
+    
+    func privateServers() -> [Server] {
+        var newList = [Server]()
+        for server in servers {
+            if !server.isAdmin {
+                newList.append(server)
+            }
+        }
+        return newList
     }
     
     func saveAgreedToTermsOfService() {

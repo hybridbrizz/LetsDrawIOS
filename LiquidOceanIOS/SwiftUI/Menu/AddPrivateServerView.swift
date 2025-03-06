@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct AddPrivateServerView: View {
+    @ObservedObject var viewModel: ServerListViewModel
+    
     var onClose: () -> Void
     // Thanks Apple!
     @State private var key: String = ""
@@ -41,6 +43,7 @@ struct AddPrivateServerView: View {
                 .textInputAutocapitalization(.characters)
                 .disableAutocorrection(true)
                 .border(.secondary)
+                .submitLabel(.done)
                 .font(.custom("Inter", size: 24))
                 .fontWeight(.black)
                 .foregroundStyle(.blue)
@@ -56,6 +59,10 @@ struct AddPrivateServerView: View {
                 }
                 .frame(width: 50, height: 34)
                 .background(color)
+                .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.3)) {
+                    UIApplication.shared.endEditing()
+                    viewModel.addPrivateServer(accessKey: key)
+                }
                 Spacer()
                 Button(action: {
                     UIApplication.shared.endEditing()

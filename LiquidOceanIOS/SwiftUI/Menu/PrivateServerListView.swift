@@ -23,20 +23,41 @@ struct PrivateServerListView: View {
             else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        VStack(spacing: 0) {
-                            ZStack {}
-                                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
-                            HStack(spacing: 0) {
-                                Text("Servers")
-                                    .foregroundStyle(.white)
-                                    .font(.custom("Inter", size: 13))
-                                    .fontWeight(.bold)
-                                    .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                                Spacer()
+                        if viewModel.adminServers.count > 0 && viewModel.privateServers.count > 0 {
+                            VStack(spacing: 0) {
+                                ZStack {}
+                                    .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                                HStack(spacing: 0) {
+                                    Text("Mod")
+                                        .foregroundStyle(.white)
+                                        .font(.custom("Inter", size: 13))
+                                        .fontWeight(.bold)
+                                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                    Spacer()
+                                }
                             }
+                            .frame(maxWidth: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
+                        ForEach(viewModel.adminServers) { server in
+                            ServerListItemView(server: server, selectionDelegate: selectionDelegate)
+                        }
+                        if viewModel.adminServers.count > 0 && viewModel.privateServers.count > 0 {
+                            VStack(spacing: 0) {
+                                ZStack {}
+                                    .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                                HStack(spacing: 0) {
+                                    Text("Private")
+                                        .foregroundStyle(.white)
+                                        .font(.custom("Inter", size: 13))
+                                        .fontWeight(.bold)
+                                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                    Spacer()
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
                         ForEach(viewModel.privateServers) { server in
                             ServerListItemView(server: server, selectionDelegate: selectionDelegate)
                         }

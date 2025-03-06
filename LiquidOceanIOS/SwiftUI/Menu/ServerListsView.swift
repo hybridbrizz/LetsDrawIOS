@@ -118,7 +118,7 @@ struct ServerListsView: View {
                     .background(.black.opacity(0.1))
                     
                     if showAddPrivateServerInput && !showPublicServers {
-                        AddPrivateServerView {
+                        AddPrivateServerView(viewModel: viewModel) {
                             showAddPrivateServerInput = false
                         }
                     }

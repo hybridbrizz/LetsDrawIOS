@@ -12,6 +12,7 @@ class ServerListViewModel: ObservableObject {
     
     @Published var publicServers = [Server]()
     @Published var privateServers = [Server]()
+    @Published var adminServers = [Server]()
     
     @Published var isPublicLoading = false
     @Published var isPrivateLoading = false
@@ -71,33 +72,53 @@ class ServerListViewModel: ObservableObject {
             
             downloadCount += 1
             
-            if downloadCount == 2 {
-                var newPrivateServerList = [Server]()
-                for server in SessionSettings.instance.servers {
+            var newPrivateServerList = [Server]()
+            for server in SessionSettings.instance.servers {
+                if !server.isAdmin {
                     newPrivateServerList.append(server)
                 }
-                
-                self.privateServers = newPrivateServerList
+            }
+            
+            self.privateServers = newPrivateServerList
+            
+            if downloadCount == 2 {
                 self.isPrivateLoading = false
                 self.lastPrivateDownload = NSDate().timeIntervalSince1970
             }
         }
         
-        URLSessionHandler.instance.getPrivateAdminServers(keys: accessKeys) { servers in
+        URLSessionHandler.instance.getPrivateAdminServers(keys: adminKeys) { servers in
             SessionSettings.instance.syncServerStatus(remoteServers: servers)
             
             downloadCount += 1
             
-            if downloadCount == 2 {
-                var newPrivateServerList = [Server]()
-                for server in SessionSettings.instance.servers {
+            var newPrivateServerList = [Server]()
+            for server in SessionSettings.instance.servers {
+                if server.isAdmin {
                     newPrivateServerList.append(server)
                 }
-                
-                self.privateServers = newPrivateServerList
+            }
+            
+            self.adminServers = newPrivateServerList
+            
+            if downloadCount == 2 {
                 self.isPrivateLoading = false
                 self.lastPrivateDownload = NSDate().timeIntervalSince1970
             }
+        }
+    }
+    
+    func addPrivateServer(accessKey: String) {
+        isPrivateLoading = true
+        privateServers = []
+        
+        URLSessionHandler.instance.findServer(accessKey: accessKey) { success, statusCode, server in
+            if let server = server {
+                SessionSettings.instance.addServer(server: server)
+                self.privateServers = SessionSettings.instance.privateServers()
+                self.adminServers = SessionSettings.instance.adminServers()
+            }
+            self.isPrivateLoading = false
         }
     }
 }
