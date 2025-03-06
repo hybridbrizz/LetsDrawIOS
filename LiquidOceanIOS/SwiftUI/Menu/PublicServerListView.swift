@@ -24,9 +24,6 @@ struct PublicServerListView: View {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         VStack(spacing: 0) {
-                            ZStack {}
-                                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
                             HStack(spacing: 0) {
                                 Text("Servers")
                                     .foregroundStyle(.white)

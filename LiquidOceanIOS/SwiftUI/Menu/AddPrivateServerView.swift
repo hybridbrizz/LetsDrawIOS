@@ -60,12 +60,18 @@ struct AddPrivateServerView: View {
                 .frame(width: 50, height: 34)
                 .background(color)
                 .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.3)) {
-                    UIApplication.shared.endEditing()
                     viewModel.addPrivateServer(accessKey: key)
+                    
+                    UIApplication.shared.endEditing()
+                    key = ""
+                    
+                    onClose()
                 }
                 Spacer()
                 Button(action: {
                     UIApplication.shared.endEditing()
+                    key = ""
+                    
                     onClose()
                 }) {
                     Image(systemName: "xmark")
