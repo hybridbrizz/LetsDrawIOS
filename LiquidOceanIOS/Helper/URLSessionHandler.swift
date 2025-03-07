@@ -357,7 +357,7 @@ class URLSessionHandler: NSObject, URLSessionTaskDelegate {
     }
     
     func updateDisplayName(server: Server, name: String, completionHandler: @escaping (Bool) -> (Void)) {
-        let uniqueId = SessionSettings.instance.uniqueId
+        let uniqueId = server.uuid
         
         var request = URLRequest(url: URL(string: "\(server.serviceUrl())api/v1/devices/" + uniqueId)!)
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())

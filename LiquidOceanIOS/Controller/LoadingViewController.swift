@@ -400,7 +400,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     }
     
     func sendDeviceId() {
-        self.server.uuid = UUID().uuidString
+        self.server.uuid = UUID().uuidString.lowercased()
         if self.server.isPublic {
             SessionSettings.instance.publicServerUniqueIds["\(self.server.uid)"] = self.server.uuid
             SessionSettings.instance.save()

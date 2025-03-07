@@ -688,10 +688,7 @@ class SessionSettings: NSObject {
             return displayName
         }
         else {
-            if uniqueId2 == "" {
-                uniqueId2 = UUID().uuidString
-            }
-            return String(uniqueId2.prefix(4))
+            return String(lastVisitedServer?.uuid.prefix(4) ?? UUID().uuidString.prefix(4))
         }
     }
 }

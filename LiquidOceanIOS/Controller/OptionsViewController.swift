@@ -1096,7 +1096,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         let gradient = CAGradientLayer()
 
         gradient.frame = self.view.frame
-        gradient.colors = [UIColor(argb: Utils.int32FromColorHex(hex: "0xff681a8a")).cgColor, UIColor(argb: Utils.int32FromColorHex(hex: "0xff0e877b")).cgColor]
+        gradient.colors = [UIColor(argb: Utils.int32FromColorHex(hex: "0xff242E8F")).cgColor, UIColor(argb: Utils.int32FromColorHex(hex: "0xff8F3234")).cgColor]
         
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
