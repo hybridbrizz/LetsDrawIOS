@@ -21,6 +21,13 @@ struct PrivateServerListView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             else {
+                if viewModel.adminServers.isEmpty && viewModel.privateServers.isEmpty {
+                    ZStack {
+                        Text("Enter an access key to add canvas.").font(.custom("Inter", size: 12)).foregroundStyle(.white)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         if viewModel.adminServers.count > 0 && viewModel.privateServers.count > 0 {

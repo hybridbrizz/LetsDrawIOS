@@ -625,6 +625,7 @@ class SessionSettings: NSObject {
             }
             i += 1
         }
+        saveServers()
     }
     
     func hasServer(accessKey: String) -> Bool {
