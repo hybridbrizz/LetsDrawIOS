@@ -45,6 +45,10 @@
 		076120E22D73932C0030DAA9 /* SummaryClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */; };
 		076120E42D73A1450030DAA9 /* ClientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120E32D73A1450030DAA9 /* ClientListView.swift */; };
 		076ADE6F2D77BCFB0059827A /* PublicServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */; };
+		076E4EA62D7BA7B0004C363E /* ColorPicker2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E4EA52D7BA7B0004C363E /* ColorPicker2ViewController.swift */; };
+		076E4EA82D7BAB9E004C363E /* HPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E4EA72D7BAB9E004C363E /* HPalette.swift */; };
+		076E4EAA2D7BB254004C363E /* SBIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E4EA92D7BB254004C363E /* SBIndicator.swift */; };
+		076E4EAC2D7BBBAA004C363E /* HIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E4EAB2D7BBBAA004C363E /* HIndicator.swift */; };
 		0783F3BE2D767B7A006DA53F /* ServerListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */; };
 		0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916A2D74AF4700B4041B /* CanvasMenuView.swift */; };
 		0788916D2D74AF8700B4041B /* CanvasMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */; };
@@ -97,6 +101,7 @@
 		07A9B19425ED6CCD009A47DF /* amb_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07A9B18225ED6CCD009A47DF /* amb_3.jpg */; };
 		07A9B19625EDAB8F009A47DF /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9B19525EDAB8F009A47DF /* ColorPickerViewController.swift */; };
 		07AE665F289ED5BE00E2E9FC /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AE665E289ED5BE00E2E9FC /* ServerCell.swift */; };
+		07B691232D7AB39A00BA4D9C /* SBPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B691222D7AB39A00BA4D9C /* SBPalette.swift */; };
 		07BBBABA2896E3B3008A6B9E /* QueueSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BBBAB92896E3B3008A6B9E /* QueueSocket.swift */; };
 		07BD25C725D43FB500CF812E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BD25C625D43FB500CF812E /* AppDelegate.swift */; };
 		07BD25C925D43FB500CF812E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BD25C825D43FB500CF812E /* SceneDelegate.swift */; };
@@ -203,6 +208,10 @@
 		076120E12D73932C0030DAA9 /* SummaryClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120E32D73A1450030DAA9 /* ClientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientListView.swift; sourceTree = "<group>"; };
 		076ADE6E2D77BCFB0059827A /* PublicServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicServerListView.swift; sourceTree = "<group>"; };
+		076E4EA52D7BA7B0004C363E /* ColorPicker2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker2ViewController.swift; sourceTree = "<group>"; };
+		076E4EA72D7BAB9E004C363E /* HPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPalette.swift; sourceTree = "<group>"; };
+		076E4EA92D7BB254004C363E /* SBIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBIndicator.swift; sourceTree = "<group>"; };
+		076E4EAB2D7BBBAA004C363E /* HIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIndicator.swift; sourceTree = "<group>"; };
 		0783F3BD2D767B7A006DA53F /* ServerListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListItemView.swift; sourceTree = "<group>"; };
 		0788916A2D74AF4700B4041B /* CanvasMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuView.swift; sourceTree = "<group>"; };
 		0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasMenuItemView.swift; sourceTree = "<group>"; };
@@ -256,6 +265,7 @@
 		07A9B18225ED6CCD009A47DF /* amb_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = amb_3.jpg; sourceTree = "<group>"; };
 		07A9B19525EDAB8F009A47DF /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		07AE665E289ED5BE00E2E9FC /* ServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
+		07B691222D7AB39A00BA4D9C /* SBPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBPalette.swift; sourceTree = "<group>"; };
 		07BBBAB92896E3B3008A6B9E /* QueueSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueSocket.swift; sourceTree = "<group>"; };
 		07BD25C325D43FB500CF812E /* LiquidOceanIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiquidOceanIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07BD25C625D43FB500CF812E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -357,6 +367,7 @@
 				070DA9DC2732B97800D76775 /* CanvasImportViewController.swift */,
 				070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */,
 				07D6934228BA57A300F2EBE7 /* TermsOfUseViewController.swift */,
+				076E4EA52D7BA7B0004C363E /* ColorPicker2ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -488,6 +499,17 @@
 			path = json;
 			sourceTree = "<group>";
 		};
+		07B691212D7AB38700BA4D9C /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				07B691222D7AB39A00BA4D9C /* SBPalette.swift */,
+				076E4EA72D7BAB9E004C363E /* HPalette.swift */,
+				076E4EA92D7BB254004C363E /* SBIndicator.swift */,
+				076E4EAB2D7BBBAA004C363E /* HIndicator.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
 		07BD25BA25D43FB500CF812E = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +533,7 @@
 		07BD25C525D43FB500CF812E /* LiquidOceanIOS */ = {
 			isa = PBXGroup;
 			children = (
+				07B691212D7AB38700BA4D9C /* ColorPicker */,
 				078891702D750E3000B4041B /* ViewModel */,
 				075DE9382D728815007C664D /* SwiftUI */,
 				0704FB75273982CE009799E1 /* font */,
@@ -845,6 +868,7 @@
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,
 				070DA9DF2732B98500D76775 /* CanvasExportViewController.swift in Sources */,
 				07006C4425DCB98E00DF9A64 /* PixelHistoryCollectionViewCell.swift in Sources */,
+				076E4EAC2D7BBBAA004C363E /* HIndicator.swift in Sources */,
 				07006C4225DCB6D400DF9A64 /* PixelHistoryViewController.swift in Sources */,
 				07FF5F0125DF616A003E19AE /* ExportViewController.swift in Sources */,
 				07FF5F0925E4354B003E19AE /* StatTracker.swift in Sources */,
@@ -878,12 +902,14 @@
 				0712053A25DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift in Sources */,
 				0704FB9B2739A511009799E1 /* InsetLabel.swift in Sources */,
 				0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */,
+				076E4EA62D7BA7B0004C363E /* ColorPicker2ViewController.swift in Sources */,
 				0731602B28A0159B00466BC4 /* ButtonFrame.swift in Sources */,
 				07BD25C725D43FB500CF812E /* AppDelegate.swift in Sources */,
 				0704FB7427397D3B009799E1 /* PaletteHeaderCollectionReusableView.swift in Sources */,
 				07DA42F02D78C34100275BC2 /* PrivateServerListView.swift in Sources */,
 				0736637A260E148700E5403F /* AchievementIcon.swift in Sources */,
 				07FF5F0725E42C1C003E19AE /* ActionButtonReusableView.swift in Sources */,
+				076E4EAA2D7BB254004C363E /* SBIndicator.swift in Sources */,
 				07006C3E25D6C2D500DF9A64 /* PaintQuantityBar.swift in Sources */,
 				07F573C8289EA65D00D4C9EF /* Server.swift in Sources */,
 				07A9B19625EDAB8F009A47DF /* ColorPickerViewController.swift in Sources */,
@@ -895,6 +921,7 @@
 				07FF5F1125E5BA4F003E19AE /* PanelBackgroundCollectionViewCell.swift in Sources */,
 				076120E42D73A1450030DAA9 /* ClientListView.swift in Sources */,
 				07BD25C925D43FB500CF812E /* SceneDelegate.swift in Sources */,
+				07B691232D7AB39A00BA4D9C /* SBPalette.swift in Sources */,
 				07AE665F289ED5BE00E2E9FC /* ServerCell.swift in Sources */,
 				07A9B17025ED611C009A47DF /* PanelThemeConfig.swift in Sources */,
 				078AF00926016CCB00AB4CE4 /* PaintQuantityCircle.swift in Sources */,
@@ -903,6 +930,7 @@
 				07D0ED24272DCE5F00755C1D /* InteractiveCanvasSummaryView.swift in Sources */,
 				07D0ED26272DFC9000755C1D /* DeviceViewportSummaryView.swift in Sources */,
 				076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */,
+				076E4EA82D7BAB9E004C363E /* HPalette.swift in Sources */,
 				076ADE6F2D77BCFB0059827A /* PublicServerListView.swift in Sources */,
 				07BD25F925D450CF00CF812E /* SessionSettings.swift in Sources */,
 				073663782608F16600E5403F /* PincodeViewController.swift in Sources */,

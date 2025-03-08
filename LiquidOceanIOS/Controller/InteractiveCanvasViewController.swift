@@ -12,7 +12,7 @@ import Kingfisher
 import SwiftUI
 
 class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
-                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate {
+                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
     
@@ -260,6 +260,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     weak var recentColorsViewController: RecentColorsViewController!
     weak var exportViewController: ExportViewController!
     weak var colorPickerViewController: ColorPickerOutletsViewController!
+    weak var colorPicker2ViewController: ColorPicker2ViewController!
     weak var palettesViewController: PalettesViewController!
     weak var canvasFrameViewController: CanvasFrameViewController!
     weak var menuViewController: MenuViewController!
@@ -1140,6 +1141,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             //setDefaultColorsClickListeners()
         }
+        else if segue.identifier == "ColorPicker2Embed" {
+            colorPicker2ViewController = segue.destination as! ColorPicker2ViewController
+            colorPicker2ViewController.colorSelectionDelegate = self
+        }
         else if segue.identifier == "PixelHistoryEmbed" {
             segue.destination.modalPresentationStyle = .overCurrentContext
             self.pixelHistoryViewController = segue.destination as? PixelHistoryViewController
@@ -1447,6 +1452,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.paintColor)
         
         self.colorPicker(self.colorPickerViewController.colorPicker, selectedColor: self.colorPickerViewController.selectedColor, usingControl: self.colorPickerViewController.colorPicker.radialHsbPalette!)
+        
+        let color = UIColor(argb: SessionSettings.instance.paintColor)
+        
+        colorPicker2ViewController.setColor(color: color)
+        onColorSelected(selectedColor: color)
     }
     
     // color picker delegate
@@ -2214,6 +2224,21 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         SessionSettings.instance.restoreCanvasScaleFactor = 0
         SessionSettings.instance.save()
         self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
+    }
+    
+    // Color Selection Delegate (ColorPicker2)
+    
+    func onColorSelected(selectedColor: UIColor) {
+        let color = selectedColor.argb()
+        
+        SessionSettings.instance.paintColor = color
+        self.paintColorIndicator.setNeedsDisplay()
+        
+        self.updatePaintColorAcceptColorMode(color: color)
+        
+        self.colorPickerViewController.colorHexTextField.text = UIColor(argb: color).hexString()
+        
+        self.syncPaletteAndColor()
     }
 }
 

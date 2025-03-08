@@ -3023,11 +3023,17 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoZ-vF-uEO">
                                 <rect key="frame" x="546" y="0.0" width="350" height="414"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpT-yf-Thz">
+                                    <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpT-yf-Thz">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
                                         <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="0.81000000000000005" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="vlp-4O-A3P" kind="embed" identifier="ColorPickerEmbed" id="WcB-8f-H9a"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMH-ZX-iiz">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
+                                        <connections>
+                                            <segue destination="J99-Ay-ID7" kind="embed" identifier="ColorPicker2Embed" id="PSG-Js-OXX"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -3035,9 +3041,13 @@
                                 <constraints>
                                     <constraint firstItem="lpT-yf-Thz" firstAttribute="top" secondItem="xoZ-vF-uEO" secondAttribute="top" id="300-0E-vjC"/>
                                     <constraint firstItem="lpT-yf-Thz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="EIl-b3-eR0"/>
+                                    <constraint firstAttribute="bottom" secondItem="oMH-ZX-iiz" secondAttribute="bottom" id="JzB-cc-1FT"/>
+                                    <constraint firstAttribute="trailing" secondItem="oMH-ZX-iiz" secondAttribute="trailing" id="Oeg-iY-NZh"/>
                                     <constraint firstAttribute="trailing" secondItem="lpT-yf-Thz" secondAttribute="trailing" id="Tfq-b0-dM2"/>
                                     <constraint firstAttribute="bottom" secondItem="lpT-yf-Thz" secondAttribute="bottom" id="bQb-Wu-1Hn"/>
+                                    <constraint firstItem="oMH-ZX-iiz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="cNi-8G-JZu"/>
                                     <constraint firstAttribute="width" constant="350" id="jis-mA-s6R"/>
+                                    <constraint firstItem="oMH-ZX-iiz" firstAttribute="top" secondItem="xoZ-vF-uEO" secondAttribute="top" id="tc2-h2-1s5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dcg-RG-ceO" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
@@ -5647,6 +5657,60 @@ If any person on any canvas uses pixels to give out any personal information abo
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fn0-ff-rqq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1197.3214285714284" y="-513.04347826086962"/>
+        </scene>
+        <!--Color Picker2 View Controller-->
+        <scene sceneID="eGq-z6-cj1">
+            <objects>
+                <viewController id="J99-Ay-ID7" customClass="ColorPicker2ViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jv7-2W-5qR">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOA-Wn-Nig">
+                                <rect key="frame" x="60" y="72" width="230" height="270"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-qJ-eZ4" customClass="SBPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="230" height="230"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Xd1-qJ-eZ4" secondAttribute="height" multiplier="1:1" id="342-RS-ceL"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0N-sp-If7" customClass="HPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="250" width="230" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Cj5-BF-HVy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="h0N-sp-If7" firstAttribute="top" secondItem="Xd1-qJ-eZ4" secondAttribute="bottom" constant="20" id="6LP-RM-WR2"/>
+                                    <constraint firstItem="Xd1-qJ-eZ4" firstAttribute="leading" secondItem="ZOA-Wn-Nig" secondAttribute="leading" id="EKF-Jp-CtT"/>
+                                    <constraint firstAttribute="trailing" secondItem="h0N-sp-If7" secondAttribute="trailing" id="Pa8-B5-7ul"/>
+                                    <constraint firstItem="h0N-sp-If7" firstAttribute="leading" secondItem="ZOA-Wn-Nig" secondAttribute="leading" id="Ttu-w0-UMe"/>
+                                    <constraint firstAttribute="bottom" secondItem="h0N-sp-If7" secondAttribute="bottom" id="UkL-gS-xwS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xd1-qJ-eZ4" secondAttribute="trailing" id="dzc-C4-YbH"/>
+                                    <constraint firstItem="Xd1-qJ-eZ4" firstAttribute="top" secondItem="ZOA-Wn-Nig" secondAttribute="top" id="pNV-zS-hXz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZOA-Wn-Nig" secondAttribute="trailing" constant="60" id="HFM-6u-dHm"/>
+                            <constraint firstItem="ZOA-Wn-Nig" firstAttribute="centerY" secondItem="jv7-2W-5qR" secondAttribute="centerY" id="JY9-f3-qJj"/>
+                            <constraint firstItem="ZOA-Wn-Nig" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="60" id="ys0-fR-zg7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="hPalette" destination="h0N-sp-If7" id="jIK-iJ-saX"/>
+                        <outlet property="sbPalette" destination="Xd1-qJ-eZ4" id="u9G-iD-90b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jzo-8q-uPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-14.0625" y="-723.1884057971015"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
