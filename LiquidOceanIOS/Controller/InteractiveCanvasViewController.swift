@@ -12,7 +12,7 @@ import Kingfisher
 import SwiftUI
 
 class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
-                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate {
+                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate, ColorPicker2LayoutDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
     
@@ -1144,6 +1144,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         else if segue.identifier == "ColorPicker2Embed" {
             colorPicker2ViewController = segue.destination as! ColorPicker2ViewController
             colorPicker2ViewController.colorSelectionDelegate = self
+            colorPicker2ViewController.layoutDelegate = self
             colorPicker2ViewController.setColor(color: UIColor(argb: SessionSettings.instance.paintColor))
         }
         else if segue.identifier == "PixelHistoryEmbed" {
@@ -1251,7 +1252,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.paintYes.isHidden = true
         self.paintNo.isHidden = true
         
-        self.colorPickerViewController.colorHexTextField.delegate = self
+        self.colorPicker2ViewController.colorHexTextField.delegate = self
         
         self.surfaceView.startPaintSelection()
     }
@@ -1469,7 +1470,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.updatePaintColorAcceptColorMode(color: color)
         
-        self.colorPickerViewController.colorHexTextField.text = UIColor(argb: color).hexString()
+        self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
         
         self.syncPaletteAndColor()
     }
@@ -1738,10 +1739,16 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.colorPickerViewController.selectedColor = UIColor(hexString: hexString)
         
         self.colorPicker(self.colorPickerViewController.colorPicker, selectedColor: self.colorPickerViewController.selectedColor, usingControl: self.colorPickerViewController.colorPicker.radialHsbPalette!)
+        
+        let color = UIColor(hexString: hexString)
+        
+        self.colorPicker2ViewController.setColor(color: color)
+        
+        self.onColorSelected(selectedColor: color)
     }
     
     @objc func textFieldDidChange() {
-        let textField = self.colorPickerViewController.colorHexTextField!
+        let textField = self.colorPicker2ViewController.colorHexTextField!
         let range = NSRange(location: 0, length: textField.text!.count)
         let regex = try! NSRegularExpression(pattern: "[A-F0-9]{6}")
         
@@ -1760,7 +1767,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // color picker layout delegate
     func colorPickerDidLayoutSubviews(colorPickerViewController: ColorPickerOutletsViewController) {
-        colorPickerViewController.colorHexTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        //colorPickerViewController.colorHexTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         colorPickerViewController.delegate = self
     }
     
@@ -2208,6 +2215,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     func notifyYankCanvasClicked() {
         self.canvasMenuContainer.isHidden = true
         exportViewController.canvas = surfaceView.interactiveCanvas
+        exportViewController.view.setNeedsLayout()
         exportContainer.isHidden = false
     }
     
@@ -2237,9 +2245,15 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.updatePaintColorAcceptColorMode(color: color)
         
-        self.colorPickerViewController.colorHexTextField.text = UIColor(argb: color).hexString()
+        self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
         
         self.syncPaletteAndColor()
+    }
+    
+    // Color Picker 2 Layout Delegate
+    
+    func onColorPicker2LayoutSubviews() {
+        colorPicker2ViewController.colorHexTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
 }
 

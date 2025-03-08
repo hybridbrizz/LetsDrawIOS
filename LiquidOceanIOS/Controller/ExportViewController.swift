@@ -29,6 +29,9 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var canvasImageView: UIImageView!
     
+    @IBOutlet weak var canvasImageViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var canvasImageViewHeight: NSLayoutConstraint!
+    
     private var canvasImage: UIImage?
     
     var _art: [InteractiveCanvas.RestorePoint]?
@@ -132,6 +135,9 @@ class ExportViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        artViewWidth.constant = 500
+        artViewHeight.constant = 300
+        
         if artView.frame.origin.y < (saveButton.frame.origin.y + saveButton.frame.size.height) {
             artViewHeight.constant -= (saveButton.frame.origin.y + saveButton.frame.size.height) - artView.frame.origin.y + 10
         }
@@ -141,12 +147,23 @@ class ExportViewController: UIViewController {
             backButtonLeading.constant += 30
         }
         
-        if view.frame.size.height > 600 {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             artViewWidth.constant = view.frame.size.width - 130
             artViewHeight.constant = view.frame.size.height - 200
             
             artSizeSwitchTop.constant = 45
         }
+        
+        let minSpan = min(view.window?.windowScene?.screen.bounds.width ?? 500, view.window?.windowScene!.screen.bounds.height ?? 300)
+        let canvasPadding = if UIDevice.current.userInterfaceIdiom == .pad {
+            160.0
+        }
+        else {
+            120.0
+        }
+        
+        canvasImageViewWidth.constant = minSpan - canvasPadding
+        canvasImageViewHeight.constant = minSpan - canvasPadding
         
         artView.setNeedsDisplay()
     }

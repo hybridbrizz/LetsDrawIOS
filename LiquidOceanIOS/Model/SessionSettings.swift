@@ -105,14 +105,14 @@ class SessionSettings: NSObject {
     var paintIndicatorOutline = true
     var paintIndicatorWidth = 4
     
-    var gridLineColor: Int32 = 0
+    var gridLineColor: Int32 = Utils.int32FromColorHex(hex: "0xffffffff")
     
-    var canvasBackgroundPrimaryColor: Int32 = 0
-    var canvasBackgroundSecondaryColor: Int32 = 0
+    var canvasBackgroundPrimaryColor: Int32 = Utils.int32FromColorHex(hex: "0xffffffff")
+    var canvasBackgroundSecondaryColor: Int32 = Utils.int32FromColorHex(hex: "0xffffffff")
     
     var frameColor: Int32 = 0
     
-    var paintPanelCloseButtonColor: Int32 = 0
+    var paintPanelCloseButtonColor: Int32 = Utils.int32FromColorHex(hex: "0xffffffff")
     
     var promptBack = false
     
@@ -188,6 +188,8 @@ class SessionSettings: NSObject {
     var publicServerUniqueIds = [String: String]()
     var publicServerLastVisitedTimes = [String: Double]()
     
+    var onceResetColorSettings = true
+    
     func save() {
         print("Save session settings")
         
@@ -231,6 +233,7 @@ class SessionSettings: NSObject {
         userDefaults().set(paintPanelOpen, forKey: "paint_panel_open")
         userDefaults().set(canvasOpen, forKey: "canvas_open")
         userDefaults().set(colorPaletteSize, forKey: "palette_size")
+        userDefaults().set(onceResetColorSettings, forKey: "once_reset_color_settings")
         
         let publicServerUniqueIdsStr = try! JSONSerialization.data(withJSONObject: publicServerUniqueIds, options: [])
         userDefaults().set(String(data: publicServerUniqueIdsStr, encoding: .utf8)!, forKey: "public_server_unique_ids")
@@ -323,6 +326,8 @@ class SessionSettings: NSObject {
         palettes.insert(Palette(name: "Recent Color"), at: 0)
         
         selectedPaletteIndex = userDefaultsInt(forKey: "selected_palette_index", defaultVal: 0)
+        
+        onceResetColorSettings = userDefaultsBool(forKey: "once_reset_color_settings", defaultVal: true)
         
         /*let palette = Palette(name: "Palette")
         palette.addColor(color: UIColor(hexString: "EACB6E").argb())

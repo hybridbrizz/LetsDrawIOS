@@ -142,6 +142,26 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if SessionSettings.instance.onceResetColorSettings {
+            SessionSettings.instance.paintIndicatorColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            paintMeterColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.paintIndicatorColor)
+            SessionSettings.instance.gridLineColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            gridLineColorColorView.backgroundColor = UIColor.white
+            SessionSettings.instance.canvasBackgroundPrimaryColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            canvasBackgroundPrimaryColorColorView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
+            SessionSettings.instance.canvasBackgroundSecondaryColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            canvasBackgroundSecondaryColorColorView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
+            SessionSettings.instance.canvasLockColor = Utils.int32FromColorHex(hex: "0x66ff0000")
+            canvasLockColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.canvasLockColor)
+            SessionSettings.instance.frameColor = Utils.int32FromColorHex(hex: "0xff999999")
+            frameColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.frameColor)
+            SessionSettings.instance.paintPanelCloseButtonColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            closeDrawPanelColorColorView.backgroundColor = UIColor.white
+            
+            SessionSettings.instance.onceResetColorSettings = false
+            SessionSettings.instance.save()
+        }
+        
         setGradientBackground()
         
         backButton.setOnClickListener {
@@ -216,7 +236,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         tgr = UITapGestureRecognizer(target: self, action: #selector(tappedGridLineColorView(sender:)))
         gridLineColorColorView.addGestureRecognizer(tgr)
         
-        if SessionSettings.instance.gridLineColor != 0 {
+        if SessionSettings.instance.gridLineColor != Utils.int32FromColorHex(hex: "0xffffffff") {
             gridLineColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.gridLineColor)
         }
         
@@ -227,7 +247,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         tgr = UITapGestureRecognizer(target: self, action: #selector(tappedCanvasBackgroundPrimaryColorView(sender:)))
         canvasBackgroundPrimaryColorColorView.addGestureRecognizer(tgr)
         
-        if SessionSettings.instance.canvasBackgroundPrimaryColor != 0 {
+        if SessionSettings.instance.canvasBackgroundPrimaryColor != Utils.int32FromColorHex(hex: "0xffffffff") {
             canvasBackgroundPrimaryColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.canvasBackgroundPrimaryColor)
         }
         
@@ -238,7 +258,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         tgr = UITapGestureRecognizer(target: self, action: #selector(tappedCanvasBackgroundSecondaryColorView(sender:)))
         canvasBackgroundSecondaryColorColorView.addGestureRecognizer(tgr)
         
-        if SessionSettings.instance.canvasBackgroundSecondaryColor != 0 {
+        if SessionSettings.instance.canvasBackgroundSecondaryColor != Utils.int32FromColorHex(hex: "0xffffffff") {
             canvasBackgroundSecondaryColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.canvasBackgroundSecondaryColor)
         }
         
@@ -254,7 +274,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         closeDrawPanelColorContainer.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99FFFFFF")).cgColor
         closeDrawPanelColorContainer.layer.borderWidth = 0
         
-        if SessionSettings.instance.paintPanelCloseButtonColor != 0 {
+        if SessionSettings.instance.paintPanelCloseButtonColor != Utils.int32FromColorHex(hex: "0xffffffff") {
             closeDrawPanelColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.paintPanelCloseButtonColor)
         }
         
@@ -394,7 +414,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewWillAppear(animated)
         
         if view.frame.size.height <= 600 {
-            Animator.animateTitleFromTop(titleView: optionsTitleLabel)
+            //Animator.animateTitleFromTop(titleView: optionsTitleLabel)
             Animator.animateTitleFromTop(titleView: backButton)
             
             Animator.animateHorizontalViewEnter(view: panelTextureTitle, left: false)
@@ -472,16 +492,16 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             paintMeterColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.paintIndicatorColor)
         }
         else if sender == gridLineColorResetButton {
-            SessionSettings.instance.gridLineColor = 0
+            SessionSettings.instance.gridLineColor = Utils.int32FromColorHex(hex: "0xffffffff")
             gridLineColorColorView.backgroundColor = UIColor.white
         }
         else if sender == canvasBackgroundPrimaryColorResetButton {
-            SessionSettings.instance.canvasBackgroundPrimaryColor = 0
-            canvasBackgroundPrimaryColorColorView.backgroundColor = UIColor.white
+            SessionSettings.instance.canvasBackgroundPrimaryColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            canvasBackgroundPrimaryColorColorView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
         }
         else if sender == canvasBackgroundSecondaryColorResetButton {
-            SessionSettings.instance.canvasBackgroundSecondaryColor = 0
-            canvasBackgroundSecondaryColorColorView.backgroundColor = UIColor.white
+            SessionSettings.instance.canvasBackgroundSecondaryColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            canvasBackgroundSecondaryColorColorView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
         }
         else if sender == canvasLockColorResetButton {
             SessionSettings.instance.canvasLockColor = Utils.int32FromColorHex(hex: "0x66ff0000")
@@ -492,7 +512,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             frameColorColorView.backgroundColor = UIColor(argb: SessionSettings.instance.frameColor)
         }
         else if sender == closeDrawPanelColorResetButton {
-            SessionSettings.instance.paintPanelCloseButtonColor = 0
+            SessionSettings.instance.paintPanelCloseButtonColor = Utils.int32FromColorHex(hex: "0xffffffff")
             closeDrawPanelColorColorView.backgroundColor = UIColor.white
         }
     }
@@ -523,7 +543,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     @objc func tappedGridLineColorView(sender: UIView) {
-        if SessionSettings.instance.gridLineColor == 0 {
+        if SessionSettings.instance.gridLineColor == Utils.int32FromColorHex(hex: "0xffffffff") {
             colorPickerViewController.selectedColor = UIColor.white
         }
         else {
@@ -570,8 +590,8 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     @objc func tappedCanvasBackgroundPrimaryColorView(sender: UIView) {
-        if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 {
-            colorPickerViewController.selectedColor = UIColor.white
+        if SessionSettings.instance.canvasBackgroundPrimaryColor == Utils.int32FromColorHex(hex: "0xffffffff") {
+            colorPickerViewController.selectedColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
         }
         else {
             colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.canvasBackgroundPrimaryColor)
@@ -583,8 +603,8 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     @objc func tappedCanvasBackgroundSecondaryColorView(sender: UIView) {
-        if SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
-            colorPickerViewController.selectedColor = UIColor.white
+        if SessionSettings.instance.canvasBackgroundSecondaryColor == Utils.int32FromColorHex(hex: "0xffffffff") {
+            colorPickerViewController.selectedColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xffffffff"))
         }
         else {
             colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.canvasBackgroundSecondaryColor)
@@ -604,7 +624,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     @objc func tappedCloseDrawPanelColorView(sender: UIView) {
-        if SessionSettings.instance.paintPanelCloseButtonColor == 0 {
+        if SessionSettings.instance.paintPanelCloseButtonColor == Utils.int32FromColorHex(hex: "0xffffffff") {
             colorPickerViewController.selectedColor = UIColor.white
         }
         else {
@@ -694,7 +714,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             selectingCanvasLockColor = false
         }
         else if selectingGridLineColor {
-            if SessionSettings.instance.gridLineColor == 0 {
+            if SessionSettings.instance.gridLineColor == Utils.int32FromColorHex(hex: "0xffffffff") {
                 gridLineColorColorView.backgroundColor = UIColor.white
                 colorPickerViewController.selectedColor = UIColor.white
             }
@@ -706,7 +726,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             selectingGridLineColor = false
         }
         else if selectingCanvasPrimaryColor {
-            if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 {
+            if SessionSettings.instance.canvasBackgroundPrimaryColor == Utils.int32FromColorHex(hex: "0xffffffff") {
                 canvasBackgroundPrimaryColorColorView.backgroundColor = UIColor.white
                 colorPickerViewController.selectedColor = UIColor.white
             }
@@ -718,7 +738,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             selectingCanvasPrimaryColor = false
         }
         else if selectingCanvasSecondaryColor {
-            if SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
+            if SessionSettings.instance.canvasBackgroundSecondaryColor == Utils.int32FromColorHex(hex: "0xffffffff") {
                 canvasBackgroundSecondaryColorColorView.backgroundColor = UIColor.white
                 colorPickerViewController.selectedColor = UIColor.white
             }
@@ -736,7 +756,7 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
             selectingFrameColor = false
         }
         else if selectingCloseDrawPanelColor {
-            if SessionSettings.instance.paintPanelCloseButtonColor == 0 {
+            if SessionSettings.instance.paintPanelCloseButtonColor == Utils.int32FromColorHex(hex: "0xffffffff") {
                 closeDrawPanelColorColorView.backgroundColor = UIColor.white
                 colorPickerViewController.selectedColor = UIColor.white
             }

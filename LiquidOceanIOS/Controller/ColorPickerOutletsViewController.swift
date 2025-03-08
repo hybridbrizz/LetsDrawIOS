@@ -21,7 +21,7 @@ class ColorPickerOutletsViewController: CustomColorPickerViewController {
     @IBOutlet weak var defaultWhiteButton: ActionButtonFrame!
     @IBOutlet weak var defaultWhiteAction: ActionButtonView!
     
-    @IBOutlet weak var colorHexTextField: UITextField!
+    //@IBOutlet weak var colorHexTextField: UITextField!
     
     @IBOutlet weak var hsbWheelXCenter: NSLayoutConstraint!
     @IBOutlet weak var hsbWheelYCenter: NSLayoutConstraint!

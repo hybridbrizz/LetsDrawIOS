@@ -873,7 +873,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qka-e5-zOF">
                                                 <rect key="frame" x="718" y="10" width="40" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="FDs-TM-uWp"/>
                                                     <constraint firstAttribute="width" constant="40" id="rcg-RX-gzO"/>
@@ -919,7 +919,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VW-GQ-Jy4">
                                                 <rect key="frame" x="718" y="10" width="40" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="LPh-OF-UU7"/>
                                                     <constraint firstAttribute="height" constant="40" id="iL1-Lw-EtR"/>
@@ -965,7 +965,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5v-OA-xoZ">
                                                 <rect key="frame" x="718" y="10" width="40" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="toi-8o-K0A"/>
                                                     <constraint firstAttribute="width" constant="40" id="u66-zb-vx8"/>
@@ -1011,7 +1011,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lob-7a-iOa">
                                                 <rect key="frame" x="718" y="10" width="40" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="4SL-cJ-tDh"/>
                                                     <constraint firstAttribute="height" constant="40" id="YIc-fL-Slh"/>
@@ -1057,7 +1057,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deM-r4-72e">
                                                 <rect key="frame" x="718" y="10" width="40" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="c1i-Qh-tKd"/>
                                                     <constraint firstAttribute="width" constant="40" id="fcb-48-64G"/>
@@ -4126,7 +4126,6 @@
                     <connections>
                         <outlet property="brightnessSlider" destination="q2Z-sl-HLi" id="168-1U-HO5"/>
                         <outlet property="brightnessSliderWidth" destination="6dJ-mr-B18" id="nl0-hv-nPB"/>
-                        <outlet property="colorHexTextField" destination="9uX-r8-HM3" id="Fug-wP-rZ9"/>
                         <outlet property="defaultBlackAction" destination="uSB-Xo-tWk" id="h4M-0F-xYP"/>
                         <outlet property="defaultBlackButton" destination="BU5-Yu-uP0" id="9Kb-ca-Aci"/>
                         <outlet property="defaultWhiteAction" destination="Y8r-ur-ZyT" id="YRu-Gc-5EK"/>
@@ -4480,6 +4479,8 @@
                         <outlet property="backButton" destination="MqO-ne-2SR" id="otm-2L-rem"/>
                         <outlet property="backButtonLeading" destination="vW3-Vt-cOj" id="2zV-YE-11r"/>
                         <outlet property="canvasImageView" destination="Lm8-KB-x6N" id="5dF-dH-cY6"/>
+                        <outlet property="canvasImageViewHeight" destination="GE7-xi-tX0" id="mko-nC-PAV"/>
+                        <outlet property="canvasImageViewWidth" destination="Qvt-YT-fL2" id="cGc-2T-30g"/>
                         <outlet property="saveButton" destination="Ghr-rn-ObS" id="Xwm-dQ-knG"/>
                         <outlet property="screenSizeLabel" destination="Kwd-vz-DyL" id="k3d-h5-Tfp"/>
                         <outlet property="shareButton" destination="4bw-r1-aTY" id="dhl-R0-UGK"/>
@@ -5695,16 +5696,30 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstItem="Xd1-qJ-eZ4" firstAttribute="top" secondItem="ZOA-Wn-Nig" secondAttribute="top" id="pNV-zS-hXz"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k4k-Px-U0p">
+                                <rect key="frame" x="192" y="0.0" width="110" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="M2d-46-ce9"/>
+                                    <constraint firstAttribute="height" constant="40" id="dpc-nM-PdT"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DeZ-vW-XnC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ZOA-Wn-Nig" secondAttribute="trailing" constant="30" id="HFM-6u-dHm"/>
                             <constraint firstItem="ZOA-Wn-Nig" firstAttribute="centerY" secondItem="jv7-2W-5qR" secondAttribute="centerY" id="JY9-f3-qJj"/>
+                            <constraint firstItem="k4k-Px-U0p" firstAttribute="top" secondItem="DeZ-vW-XnC" secondAttribute="top" id="OYW-qg-gaa"/>
+                            <constraint firstItem="DeZ-vW-XnC" firstAttribute="trailing" secondItem="k4k-Px-U0p" secondAttribute="trailing" id="fCX-mW-vb0"/>
                             <constraint firstItem="ZOA-Wn-Nig" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="30" id="ys0-fR-zg7"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="colorHexTextField" destination="k4k-Px-U0p" id="i0Q-ND-kmF"/>
                         <outlet property="hPalette" destination="h0N-sp-If7" id="jIK-iJ-saX"/>
                         <outlet property="sbPalette" destination="Xd1-qJ-eZ4" id="u9G-iD-90b"/>
                     </connections>

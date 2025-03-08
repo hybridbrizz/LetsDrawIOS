@@ -10,12 +10,19 @@ import Foundation
 import UIKit
 import CoreGraphics
 
+protocol ColorPicker2LayoutDelegate: AnyObject {
+    func onColorPicker2LayoutSubviews()
+}
+
 class ColorPicker2ViewController: UIViewController {
     
     @IBOutlet weak var sbPalette: SBPalette!
     @IBOutlet weak var hPalette: HPalette!
     
+    @IBOutlet weak var colorHexTextField: UITextField!
+    
     var colorSelectionDelegate: ColorSelectionDelegate? = nil
+    var layoutDelegate: ColorPicker2LayoutDelegate? = nil
     
     private var pendingStartColor: UIColor? = nil
     
@@ -35,6 +42,8 @@ class ColorPicker2ViewController: UIViewController {
         
         hPalette.layer.borderWidth = 1
         hPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452")).cgColor
+        
+        layoutDelegate?.onColorPicker2LayoutSubviews()
     }
     
     func setColor(color: UIColor) {
