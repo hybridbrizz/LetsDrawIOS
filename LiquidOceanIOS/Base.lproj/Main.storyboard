@@ -5667,17 +5667,17 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOA-Wn-Nig">
-                                <rect key="frame" x="60" y="72" width="230" height="270"/>
+                                <rect key="frame" x="30" y="42" width="290" height="330"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-qJ-eZ4" customClass="SBPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="230"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xd1-qJ-eZ4" secondAttribute="height" multiplier="1:1" id="342-RS-ceL"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0N-sp-If7" customClass="HPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="250" width="230" height="20"/>
+                                        <rect key="frame" x="0.0" y="310" width="290" height="20"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Cj5-BF-HVy"/>
@@ -5696,11 +5696,12 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="DeZ-vW-XnC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ZOA-Wn-Nig" secondAttribute="trailing" constant="60" id="HFM-6u-dHm"/>
+                            <constraint firstAttribute="trailing" secondItem="ZOA-Wn-Nig" secondAttribute="trailing" constant="30" id="HFM-6u-dHm"/>
                             <constraint firstItem="ZOA-Wn-Nig" firstAttribute="centerY" secondItem="jv7-2W-5qR" secondAttribute="centerY" id="JY9-f3-qJj"/>
-                            <constraint firstItem="ZOA-Wn-Nig" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="60" id="ys0-fR-zg7"/>
+                            <constraint firstItem="ZOA-Wn-Nig" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="30" id="ys0-fR-zg7"/>
                         </constraints>
                     </view>
                     <connections>

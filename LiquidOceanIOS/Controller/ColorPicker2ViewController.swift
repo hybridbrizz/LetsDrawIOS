@@ -17,9 +17,16 @@ class ColorPicker2ViewController: UIViewController {
     
     var colorSelectionDelegate: ColorSelectionDelegate? = nil
     
+    private var pendingStartColor: UIColor? = nil
+    
     override func viewDidLoad() {
         hPalette.hueSelectionDelegate = sbPalette
         sbPalette.colorSelectionDelegate = colorSelectionDelegate
+        
+        if pendingStartColor != nil {
+            setColor(color: pendingStartColor!)
+            pendingStartColor = nil
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -31,6 +38,11 @@ class ColorPicker2ViewController: UIViewController {
     }
     
     func setColor(color: UIColor) {
+        if hPalette == nil || sbPalette == nil {
+            pendingStartColor = color
+            return
+        }
+        
         hPalette.setColor(color: color)
         sbPalette.setColor(color: color)
     }

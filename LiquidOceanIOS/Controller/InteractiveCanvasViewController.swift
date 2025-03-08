@@ -1144,6 +1144,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         else if segue.identifier == "ColorPicker2Embed" {
             colorPicker2ViewController = segue.destination as! ColorPicker2ViewController
             colorPicker2ViewController.colorSelectionDelegate = self
+            colorPicker2ViewController.setColor(color: UIColor(argb: SessionSettings.instance.paintColor))
         }
         else if segue.identifier == "PixelHistoryEmbed" {
             segue.destination.modalPresentationStyle = .overCurrentContext
