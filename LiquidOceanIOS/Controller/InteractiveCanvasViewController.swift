@@ -2191,7 +2191,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     @objc func clickedBannerView() {
-        UIApplication.shared.openURL(URL(string: server.iconLink)!)
+        let url = URL(string: server.iconLink)
+        
+        if url != nil {
+            UIApplication.shared.open(url!)
+        }
     }
     
     // Menu Delegate
@@ -2205,7 +2209,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         let url = URL(string: server.iconLink)
         
         if url != nil {
-            UIApplication.shared.openURL(url!)
+            UIApplication.shared.open(url!)
         }
     }
     
