@@ -264,16 +264,10 @@ class InteractiveCanvas: NSObject, ObservableObject {
     func initType() {
         if world {
             // world
-            if realmId == 1 {
-                rows = SessionSettings.instance.canvasSize
-                cols = rows
-                initChunkPixelsFromMemory()
-            }
-            // dev
-            else {
-                let dataJsonStr = SessionSettings.instance.userDefaults().object(forKey: "arr") as? String
-                initPixels(arrJsonStr: dataJsonStr!)
-            }
+            startLatencyTask()
+            rows = SessionSettings.instance.canvasSize
+            cols = rows
+            initChunkPixelsFromMemory()
             
             registerForSocketEvents(socket: InteractiveCanvasSocket.instance.socket!)
         }
@@ -1398,10 +1392,13 @@ class InteractiveCanvas: NSObject, ObservableObject {
         
         self.latencyTask = Task {
             while !Task.isCancelled {
-                print("Sending latency check")
+                print("Sending latency check \(!Task.isCancelled)")
                 
-                InteractiveCanvasSocket.instance.socket?.emit("lat", "\(SessionSettings.instance.displayNameOrId())&\(pixelId(x: self.deviceViewport.midX, y: deviceViewport.midY))")
-                self.lastPingTime = NSDate().timeIntervalSince1970
+                if self.deviceViewport != nil {
+                    InteractiveCanvasSocket.instance.socket?.emit("lat", "\(SessionSettings.instance.displayNameOrId())&\(pixelId(x: self.deviceViewport.midX, y: deviceViewport.midY))")
+                    self.lastPingTime = NSDate().timeIntervalSince1970
+                }
+                
                 try await Task.sleep(for: .milliseconds(4200))
             }
         }

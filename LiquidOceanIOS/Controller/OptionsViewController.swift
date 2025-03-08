@@ -26,12 +26,6 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var pincodeButton: UIButton!
     
-    @IBOutlet weak var showPaintBarContainer: UIView!
-    @IBOutlet weak var showPaintBarSwitch: UISwitch!
-    
-    @IBOutlet weak var showPaintCircleContainer: UIView!
-    @IBOutlet weak var showPaintCircleSwitch: UISwitch!
-    
     @IBOutlet weak var paintMeterColorContainer: UIView!
     @IBOutlet weak var paintMeterColorColorView: UIView!
     @IBOutlet weak var paintMeterColorResetButton: UIButton!
@@ -196,16 +190,6 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         
         checkedName = SessionSettings.instance.displayName
         changeNameTextField.text = SessionSettings.instance.displayName
-        
-        // show paint bar
-        showPaintBarContainer.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99FFFFFF")).cgColor
-        showPaintBarContainer.layer.borderWidth = 0
-        showPaintBarSwitch.isOn = SessionSettings.instance.showPaintBar
-        
-        // show paint circle
-        showPaintCircleContainer.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99FFFFFF")).cgColor
-        showPaintCircleContainer.layer.borderWidth = 0
-        showPaintCircleSwitch.isOn = SessionSettings.instance.showPaintCircle
         
         // paint meter color
         paintMeterColorContainer.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99FFFFFF")).cgColor
@@ -463,20 +447,6 @@ class OptionsViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         else if sender == canvasLockBorderSwitch {
             SessionSettings.instance.canvasLockBorder = sender.isOn
-        }
-        else if sender == showPaintBarSwitch {
-            SessionSettings.instance.showPaintBar = sender.isOn
-            if sender.isOn && showPaintCircleSwitch.isOn {
-                showPaintCircleSwitch.setOn(false, animated: true)
-                SessionSettings.instance.showPaintCircle = false
-            }
-        }
-        else if sender == showPaintCircleSwitch {
-            SessionSettings.instance.showPaintCircle = sender.isOn
-            if sender.isOn && showPaintBarSwitch.isOn {
-                showPaintBarSwitch.setOn(false, animated: true)
-                SessionSettings.instance.showPaintBar = false
-            }
         }
         else if sender == rightHandedSwitch {
             SessionSettings.instance.rightHanded = sender.isOn

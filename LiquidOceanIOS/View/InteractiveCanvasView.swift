@@ -360,8 +360,6 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         else {
             interactiveCanvas.updateDeviceViewport(screenSize: self.frame.size, canvasCenterX: SessionSettings.instance.restoreDeviceViewportCenterX, canvasCenterY: SessionSettings.instance.restoreDeviceViewportCenterY)
         }
-        
-        self.interactiveCanvas.startLatencyTask()
     }
     
     func addPan() {

@@ -409,6 +409,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         //self.paintPanelWidth.constant = 0
         self.colorPickerFrameWidth.constant = 0
         self.colorPickerFrame.isHidden = true
+        self.colorPickerFrame.isUserInteractionEnabled = true
 
         self.paintPanel.isHidden = true
         
@@ -1241,6 +1242,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.colorPickerFrame.isHidden = false
+        self.recentColorsButton.isHidden = true
         
         self.paintColorAccept.isHidden = false
         self.paintColorCancel.isHidden = false
@@ -1263,6 +1265,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.colorPickerFrame.isHidden = true
         self.paintColorAccept.isHidden = true
         self.paintColorCancel.isHidden = true
+        
+        self.recentColorsButton.isHidden = false
         
         if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
             self.closePaintPanelButton.isHidden = false
@@ -1295,8 +1299,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             SessionSettings.instance.paintPanelOpen = true
             
-            self.latencyText.isHidden = true
-            self.socketStatusImage.isHidden = true
+            self.latencyContainer.isHidden = true
             
             self.changeBackgroundButton.isHidden = true
         }
@@ -1325,8 +1328,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             SessionSettings.instance.paintPanelOpen = false
             
-            self.latencyText.isHidden = false
-            self.socketStatusImage.isHidden = false
+            self.latencyContainer.isHidden = false
             
             self.changeBackgroundButton.isHidden = false
         }
