@@ -5609,7 +5609,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="h0N-sp-If7" firstAttribute="top" secondItem="Xd1-qJ-eZ4" secondAttribute="bottom" constant="20" id="6LP-RM-WR2"/>
                                     <constraint firstItem="Xd1-qJ-eZ4" firstAttribute="leading" secondItem="ZOA-Wn-Nig" secondAttribute="leading" id="EKF-Jp-CtT"/>
@@ -5620,7 +5620,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstItem="Xd1-qJ-eZ4" firstAttribute="top" secondItem="ZOA-Wn-Nig" secondAttribute="top" id="pNV-zS-hXz"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k4k-Px-U0p">
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k4k-Px-U0p">
                                 <rect key="frame" x="192" y="0.0" width="110" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -5633,7 +5633,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DeZ-vW-XnC"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ZOA-Wn-Nig" secondAttribute="trailing" constant="30" id="HFM-6u-dHm"/>
                             <constraint firstItem="ZOA-Wn-Nig" firstAttribute="centerY" secondItem="jv7-2W-5qR" secondAttribute="centerY" id="JY9-f3-qJj"/>

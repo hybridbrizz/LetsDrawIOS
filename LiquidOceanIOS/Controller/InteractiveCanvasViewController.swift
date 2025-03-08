@@ -1235,7 +1235,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             resizedColorPicker = true
         }
         else if view.frame.size.height > 600 {
-            colorPickerFrameWidth.constant = 330 * 2
+            colorPickerFrameWidth.constant = 330 * 1.5
         }
         else if view.frame.size.height <= 600 {
             colorPickerFrameWidth.constant = 330
