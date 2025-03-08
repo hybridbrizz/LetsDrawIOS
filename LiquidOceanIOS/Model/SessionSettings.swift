@@ -649,24 +649,61 @@ class SessionSettings: NSObject {
         userDefaults().set(String(data: jsonData, encoding: .utf8)!, forKey: "server_list_json")
     }
     
-    func syncServerStatus(remoteServers: [Server]) {
+    func syncServerStatus(remoteServers: [Server], admin: Bool) {
+        var toDelete = [Server]()
         for server in servers {
-            var remoteServer: Server? = nil
-            for serverItem in remoteServers {
-                if serverItem.uid == server.uid {
-                    remoteServer = serverItem
+            if admin {
+                var remoteServer: Server? = nil
+                for serverItem in remoteServers {
+                    if serverItem.uid == server.uid && serverItem.isAdmin && server.isAdmin {
+                        if serverItem.adminKey == server.adminKey {
+                            remoteServer = serverItem
+                        }
+                    }
+                }
+                
+                if remoteServer != nil {
+                    server.name = remoteServer!.name
+                    server.isOnline = remoteServer!.isOnline
+                    server.connectionCount = remoteServer!.connectionCount
+                    server.maxConnections = remoteServer!.maxConnections
+                    server.size = remoteServer!.size
+                }
+                else {
+                    if server.isAdmin {
+                        toDelete.append(server)
+                    }
                 }
             }
-            
-            if remoteServer != nil {
-                server.name = remoteServer!.name
-                server.isOnline = remoteServer!.isOnline
-                server.connectionCount = remoteServer!.connectionCount
-                server.maxConnections = remoteServer!.maxConnections
-                server.size = remoteServer!.size
+            else {
+                var remoteServer: Server? = nil
+                for serverItem in remoteServers {
+                    if serverItem.uid == server.uid && !serverItem.isAdmin && !server.isAdmin {
+                        if serverItem.accessKey == server.accessKey {
+                            remoteServer = serverItem
+                        }
+                    }
+                }
+                
+                if remoteServer != nil {
+                    server.name = remoteServer!.name
+                    server.isOnline = remoteServer!.isOnline
+                    server.connectionCount = remoteServer!.connectionCount
+                    server.maxConnections = remoteServer!.maxConnections
+                    server.size = remoteServer!.size
+                }
+                else {
+                    if !server.isAdmin {
+                        toDelete.append(server)
+                    }
+                }
             }
         }
         saveServers()
+        
+        for server in toDelete {
+            removeServer(server: server)
+        }
     }
     
     func adminServers() -> [Server] {

@@ -68,7 +68,7 @@ class ServerListViewModel: ObservableObject {
         var downloadCount = 0
         
         URLSessionHandler.instance.getPrivateServers(keys: accessKeys) { servers in
-            SessionSettings.instance.syncServerStatus(remoteServers: servers)
+            SessionSettings.instance.syncServerStatus(remoteServers: servers, admin: false)
             
             downloadCount += 1
             
@@ -88,7 +88,7 @@ class ServerListViewModel: ObservableObject {
         }
         
         URLSessionHandler.instance.getPrivateAdminServers(keys: adminKeys) { servers in
-            SessionSettings.instance.syncServerStatus(remoteServers: servers)
+            SessionSettings.instance.syncServerStatus(remoteServers: servers, admin: true)
             
             downloadCount += 1
             
@@ -112,13 +112,16 @@ class ServerListViewModel: ObservableObject {
     func addPrivateServer(accessKey: String) {
         isPrivateLoading = true
         privateServers = []
+        adminServers = []
         
         URLSessionHandler.instance.findServer(accessKey: accessKey) { success, statusCode, server in
             if let server = server {
                 SessionSettings.instance.addServer(server: server)
-                self.privateServers = SessionSettings.instance.privateServers()
-                self.adminServers = SessionSettings.instance.adminServers()
             }
+            
+            self.privateServers = SessionSettings.instance.privateServers()
+            self.adminServers = SessionSettings.instance.adminServers()
+            
             self.isPrivateLoading = false
         }
     }
