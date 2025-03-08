@@ -614,8 +614,17 @@ class SessionSettings: NSObject {
             lastVisitedServer = nil
             userDefaults().set(-1, forKey: "last_visited_server_id")
         }
-        servers.remove(at: servers.firstIndex(of: server)!)
-        saveServers()
+        
+        var index = -1
+        var i = 0
+        while i < servers.count {
+            let serverItem = servers[i]
+            if serverItem.uid == server.uid && serverItem.isAdmin == server.isAdmin {
+                servers.remove(at: i)
+                i -= 1
+            }
+            i += 1
+        }
     }
     
     func hasServer(accessKey: String) -> Bool {
@@ -649,6 +658,7 @@ class SessionSettings: NSObject {
             }
             
             if remoteServer != nil {
+                server.name = remoteServer!.name
                 server.isOnline = remoteServer!.isOnline
                 server.connectionCount = remoteServer!.connectionCount
                 server.maxConnections = remoteServer!.maxConnections

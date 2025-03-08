@@ -30,11 +30,13 @@ class InteractiveCanvasSocket: NSObject, URLSessionDelegate {
         // socket init
         //manager = SocketManager(socketURL: URL(string: "https://192.168.200.69:5010")!, config: [.log(true), .compress, .selfSigned(true), .sessionDelegate(self)])
         
-        manager = SocketManager(socketURL: URL(string: server.socketUrl())!, config: [.log(true), .reconnectAttempts(3), .forceWebsockets(true)])
+        manager = SocketManager(socketURL: URL(string: server.socketUrl())!, config: [.log(true), .reconnectAttempts(0), .forceWebsockets(true)])
         
         socket = manager.defaultSocket
         
-        socket?.connect()
+        socket?.connect(timeoutAfter: 5) {
+            self.socketConnectionDelegate?.notifySocketConnectionError()
+        }
         
         socket?.on(clientEvent: .connect) { (data, ack) in
             print(data)

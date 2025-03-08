@@ -12,6 +12,7 @@ import SocketIO
 protocol QueueSocketDelegate: AnyObject {
     func notifyQueueConnect()
     func notifyQueueConnectError()
+    func notifyCanvasSocketDownError()
     func notifyAddedToQueue(pos: Int)
     func notifyServiceReady()
 }
@@ -35,7 +36,9 @@ class QueueSocket: NSObject, URLSessionDelegate {
         
         socket = manager.defaultSocket
         
-        socket.connect()
+        socket.connect(timeoutAfter: 5) {
+            self.queueSocketDelegate?.notifyQueueConnectError()
+        }
         
         socket.on(clientEvent: .connect) { (data, ack) in
             print(data)
@@ -67,6 +70,11 @@ class QueueSocket: NSObject, URLSessionDelegate {
             
             self.queueSocketDelegate?.notifyServiceReady()
         }
+        
+        socket?.on("canvas_socket_down", callback: { data, ack in
+            self.socket.disconnect()
+            self.queueSocketDelegate?.notifyCanvasSocketDownError()
+        })
     }
     
     func disconnect() {

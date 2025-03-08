@@ -95,6 +95,7 @@ class ServerListViewModel: ObservableObject {
             var newPrivateServerList = [Server]()
             for server in SessionSettings.instance.servers {
                 if server.isAdmin {
+                    server.name = "\(server.name) (Mod)"
                     newPrivateServerList.append(server)
                 }
             }

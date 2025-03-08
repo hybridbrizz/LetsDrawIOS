@@ -706,7 +706,8 @@ class InteractiveCanvas: NSObject, ObservableObject {
             }
             
             print("emit pixels")
-            let sendStr = buildPixelsString(xs: xs, ys: ys, deviceId: SessionSettings.instance.deviceId, colors: colors)
+            let sendStr = buildPixelsString(xs: xs, ys: ys, deviceId: SessionSettings.instance.deviceId, colors: colors, includeAdminKey: true)
+            let sendStrMinusKey = buildPixelsString(xs: xs, ys: ys, deviceId: SessionSettings.instance.deviceId, colors: colors, includeAdminKey: false)
             InteractiveCanvasSocket.instance.socket!.emit("pixels_send", sendStr, completion: nil)
             
             var rpCopy = [RestorePoint]()
@@ -714,7 +715,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
                 rpCopy.append(restorePoint)
             }
             
-            self.pendingUndos.append(PendingUndo(restorePoints: rpCopy, message: sendStr, onUndo: { rps in
+            self.pendingUndos.append(PendingUndo(restorePoints: rpCopy, message: sendStrMinusKey, onUndo: { rps in
                 for rp in rps {
                     self.arr[rp.y][rp.x] = rp.color
                 }
@@ -735,7 +736,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
         self.recentColorsDelegate?.notifyNewRecentColors(recentColors: self.recentColors)
     }
     
-    func buildPixelsString(xs: [Int], ys: [Int], deviceId: Int, colors: [Int32]) -> String {
+    func buildPixelsString(xs: [Int], ys: [Int], deviceId: Int, colors: [Int32], includeAdminKey: Bool) -> String {
         var str = "\(deviceId)"
         
         for i in 0...colors.count - 1 {
@@ -747,7 +748,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
             str += "&\(pixelId)&\(color)"
         }
         
-        if server.isAdmin {
+        if server.isAdmin && includeAdminKey {
             str += "&\(server.adminKey)"
         }
         

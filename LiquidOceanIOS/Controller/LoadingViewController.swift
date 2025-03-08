@@ -64,6 +64,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     
     var errorTypeServer = "server"
     var errorTypeSocket = "socket"
+    var errorTypeQueue = "queue"
     var errorTypeAccessKey = "access-key"
     var errorTypeBan = "ban"
     
@@ -141,7 +142,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
             
             self.canvasImage.alpha = 0
             self.canvasImage.kf.setImage(
-                with: URL(string: "\(server!.serviceAltUrl())/canvas"), options: [.forceRefresh]) { result in
+                with: URL(string: "\(server!.serviceAltUrl())canvas"), options: [.forceRefresh]) { result in
                     UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn) {
                         self.canvasImage.alpha = 1
                     }
@@ -550,6 +551,9 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
             else if type == errorTypeSocket {
                 msg = "Socket error."
             }
+            else if type == errorTypeQueue {
+                msg = "Queue is not responding."
+            }
             else if type == errorTypeAccessKey {
                 msg = "Access key has changed."
             }
@@ -595,6 +599,11 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     }
     
     func notifyQueueConnectError() {
+        doneConnectingQueue = false
+        showError(type: errorTypeQueue)
+    }
+    
+    func notifyCanvasSocketDownError() {
         doneConnectingQueue = false
         showError(type: errorTypeSocket)
     }

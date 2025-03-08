@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SessionSettings.instance.load()
         StatTracker.instance.load()
         
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         /*if !SessionSettings.instance.sentUniqueId {
             URLSessionHandler.instance.sendDeviceId { (success) -> (Void) in
                 if success {
