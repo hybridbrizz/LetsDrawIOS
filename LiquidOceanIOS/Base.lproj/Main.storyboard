@@ -38,7 +38,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6E-cV-Ty3">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePD-Wx-iiY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Guide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePD-Wx-iiY">
                                         <rect key="frame" x="298" y="0.0" width="300" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="5Yi-j7-T0y"/>
@@ -56,7 +56,7 @@
                                             <constraint firstAttribute="height" constant="190" id="4Mq-C2-OyC"/>
                                             <constraint firstAttribute="width" constant="582" id="8vh-e2-z3F"/>
                                         </constraints>
-                                        <string key="text">Welcome to this quick guide. This will help you get all set up and fill you in on what you need to know to get started. First, you can connect to one of the public canvases by going to Connect then entering 'SMALL', 'MEDIUM', or 'LARGE', each server is a different size. Once connected you will start to gain pixels that you can use to draw onto the canvas.</string>
+                                        <string key="text">Welcome. This will help you get all set up and fill you in on what you need to know. Once you connect to server you will start to get pixels that you can use to paint onto the canvas.</string>
                                         <fontDescription key="fontDescription" name="Inter-Light" family="Inter" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                                             <constraint firstAttribute="width" constant="582" id="2xf-Gn-4MB"/>
                                             <constraint firstAttribute="height" constant="200" id="7ca-ej-mlQ"/>
                                         </constraints>
-                                        <string key="text">It's worth mentioning that you get a certain amount of pixels over time from each canvas you have connected to. You will get pixels even if you aren't online, up to a maximum amount. It's limited so that no one person has too much control over a canvas. You can easily export and share pixel art that you see. Just use this icon and select what you want.</string>
+                                        <string key="text">You get a certain amount of pixels over time from each canvas. You will get pixels even if you aren't online, up to a maximum configured by the server. You can easily export and share pixel art that you see. Just use this icon and select whatever you want. You can also yank the whole canvas in the menu.</string>
                                         <fontDescription key="fontDescription" name="Inter-Light" family="Inter" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                             <constraint firstAttribute="height" constant="160" id="GT1-Cd-LwN"/>
                                             <constraint firstAttribute="width" constant="582" id="ziH-pl-Sbw"/>
                                         </constraints>
-                                        <string key="text">The canvas is interactive so as you draw, everyone can see what you are doing. Finally each pixel keeps a history of edits. Now onto tools... There are a few basic tools. The first lets you change the canvas background to different colors.</string>
+                                        <string key="text">Each pixel keeps a record of edits on it. Tap any pixel on the canvas to see this history. This icon is for changing background presets, you can configure a custom background that will be the last preset in the cycle.</string>
                                         <fontDescription key="fontDescription" name="Inter-Light" family="Inter" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -143,7 +143,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.44" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The next one lets you turn on and off canvas grid lines. When you are far from the canvas, grid lines are always toggled off." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-Ap-2vD" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is for turning on and off grid lines. When you are very far zoomed out grid lines auto toggle off." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-Ap-2vD" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
                                         <rect key="frame" x="250" y="1447" width="582" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="582" id="gbU-pO-PIx"/>
@@ -173,12 +173,13 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.44" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This shows you an overview of the canvas." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWO-FU-dZt" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWO-FU-dZt" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
                                         <rect key="frame" x="64" y="1797" width="582" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="582" id="Z1g-Zf-tuB"/>
                                             <constraint firstAttribute="height" constant="60" id="mJc-bp-gF5"/>
                                         </constraints>
+                                        <string key="text">This shows you an overview of the canvas. If you tap on your ping in the corner it will bring up a server list (also accessible through the menu). Tap on a name to jump to that person whenever they are on the canvas.</string>
                                         <fontDescription key="fontDescription" name="Inter-Light" family="Inter" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -233,7 +234,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.44" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finally this shows and hides your recently used colors. And that's all there is to getting started." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5B-0s-MBD" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This shows your recently used colors." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5B-0s-MBD" customClass="InsetLabel" customModule="LiquidOceanIOS" customModuleProvider="target">
                                         <rect key="frame" x="64" y="2372" width="582" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="582" id="LaR-xI-XbB"/>
@@ -4200,11 +4201,11 @@
             <objects>
                 <viewController id="4Eu-IR-h8h" customClass="RecentColorsViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m54-ZD-Z77">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0tb-gh-gwe">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gov-3c-91k">
                                     <size key="itemSize" width="128" height="128"/>
@@ -4214,7 +4215,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecentColorCell" id="D19-1N-fc8" customClass="RecentColorCollectionViewCell" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                        <rect key="frame" x="11" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="-14" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="akD-rd-jML">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -5654,7 +5655,7 @@ If any person on any canvas uses pixels to give out any personal information abo
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xNZ-J9-gls"/>
+        <segue reference="Oc8-rR-yNG"/>
         <segue reference="XGn-H2-2Wq"/>
         <segue reference="N4G-oK-EKi"/>
     </inferredMetricsTieBreakers>
