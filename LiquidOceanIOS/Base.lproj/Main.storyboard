@@ -2554,7 +2554,7 @@
                                     <constraint firstAttribute="height" constant="40" id="JRN-It-LVp"/>
                                     <constraint firstAttribute="width" constant="320" id="k5D-g4-X9W"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="22"/>
                                 <color key="textColor" red="0.20392156862745098" green="0.96862745098039216" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
