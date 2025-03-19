@@ -64,15 +64,15 @@ class PaintColorIndicator: UIView, ActionButtonViewTouchDelegate {
         
         var radius = frame.size.width / 3
         
-        let w = SessionSettings.instance.paintIndicatorWidth
-        if !SessionSettings.instance.paintIndicatorFill && !SessionSettings.instance.paintIndicatorSquare && w > 3 {
-            if w == 4 {
-                radius = frame.size.width * 0.38
-            }
-            else if w == 5 {
-                radius = frame.size.width * 0.43
-            }
-        }
+        let w = frame.size.width
+//        if !SessionSettings.instance.paintIndicatorFill && !SessionSettings.instance.paintIndicatorSquare && w > 3 {
+//            if w == 4 {
+//                radius = frame.size.width * 0.38
+//            }
+//            else if w == 5 {
+//                radius = frame.size.width * 0.43
+//            }
+//        }
         
         if SessionSettings.instance.paintIndicatorSquare {
             var padding = CGFloat(0)
@@ -83,7 +83,7 @@ class PaintColorIndicator: UIView, ActionButtonViewTouchDelegate {
                 padding = 2.5
             }
             
-            let width = squareSizeFromOption(widthVal: SessionSettings.instance.paintIndicatorWidth)
+            let width = frame.size.width
             
             ctx.addRect(CGRect(x: frame.size.width / 2 - width / 2, y: frame.size.height / 2 - width / 2, width: width - padding, height: width - padding))
             

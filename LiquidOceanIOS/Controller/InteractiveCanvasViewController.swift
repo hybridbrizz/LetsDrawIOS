@@ -37,7 +37,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @IBOutlet weak var paintPanelWidth: NSLayoutConstraint!
     
-    @IBOutlet weak var colorPickerFrameWidth: NSLayoutConstraint!
+    //@IBOutlet weak var colorPickerFrameWidth: NSLayoutConstraint!
     
     @IBOutlet weak var paintColorAccept: ButtonFrame!
     @IBOutlet weak var paintColorCancel: ButtonFrame!
@@ -407,7 +407,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         //self.paintPanelWidth.constant = 0
-        self.colorPickerFrameWidth.constant = 0
+        //self.colorPickerFrameWidth.constant = 0
         self.colorPickerFrame.isHidden = true
         self.colorPickerFrame.isUserInteractionEnabled = true
 
@@ -721,15 +721,15 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             canvasLockTrailingRight.isActive = true
             
             // paint panel
-            paintPanelTrailing.isActive = false
-            paintPanelLeading.isActive = true
+            //paintPanelTrailing.isActive = false
+            //paintPanelLeading.isActive = true
             
             // close paint panel
             //closePaintPanelButton.transform = CGAffineTransform.init(rotationAngle: CGFloat(180 * Double.pi / 180.0))
             
             // color picker frame
-            colorPIckerFrameLeading.isActive = false
-            colorPickerFrameTrailing.isActive = true
+            //colorPIckerFrameLeading.isActive = false
+            //colorPickerFrameTrailing.isActive = true
             
             // toolbox button
 //            toolboxButtonLeading.isActive = true
@@ -1221,8 +1221,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         // tablet
         if view.frame.size.height > 600 && !resizedColorPicker {
-            colorPickerFrameWidth.constant = 330
-            colorPickerFrameWidth.constant *= 1.5
+            //colorPickerFrameWidth.constant = 330
+            //colorPickerFrameWidth.constant *= 1.5
             
             colorPickerViewController.hsbWheelWidth.constant *= 2
             colorPickerViewController.hsbWheelHeight.constant *= 2
@@ -1235,10 +1235,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             resizedColorPicker = true
         }
         else if view.frame.size.height > 600 {
-            colorPickerFrameWidth.constant = 330 * 1.5
+            //colorPickerFrameWidth.constant = 330 * 1.5
         }
         else if view.frame.size.height <= 600 {
-            colorPickerFrameWidth.constant = 330
+            //colorPickerFrameWidth.constant = 330
         }
         
         self.colorPickerFrame.isHidden = false
@@ -1260,7 +1260,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func closeColorPicker() {
-        self.colorPickerFrameWidth.constant = 0
+        //self.colorPickerFrameWidth.constant = 0
         
         self.colorPickerFrame.isHidden = true
         self.paintColorAccept.isHidden = true
@@ -1276,8 +1276,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     func togglePaintPanel(open: Bool, softHide: Bool = false) {
         if open {
             self.paintPanelButton.isHidden = true
-            
-            self.paintPanelWidth.constant = 200
             
             self.paintPanel.isHidden = false
             
@@ -1405,12 +1403,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     override func viewDidAppear(_ animated: Bool) {
         self.surfaceView.backgroundColor = UIColor.red
         
-        if !SessionSettings.instance.selectedHand {
-            self.toggleMenu(show: true)
-        }
-        else {
-            self.togglePaintPanel(open: SessionSettings.instance.paintPanelOpen)
-        }
+//        if !SessionSettings.instance.selectedHand {
+//            self.toggleMenu(show: true)
+//        }
+//        else {
+//            //self.togglePaintPanel(open: SessionSettings.instance.paintPanelOpen)
+//        }
+        self.togglePaintPanel(open: true)
     }
     
     // menu button delegate

@@ -100,9 +100,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Thanks Nahid Raihan - https://stackoverflow.com/questions/28938660/how-to-lock-orientation-of-one-view-controller-to-portrait-mode-only
     var orientationLock = UIInterfaceOrientationMask.all
         
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return self.orientationLock
-    }
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//        return self.orientationLock
+//    }
     
     struct OrientationUtility {
         static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         static func lockAndApplyOrientation(_ orientation: UIInterfaceOrientationMask) {
             self.lockOrientation(orientation)
-            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+            //UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
         }
     }
 }
