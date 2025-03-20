@@ -26,8 +26,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var paintPanelButton: ButtonFrame!
     @IBOutlet weak var paintPanelImage: UIImageView!
     
-    @IBOutlet weak var closePaintPanelButton: ButtonFrame!
-    
     @IBOutlet weak var colorPickerFrame: UIView!
     
     @IBOutlet weak var paintColorIndicator: PaintColorIndicator!
@@ -38,11 +36,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var paintPanelWidth: NSLayoutConstraint!
     
     //@IBOutlet weak var colorPickerFrameWidth: NSLayoutConstraint!
-    
-    @IBOutlet weak var paintColorAccept: ButtonFrame!
-    @IBOutlet weak var paintColorCancel: ButtonFrame!
-    @IBOutlet weak var paintYes: ButtonFrame!
-    @IBOutlet weak var paintNo: ButtonFrame!
     
     @IBOutlet weak var paintQuantityCircle: PaintQuantityCircle!
     @IBOutlet weak var paintQuantityBar: PaintQuantityBar!
@@ -61,7 +54,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @IBOutlet weak var exportImage: UIImageView!
     @IBOutlet weak var exportButton: ButtonFrame!
-    @IBOutlet weak var changeBackgroundButton: ButtonFrame!
+    //@IBOutlet weak var changeBackgroundButton: ButtonFrame!
     @IBOutlet weak var gridLinesButton: ButtonFrame!
     @IBOutlet weak var summaryButton: ButtonFrame!
     
@@ -142,12 +135,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet var colorPIckerFrameLeading: NSLayoutConstraint!
     @IBOutlet var colorPickerFrameTrailing: NSLayoutConstraint!
     
-    @IBOutlet weak var paintYesActionWidth: NSLayoutConstraint!
-    @IBOutlet weak var paintYesActionHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var paintNoActionWidth: NSLayoutConstraint!
-    @IBOutlet weak var paintNoActionHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var paintColorAcceptActionWidth: NSLayoutConstraint!
     @IBOutlet weak var paintColorAcceptActionHeight: NSLayoutConstraint!
     
@@ -221,6 +208,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var latencyText: UILabel!
     
     @IBOutlet weak var latencyContainer: UIView!
+    
+    @IBOutlet weak var actionButtonContainer: UIView!
+    
+    @IBOutlet weak var bottomTextDisplay: UIView!
     
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
@@ -442,37 +433,37 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         // change background
-        self.changeBackgroundButton.setOnClickListener {
-            SessionSettings.instance.backgroundColorIndex += 1
-            if SessionSettings.instance.backgroundColorIndex == self.surfaceView.interactiveCanvas.numBackgrounds {
-                SessionSettings.instance.backgroundColorIndex = 0
-            }
-            
-            if SessionSettings.instance.backgroundColorIndex == InteractiveCanvas.backgroundCustom {
-                if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 || SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
-                    SessionSettings.instance.backgroundColorIndex = 0
-                }
-            }
-            
-            SessionSettings.instance.darkIcons = (SessionSettings.instance.backgroundColorIndex == 1 || SessionSettings.instance.backgroundColorIndex == 3)
-            
-            self.updateIconColors()
-            self.updateLatencyTextColors()
-            
-            self.paletteAddColorAction.setNeedsDisplay()
-            self.paletteRemoveColorAction.setNeedsDisplay()
-            self.objectMoveUpAction.setNeedsDisplay()
-            self.objectMoveDownAction.setNeedsDisplay()
-            self.objectMoveLeftAction.setNeedsDisplay()
-            self.objectMoveRightAction.setNeedsDisplay()
-            
-            self.palettesViewController.addPaletteAction.setNeedsDisplay()
-            
-            self.recentColorsViewController.collectionView.reloadData()
-            
-            self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
-        }
-        
+//        self.changeBackgroundButton.setOnClickListener {
+//            SessionSettings.instance.backgroundColorIndex += 1
+//            if SessionSettings.instance.backgroundColorIndex == self.surfaceView.interactiveCanvas.numBackgrounds {
+//                SessionSettings.instance.backgroundColorIndex = 0
+//            }
+//            
+//            if SessionSettings.instance.backgroundColorIndex == InteractiveCanvas.backgroundCustom {
+//                if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 || SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
+//                    SessionSettings.instance.backgroundColorIndex = 0
+//                }
+//            }
+//            
+//            SessionSettings.instance.darkIcons = (SessionSettings.instance.backgroundColorIndex == 1 || SessionSettings.instance.backgroundColorIndex == 3)
+//            
+//            self.updateIconColors()
+//            self.updateLatencyTextColors()
+//            
+//            self.paletteAddColorAction.setNeedsDisplay()
+//            self.paletteRemoveColorAction.setNeedsDisplay()
+//            self.objectMoveUpAction.setNeedsDisplay()
+//            self.objectMoveDownAction.setNeedsDisplay()
+//            self.objectMoveLeftAction.setNeedsDisplay()
+//            self.objectMoveRightAction.setNeedsDisplay()
+//            
+//            self.palettesViewController.addPaletteAction.setNeedsDisplay()
+//            
+//            self.recentColorsViewController.collectionView.reloadData()
+//            
+//            self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
+//        }
+//        
         // grid lines
         gridLinesButton.setOnClickListener {
             SessionSettings.instance.showGridLines = !SessionSettings.instance.showGridLines
@@ -500,23 +491,29 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         // paint panel
         self.paintPanel.isHidden = true
+        
+        
         self.paintPanelButton.setOnClickListener {
-            self.togglePaintPanel(open: true)
+            if self.surfaceView.mode != .painting {
+                self.surfaceView.startPainting()
+                self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff999999")
+            }
+            else {
+                self.surfaceView.endPainting(accept: true)
+                self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
+            }
         }
         
         self.paintPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPaintPanel)))
         
-        // close paint panel
-        self.closePaintPanelButton.setOnClickListener {
-            self.togglePaintPanel(open: false)
-        }
+//        // close paint panel
+//        self.closePaintPanelButton.setOnClickListener {
+//            self.togglePaintPanel(open: false)
+//        }
         
         // paint quantity meter
         let paintIndicatorTap = UITapGestureRecognizer(target: self, action: #selector(didTapColorIndicator(sender:)))
         self.paintColorIndicator.addGestureRecognizer(paintIndicatorTap)
-        
-        self.paintColorAccept.isHidden = true
-        self.paintColorCancel.isHidden = true
         
         // palette
         paletteAddColorAction.type = .add
@@ -563,82 +560,80 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         deviceViewportSummaryView.interactiveCanvas = surfaceView.interactiveCanvas
         
         // paint selection accept
-        self.paintColorAccept.setOnClickListener {
-            self.closeColorPicker()
-            
-            if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
-                self.closePaintPanelButton.isHidden = false
-                
-                self.paintYes.isHidden = true
-                self.paintNo.isHidden = true
-            }
-            else {
-                self.closePaintPanelButton.isHidden = true
-                
-                self.paintYes.isHidden = false
-                self.paintNo.isHidden = false
-            }
-            
-            self.recentColorsButton.isHidden = false
-            
-            self.surfaceView.endPaintSelection()
-        }
+//        self.paintColorAccept.setOnClickListener {
+//            self.closeColorPicker()
+//            
+////            if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
+////                self.closePaintPanelButton.isHidden = false
+////                
+////                self.paintYes.isHidden = true
+////                self.paintNo.isHidden = true
+////            }
+////            else {
+////                self.closePaintPanelButton.isHidden = true
+////                
+////                self.paintYes.isHidden = false
+////                self.paintNo.isHidden = false
+////            }
+////            
+////            self.recentColorsButton.isHidden = false
+//            
+////            self.surfaceView.endPaintSelection()
+//        }
+//        
+//        // paint selection cancel
+//        self.paintColorCancel.setOnClickListener {
+//            self.paintColorIndicator.setPaintColor(color: self.previousColor)
+//            self.colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.paintColor)
+//            
+//            if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
+//                self.closePaintPanelButton.isHidden = false
+//                
+//                self.paintYes.isHidden = true
+//                self.paintNo.isHidden = true
+//            }
+//            else {
+//                self.closePaintPanelButton.isHidden = true
+//                
+//                self.paintYes.isHidden = false
+//                self.paintNo.isHidden = false
+//            }
+//            
+//            self.closeColorPicker()
+//            
+//            self.recentColorsButton.isHidden = false
+//            
+//            self.surfaceView.endPaintSelection()
+//        }
         
-        // paint selection cancel
-        self.paintColorCancel.setOnClickListener {
-            self.paintColorIndicator.setPaintColor(color: self.previousColor)
-            self.colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.paintColor)
-            
-            if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
-                self.closePaintPanelButton.isHidden = false
-                
-                self.paintYes.isHidden = true
-                self.paintNo.isHidden = true
-            }
-            else {
-                self.closePaintPanelButton.isHidden = true
-                
-                self.paintYes.isHidden = false
-                self.paintNo.isHidden = false
-            }
-            
-            self.closeColorPicker()
-            
-            self.recentColorsButton.isHidden = false
-            
-            self.surfaceView.endPaintSelection()
-        }
-        
-        self.paintYes.isHidden = true
-        self.paintNo.isHidden = true
+//        self.paintYes.isHidden = true
+//        self.paintNo.isHidden = true
         
         // paint yes
-        self.paintYes.setOnClickListener {
-            self.surfaceView.endPainting(accept: true)
-            
-            self.paintYes.isHidden = true
-            self.paintNo.isHidden = true
-            self.closePaintPanelButton.isHidden = false
-            
-            self.surfaceView.startPainting()
-        }
+//        self.paintYes.setOnClickListener {
+//            self.surfaceView.endPainting(accept: true)
+//            
+//            self.paintYes.isHidden = true
+//            self.paintNo.isHidden = true
+//            self.closePaintPanelButton.isHidden = false
+//            
+//            self.surfaceView.startPainting()
+//        }
+//        
+//        // paint no
+//        self.paintNo.setOnClickListener {
+//            self.surfaceView.endPainting(accept: false)
+//            
+//            self.paintYes.isHidden = true
+//            self.paintNo.isHidden = true
+//            self.closePaintPanelButton.isHidden = false
+//            
+//            self.surfaceView.startPainting()
+//        }
         
-        // paint no
-        self.paintNo.setOnClickListener {
-            self.surfaceView.endPainting(accept: false)
-            
-            self.paintYes.isHidden = true
-            self.paintNo.isHidden = true
-            self.closePaintPanelButton.isHidden = false
-            
-            self.surfaceView.startPainting()
-        }
-        
-        self.paintYes.color = UIColor.green.argb()
-        self.paintNo.color = UIColor.red.argb()
-        self.closePaintPanelButton.color = UIColor.yellow.argb()
-        self.paintColorAccept.color = UIColor.green.argb()
-        self.paintColorCancel.color = UIColor.red.argb()
+//        self.paintYes.color = UIColor.green.argb()
+//        self.paintNo.color = UIColor.red.argb()
+//        self.closePaintPanelButton.color = UIColor.yellow.argb()
         
         //self.paintColorAcceptAction.touchDelegate = self.paintColorIndicator
         
@@ -760,16 +755,16 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             deviceViewportSummaryViewTrailing.isActive = true
             
             // toolbox buttons
-            let leadingConstraints = [exportButtonLeading, changeBackgroundButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
-            let trailingConstraints = [exportButtonTrailing, changeBackgroundButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
-            
-            for i in 0...trailingConstraints.count - 1 {
-                let leadingConstraint = leadingConstraints[i]!
-                let trailingConstraint = trailingConstraints[i]!
-                
-                leadingConstraint.isActive = true
-                trailingConstraint.isActive = false
-            }
+//            let leadingConstraints = [exportButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
+//            let trailingConstraints = [exportButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
+//            
+//            for i in 0...trailingConstraints.count - 1 {
+//                let leadingConstraint = leadingConstraints[i]!
+//                let trailingConstraint = trailingConstraints[i]!
+//                
+//                leadingConstraint.isActive = true
+//                trailingConstraint.isActive = false
+//            }
             
             // paint qty bar
             paintQuantityBar.transform = CGAffineTransform.init(rotationAngle: CGFloat(180 * Double.pi / 180.0))
@@ -956,9 +951,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         // close button color
-        if SessionSettings.instance.paintPanelCloseButtonColor != 0 {
-            closePaintPanelButton.color = SessionSettings.instance.paintPanelCloseButtonColor
-        }
+//        if SessionSettings.instance.paintPanelCloseButtonColor != 0 {
+//            closePaintPanelButton.color = SessionSettings.instance.paintPanelCloseButtonColor
+//        }
         
         self.surfaceView.interactiveCanvas.updateRecentColors()
         self.setupColorPalette(colors: self.surfaceView.interactiveCanvas.recentColors)
@@ -1215,73 +1210,91 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @objc func didTapColorIndicator(sender: UITapGestureRecognizer) {
         self.previousColor = SessionSettings.instance.paintColor
         
-        if self.previousColor == 0 {
-            colorPickerViewController.selectedColor = UIColor.white
+        if self.colorPickerFrame.isHidden {
+            openColorPicker()
         }
+        else {
+            closeColorPicker()
+        }
+        
+//        if self.previousColor == 0 {
+//            colorPickerViewController.selectedColor = UIColor.white
+//        }
         
         // tablet
-        if view.frame.size.height > 600 && !resizedColorPicker {
-            //colorPickerFrameWidth.constant = 330
-            //colorPickerFrameWidth.constant *= 1.5
-            
-            colorPickerViewController.hsbWheelWidth.constant *= 2
-            colorPickerViewController.hsbWheelHeight.constant *= 2
-            
-            colorPickerViewController.hsbWheelXCenter.constant = 0
-            colorPickerViewController.hsbWheelYCenter.constant = 0
-            
-            colorPickerViewController.brightnessSliderWidth.constant *= 2
-            
-            resizedColorPicker = true
-        }
-        else if view.frame.size.height > 600 {
-            //colorPickerFrameWidth.constant = 330 * 1.5
-        }
-        else if view.frame.size.height <= 600 {
-            //colorPickerFrameWidth.constant = 330
-        }
+//        if view.frame.size.height > 600 && !resizedColorPicker {
+//            //colorPickerFrameWidth.constant = 330
+//            //colorPickerFrameWidth.constant *= 1.5
+//            
+//            colorPickerViewController.hsbWheelWidth.constant *= 2
+//            colorPickerViewController.hsbWheelHeight.constant *= 2
+//            
+//            colorPickerViewController.hsbWheelXCenter.constant = 0
+//            colorPickerViewController.hsbWheelYCenter.constant = 0
+//            
+//            colorPickerViewController.brightnessSliderWidth.constant *= 2
+//            
+//            resizedColorPicker = true
+//        }
+//        else if view.frame.size.height > 600 {
+//            //colorPickerFrameWidth.constant = 330 * 1.5
+//        }
+//        else if view.frame.size.height <= 600 {
+//            //colorPickerFrameWidth.constant = 330
+//        }
         
-        self.colorPickerFrame.isHidden = false
-        self.recentColorsButton.isHidden = true
         
-        self.paintColorAccept.isHidden = false
-        self.paintColorCancel.isHidden = false
+//        self.recentColorsButton.isHidden = true
         
-        self.closePaintPanelButton.isHidden = true
+//        self.paintColorAccept.isHidden = false
+//        self.paintColorCancel.isHidden = false
+//        
+//        self.closePaintPanelButton.isHidden = true
         
         // self.colorHandle.color = UIColor(argb: SessionSettings.instance.paintColor)
         
-        self.paintYes.isHidden = true
-        self.paintNo.isHidden = true
+//        self.paintYes.isHidden = true
+//        self.paintNo.isHidden = true
         
-        self.colorPicker2ViewController.colorHexTextField.delegate = self
+//        self.colorPicker2ViewController.colorHexTextField.delegate = self
         
+        
+    }
+    
+    func openColorPicker() {
+        self.colorPickerFrame.isHidden = false
         self.surfaceView.startPaintSelection()
+        self.actionButtonContainer.isHidden = true
+        self.paintPanelButton.isHidden = true
     }
     
     func closeColorPicker() {
         //self.colorPickerFrameWidth.constant = 0
         
         self.colorPickerFrame.isHidden = true
-        self.paintColorAccept.isHidden = true
-        self.paintColorCancel.isHidden = true
+        self.actionButtonContainer.isHidden = false
+        self.paintPanelButton.isHidden = false
+        //self.paintColorAccept.isHidden = true
+        //self.paintColorCancel.isHidden = true
         
-        self.recentColorsButton.isHidden = false
+        //self.recentColorsButton.isHidden = false
         
-        if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
-            self.closePaintPanelButton.isHidden = false
-        }
+//        if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
+//            self.closePaintPanelButton.isHidden = false
+//        }
+        
+        self.surfaceView.endPaintSelection()
     }
     
     func togglePaintPanel(open: Bool, softHide: Bool = false) {
         if open {
-            self.paintPanelButton.isHidden = true
+            //self.paintPanelButton.isHidden = true
             
             self.paintPanel.isHidden = false
             
             self.pixelHistoryView.isHidden = true
             
-            self.menuButton.isHidden = true
+            //self.menuButton.isHidden = true
             
             if SessionSettings.instance.canvasLockBorder {
                 self.canvasLockView.isHidden = false
@@ -1293,13 +1306,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             //toggleMenu(show: false)
             
-            self.surfaceView.startPainting()
+            //self.surfaceView.startPainting()
             
             SessionSettings.instance.paintPanelOpen = true
             
             self.latencyContainer.isHidden = true
             
-            self.changeBackgroundButton.isHidden = true
+//            self.changeBackgroundButton.isHidden = true
         }
         else if softHide {
             self.paintPanel.isHidden = true
@@ -1328,7 +1341,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.latencyContainer.isHidden = false
             
-            self.changeBackgroundButton.isHidden = false
+//            self.changeBackgroundButton.isHidden = false
         }
     }
     
@@ -1435,15 +1448,15 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // paint delegate
     func notifyPaintingStarted() {
-        self.closePaintPanelButton.isHidden = true
-        self.paintYes.isHidden = false
-        self.paintNo.isHidden = false
+//        self.closePaintPanelButton.isHidden = true
+//        self.paintYes.isHidden = false
+//        self.paintNo.isHidden = false
     }
     
     func notifyPaintingEnded(accept: Bool) {
-        self.closePaintPanelButton.isHidden = false
-        self.paintYes.isHidden = true
-        self.paintNo.isHidden = true
+//        self.closePaintPanelButton.isHidden = false
+//        self.paintYes.isHidden = true
+//        self.paintNo.isHidden = true
         
         if accept {
             summaryView.setNeedsDisplay()
@@ -1913,7 +1926,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            self.toolboxButton.isLight = true
             self.recentColorsButton.isLight = true
             self.exportButton.isLight = true
-            self.changeBackgroundButton.isLight = true
+//            self.changeBackgroundButton.isLight = true
             self.gridLinesButton.isLight = true
             self.summaryButton.isLight = true
         }
@@ -1923,7 +1936,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            self.toolboxButton.isLight = false
             self.recentColorsButton.isLight = false
             self.exportButton.isLight = false
-            self.changeBackgroundButton.isLight = false
+//            self.changeBackgroundButton.isLight = false
             self.gridLinesButton.isLight = false
             self.summaryButton.isLight = false
         }

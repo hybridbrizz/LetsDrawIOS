@@ -694,6 +694,10 @@ class InteractiveCanvas: NSObject, ObservableObject {
     }
     
     func commitPixels() {
+        if restorePoints.isEmpty {
+            return
+        }
+        
         if world {
             var xs = [Int]()
             var ys = [Int]()

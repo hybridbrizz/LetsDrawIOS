@@ -451,7 +451,21 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         
         let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
         
-        if interactiveCanvas.world {
+        if mode == .paintSelection {
+            let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
+            let x = Int(unitPoint.x)
+            let y = Int(unitPoint.y)
+            
+            if x >= 0 && x < interactiveCanvas.cols && y >= 0 && y < interactiveCanvas.rows {
+                var color = interactiveCanvas.arr[y][x]
+                if color == 0 {
+                    color = UIColor.black.argb()
+                }
+                SessionSettings.instance.paintColor = color
+                paintDelegate?.notifyPaintColorUpdate()
+            }
+        }
+        else if interactiveCanvas.world {
             if !interactiveCanvas.isBackground(unitPoint: unitPoint) {
                 self.interactiveCanvas.getPixelHistoryForUnitPoint(unitPoint: unitPoint) { (success, data) in
                     self.interactiveCanvas.pixelHistoryDelegate?.notifyShowPixelHistory(data: data, screenPoint: location)
@@ -547,11 +561,15 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     }
     
     func startPaintSelection() {
+        lastMode = mode
         self.mode = .paintSelection
     }
     
+    var lastMode: Mode? = nil
     func endPaintSelection() {
-        self.mode = .painting
+        if let lastMode = lastMode {
+            self.mode = lastMode
+        }
     }
     
     func startExporting() {
