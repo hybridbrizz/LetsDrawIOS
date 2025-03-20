@@ -141,6 +141,8 @@ class InteractiveCanvas: NSObject, ObservableObject {
     var latency = -1
     var connectionCount = 0
     
+    private var batchPixelsTask: Task<(), any Error>? = nil
+    
     private var _selectedPixels: [RestorePoint]?
     var selectedPixels: [RestorePoint]? {
         set {
@@ -642,11 +644,11 @@ class InteractiveCanvas: NSObject, ObservableObject {
         return unitPoint.x < 0 || unitPoint.y < 0 || unitPoint.x > CGFloat(cols - 1) || unitPoint.y > CGFloat(rows - 1) || arr[Int(unitPoint.y)][Int(unitPoint.x)] == 0
     }
     
-    func paintUnitOrUndo(x: Int, y: Int, mode: Int = 0, redraw: Bool = true) {
+    func paintUnit(x: Int, y: Int, mode: Int = 0, redraw: Bool = true) {
         let restorePoint = unitInRestorePoints(x: x, y: y, restorePointsArr: self.restorePoints)
         
         if mode == 0 {
-            if restorePoint == nil && (SessionSettings.instance.dropsAmt > 0 && restorePoints.count < SessionSettings.instance.maxSend || !world) {
+            if restorePoint == nil && SessionSettings.instance.dropsAmt > 0 {
                 if x > -1 && x < cols && y > -1 && y < rows {
                     let unitColor = arr[y][x]
                     
@@ -657,28 +659,31 @@ class InteractiveCanvas: NSObject, ObservableObject {
                         arr[y][x] = SessionSettings.instance.paintColor
                         
                         SessionSettings.instance.dropsAmt -= 1
+                        
+                        cancelBatchPixelsTask()
+                        startBatchPixelsTask()
                     }
                 }
                 else {
                     self.addErrorPixel(x: x, y: y)
                 }
             }
-            else if SessionSettings.instance.dropsAmt == 0 || restorePoints.count >= SessionSettings.instance.maxSend {
+            else if SessionSettings.instance.dropsAmt == 0 {
                 self.addErrorPixel(x: x, y: y)
             }
         }
-        else if mode == 1 {
-            if restorePoint != nil {
-                let index = restorePoints.firstIndex{$0 === restorePoint}
-                
-                if index != nil {
-                    restorePoints.remove(at: index!)
-                    arr[y][x] = restorePoint!.color
-                    
-                    SessionSettings.instance.dropsAmt += 1
-                }
-            }
-        }
+//        else if mode == 1 {
+//            if restorePoint != nil {
+//                let index = restorePoints.firstIndex{$0 === restorePoint}
+//                
+//                if index != nil {
+//                    restorePoints.remove(at: index!)
+//                    arr[y][x] = restorePoint!.color
+//                    
+//                    SessionSettings.instance.dropsAmt += 1
+//                }
+//            }
+//        }
         
         if redraw {
             drawCallback?.notifyCanvasRedraw()
@@ -738,6 +743,8 @@ class InteractiveCanvas: NSObject, ObservableObject {
         
         updateRecentColors()
         self.recentColorsDelegate?.notifyNewRecentColors(recentColors: self.recentColors)
+        
+        clearRestorePoints()
     }
     
     func buildPixelsString(xs: [Int], ys: [Int], deviceId: Int, colors: [Int32], includeAdminKey: Bool) -> String {
@@ -1412,6 +1419,25 @@ class InteractiveCanvas: NSObject, ObservableObject {
     func cancelLatencyTask() {
         self.latencyTask?.cancel()
         self.latencyTask = nil
+    }
+    
+    func startBatchPixelsTask() {
+        if self.batchPixelsTask != nil {
+            return
+        }
+        
+        self.batchPixelsTask = Task {
+            try await Task.sleep(for: .milliseconds(2500))
+            
+            if !Task.isCancelled {
+                commitPixels()
+            }
+        }
+    }
+    
+    func cancelBatchPixelsTask() {
+        self.batchPixelsTask?.cancel()
+        self.batchPixelsTask = nil
     }
     
     func pixelId(x: CGFloat, y: CGFloat) -> Int {

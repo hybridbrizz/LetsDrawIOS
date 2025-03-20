@@ -204,15 +204,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 }
                 
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
-                
-                self.undo = interactiveCanvas.unitInRestorePoints(x: Int(unitPoint.x), y: Int(unitPoint.y), restorePointsArr: interactiveCanvas.restorePoints) != nil
-                
-                if self.undo {
-                    interactiveCanvas.paintUnitOrUndo(x: Int(unitPoint.x), y: Int(unitPoint.y), mode: 1)
-                }
-                else {
-                    interactiveCanvas.paintUnitOrUndo(x: Int(unitPoint.x), y: Int(unitPoint.y))
-                }
+                interactiveCanvas.paintUnit(x: Int(unitPoint.x), y: Int(unitPoint.y))
                 
                 if interactiveCanvas.restorePoints.count == 1 {
                     paintDelegate?.notifyPaintingStarted()
@@ -253,15 +245,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 }
                 
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
-                
-                if self.undo {
-                    // undo
-                    interactiveCanvas.paintUnitOrUndo(x: Int(unitPoint.x), y: Int(unitPoint.y), mode: 1)
-                }
-                else {
-                    // paint
-                    interactiveCanvas.paintUnitOrUndo(x: Int(unitPoint.x), y: Int(unitPoint.y))
-                }
+                interactiveCanvas.paintUnit(x: Int(unitPoint.x), y: Int(unitPoint.y))
                 
                 if interactiveCanvas.restorePoints.count == 1 {
                     paintDelegate?.notifyPaintingStarted()
@@ -544,10 +528,8 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             }
         }
         else {
-            interactiveCanvas.commitPixels()
+            //interactiveCanvas.commitPixels()
         }
-        
-        interactiveCanvas.clearRestorePoints()
         
         paintDelegate?.notifyPaintingEnded(accept: accept)
         
@@ -653,22 +635,22 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             maxY = centerY + (height + 1) / 2
         }
         
-        // left
-        for y in minY...maxY {
-            interactiveCanvas.paintUnitOrUndo(x: minX, y: y, redraw: false)
-        }
-        // right
-        for y in minY...maxY {
-            interactiveCanvas.paintUnitOrUndo(x: maxX, y: y, redraw: false)
-        }
-        // top
-        for x in minX...maxX {
-            interactiveCanvas.paintUnitOrUndo(x: x, y: minY, redraw: false)
-        }
-        // bottom
-        for x in minX...maxX {
-            interactiveCanvas.paintUnitOrUndo(x: x, y: maxY, redraw: false)
-        }
+//        // left
+//        for y in minY...maxY {
+//            interactiveCanvas.paintUnitOrUndo(x: minX, y: y, redraw: false)
+//        }
+//        // right
+//        for y in minY...maxY {
+//            interactiveCanvas.paintUnitOrUndo(x: maxX, y: y, redraw: false)
+//        }
+//        // top
+//        for x in minX...maxX {
+//            interactiveCanvas.paintUnitOrUndo(x: x, y: minY, redraw: false)
+//        }
+//        // bottom
+//        for x in minX...maxX {
+//            interactiveCanvas.paintUnitOrUndo(x: x, y: maxY, redraw: false)
+//        }
         
         SessionSettings.instance.paintColor = oldColor
         
@@ -794,8 +776,9 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     func drawGridLines(ctx: CGContext, deviceViewport: CGRect, ppu: Int) {
         if ppu > interactiveCanvas.gridLineThreshold && SessionSettings.instance.showGridLines {
             let gridLineColor = interactiveCanvas.getGridLineColor()
-            ctx.setStrokeColor(UIColor(argb: gridLineColor).cgColor)
             ctx.setLineWidth(1.0)
+            
+            ctx.setStrokeColor(UIColor(argb: gridLineColor).withAlphaComponent(0.5).cgColor)
             
             let unitsWide = Int(self.frame.size.width) / ppu
             let unitsTall = Int(self.frame.size.height) / ppu
@@ -805,15 +788,24 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             
             for y in 0...unitsTall {
                 let curY = CGFloat(y * ppu) + gridYOffsetPx
+//                if Int(curY) % 10 != 0 {
+//                    ctx.setStrokeColor(UIColor(argb: gridLineColor).withAlphaComponent(0.5).cgColor)
+//                }
+//                else {
+//                    ctx.setStrokeColor(UIColor(argb: gridLineColor).cgColor)
+//                }
+//                print("\(curY)")
                 drawLine(ctx: ctx, s: CGPoint(x: 0.0, y: curY), e: CGPoint(x: self.frame.size.width, y: curY))
+                
+                ctx.drawPath(using: .stroke)
             }
             
             for x in 0...unitsWide {
                 let curX = CGFloat(x * ppu) + gridXOffsetPx
                 drawLine(ctx: ctx, s: CGPoint(x: curX, y: 0.0), e: CGPoint(x: curX, y: self.frame.size.height))
+                
+                ctx.drawPath(using: .stroke)
             }
-            
-            ctx.drawPath(using: .stroke)
         }
     }
     

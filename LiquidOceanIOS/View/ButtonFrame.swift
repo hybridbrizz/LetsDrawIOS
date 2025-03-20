@@ -150,4 +150,14 @@ class ButtonFrame: UIView {
             label?.textColor = UIColor(argb: color)
         }
     }
+    
+    override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else {
+            print("could not get graphics context")
+            return
+        }
+        
+        context.setFillColor(UIColor.darkGray.cgColor)
+        context.fillEllipse(in: CGRect(x: 0, y: 0, width: context.width, height: context.height))
+    }
 }

@@ -211,7 +211,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @IBOutlet weak var actionButtonContainer: UIView!
     
-    @IBOutlet weak var bottomTextDisplay: UIView!
+    @IBOutlet weak var bottomTextDisplay: UILabel!
+    
+    @IBOutlet weak var paintButtonBackgroundView: UIView!
     
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
@@ -373,6 +375,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         SessionSettings.instance.paintQtyDelegates.append(self)
         paintEventAmtLabel.text = String(SessionSettings.instance.dropsAmt)
+        bottomTextDisplay.text = String(SessionSettings.instance.dropsAmt)
         
         // paint quantity meter
         if SessionSettings.instance.showPaintBar {
@@ -408,6 +411,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.recentColorsButton.setOnClickListener {
             self.toggleRecentColors(open: self.recentColorsContainer.isHidden)
         }
+        
+        paintButtonBackgroundView.layer.cornerRadius = 50
+        paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99000000"))
         
         // export
         self.exportButton.setOnClickListener {
@@ -494,13 +500,28 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         
         self.paintPanelButton.setOnClickListener {
-            if self.surfaceView.mode != .painting {
+            if self.surfaceView.mode == .exploring {
                 self.surfaceView.startPainting()
-                self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff999999")
+                self.paintButtonBackgroundView.isHidden = false
+//                self.paintButtonBackgroundView.backgroundColor = UIColor.clear
+//                UIView.animate(withDuration: 150) {
+//                    self.paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99000000"))
+//                }
+                //self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff999999")
             }
             else {
                 self.surfaceView.endPainting(accept: true)
-                self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
+                    
+//                UIView.animate(withDuration: 150) {
+//                    self.paintButtonBackgroundView.alpha = 0
+//                } completion: { done in
+//                    if done {
+//                        self.paintButtonBackgroundView.isHidden = true
+//                    }
+//                }
+                self.paintButtonBackgroundView.isHidden = true
+                
+                //self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
             }
         }
         
@@ -923,6 +944,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         // paint quantity meter
         SessionSettings.instance.paintQtyDelegates.removeAll()
+        SessionSettings.instance.paintQtyDelegates.append(self)
         
         if SessionSettings.instance.showPaintBar {
             SessionSettings.instance.paintQtyDelegates.append(paintQuantityBar)
@@ -1263,6 +1285,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func openColorPicker() {
         self.colorPickerFrame.isHidden = false
+        self.colorPickerFrame.alpha = 0
+        UIView.animate(withDuration: 0.25) {
+            self.colorPickerFrame.alpha = 1
+        }
+        
         self.surfaceView.startPaintSelection()
         self.actionButtonContainer.isHidden = true
         self.paintPanelButton.isHidden = true
@@ -1271,7 +1298,15 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     func closeColorPicker() {
         //self.colorPickerFrameWidth.constant = 0
         
-        self.colorPickerFrame.isHidden = true
+//        self.colorPickerFrame.isHidden = true
+        UIView.animate(withDuration: 250) {
+            self.colorPickerFrame.alpha = 1
+        } completion: { done in
+            if done {
+                self.colorPickerFrame.isHidden = true
+            }
+        }
+        
         self.actionButtonContainer.isHidden = false
         self.paintPanelButton.isHidden = false
         //self.paintColorAccept.isHidden = true
@@ -1722,6 +1757,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     // paint quantity delegate
     func notifyPaintQtyChanged(qty: Int) {
         paintEventAmtLabel.text = String(qty)
+        bottomTextDisplay.text = "\(qty)"
     }
     
     // object selection delegate

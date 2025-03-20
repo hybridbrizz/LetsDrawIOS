@@ -38,10 +38,10 @@ class ColorPicker2ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         sbPalette.layer.borderWidth = 1
-        sbPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452")).cgColor
+        sbPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99ffffff")).cgColor
         
         hPalette.layer.borderWidth = 1
-        hPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452")).cgColor
+        hPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99ffffff")).cgColor
         
         layoutDelegate?.onColorPicker2LayoutSubviews()
     }
