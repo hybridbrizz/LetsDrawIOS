@@ -32,6 +32,7 @@ protocol InteractiveCanvasPalettesDelegate: AnyObject {
 protocol InteractiveCanvasGestureDelegate: AnyObject {
     func notifyInteractiveCanvasPan()
     func notifyInteractiveCanvasScale()
+    func notifyInteractiveCanvasDoubleTap()
 }
 
 protocol CanvasFrameDelegate: AnyObject {
@@ -126,6 +127,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         addPan()
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(sender:)))
+        self.tapGestureRecognizer.numberOfTapsRequired = 2
         addTap()
         
         self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
@@ -450,11 +452,13 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             }
         }
         else if interactiveCanvas.world {
-            if !interactiveCanvas.isBackground(unitPoint: unitPoint) {
-                self.interactiveCanvas.getPixelHistoryForUnitPoint(unitPoint: unitPoint) { (success, data) in
-                    self.interactiveCanvas.pixelHistoryDelegate?.notifyShowPixelHistory(data: data, screenPoint: location)
-                }
-            }
+//            if !interactiveCanvas.isBackground(unitPoint: unitPoint) {
+//                self.interactiveCanvas.getPixelHistoryForUnitPoint(unitPoint: unitPoint) { (success, data) in
+//                    self.interactiveCanvas.pixelHistoryDelegate?.notifyShowPixelHistory(data: data, screenPoint: location)
+//                }
+//            }
+            
+            gestureDelegate?.notifyInteractiveCanvasDoubleTap()
         }
         else {
             canvasFrameDelegate?.notifyCloseCanvasFrameView()

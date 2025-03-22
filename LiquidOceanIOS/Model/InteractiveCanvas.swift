@@ -63,6 +63,10 @@ protocol InteractiveCanvasMenuDelegate: AnyObject {
     func notifyYankCanvasClicked()
     func notifyHelpClicked()
     func notifyLeaveClicked()
+    func notifyGridLinesClicked()
+    func notifyChangeBackgroundClicked()
+    func notifySummaryClicked()
+    func notifyRequestClose()
 }
 
 class InteractiveCanvas: NSObject, ObservableObject {

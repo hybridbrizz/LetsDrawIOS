@@ -17,7 +17,10 @@ struct CanvasMenuView: View {
         ItemInfo(title: "Options", icon: .options),
         ItemInfo(title: "Yank Canvas", icon: .camera),
         ItemInfo(title: "Help", icon: .help),
-        ItemInfo(title: "Leave", icon: .leave)
+        ItemInfo(title: "Leave", icon: .leave),
+        ItemInfo(title: "Grid Lines", icon: .grid),
+        ItemInfo(title: "Background", icon: .background),
+        ItemInfo(title: "Minimap", icon: .zoomOut)
     ]
     
     let columns = [GridItem(.fixed(100)), GridItem(.fixed(100)), GridItem(.fixed(100))]
@@ -59,6 +62,15 @@ struct CanvasMenuView: View {
                                 case "Leave":
                                     delegate.notifyLeaveClicked()
                                     break
+                                case "Grid Lines":
+                                    delegate.notifyGridLinesClicked()
+                                    break
+                                case "Background":
+                                    delegate.notifyChangeBackgroundClicked()
+                                    break
+                                case "Minimap":
+                                    delegate.notifySummaryClicked()
+                                    break
                                 default:
                                     break
                             }
@@ -77,6 +89,9 @@ struct CanvasMenuView: View {
             maxWidth: .infinity,
             maxHeight: .infinity
         )
+        .onTapGesture {
+            delegate.notifyRequestClose()
+        }
     }
 }
 

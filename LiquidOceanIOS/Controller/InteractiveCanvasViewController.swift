@@ -150,10 +150,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet var canvasLockLeadingRight: NSLayoutConstraint!
     @IBOutlet var canvasLockTrailingRight: NSLayoutConstraint!
     
-    @IBOutlet var summaryViewLeading: NSLayoutConstraint!
     @IBOutlet var summaryViewTrailing: NSLayoutConstraint!
     
-    @IBOutlet var deviceViewportSummaryViewLeading: NSLayoutConstraint!
     @IBOutlet var deviceViewportSummaryViewTrailing: NSLayoutConstraint!
     
     @IBOutlet weak var palettesViewTrailing: NSLayoutConstraint!
@@ -340,37 +338,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         // menu button
         self.menuButton.setOnClickListener {
             
-            if self.surfaceView.isExporting() {
-                self.exportButton.toggleState = .none
-                self.surfaceView.endExporting()
-                
-                self.exportButton.highlight = false
-            }
-//            else if self.surfaceView.isObjectMoveSelection() || self.surfaceView.isObjectMoving() {
-//                if self.surfaceView.isObjectMoving() {
-//                    self.surfaceView.interactiveCanvas.cancelMoveSelectedObject()
-//                }
-//                else {
-//                    self.surfaceView.startExporting()
-//
-//                    self.exportButton.toggleState = .single
-//                    self.exportButton.layer.borderWidth = 1
-//                    self.exportButton.layer.borderColor = UIColor(argb: ActionButtonView.lightYellowColor).cgColor
-//                }
-//            }
-            else {
-                /*if SessionSettings.instance.promptBack {
-                    self.promptBack()
-                }
-                else {
-                    self.performSegue(withIdentifier: "UnwindToMenu", sender: nil)
-                }*/
-                //self.toggleMenu(show: self.menuContainer.isHidden)
-                self.surfaceView.interactiveCanvas.saveDeviceViewport()
-//                self.performSegue(withIdentifier: self.showOptions, sender: self)
-                self.clientListContainer.isHidden = true
-                self.canvasMenuContainer.isHidden = !self.canvasMenuContainer.isHidden
-            }
+            
         }
         
         SessionSettings.instance.paintQtyDelegates.append(self)
@@ -435,61 +403,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //                self.exportAction.toggleState = .none
 //                self.exportAction.layer.borderWidth = 0
 //            }
-        }
-        
-        // change background
-//        self.changeBackgroundButton.setOnClickListener {
-//            SessionSettings.instance.backgroundColorIndex += 1
-//            if SessionSettings.instance.backgroundColorIndex == self.surfaceView.interactiveCanvas.numBackgrounds {
-//                SessionSettings.instance.backgroundColorIndex = 0
-//            }
-//            
-//            if SessionSettings.instance.backgroundColorIndex == InteractiveCanvas.backgroundCustom {
-//                if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 || SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
-//                    SessionSettings.instance.backgroundColorIndex = 0
-//                }
-//            }
-//            
-//            SessionSettings.instance.darkIcons = (SessionSettings.instance.backgroundColorIndex == 1 || SessionSettings.instance.backgroundColorIndex == 3)
-//            
-//            self.updateIconColors()
-//            self.updateLatencyTextColors()
-//            
-//            self.paletteAddColorAction.setNeedsDisplay()
-//            self.paletteRemoveColorAction.setNeedsDisplay()
-//            self.objectMoveUpAction.setNeedsDisplay()
-//            self.objectMoveDownAction.setNeedsDisplay()
-//            self.objectMoveLeftAction.setNeedsDisplay()
-//            self.objectMoveRightAction.setNeedsDisplay()
-//            
-//            self.palettesViewController.addPaletteAction.setNeedsDisplay()
-//            
-//            self.recentColorsViewController.collectionView.reloadData()
-//            
-//            self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
-//        }
-//        
-        // grid lines
-        gridLinesButton.setOnClickListener {
-            SessionSettings.instance.showGridLines = !SessionSettings.instance.showGridLines
-            
-            self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
-        }
-        
-        // summary
-        summaryButton.setOnClickListener {
-            if self.summaryView.isHidden {
-                self.toggleSummary(show: true)
-            }
-            else {
-                self.toggleSummary(show: false)
-            }
-            let currentTime = NSDate().timeIntervalSince1970
-            if currentTime - self.lastCanvasSummaryUpdate > 60 * 10 {
-                self.summaryView.kf.setImage(with: URL(string: "\(self.server!.serviceAltUrl())/canvas"), options: [.forceRefresh])
-                self.lastCanvasSummaryUpdate = currentTime
-            }
-            
         }
         
         self.updateLatencyTextColors()
@@ -579,6 +492,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         //summaryView.interactiveCanvas = surfaceView.interactiveCanvas
         deviceViewportSummaryView.interactiveCanvas = surfaceView.interactiveCanvas
         
+        summaryView.layer.borderColor = UIColor.white.cgColor
+        summaryView.layer.borderWidth = 1
+        
         // paint selection accept
 //        self.paintColorAccept.setOnClickListener {
 //            self.closeColorPicker()
@@ -662,6 +578,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         colorPaletteTitleLabel.text = SessionSettings.instance.palette.displayName
         self.syncPaletteAndColor()
+        
+        tgr = UITapGestureRecognizer(target: self, action: #selector(didTapMenuContainer))
+        self.canvasMenuContainer.addGestureRecognizer(tgr)
         
         // paint event time toggle
         tgr = UITapGestureRecognizer(target: self, action: #selector(didTapPaintQuantityBar))
@@ -766,14 +685,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            recentColorsContainerLeading.isActive = false
 //            recentColorsContainerTrailing.isActive = true
             
-            // summary view
-            summaryViewLeading.isActive = false
-            summaryViewTrailing.isActive = true
-            
-            // device viewport view
-            deviceViewportSummaryViewLeading.isActive = false
-            deviceViewportSummaryViewTrailing.isActive = true
-            
             // toolbox buttons
 //            let leadingConstraints = [exportButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
 //            let trailingConstraints = [exportButtonTrailing, gridLinesButtonTrailing, summaryButtonTrailing]
@@ -826,14 +737,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             // recent colors container
             recentColorsContainerLeading.isActive = true
             recentColorsContainerTrailing.isActive = false
-            
-            // summary view
-            summaryViewLeading.isActive = true
-            summaryViewTrailing.isActive = false
-            
-            // device viewport view
-            deviceViewportSummaryViewLeading.isActive = true
-            deviceViewportSummaryViewTrailing.isActive = false
             
             // toolbox buttons
             let leadingConstraints = [changeBackgroundButtonLeading, gridLinesButtonLeading, summaryButtonLeading]
@@ -1047,6 +950,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @objc func didTapColorPaletteTitle() {
         self.togglePalettesView(show: true)
+    }
+    
+    @objc func didTapMenuContainer() {
+        closeMenu()
     }
     
     @objc func didTapPaintPanel() {
@@ -1896,6 +1803,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         deviceViewportSummaryView.setNeedsDisplay()
     }
     
+    func notifyInteractiveCanvasDoubleTap() {
+        showMenu()
+    }
+    
     func notifyToggleCanvasFrameView(canvasX: Int, canvasY: Int, screenPoint: CGPoint) {
         if !canvasFrameView.isHidden {
             hideCanvasFrameView()
@@ -2284,6 +2195,59 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.performSegue(withIdentifier: self.unwindToLoading, sender: nil)
     }
     
+    func notifyGridLinesClicked() {
+        SessionSettings.instance.showGridLines = !SessionSettings.instance.showGridLines
+        
+        self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
+    }
+    
+    func notifyChangeBackgroundClicked() {
+        SessionSettings.instance.backgroundColorIndex += 1
+        if SessionSettings.instance.backgroundColorIndex == self.surfaceView.interactiveCanvas.numBackgrounds {
+            SessionSettings.instance.backgroundColorIndex = 0
+        }
+        
+        if SessionSettings.instance.backgroundColorIndex == InteractiveCanvas.backgroundCustom {
+            if SessionSettings.instance.canvasBackgroundPrimaryColor == 0 || SessionSettings.instance.canvasBackgroundSecondaryColor == 0 {
+                SessionSettings.instance.backgroundColorIndex = 0
+            }
+        }
+        
+        SessionSettings.instance.darkIcons = (SessionSettings.instance.backgroundColorIndex == 1 || SessionSettings.instance.backgroundColorIndex == 3)
+        
+        self.updateIconColors()
+        self.updateLatencyTextColors()
+        
+        self.paletteAddColorAction.setNeedsDisplay()
+        self.paletteRemoveColorAction.setNeedsDisplay()
+        self.objectMoveUpAction.setNeedsDisplay()
+        self.objectMoveDownAction.setNeedsDisplay()
+        self.objectMoveLeftAction.setNeedsDisplay()
+        self.objectMoveRightAction.setNeedsDisplay()
+        
+        self.palettesViewController.addPaletteAction.setNeedsDisplay()
+        
+        self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
+    }
+    
+    func notifySummaryClicked() {
+        if self.summaryView.isHidden {
+            self.toggleSummary(show: true)
+        }
+        else {
+            self.toggleSummary(show: false)
+        }
+        let currentTime = NSDate().timeIntervalSince1970
+        if currentTime - self.lastCanvasSummaryUpdate > 60 * 10 {
+            self.summaryView.kf.setImage(with: URL(string: "\(self.server!.serviceAltUrl())/canvas"), options: [.forceRefresh])
+            self.lastCanvasSummaryUpdate = currentTime
+        }
+    }
+    
+    func notifyRequestClose() {
+        closeMenu()
+    }
+    
     // Color Selection Delegate (ColorPicker2)
     
     func onColorSelected(selectedColor: UIColor) {
@@ -2319,6 +2283,45 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func onColorPicker2LayoutSubviews() {
         colorPicker2ViewController.colorHexTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    func showMenu() {
+        if self.surfaceView.isExporting() {
+            self.exportButton.toggleState = .none
+            self.surfaceView.endExporting()
+            
+            self.exportButton.highlight = false
+        }
+//            else if self.surfaceView.isObjectMoveSelection() || self.surfaceView.isObjectMoving() {
+//                if self.surfaceView.isObjectMoving() {
+//                    self.surfaceView.interactiveCanvas.cancelMoveSelectedObject()
+//                }
+//                else {
+//                    self.surfaceView.startExporting()
+//
+//                    self.exportButton.toggleState = .single
+//                    self.exportButton.layer.borderWidth = 1
+//                    self.exportButton.layer.borderColor = UIColor(argb: ActionButtonView.lightYellowColor).cgColor
+//                }
+//            }
+        else {
+            /*if SessionSettings.instance.promptBack {
+                self.promptBack()
+            }
+            else {
+                self.performSegue(withIdentifier: "UnwindToMenu", sender: nil)
+            }*/
+            //self.toggleMenu(show: self.menuContainer.isHidden)
+            self.surfaceView.interactiveCanvas.saveDeviceViewport()
+//                self.performSegue(withIdentifier: self.showOptions, sender: self)
+            self.clientListContainer.isHidden = true
+            self.canvasMenuContainer.isHidden = false
+            self.canvasMenuContainer.isUserInteractionEnabled = true
+        }
+    }
+    
+    func closeMenu() {
+        self.canvasMenuContainer.isHidden = true
     }
 }
 

@@ -2961,7 +2961,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bS-Rb-F4l">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="160"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhR-03-8Ib" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhR-03-8Ib" customClass="ButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="vfp-vR-UJm">
@@ -3580,28 +3580,28 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-Br-pXl" customClass="UIImageView">
-                                <rect key="frame" x="532" y="84" width="300" height="300"/>
+                                <rect key="frame" x="676" y="-230" width="200" height="200"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLq-ba-skA">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="HIU-IG-Wh5"/>
+                                    <constraint firstAttribute="height" constant="200" id="HIU-IG-Wh5"/>
                                     <constraint firstAttribute="trailing" secondItem="jLq-ba-skA" secondAttribute="trailing" id="MMt-2s-LoO"/>
                                     <constraint firstAttribute="bottom" secondItem="jLq-ba-skA" secondAttribute="bottom" id="Wuc-FI-f96"/>
                                     <constraint firstItem="jLq-ba-skA" firstAttribute="leading" secondItem="hfq-Br-pXl" secondAttribute="leading" id="big-po-gEZ"/>
-                                    <constraint firstAttribute="width" constant="300" id="esi-4k-n42"/>
+                                    <constraint firstAttribute="width" constant="200" id="esi-4k-n42"/>
                                     <constraint firstItem="jLq-ba-skA" firstAttribute="top" secondItem="hfq-Br-pXl" secondAttribute="top" id="t06-qC-EjE"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCY-AR-gsM" customClass="DeviceViewportSummaryView" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="532" y="84" width="300" height="300"/>
+                                <rect key="frame" x="676" y="-230" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="HGg-dw-KOC"/>
-                                    <constraint firstAttribute="width" constant="300" id="gmp-o0-RvR"/>
+                                    <constraint firstAttribute="height" constant="200" id="HGg-dw-KOC"/>
+                                    <constraint firstAttribute="width" constant="200" id="gmp-o0-RvR"/>
                                 </constraints>
                             </view>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yzu-bO-Iw1">
@@ -3660,18 +3660,16 @@
                             <constraint firstItem="Noh-3c-qct" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4cV-Mk-PDL"/>
                             <constraint firstAttribute="bottom" secondItem="P5c-I6-Tuf" secondAttribute="bottom" id="4vP-LZ-T7b"/>
                             <constraint firstItem="Yzu-bO-Iw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5oO-uZ-PHs"/>
-                            <constraint firstAttribute="trailing" secondItem="hfq-Br-pXl" secondAttribute="trailing" constant="64" id="70h-Uj-IPc"/>
+                            <constraint firstAttribute="trailing" secondItem="hfq-Br-pXl" secondAttribute="trailing" constant="20" id="70h-Uj-IPc"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="7Yu-Jz-Xaf"/>
                             <constraint firstAttribute="trailing" secondItem="1T9-L7-JKj" secondAttribute="trailing" id="7ud-bU-A7c"/>
                             <constraint firstItem="UYW-Te-7QB" firstAttribute="leading" secondItem="tjQ-fj-IaW" secondAttribute="trailing" priority="999" id="8Qe-b7-EjC"/>
-                            <constraint firstItem="BCY-AR-gsM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" constant="64" id="9zf-cW-SSa"/>
                             <constraint firstItem="0bS-Rb-F4l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A7a-pa-9Ir"/>
                             <constraint firstItem="Noh-3c-qct" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="A8U-WJ-UM9"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="BCY-AR-gsM" secondAttribute="bottom" constant="30" id="ABM-R5-0g2"/>
+                            <constraint firstItem="1T9-L7-JKj" firstAttribute="top" secondItem="BCY-AR-gsM" secondAttribute="bottom" constant="20" id="ABM-R5-0g2"/>
                             <constraint firstAttribute="trailing" secondItem="Xy2-vk-Qhk" secondAttribute="trailing" id="AQ7-KZ-Zr8"/>
                             <constraint firstAttribute="bottom" secondItem="Vip-aI-b8W" secondAttribute="bottom" id="BWb-jp-5fc"/>
                             <constraint firstItem="hVZ-1b-A3N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="248" id="BiG-YW-U0X"/>
-                            <constraint firstItem="hfq-Br-pXl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="999" constant="64" id="CLK-T5-VUI"/>
                             <constraint firstItem="0af-Id-wac" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="68" id="CMp-7O-VLW"/>
                             <constraint firstItem="0bS-Rb-F4l" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CZh-cJ-F1Y"/>
                             <constraint firstItem="W05-sy-4ef" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="D6P-D3-c4i"/>
@@ -3713,8 +3711,8 @@
                             <constraint firstAttribute="bottom" secondItem="xoZ-vF-uEO" secondAttribute="bottom" constant="200" id="q0O-np-Qbx"/>
                             <constraint firstItem="Yzu-bO-Iw1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="q2d-ZF-9ea"/>
                             <constraint firstItem="0bh-it-Xd2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="qV9-j0-AQ4"/>
-                            <constraint firstAttribute="trailing" secondItem="BCY-AR-gsM" secondAttribute="trailing" constant="64" id="rGS-2t-gvc"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="hfq-Br-pXl" secondAttribute="bottom" constant="30" id="rr3-PT-uTZ"/>
+                            <constraint firstAttribute="trailing" secondItem="BCY-AR-gsM" secondAttribute="trailing" constant="20" id="rGS-2t-gvc"/>
+                            <constraint firstItem="1T9-L7-JKj" firstAttribute="top" secondItem="hfq-Br-pXl" secondAttribute="bottom" constant="20" id="rr3-PT-uTZ"/>
                             <constraint firstAttribute="trailing" secondItem="Noh-3c-qct" secondAttribute="trailing" id="vJq-G7-QCM"/>
                             <constraint firstItem="JBK-ya-sQZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vil-RN-n68"/>
                             <constraint firstItem="Tzt-c9-dyw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="w3G-WX-fVW"/>
@@ -3755,7 +3753,6 @@
                         <outlet property="colorPickerFrame" destination="xoZ-vF-uEO" id="vGm-Pv-MBY"/>
                         <outlet property="colorPickerFrameTrailing" destination="DY5-I4-pWG" id="rQL-hZ-ULs"/>
                         <outlet property="deviceViewportSummaryView" destination="BCY-AR-gsM" id="dXB-AV-xHV"/>
-                        <outlet property="deviceViewportSummaryViewLeading" destination="9zf-cW-SSa" id="unI-r4-Skf"/>
                         <outlet property="deviceViewportSummaryViewTrailing" destination="rGS-2t-gvc" id="c0H-kR-4cL"/>
                         <outlet property="exportButton" destination="Fyk-ME-JTp" id="vGL-4d-Q1J"/>
                         <outlet property="exportContainer" destination="Xy2-vk-Qhk" id="5n9-8d-Ekf"/>
@@ -3826,7 +3823,6 @@
                         <outlet property="summaryButton" destination="ZmC-9f-OkI" id="xx7-Am-apT"/>
                         <outlet property="summaryClientIndicatorsContainer" destination="jLq-ba-skA" id="UMh-jg-kfs"/>
                         <outlet property="summaryView" destination="hfq-Br-pXl" id="JId-SU-mDY"/>
-                        <outlet property="summaryViewLeading" destination="CLK-T5-VUI" id="YFk-rm-xCZ"/>
                         <outlet property="summaryViewTrailing" destination="70h-Uj-IPc" id="IZR-VE-suB"/>
                         <outlet property="surfaceView" destination="Noh-3c-qct" id="52u-Qo-MJp"/>
                         <segue destination="PmP-As-lpW" kind="show" identifier="ShowOptions" animates="NO" id="XGn-H2-2Wq"/>
