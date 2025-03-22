@@ -24,7 +24,7 @@ class HPalette: UIView {
     private var maxHue: CGFloat = 360
     
     private var indicator: HIndicator
-    private var indicatorWidth: CGFloat = 5
+    private var indicatorWidth: CGFloat = 2
     
     var hueSelectionDelegate: HueSelectionDelegate? = nil
     

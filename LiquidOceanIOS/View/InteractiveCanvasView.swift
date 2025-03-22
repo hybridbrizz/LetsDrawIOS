@@ -452,12 +452,6 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             }
         }
         else if interactiveCanvas.world {
-//            if !interactiveCanvas.isBackground(unitPoint: unitPoint) {
-//                self.interactiveCanvas.getPixelHistoryForUnitPoint(unitPoint: unitPoint) { (success, data) in
-//                    self.interactiveCanvas.pixelHistoryDelegate?.notifyShowPixelHistory(data: data, screenPoint: location)
-//                }
-//            }
-            
             gestureDelegate?.notifyInteractiveCanvasDoubleTap()
         }
         else {
@@ -472,9 +466,15 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             
             let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
             
-            if !interactiveCanvas.world {
-                canvasFrameDelegate?.notifyToggleCanvasFrameView(canvasX: Int(unitPoint.x), canvasY: Int(unitPoint.y), screenPoint: location)
+            if !interactiveCanvas.isBackground(unitPoint: unitPoint) {
+                self.interactiveCanvas.getPixelHistoryForUnitPoint(unitPoint: unitPoint) { (success, data) in
+                    self.interactiveCanvas.pixelHistoryDelegate?.notifyShowPixelHistory(data: data, screenPoint: location)
+                }
             }
+            
+//            if !interactiveCanvas.world {
+//                canvasFrameDelegate?.notifyToggleCanvasFrameView(canvasX: Int(unitPoint.x), canvasY: Int(unitPoint.y), screenPoint: location)
+//            }
         }
     }
     

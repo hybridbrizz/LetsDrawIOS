@@ -98,9 +98,11 @@ class RecentColorsView: UIView {
             
             let index = y * cols + x
             
-            let color = recentColors[index]
-            SessionSettings.instance.paintColor = color
-            self.delegate?.notifyRecentColorSelected(color: color)
+            if recentColors.indices.contains(index) {
+                let color = recentColors[index]
+                SessionSettings.instance.paintColor = color
+                self.delegate?.notifyRecentColorSelected(color: color)
+            }
         }
     }
 }

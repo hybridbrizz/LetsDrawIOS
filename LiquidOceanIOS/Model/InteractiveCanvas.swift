@@ -177,6 +177,9 @@ class InteractiveCanvas: NSObject, ObservableObject {
     @Published var showCanvasClientIndicators = true
     @Published var showSummaryClientIndicators = true
     
+    @Published var latencyText = ""
+    @Published var isConnected = true
+    
     enum Direction {
         case up
         case down
@@ -438,6 +441,18 @@ class InteractiveCanvas: NSObject, ObservableObject {
             
             let latency = Int(1000 * (NSDate().timeIntervalSince1970 - self.lastPingTime))
             self.latency = latency
+            
+            var text = ""
+            if connectionCount > 1 {
+                text += "(\(connectionCount))"
+            }
+            
+            if latency > -1 {
+                text += " \(latency) ms"
+            }
+            
+            self.latencyText = text
+            
             self.latencyDelegate?.notifyLatency(latency: latency)
             self.latencyDelegate?.notifyConnectionCount(count: connectionCount)
             

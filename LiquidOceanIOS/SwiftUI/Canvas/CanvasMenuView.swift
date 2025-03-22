@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct CanvasMenuView: View {
+    @ObservedObject var interactiveCanvas: InteractiveCanvas
     let delegate: InteractiveCanvasMenuDelegate
     
     let items = [
-        ItemInfo(title: "Person List", icon: .serverPerson),
+        ItemInfo(title: "Server List", icon: .serverPerson),
         ItemInfo(title: "Community", icon: .community),
         ItemInfo(title: "Options", icon: .options),
         ItemInfo(title: "Yank Canvas", icon: .camera),
@@ -26,67 +27,101 @@ struct CanvasMenuView: View {
     let columns = [GridItem(.fixed(100)), GridItem(.fixed(100)), GridItem(.fixed(100))]
     
     var body: some View {
-        HStack {
-            Spacer()
-            
-            VStack {
-                Text(SessionSettings.instance.lastVisitedServer!.name)
-                    .font(.custom("Inter", size: 14))
-                    .fontWeight(.black)
-                    .foregroundStyle(.white)
-
-                Spacer().frame(height: 16)
+        VStack {
+            HStack {
+                Spacer()
                 
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(items) { item in
-                        CanvasMenuItemView(
-                            title: item.title,
-                            icon: item.icon
-                        ) { title in
-                            switch title {
-                                case "Person List":
-                                    delegate.notifyPersonListClicked()
-                                    break
-                                case "Community":
-                                    delegate.notifyCommunityClicked()
-                                    break
-                                case "Options":
-                                    delegate.notifyOptionsClicked()
-                                    break
-                                case "Yank Canvas":
-                                    delegate.notifyYankCanvasClicked()
-                                    break
-                                case "Help":
-                                    delegate.notifyHelpClicked()
-                                    break
-                                case "Leave":
-                                    delegate.notifyLeaveClicked()
-                                    break
-                                case "Grid Lines":
-                                    delegate.notifyGridLinesClicked()
-                                    break
-                                case "Background":
-                                    delegate.notifyChangeBackgroundClicked()
-                                    break
-                                case "Minimap":
-                                    delegate.notifySummaryClicked()
-                                    break
-                                default:
-                                    break
+                VStack {
+                    ZStack(alignment: .trailing) {
+                        Text(SessionSettings.instance.lastVisitedServer!.name)
+                            .font(.custom("Inter", size: 14))
+                            .fontWeight(.black)
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        HStack {
+                            Text(interactiveCanvas.latencyText)
+                                .font(.custom("Inter", size: 14))
+                                .fontWeight(.light)
+                                .foregroundStyle(.white)
+                            
+                            let imageName = if interactiveCanvas.isConnected {
+                                "green_circle.png"
+                            }
+                            else {
+                                "red_circle.png"
+                            }
+
+                            Image(uiImage: UIImage(named: imageName)!)
+                                .resizable()
+                                .frame(width: 10, height: 10)
+                            
+                            Spacer()
+                                .frame(width: 2)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+
+                    Spacer().frame(height: 16)
+                    
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(items) { item in
+                            CanvasMenuItemView(
+                                title: item.title,
+                                icon: item.icon
+                            ) { title in
+                                switch title {
+                                    case "Server List":
+                                        delegate.notifyPersonListClicked()
+                                        break
+                                    case "Community":
+                                        delegate.notifyCommunityClicked()
+                                        break
+                                    case "Options":
+                                        delegate.notifyOptionsClicked()
+                                        break
+                                    case "Yank Canvas":
+                                        delegate.notifyYankCanvasClicked()
+                                        break
+                                    case "Help":
+                                        delegate.notifyHelpClicked()
+                                        break
+                                    case "Leave":
+                                        delegate.notifyLeaveClicked()
+                                        break
+                                    case "Grid Lines":
+                                        delegate.notifyGridLinesClicked()
+                                        break
+                                    case "Background":
+                                        delegate.notifyChangeBackgroundClicked()
+                                        break
+                                    case "Minimap":
+                                        delegate.notifySummaryClicked()
+                                        break
+                                    default:
+                                        break
+                                }
                             }
                         }
                     }
+                    .fixedSize()
                 }
-                .fixedSize()
+                .padding(16)
+                .background(Color(UIColor.darkGray))
+                .cornerRadius(10)
+                
+                Spacer()
             }
-            .padding(16)
-            .background(Color(UIColor.darkGray))
-            .cornerRadius(10)
+            .frame(
+                maxWidth: .infinity
+            )
+            .onTapGesture {
+                delegate.notifyRequestClose()
+            }
             
             Spacer()
         }
         .frame(
-            maxWidth: .infinity,
             maxHeight: .infinity
         )
         .onTapGesture {

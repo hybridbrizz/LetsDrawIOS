@@ -75,8 +75,6 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
         
         if self.selectedIndices.contains(indexPath) {
             cell.nameLabel.isHidden = true
-            cell.levelLabel.isHidden = true
-            cell.dateLabel.isHidden = true
             cell.colorView.isHidden = true
             cell.fullDateLabel.isHidden = false
             
@@ -85,8 +83,6 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
         }
         else {
             cell.nameLabel.isHidden = false
-            cell.levelLabel.isHidden = false
-            cell.dateLabel.isHidden = false
             cell.colorView.isHidden = false
             cell.fullDateLabel.isHidden = true
             
@@ -97,7 +93,7 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
             }
             
             cell.nameLabel.text = name
-            cell.nameLabelWidth.constant = name.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 24.0)]).width + 5
+            //cell.nameLabelWidth.constant = name.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 24.0)]).width + 5
             
             if name == SessionSettings.instance.firstContributorName {
                 cell.nameLabel.textColor = Utils.UIColorFromColorHex(hex: "0xffdecb52")
@@ -112,42 +108,42 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
                 cell.nameLabel.textColor = UIColor.white
             }
             
-            cell.levelLabel.text = " (" + String(level) + ")"
+            //cell.levelLabel.text = " (" + String(level) + ")"
             
-            let days = Calendar.current.ordinality(of: .day, in: .year, for: now)! - Calendar.current.ordinality(of: .day, in: .year, for: date)!
-            let sameYaer = Calendar.current.component(.year, from: date) == Calendar.current.component(.year, from: now)
-            
-            if days == 0 && sameYaer {
-                dateFormatter.dateFormat = "hh:mm a"
-                cell.dateLabel.text = dateFormatter.string(from: date).lowercased()
-            }
-            else if days == 1 && sameYaer {
-                cell.dateLabel.text = "Yesterday"
-            }
-            else if days > 1 && days < 7 {
-                dateFormatter.dateFormat = "EEEE"
-                cell.dateLabel.text = dateFormatter.string(from: date)
-            }
-            else if days < 14 {
-                cell.dateLabel.text = "Week ago"
-            }
-            else if days < 21 {
-                cell.dateLabel.text = "Two weeks ago"
-            }
-            else if days < 28 {
-                cell.dateLabel.text = "Three weeks ago"
-            }
-            else if days <= 31 {
-                cell.dateLabel.text = "Four weeks ago"
-            }
-            else if sameYaer {
-                dateFormatter.dateFormat = "MMMM"
-                cell.dateLabel.text = dateFormatter.string(from: date)
-            }
-            else {
-                dateFormatter.dateFormat = "MM-dd-yy"
-                cell.dateLabel.text = dateFormatter.string(from: date)
-            }
+//            let days = Calendar.current.ordinality(of: .day, in: .year, for: now)! - Calendar.current.ordinality(of: .day, in: .year, for: date)!
+//            let sameYaer = Calendar.current.component(.year, from: date) == Calendar.current.component(.year, from: now)
+//            
+//            if days == 0 && sameYaer {
+//                dateFormatter.dateFormat = "hh:mm a"
+//                cell.dateLabel.text = dateFormatter.string(from: date).lowercased()
+//            }
+//            else if days == 1 && sameYaer {
+//                cell.dateLabel.text = "Yesterday"
+//            }
+//            else if days > 1 && days < 7 {
+//                dateFormatter.dateFormat = "EEEE"
+//                cell.dateLabel.text = dateFormatter.string(from: date)
+//            }
+//            else if days < 14 {
+//                cell.dateLabel.text = "Week ago"
+//            }
+//            else if days < 21 {
+//                cell.dateLabel.text = "Two weeks ago"
+//            }
+//            else if days < 28 {
+//                cell.dateLabel.text = "Three weeks ago"
+//            }
+//            else if days <= 31 {
+//                cell.dateLabel.text = "Four weeks ago"
+//            }
+//            else if sameYaer {
+//                dateFormatter.dateFormat = "MMMM"
+//                cell.dateLabel.text = dateFormatter.string(from: date)
+//            }
+//            else {
+//                dateFormatter.dateFormat = "MM-dd-yy"
+//                cell.dateLabel.text = dateFormatter.string(from: date)
+//            }
         }
         
         if server.isAdmin {
@@ -160,7 +156,7 @@ class PixelHistoryViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 400, height: 60)
+        return CGSize(width: 240, height: 45)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -48,7 +48,7 @@ class SBIndicator: UIView {
 //        ctx.drawPath(using: .fill)
         
         ctx.setStrokeColor(UIColor(argb: Utils.int32FromColorHex(hex: "0xccffffff")).cgColor)
-        ctx.setLineWidth(5)
+        ctx.setLineWidth(2)
         
         ctx.addEllipse(in: CGRect(x: 2.5, y: 2.5, width: frame.width - 5, height: frame.height - 5))
         ctx.drawPath(using: .stroke)

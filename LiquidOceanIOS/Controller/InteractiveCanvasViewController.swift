@@ -203,7 +203,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var bannerWidth: NSLayoutConstraint!
     
     @IBOutlet weak var socketStatusImage: UIImageView!
-    @IBOutlet weak var latencyText: UILabel!
     
     @IBOutlet weak var latencyContainer: UIView!
     
@@ -280,7 +279,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         SessionSettings.instance.sceneDelegateDelegate = self
         
         realmId = 1
-        self.updateLatencyText()
         
         surfaceView.interactiveCanvas.server = server
         surfaceView.interactiveCanvas.realmId = realmId
@@ -321,15 +319,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         )
         
         addSwiftUIViewToContainer(swiftUIView: summaryClientIndicatorsView, containerView: self.summaryClientIndicatorsContainer)
-        
-        let clientListView = ClientListView(interactiveCanvas: self.surfaceView.interactiveCanvas)
-        addSwiftUIViewToContainer(swiftUIView: clientListView, containerView: self.clientListContainer)
-        
-        let canvasMenuView = CanvasMenuView(delegate: self)
-        addSwiftUIViewToContainer(swiftUIView: canvasMenuView, containerView: self.canvasMenuContainer)
-        
-        let latencyTGR = UITapGestureRecognizer(target: self, action: #selector(didTapLatencyContainer))
-        latencyContainer.addGestureRecognizer(latencyTGR)
         
         // surfaceView.setInitalScale()
         
@@ -404,8 +393,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //                self.exportAction.layer.borderWidth = 0
 //            }
         }
-        
-        self.updateLatencyTextColors()
+
         
         // paint panel
         self.paintPanel.isHidden = true
@@ -492,7 +480,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         //summaryView.interactiveCanvas = surfaceView.interactiveCanvas
         deviceViewportSummaryView.interactiveCanvas = surfaceView.interactiveCanvas
         
-        summaryView.layer.borderColor = UIColor.white.cgColor
+        summaryView.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.5)
         summaryView.layer.borderWidth = 1
         
         // paint selection accept
@@ -582,6 +570,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         tgr = UITapGestureRecognizer(target: self, action: #selector(didTapMenuContainer))
         self.canvasMenuContainer.addGestureRecognizer(tgr)
         
+        tgr = UITapGestureRecognizer(target: self, action: #selector(didTapClientListContainer))
+        self.clientListContainer.addGestureRecognizer(tgr)
+        
         // paint event time toggle
         tgr = UITapGestureRecognizer(target: self, action: #selector(didTapPaintQuantityBar))
         
@@ -625,6 +616,12 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     override func viewDidLayoutSubviews() {
         if initial {
             layoutSubviews()
+            
+            let canvasMenuView = CanvasMenuView(interactiveCanvas: surfaceView.interactiveCanvas, delegate: self)
+            addSwiftUIViewToContainer(swiftUIView: canvasMenuView, containerView: self.canvasMenuContainer)
+            
+            let clientListView = ClientListView(interactiveCanvas: self.surfaceView.interactiveCanvas)
+            addSwiftUIViewToContainer(swiftUIView: clientListView, containerView: self.clientListContainer)
             
             initial = false
         }
@@ -952,18 +949,16 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.togglePalettesView(show: true)
     }
     
+    @objc func didTapClientListContainer() {
+        self.clientListContainer.isHidden = true
+    }
+    
     @objc func didTapMenuContainer() {
         closeMenu()
     }
     
     @objc func didTapPaintPanel() {
         self.togglePalettesView(show: false)
-    }
-    
-    @objc func didTapLatencyContainer() {
-        if InteractiveCanvasSocket.instance.isConnected {
-            self.clientListContainer.isHidden = !self.clientListContainer.isHidden
-        }
     }
     
 //    func startServerStatusChecks() {
@@ -1467,8 +1462,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             x = self.view.frame.size.width - self.pixelHistoryView.frame.size.width - 20
         }
         
-        if y < 20 {
-            y = 20
+        if y < 60 {
+            y = 60
         }
         else if y + self.pixelHistoryView.frame.size.height > self.view.frame.size.height - 20 {
             y = self.view.frame.size.height - self.pixelHistoryView.frame.size.height - 20
@@ -1779,20 +1774,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.present(alertVC, animated: true, completion: nil)
     }
     
-    func updateLatencyTextColors() {
-        let bgIndex = SessionSettings.instance.backgroundColorIndex
-        let isLight = bgIndex != 1 && bgIndex != 3
-        
-        if (isLight) {
-            self.latencyText.textColor = UIColor.white
-            self.latencyText.shadowColor = UIColor.black
-        }
-        else {
-            self.latencyText.textColor = UIColor.black
-            self.latencyText.shadowColor = UIColor.white
-        }
-    }
-    
     // scale delegate
     func notifyInteractiveCanvasPan() {
         deviceViewportSummaryView.setNeedsDisplay()
@@ -2028,13 +2009,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.surfaceView.interactiveCanvas.startLatencyTask()
-        self.latencyText.isHidden = false
         updateSocketStatus(connected: true)
     }
     
     func notifySocketDisconnect() {
         self.surfaceView.interactiveCanvas.cancelLatencyTask()
-        self.latencyText.isHidden = true
         updateSocketStatus(connected: false)
     }
     
@@ -2043,38 +2022,24 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func updateSocketStatus(connected: Bool) {
-        if connected {
-            self.socketStatusImage.image = UIImage(named: "green_circle.png")
-        }
-        else {
-            self.socketStatusImage.image = UIImage(named: "red_circle.png")
+//        if connected {
+//            self.socketStatusImage.image = UIImage(named: "green_circle.png")
+//        }
+//        else {
+//            self.socketStatusImage.image = UIImage(named: "red_circle.png")
+//        }
+        surfaceView.interactiveCanvas.isConnected = connected
+        if !connected {
+            surfaceView.interactiveCanvas.latencyText = ""
         }
     }
     
-    private var latency = -2
-    private var connectionCount = 0
-    
     func notifyLatency(latency: Int) {
-        self.latency = latency
-        updateLatencyText()
+        
     }
     
     func notifyConnectionCount(count: Int) {
-        self.connectionCount = count
-        updateLatencyText()
-    }
-    
-    func updateLatencyText() {
-        var text = ""
-        if connectionCount > 1 {
-            text += "(\(connectionCount))"
-        }
         
-        if latency > -1 {
-            text += " \(latency) ms"
-        }
-        
-        self.latencyText.text = text
     }
     
     // scene delegate delegate
@@ -2216,7 +2181,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         SessionSettings.instance.darkIcons = (SessionSettings.instance.backgroundColorIndex == 1 || SessionSettings.instance.backgroundColorIndex == 3)
         
         self.updateIconColors()
-        self.updateLatencyTextColors()
         
         self.paletteAddColorAction.setNeedsDisplay()
         self.paletteRemoveColorAction.setNeedsDisplay()
