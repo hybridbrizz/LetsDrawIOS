@@ -12,8 +12,8 @@ import CoreGraphics
 
 class RecentColorsView: UIView {
     
-    private let rows = 2
-    private let cols = 8
+    private var rows = 2
+    private var cols = 8
     
     
     var _delegate: RecentColorsDelegate? = nil
@@ -26,10 +26,17 @@ class RecentColorsView: UIView {
         }
     }
     
+    var isTablet = false
+    
     var _recentColors = [Int32]()
     var recentColors: [Int32] {
         set {
             _recentColors = newValue
+            
+            if isTablet {
+                rows = 1
+                cols = 16
+            }
             
             // Thanks Claude
             let transition = CATransition()

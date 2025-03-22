@@ -25,6 +25,7 @@ struct CanvasMenuItemView: View {
                 .background(.white)
             ZStack(alignment: .center) {
                 Image(icon)
+                    .foregroundStyle(.white)
                     .frame(width: 24, height: 24)
             }
             .frame(width: 100, height: 100)

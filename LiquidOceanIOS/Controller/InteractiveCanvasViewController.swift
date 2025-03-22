@@ -74,6 +74,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     @IBOutlet weak var recentColorsContainerWidth: NSLayoutConstraint!
     @IBOutlet weak var recentColorsContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var recentColorsContainerAspectRatio: NSLayoutConstraint!
     
     @IBOutlet weak var exportContainer: UIView!
     
@@ -1500,8 +1501,31 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func setupColorPalette(colors: [Int32]) {
+        let isTablet = view.frame.size.height > 600
         self.recentColorsViewController.recentColorsView.delegate = self
+        self.recentColorsViewController.recentColorsView.isTablet = isTablet
         self.recentColorsViewController.recentColorsView.recentColors = colors.reversed()
+        
+        if isTablet {
+            // By Claude
+            // Remove the existing constraint
+            self.recentColorsContainerAspectRatio.isActive = false
+
+            // Create a new constraint with the desired aspect ratio
+            let newAspectRatio = NSLayoutConstraint(
+                item: recentColorsContainer,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: recentColorsContainer,
+                attribute: .height,
+                multiplier: 16, // or just 8.0 for 16:2
+                constant: 0
+            )
+
+            // Add and activate the new constraint
+            newAspectRatio.isActive = true
+            self.recentColorsContainerAspectRatio = newAspectRatio
+        }
     }
     
     // recent colors delegate

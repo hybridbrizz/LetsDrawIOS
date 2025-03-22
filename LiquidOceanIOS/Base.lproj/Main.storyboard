@@ -2943,6 +2943,7 @@
                         <outlet property="recentColorsButtonLeading" destination="LbT-aO-inW" id="nah-r4-AS8"/>
                         <outlet property="recentColorsButtonTrailing" destination="GnW-Xy-fqt" id="pjP-Vs-IAS"/>
                         <outlet property="recentColorsContainer" destination="1T9-L7-JKj" id="XI8-Dv-ZSM"/>
+                        <outlet property="recentColorsContainerAspectRatio" destination="MaV-pP-PyW" id="wvY-Rl-Ssj"/>
                         <outlet property="recentColorsImage" destination="2ag-ni-Ii1" id="wLZ-ok-bad"/>
                         <outlet property="selectedObjectNoAction" destination="sRO-h5-UP1" id="RZC-v8-OyU"/>
                         <outlet property="selectedObjectNoButton" destination="Rgv-lh-rti" id="qtb-ei-WkT"/>
@@ -4605,7 +4606,7 @@ If any person on any canvas uses pixels to give out any personal information abo
             <objects>
                 <viewController id="guW-4W-tmi" customClass="HelpMessagesViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="38p-Im-DIP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YnZ-s5-aA6">
