@@ -1501,7 +1501,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func setupColorPalette(colors: [Int32]) {
-        let isTablet = view.frame.size.height > 600
+        let isTablet = UIDevice.current.userInterfaceIdiom == .pad
         self.recentColorsViewController.recentColorsView.delegate = self
         self.recentColorsViewController.recentColorsView.isTablet = isTablet
         self.recentColorsViewController.recentColorsView.recentColors = colors.reversed()
