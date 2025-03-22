@@ -21,7 +21,7 @@ struct CanvasMenuView: View {
         ItemInfo(title: "Leave", icon: .leave),
         ItemInfo(title: "Grid Lines", icon: .grid),
         ItemInfo(title: "Background", icon: .background),
-        ItemInfo(title: "Minimap", icon: .zoomOut)
+        ItemInfo(title: "Minimap", icon: .map)
     ]
     
     let columns = [GridItem(.fixed(100)), GridItem(.fixed(100)), GridItem(.fixed(100))]

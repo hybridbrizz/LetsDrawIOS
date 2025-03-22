@@ -188,6 +188,8 @@ class SessionSettings: NSObject {
     var publicServerUniqueIds = [String: String]()
     var publicServerLastVisitedTimes = [String: Double]()
     
+    var showHelpMessages = true
+    
     var onceResetColorSettings = true
     
     func save() {
@@ -234,6 +236,7 @@ class SessionSettings: NSObject {
         userDefaults().set(canvasOpen, forKey: "canvas_open")
         userDefaults().set(colorPaletteSize, forKey: "palette_size")
         userDefaults().set(onceResetColorSettings, forKey: "once_reset_color_settings")
+        userDefaults().set(showHelpMessages, forKey: "show_help_messages")
         
         let publicServerUniqueIdsStr = try! JSONSerialization.data(withJSONObject: publicServerUniqueIds, options: [])
         userDefaults().set(String(data: publicServerUniqueIdsStr, encoding: .utf8)!, forKey: "public_server_unique_ids")
@@ -328,6 +331,8 @@ class SessionSettings: NSObject {
         selectedPaletteIndex = userDefaultsInt(forKey: "selected_palette_index", defaultVal: 0)
         
         onceResetColorSettings = userDefaultsBool(forKey: "once_reset_color_settings", defaultVal: true)
+        
+        showHelpMessages = userDefaultsBool(forKey: "show_help_messages", defaultVal: true)
         
         /*let palette = Palette(name: "Palette")
         palette.addColor(color: UIColor(hexString: "EACB6E").argb())
@@ -743,5 +748,16 @@ class SessionSettings: NSObject {
         else {
             return String(lastVisitedServer?.uuid.prefix(4) ?? UUID().uuidString.prefix(4))
         }
+    }
+    
+    func getStartingHelpMessages() -> [String] {
+        var messages = [String]()
+        messages.append("Double tap canvas for menu")
+        messages.append("Long press pixel for edit history")
+        messages.append("Tap color area for color selection")
+        messages.append("Tap brush to edit canvas")
+        messages.append("Number shows remaining edits")
+        messages.append("Edits accrue for everyone")
+        return messages
     }
 }

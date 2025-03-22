@@ -29,6 +29,10 @@
 		0712053625DEDF1100AE0F52 /* ActionButtonFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053525DEDF1100AE0F52 /* ActionButtonFrame.swift */; };
 		0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053725DF2D5100AE0F52 /* RecentColorsViewController.swift */; };
 		0712053A25DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053925DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift */; };
+		071ACA5D2D8F131200490385 /* HelpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA5C2D8F131200490385 /* HelpListView.swift */; };
+		071ACA5F2D8F13A000490385 /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA5E2D8F13A000490385 /* HelpViewModel.swift */; };
+		071ACA612D8F21F000490385 /* HelpMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA602D8F21F000490385 /* HelpMessagesViewController.swift */; };
+		071ACA632D8F231300490385 /* HelpMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA622D8F231300490385 /* HelpMessageViewCell.swift */; };
 		07270EE0272B92B300DB35CE /* PalettesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07270EDF272B92B300DB35CE /* PalettesViewController.swift */; };
 		07270EE2272C214300DB35CE /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07270EE1272C214300DB35CE /* Palette.swift */; };
 		07270EE4272C333A00DB35CE /* PaletteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07270EE3272C333A00DB35CE /* PaletteCollectionViewCell.swift */; };
@@ -193,6 +197,10 @@
 		0712053525DEDF1100AE0F52 /* ActionButtonFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonFrame.swift; sourceTree = "<group>"; };
 		0712053725DF2D5100AE0F52 /* RecentColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorsViewController.swift; sourceTree = "<group>"; };
 		0712053925DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		071ACA5C2D8F131200490385 /* HelpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpListView.swift; sourceTree = "<group>"; };
+		071ACA5E2D8F13A000490385 /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
+		071ACA602D8F21F000490385 /* HelpMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMessagesViewController.swift; sourceTree = "<group>"; };
+		071ACA622D8F231300490385 /* HelpMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMessageViewCell.swift; sourceTree = "<group>"; };
 		07270EDF272B92B300DB35CE /* PalettesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettesViewController.swift; sourceTree = "<group>"; };
 		07270EE1272C214300DB35CE /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		07270EE3272C333A00DB35CE /* PaletteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -370,6 +378,7 @@
 				070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */,
 				07D6934228BA57A300F2EBE7 /* TermsOfUseViewController.swift */,
 				076E4EA52D7BA7B0004C363E /* ColorPicker2ViewController.swift */,
+				071ACA602D8F21F000490385 /* HelpMessagesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -403,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				078891712D750E5300B4041B /* ServerListViewModel.swift */,
+				071ACA5E2D8F13A000490385 /* HelpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -427,6 +437,7 @@
 				076120E32D73A1450030DAA9 /* ClientListView.swift */,
 				0788916A2D74AF4700B4041B /* CanvasMenuView.swift */,
 				0788916C2D74AF8700B4041B /* CanvasMenuItemView.swift */,
+				071ACA5C2D8F131200490385 /* HelpListView.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -592,6 +603,7 @@
 				07D6934428BA993C00F2EBE7 /* OptionContainerView.swift */,
 				074A76002D7179EB00D487EC /* CombinedGestureView.swift */,
 				07EF25562D8CD25A0083163B /* RecentColorsView.swift */,
+				071ACA622D8F231300490385 /* HelpMessageViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -866,6 +878,7 @@
 				0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */,
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
 				075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */,
+				071ACA5F2D8F13A000490385 /* HelpViewModel.swift in Sources */,
 				07A9B16E25ED2941009A47DF /* HowtoViewController.swift in Sources */,
 				07BBBABA2896E3B3008A6B9E /* QueueSocket.swift in Sources */,
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,
@@ -900,10 +913,12 @@
 				07C9CCE6272ECA2900C9D0A1 /* CanvasFrameViewController.swift in Sources */,
 				07006C4025D6CEF200DF9A64 /* MenuViewController.swift in Sources */,
 				078891722D750E5300B4041B /* ServerListViewModel.swift in Sources */,
+				071ACA612D8F21F000490385 /* HelpMessagesViewController.swift in Sources */,
 				07270EE4272C333A00DB35CE /* PaletteCollectionViewCell.swift in Sources */,
 				07A305F325D5B6F5003A6CEA /* ActionButtonView.swift in Sources */,
 				07006C3C25D607D500DF9A64 /* UIDrawGestureRecognizer.swift in Sources */,
 				0712053A25DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift in Sources */,
+				071ACA5D2D8F131200490385 /* HelpListView.swift in Sources */,
 				0704FB9B2739A511009799E1 /* InsetLabel.swift in Sources */,
 				0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */,
 				076E4EA62D7BA7B0004C363E /* ColorPicker2ViewController.swift in Sources */,
@@ -923,6 +938,7 @@
 				07D6934528BA993D00F2EBE7 /* OptionContainerView.swift in Sources */,
 				07A7C843272AEEC9003AD69C /* UITouchGestureRecognizer.swift in Sources */,
 				07FF5F1125E5BA4F003E19AE /* PanelBackgroundCollectionViewCell.swift in Sources */,
+				071ACA632D8F231300490385 /* HelpMessageViewCell.swift in Sources */,
 				076120E42D73A1450030DAA9 /* ClientListView.swift in Sources */,
 				07BD25C925D43FB500CF812E /* SceneDelegate.swift in Sources */,
 				07B691232D7AB39A00BA4D9C /* SBPalette.swift in Sources */,

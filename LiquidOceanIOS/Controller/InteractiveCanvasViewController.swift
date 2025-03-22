@@ -12,7 +12,7 @@ import Kingfisher
 import SwiftUI
 
 class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
-                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate, ColorPicker2LayoutDelegate {
+                                       InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate, ColorPicker2LayoutDelegate, HelpMessagesDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
     
@@ -20,6 +20,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet var summaryClientIndicatorsContainer: UIView!
     @IBOutlet var clientListContainer: UIView!
     @IBOutlet var canvasMenuContainer: UIView!
+    @IBOutlet var helpMessagesContainer: UIView!
     
     @IBOutlet var paintPanel: UIView!
     
@@ -254,6 +255,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     weak var palettesViewController: PalettesViewController!
     weak var canvasFrameViewController: CanvasFrameViewController!
     weak var menuViewController: MenuViewController!
+    weak var helpMessagesViewController: HelpMessagesViewController!
     
     var landscapeLockTask: Task<(), any Error>? = nil
     
@@ -622,6 +624,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             let clientListView = ClientListView(interactiveCanvas: self.surfaceView.interactiveCanvas)
             addSwiftUIViewToContainer(swiftUIView: clientListView, containerView: self.clientListContainer)
+            
+            helpMessagesContainer.isHidden = !SessionSettings.instance.showHelpMessages
+            self.helpMessagesContainer.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.5)
+            self.helpMessagesContainer.layer.borderWidth = 1
+            self.helpMessagesContainer.layer.cornerRadius = 10
+            
+            helpMessagesViewController.delegate = self
             
             initial = false
         }
@@ -1127,6 +1136,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             segue.destination.isModalInPresentation = true
             
             (segue.destination as! HowtoViewController).fromCanvas = true
+        }
+        else if segue.identifier == "HelpMessagesEmbed" {
+            helpMessagesViewController = segue.destination as? HelpMessagesViewController
         }
     }
     
@@ -2146,7 +2158,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func notifyHelpClicked() {
         self.canvasMenuContainer.isHidden = true
-        self.performSegue(withIdentifier: self.showHowto, sender: self)
+        self.helpMessagesContainer.isHidden = false
     }
     
     func notifyLeaveClicked() {
@@ -2161,6 +2173,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func notifyGridLinesClicked() {
+        self.canvasMenuContainer.isHidden = true
         SessionSettings.instance.showGridLines = !SessionSettings.instance.showGridLines
         
         self.surfaceView.interactiveCanvas.drawCallback?.notifyCanvasRedraw()
@@ -2195,6 +2208,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func notifySummaryClicked() {
+        self.canvasMenuContainer.isHidden = true
         if self.summaryView.isHidden {
             self.toggleSummary(show: true)
         }
@@ -2286,6 +2300,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func closeMenu() {
         self.canvasMenuContainer.isHidden = true
+    }
+    
+    // Help Messages Delegate
+    func requestCloseHelpMessages() {
+        SessionSettings.instance.showHelpMessages = false
+        SessionSettings.instance.save()
+        helpMessagesContainer.isHidden = true
     }
 }
 
