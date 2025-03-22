@@ -308,21 +308,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.selectedObjectView = self
         self.surfaceView.selectedObjectMoveView = self
         
-        // canvas client indiactors
-        let canvasClientIndicatorsView = CanvasClientIndicatorsView(
-            surfaceView: self.surfaceView,
-            interactiveCanvas: self.surfaceView.interactiveCanvas
-        )
-        
-        addSwiftUIViewToContainer(swiftUIView: canvasClientIndicatorsView, containerView: self.canvasClientIndicatorsContainer)
-        
-        let summaryClientIndicatorsView = SummaryClientIndicatorsView(
-            surfaceView: self.surfaceView,
-            interactiveCanvas: self.surfaceView.interactiveCanvas
-        )
-        
-        addSwiftUIViewToContainer(swiftUIView: summaryClientIndicatorsView, containerView: self.summaryClientIndicatorsContainer)
-        
         // surfaceView.setInitalScale()
         
         setupBanner()
@@ -619,6 +604,21 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     override func viewDidLayoutSubviews() {
         if initial {
             layoutSubviews()
+            
+            // canvas client indiactors
+            let canvasClientIndicatorsView = CanvasClientIndicatorsView(
+                surfaceView: self.surfaceView,
+                interactiveCanvas: self.surfaceView.interactiveCanvas
+            )
+            
+            addSwiftUIViewToContainer(swiftUIView: canvasClientIndicatorsView, containerView: self.canvasClientIndicatorsContainer)
+            
+            let summaryClientIndicatorsView = SummaryClientIndicatorsView(
+                surfaceView: self.surfaceView,
+                interactiveCanvas: self.surfaceView.interactiveCanvas
+            )
+            
+            addSwiftUIViewToContainer(swiftUIView: summaryClientIndicatorsView, containerView: self.summaryClientIndicatorsContainer)
             
             let canvasMenuView = CanvasMenuView(interactiveCanvas: surfaceView.interactiveCanvas, delegate: self)
             addSwiftUIViewToContainer(swiftUIView: canvasMenuView, containerView: self.canvasMenuContainer)
