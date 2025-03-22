@@ -199,23 +199,23 @@ class HowtoViewController: UIViewController {
     }
     
     func setupColorPalette(colors: [Int32]) {
-        let itemWidth = self.recentColorsViewController.itemWidth
-        let itemHeight = self.recentColorsViewController.itemWidth
-        let margin = self.recentColorsViewController.itemMargin
-        
-        self.recentColorsContainerWidth.constant = itemWidth * 4 + margin * 3
-        
-        let numRows = (colors.count - 1) / 4 + 1
-        self.recentColorsContainerHeight.constant = itemHeight * CGFloat(numRows) + margin * CGFloat(numRows - 1)
-        
-        self.recentColorsViewController.data = colors.reversed()
-        self.recentColorsViewController.collectionView.reloadData()
+//        let itemWidth = self.recentColorsViewController.itemWidth
+//        let itemHeight = self.recentColorsViewController.itemWidth
+//        let margin = self.recentColorsViewController.itemMargin
+//        
+//        self.recentColorsContainerWidth.constant = itemWidth * 4 + margin * 3
+//        
+//        let numRows = (colors.count - 1) / 4 + 1
+//        self.recentColorsContainerHeight.constant = itemHeight * CGFloat(numRows) + margin * CGFloat(numRows - 1)
+//        
+//        self.recentColorsViewController.data = colors.reversed()
+//        self.recentColorsViewController.collectionView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "RecentColorsEmbed" {
-            self.recentColorsViewController = segue.destination as? RecentColorsViewController
-            self.recentColorsViewController.isStatic = true
-        }
+//        if segue.identifier == "RecentColorsEmbed" {
+//            self.recentColorsViewController = segue.destination as? RecentColorsViewController
+//            self.recentColorsViewController.isStatic = true
+//        }
     }
 }

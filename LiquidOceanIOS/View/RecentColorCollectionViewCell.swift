@@ -9,5 +9,5 @@
 import UIKit
 
 class RecentColorCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var actionView: ActionButtonView!
+    
 }

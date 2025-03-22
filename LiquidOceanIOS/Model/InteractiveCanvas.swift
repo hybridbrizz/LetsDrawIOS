@@ -323,27 +323,22 @@ class InteractiveCanvas: NSObject, ObservableObject {
                 }
             }
             else {
-                let gridLineColor = self.getGridLineColor()
-                for i in 0...SessionSettings.instance.numRecentColors - 1 {
-                    // default to size - 1 of the grid line color
-                    if i < SessionSettings.instance.numRecentColors - 1 {
-                        if gridLineColor == ActionButtonView.blackColor {
-                            self.recentColors.append(ActionButtonView.blackColor)
-                        }
-                        else {
-                            self.recentColors.append(ActionButtonView.whiteColor)
-                        }
-                    }
-                    // and 1 of the opposite color
-                    else {
-                        if gridLineColor == ActionButtonView.blackColor {
-                            self.recentColors.append(ActionButtonView.whiteColor)
-                        }
-                        else {
-                            self.recentColors.append(ActionButtonView.blackColor)
-                        }
-                    }
-                }
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
+                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
             }
         }
         catch {
@@ -662,6 +657,9 @@ class InteractiveCanvas: NSObject, ObservableObject {
                         
                         cancelBatchPixelsTask()
                         startBatchPixelsTask()
+                        
+                        updateRecentColors()
+                        self.recentColorsDelegate?.notifyNewRecentColors(recentColors: self.recentColors)
                     }
                 }
                 else {
@@ -740,9 +738,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
             }
             
         }
-        
-        updateRecentColors()
-        self.recentColorsDelegate?.notifyNewRecentColors(recentColors: self.recentColors)
         
         clearRestorePoints()
     }

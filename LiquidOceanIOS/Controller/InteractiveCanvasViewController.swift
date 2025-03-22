@@ -408,12 +408,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.paintPanel.isHidden = true
         
         // recent colors
-        self.recentColorsButton.setOnClickListener {
-            self.toggleRecentColors(open: self.recentColorsContainer.isHidden)
-        }
+//        self.recentColorsButton.setOnClickListener {
+//            self.toggleRecentColors(open: self.recentColorsContainer.isHidden)
+//        }
         
-        paintButtonBackgroundView.layer.cornerRadius = 50
-        paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99000000"))
+        toggleRecentColors(open: true)
         
         // export
         self.exportButton.setOnClickListener {
@@ -764,8 +763,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            recentColorsActionTrailing.isActive = true
             
             // recent colors container
-            recentColorsContainerLeading.isActive = false
-            recentColorsContainerTrailing.isActive = true
+//            recentColorsContainerLeading.isActive = false
+//            recentColorsContainerTrailing.isActive = true
             
             // summary view
             summaryViewLeading.isActive = false
@@ -789,6 +788,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             // paint qty bar
             paintQuantityBar.transform = CGAffineTransform.init(rotationAngle: CGFloat(180 * Double.pi / 180.0))
+            
+            syncPaletteAndColor()
         }
         else {
             // left-handed
@@ -1172,7 +1173,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         else if segue.identifier == "RecentColorsEmbed" {
             self.recentColorsViewController = segue.destination as? RecentColorsViewController
-            self.recentColorsViewController.delegate = self
         }
         else if segue.identifier == "ExportEmbed" {
             self.exportViewController = segue.destination as? ExportViewController
@@ -1293,6 +1293,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.startPaintSelection()
         self.actionButtonContainer.isHidden = true
         self.paintPanelButton.isHidden = true
+        self.bottomTextDisplay.isHidden = true
+        self.recentColorsContainer.isHidden = true
     }
     
     func closeColorPicker() {
@@ -1309,6 +1311,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.actionButtonContainer.isHidden = false
         self.paintPanelButton.isHidden = false
+        self.bottomTextDisplay.isHidden = false
+        self.recentColorsContainer.isHidden = false
         //self.paintColorAccept.isHidden = true
         //self.paintColorCancel.isHidden = true
         
@@ -1345,7 +1349,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             SessionSettings.instance.paintPanelOpen = true
             
-            self.latencyContainer.isHidden = true
+            //self.latencyContainer.isHidden = true
             
 //            self.changeBackgroundButton.isHidden = true
         }
@@ -1363,7 +1367,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.menuButton.isHidden = false
             
-            self.toggleRecentColors(open: false)
+            //self.toggleRecentColors(open: false)
             
             self.paintPanel.isHidden = true
             if SessionSettings.instance.canvasLockBorder {
@@ -1374,7 +1378,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             SessionSettings.instance.paintPanelOpen = false
             
-            self.latencyContainer.isHidden = false
+            //self.latencyContainer.isHidden = false
             
 //            self.changeBackgroundButton.isHidden = false
         }
@@ -1582,19 +1586,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func setupColorPalette(colors: [Int32]) {
-        let itemWidth = CGFloat(10 * SessionSettings.instance.colorPaletteSize)
-        let itemHeight = itemWidth
-        
-        self.recentColorsViewController.itemWidth = itemWidth
-        let margin = self.recentColorsViewController.itemMargin
-        
-        self.recentColorsContainerWidth.constant = itemWidth * 4 + margin * 3
-        
-        let numRows = (colors.count - 1) / 4 + 1
-        self.recentColorsContainerHeight.constant = itemHeight * CGFloat(numRows) + margin * CGFloat(numRows - 1)
-        
-        self.recentColorsViewController.data = colors.reversed()
-        self.recentColorsViewController.collectionView.reloadData()
+        self.recentColorsViewController.recentColorsView.delegate = self
+        self.recentColorsViewController.recentColorsView.recentColors = colors.reversed()
     }
     
     // recent colors delegate
@@ -1602,7 +1595,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.notifyPaintColorUpdate()
         self.colorPickerViewController.selectedColor = UIColor(argb: color)
         
-        self.toggleRecentColors(open: false)
+        //self.toggleRecentColors(open: false)
     }
     
     // export view controller delegate
@@ -1697,7 +1690,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // paint action delegate
     func notifyPaintActionStarted() {
-        toggleRecentColors(open: false)
+        //toggleRecentColors(open: false)
         
         if SessionSettings.instance.dropsAmt == 0 {
             paintQuantityCircle.flashError()
@@ -1862,6 +1855,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             
             self.setupColorPalette(colors: SessionSettings.instance.palette.colors)
         }
+        
+        self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
     }
     
     func showPaletteColorRemoveAlert(color: Int32) {
@@ -2295,6 +2290,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         let color = selectedColor.argb()
         
         SessionSettings.instance.paintColor = color
+        self.adjustColorIndicatorViews(color: color)
+        
         self.paintColorIndicator.setNeedsDisplay()
         
         self.updatePaintColorAcceptColorMode(color: color)
@@ -2302,6 +2299,20 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
         
         self.syncPaletteAndColor()
+    }
+    
+    func adjustColorIndicatorViews(color: Int32) {
+        if Utils.isColorBright(UIColor(argb: color)) {
+            paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff000000")
+            bottomTextDisplay.textColor = UIColor.black
+            paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55000000"))
+        }
+        else {
+            paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
+            bottomTextDisplay.textColor = UIColor.white
+            paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55ffffff"))
+        }
+        paintButtonBackgroundView.layer.cornerRadius = 50
     }
     
     // Color Picker 2 Layout Delegate

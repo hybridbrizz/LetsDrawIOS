@@ -87,4 +87,19 @@ class Utils: NSObject {
         
         return newImage!
     }
+    
+    static func isColorBright(_ color: UIColor) -> Bool {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        // Formula for calculating relative luminance/brightness
+        // 0.299 * R + 0.587 * G + 0.114 * B
+        let brightness = (0.299 * red + 0.587 * green + 0.114 * blue)
+        
+        return brightness > 0.5
+    }
 }

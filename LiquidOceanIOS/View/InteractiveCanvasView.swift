@@ -754,6 +754,8 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             return
         }
         
+        context.setShouldAntialias(false)
+        
         drawInteractiveCanvas(ctx: context)
         redrawCount += 1
     }

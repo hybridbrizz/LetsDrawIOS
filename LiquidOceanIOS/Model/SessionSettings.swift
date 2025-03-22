@@ -58,7 +58,7 @@ class SessionSettings: NSObject {
     
     var paintQtyDelegates = [PaintQtyDelegate]()
     
-    var numRecentColors = 8
+    var numRecentColors = 16
     
     var xp = 0
     
@@ -198,7 +198,7 @@ class SessionSettings: NSObject {
         userDefaults().set(paintColor, forKey: "paint_color")
         userDefaults().set(darkIcons, forKey: "dark_icons")
         userDefaults().set(backgroundColorIndex, forKey: "background_color")
-        userDefaults().set(numRecentColors, forKey: "num_recent_colors")
+        //userDefaults().set(numRecentColors, forKey: "num_recent_colors")
         userDefaults().set(xp, forKey: "xp")
         userDefaults().set(displayName, forKey: "display_name")
         userDefaults().set(artShowcaseJsonString(), forKey: "art_showcase_json")
@@ -257,13 +257,13 @@ class SessionSettings: NSObject {
     func load() {
         sentUniqueId = userDefaultsBool(forKey: "sent_unique_id", defaultVal: false)
         
-        paintColor = userDefaultsInt32(forKey: "paint_color", defaultVal: Utils.int32FromColorHex(hex: "0xFFFFFFFF"))
+        paintColor = userDefaultsInt32(forKey: "paint_color", defaultVal: Utils.int32FromColorHex(hex: "0xff023020"))
         
         darkIcons = userDefaultsBool(forKey: "dark_icons", defaultVal: false)
         
         backgroundColorIndex = userDefaultsInt(forKey: "background_color", defaultVal: 0)
         
-        numRecentColors = userDefaultsInt(forKey: "num_recent_colors", defaultVal: 16)
+        //numRecentColors = userDefaultsInt(forKey: "num_recent_colors", defaultVal: 16)
         
         xp = userDefaultsInt(forKey: "xp", defaultVal: 0)
         

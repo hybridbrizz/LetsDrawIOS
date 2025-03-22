@@ -124,6 +124,7 @@
 		07DA42F02D78C34100275BC2 /* PrivateServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */; };
 		07DA42F22D793E4E00275BC2 /* AddPrivateServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */; };
 		07E5FAAB28BAA3C700C4717D /* Solid_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E5FAAA28BAA3C700C4717D /* Solid_black.png */; };
+		07EF25572D8CD25A0083163B /* RecentColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF25562D8CD25A0083163B /* RecentColorsView.swift */; };
 		07F573C8289EA65D00D4C9EF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F573C7289EA65D00D4C9EF /* Server.swift */; };
 		07FF5EFF25DF5833003E19AE /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF5EFE25DF5833003E19AE /* ArtView.swift */; };
 		07FF5F0125DF616A003E19AE /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF5F0025DF616A003E19AE /* ExportViewController.swift */; };
@@ -292,6 +293,7 @@
 		07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerListView.swift; sourceTree = "<group>"; };
 		07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrivateServerView.swift; sourceTree = "<group>"; };
 		07E5FAAA28BAA3C700C4717D /* Solid_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Solid_black.png; sourceTree = "<group>"; };
+		07EF25562D8CD25A0083163B /* RecentColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorsView.swift; sourceTree = "<group>"; };
 		07F573C7289EA65D00D4C9EF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		07FF5EFE25DF5833003E19AE /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		07FF5F0025DF616A003E19AE /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				0731602A28A0159B00466BC4 /* ButtonFrame.swift */,
 				07D6934428BA993C00F2EBE7 /* OptionContainerView.swift */,
 				074A76002D7179EB00D487EC /* CombinedGestureView.swift */,
+				07EF25562D8CD25A0083163B /* RecentColorsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -874,6 +877,7 @@
 				07FF5F0925E4354B003E19AE /* StatTracker.swift in Sources */,
 				07BD25D125D43FB500CF812E /* LiquidOceanIOS.xcdatamodeld in Sources */,
 				07D6934328BA57A300F2EBE7 /* TermsOfUseViewController.swift in Sources */,
+				07EF25572D8CD25A0083163B /* RecentColorsView.swift in Sources */,
 				07FF5F0F25E54EE7003E19AE /* OptionsViewController.swift in Sources */,
 				078AF007260119DE00AB4CE4 /* InteractiveCanvasSocket.swift in Sources */,
 				07BD25F525D44F2A00CF812E /* Utils.swift in Sources */,

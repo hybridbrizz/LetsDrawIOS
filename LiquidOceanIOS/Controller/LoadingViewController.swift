@@ -443,10 +443,10 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     
     func downloadFinished() {
         if realmId == 1 {
-            statusLabel.text = String(format: "Loading %d / 8", getNumLoaded())
+            statusLabel.text = String(format: "%d / 8", getNumLoaded())
         }
         else {
-            statusLabel.text = String(format: "Loading %d / 4", getNumLoaded())
+            statusLabel.text = String(format: "%d / 4", getNumLoaded())
         }
         
         if loadingDone() {
