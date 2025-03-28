@@ -387,18 +387,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.paintPanel.isHidden = true
         
         
-        self.paintPanelButton.setOnClickListener {
-            if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
-                self.surfaceView.startPainting()
-                
-                self.paintButtonBackgroundView.isHidden = false
-            }
-            else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
-                self.surfaceView.endPainting(accept: true)
-                    
-                self.paintButtonBackgroundView.isHidden = true
-            }
-        }
+        self.paintButtonBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPaintButtonBackground)))
+            
         
         self.paintPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPaintPanel)))
         
@@ -980,6 +970,19 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            }
 //        })
 //    }
+    
+    @objc func didTapPaintButtonBackground() {
+        if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
+            self.surfaceView.startPainting()
+            
+            self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
+        }
+        else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
+            self.surfaceView.endPainting(accept: true)
+                
+            self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
+        }
+    }
     
     func showDisconnectedMessage(type: Int) {
         // create the alert
@@ -2254,12 +2257,22 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         if Utils.isColorBright(UIColor(argb: color)) {
             paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff000000")
             bottomTextDisplay.textColor = UIColor.black
-            paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55000000"))
+            if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
+                paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55000000"))
+            }
+            else {
+                paintButtonBackgroundView.backgroundColor = UIColor.clear
+            }
         }
         else {
             paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
             bottomTextDisplay.textColor = UIColor.white
-            paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55ffffff"))
+            if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
+                paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55ffffff"))
+            }
+            else {
+                paintButtonBackgroundView.backgroundColor = UIColor.clear
+            }
         }
         paintButtonBackgroundView.layer.cornerRadius = 50
     }
