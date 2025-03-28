@@ -64,8 +64,9 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
 
     enum Mode {
         case exploring
+        case paintSelectionExploring
         case painting
-        case paintSelection
+        case paintSelectionPainting
         case exporting
         case objectMoveSelection
         case objectMoving
@@ -85,6 +86,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
     var panGestureRecognizer: UIPanGestureRecognizer!
     var tapGestureRecognizer: UITapGestureRecognizer!
+    var paintSelectTapGestureRecognizer: UITapGestureRecognizer!
     var drawGestureRecognizer: UIDrawGestureRecognizer!
     var pinchGestureRecognizer: UIPinchGestureRecognizer!
     
@@ -128,6 +130,9 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(sender:)))
         self.tapGestureRecognizer.numberOfTapsRequired = 2
+        addTap()
+        
+        self.paintSelectTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapPaintSelection(sender:)))
         addTap()
         
         self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
@@ -215,7 +220,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                     paintDelegate?.notifyPaintingEnded(accept: false)
                 }
             }
-            else if mode == .paintSelection {
+            else if mode == .paintSelectionExploring || mode == .paintSelectionPainting {
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
                 let x = Int(unitPoint.x)
                 let y = Int(unitPoint.y)
@@ -361,6 +366,12 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         }
     }
     
+    func addPaintSelectionTap() {
+        if !hasGestureRecognizer(gestureRecognizer: self.paintSelectTapGestureRecognizer) {
+            self.addGestureRecognizer(self.paintSelectTapGestureRecognizer)
+        }
+    }
+    
     func addLongPress() {
         if !hasGestureRecognizer(gestureRecognizer: self.longPressGestureRecognizer) {
             self.addGestureRecognizer(self.longPressGestureRecognizer)
@@ -373,6 +384,10 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     
     func removeTap() {
         self.removeGestureRecognizer(self.tapGestureRecognizer)
+    }
+    
+    func removePaintSelectionTap() {
+        self.removeGestureRecognizer(self.paintSelectTapGestureRecognizer)
     }
     
     func removeLongPress() {
@@ -415,7 +430,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             let translateX = lastPanTranslationX - translation.x
             let translateY = lastPanTranslationY - translation.y
             
-            if mode == .exploring {
+            if mode == .exploring || mode == .paintSelectionExploring {
                 interactiveCanvas.pixelHistoryDelegate?.notifyHidePixelHistory()
             }
             else if mode == .painting {
@@ -435,27 +450,30 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     @objc func didTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: self)
         
-        let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
-        
-        if mode == .paintSelection {
-            let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
-            let x = Int(unitPoint.x)
-            let y = Int(unitPoint.y)
-            
-            if x >= 0 && x < interactiveCanvas.cols && y >= 0 && y < interactiveCanvas.rows {
-                var color = interactiveCanvas.arr[y][x]
-                if color == 0 {
-                    color = UIColor.black.argb()
-                }
-                SessionSettings.instance.paintColor = color
-                paintDelegate?.notifyPaintColorUpdate()
-            }
-        }
-        else if interactiveCanvas.world {
+        if interactiveCanvas.world {
             gestureDelegate?.notifyInteractiveCanvasDoubleTap()
         }
         else {
             canvasFrameDelegate?.notifyCloseCanvasFrameView()
+        }
+    }
+    
+    // paint selection tap
+    @objc func didTapPaintSelection(sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self)
+        
+        let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
+        
+        let x = Int(unitPoint.x)
+        let y = Int(unitPoint.y)
+        
+        if x >= 0 && x < interactiveCanvas.cols && y >= 0 && y < interactiveCanvas.rows {
+            var color = interactiveCanvas.arr[y][x]
+            if color == 0 {
+                color = UIColor.black.argb()
+            }
+            SessionSettings.instance.paintColor = color
+            paintDelegate?.notifyPaintColorUpdate()
         }
     }
     
@@ -513,7 +531,12 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             interactiveCanvas.cancelMoveSelectedObject()
         }
         
-        self.mode = .painting
+        if mode == .exploring {
+            mode = .painting
+        }
+        else if mode == .paintSelectionExploring {
+            mode = .paintSelectionPainting
+        }
         
         removePan()
         removeTap()
@@ -537,7 +560,12 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         
         paintDelegate?.notifyPaintingEnded(accept: accept)
         
-        self.mode = .exploring
+        if mode == .painting {
+            mode = .exploring
+        }
+        else if mode == .paintSelectionPainting {
+            mode = .paintSelectionExploring
+        }
         
         removeDraw()
         
@@ -547,15 +575,25 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     }
     
     func startPaintSelection() {
-        lastMode = mode
-        self.mode = .paintSelection
+        if mode == .exploring {
+            mode = .paintSelectionExploring
+            removeTap()
+        }
+        else if mode == .painting {
+            mode = .paintSelectionPainting
+        }
+        addPaintSelectionTap()
     }
     
-    var lastMode: Mode? = nil
     func endPaintSelection() {
-        if let lastMode = lastMode {
-            self.mode = lastMode
+        if mode == .paintSelectionExploring {
+            mode = .exploring
+            addTap()
         }
+        else if mode == .paintSelectionPainting {
+            mode = .painting
+        }
+        removePaintSelectionTap()
     }
     
     func startExporting() {

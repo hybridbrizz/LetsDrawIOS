@@ -388,28 +388,15 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         
         self.paintPanelButton.setOnClickListener {
-            if self.surfaceView.mode == .exploring {
+            if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
                 self.surfaceView.startPainting()
+                
                 self.paintButtonBackgroundView.isHidden = false
-//                self.paintButtonBackgroundView.backgroundColor = UIColor.clear
-//                UIView.animate(withDuration: 150) {
-//                    self.paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99000000"))
-//                }
-                //self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff999999")
             }
-            else {
+            else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
                 self.surfaceView.endPainting(accept: true)
                     
-//                UIView.animate(withDuration: 150) {
-//                    self.paintButtonBackgroundView.alpha = 0
-//                } completion: { done in
-//                    if done {
-//                        self.paintButtonBackgroundView.isHidden = true
-//                    }
-//                }
                 self.paintButtonBackgroundView.isHidden = true
-                
-                //self.paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
             }
         }
         
@@ -1207,8 +1194,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.surfaceView.startPaintSelection()
         self.actionButtonContainer.isHidden = true
-        self.paintPanelButton.isHidden = true
-        self.bottomTextDisplay.isHidden = true
         self.recentColorsContainer.isHidden = true
     }
     
@@ -1225,8 +1210,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.actionButtonContainer.isHidden = false
-        self.paintPanelButton.isHidden = false
-        self.bottomTextDisplay.isHidden = false
         self.recentColorsContainer.isHidden = false
         //self.paintColorAccept.isHidden = true
         //self.paintColorCancel.isHidden = true
