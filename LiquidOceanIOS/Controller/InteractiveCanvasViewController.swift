@@ -1191,20 +1191,19 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     func openColorPicker() {
         self.colorPickerFrame.isHidden = false
         self.colorPickerFrame.alpha = 0
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.2) {
             self.colorPickerFrame.alpha = 1
         }
         
         self.surfaceView.startPaintSelection()
         self.actionButtonContainer.isHidden = true
-        self.recentColorsContainer.isHidden = true
     }
     
     func closeColorPicker() {
         //self.colorPickerFrameWidth.constant = 0
         
 //        self.colorPickerFrame.isHidden = true
-        UIView.animate(withDuration: 250) {
+        UIView.animate(withDuration: 0.2) {
             self.colorPickerFrame.alpha = 1
         } completion: { done in
             if done {
@@ -1213,7 +1212,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.actionButtonContainer.isHidden = false
-        self.recentColorsContainer.isHidden = false
         //self.paintColorAccept.isHidden = true
         //self.paintColorCancel.isHidden = true
         

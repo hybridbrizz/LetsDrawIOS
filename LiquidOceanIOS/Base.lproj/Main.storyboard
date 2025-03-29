@@ -2446,6 +2446,16 @@
                                     <constraint firstItem="dQP-HJ-Oos" firstAttribute="centerX" secondItem="tjQ-fj-IaW" secondAttribute="centerX" id="vza-7U-d90"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1T9-L7-JKj">
+                                <rect key="frame" x="0.0" y="-10" width="896" height="224"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1T9-L7-JKj" secondAttribute="height" multiplier="8:2" id="MaV-pP-PyW"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="4Eu-IR-h8h" kind="embed" identifier="RecentColorsEmbed" id="xNZ-J9-gls"/>
+                                </connections>
+                            </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoZ-vF-uEO">
                                 <rect key="frame" x="0.0" y="-86" width="896" height="300"/>
                                 <subviews>
@@ -2495,16 +2505,6 @@
                                     <constraint firstAttribute="width" constant="58" id="kbw-pp-2tR"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1T9-L7-JKj">
-                                <rect key="frame" x="0.0" y="-10" width="896" height="224"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1T9-L7-JKj" secondAttribute="height" multiplier="8:2" id="MaV-pP-PyW"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="4Eu-IR-h8h" kind="embed" identifier="RecentColorsEmbed" id="xNZ-J9-gls"/>
-                                </connections>
-                            </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0af-Id-wac">
                                 <rect key="frame" x="328" y="68" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
