@@ -26,7 +26,7 @@ class TermsOfUseViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLayoutSubviews() {
         if UIDevice.current.userInterfaceIdiom == .phone {
-            let h = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat.greatestFiniteMagnitude)).height + 100
+            let h = textView.sizeThatFits(CGSize(width: self.view.frame.size.width - 80, height: CGFloat.greatestFiniteMagnitude)).height + 100
 
             termsOfServiceTextHeight.constant = h
         }
