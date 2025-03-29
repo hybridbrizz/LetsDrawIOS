@@ -3675,12 +3675,12 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnS-WF-alV">
                                 <rect key="frame" x="0.0" y="364" width="896" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am at least 13 years old and accept the Terms of Service." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMH-Wu-g2b">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am at least 13 years old and agree to the Terms of Service." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMH-Wu-g2b">
                                         <rect key="frame" x="40" y="3" width="739" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Rsn-ib-QQA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="12"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
