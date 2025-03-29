@@ -304,53 +304,22 @@ class InteractiveCanvas: NSObject, ObservableObject {
         
         recentColors = [Int32]()
         
-        let recentColorsJsonStr = SessionSettings.instance.userDefaultsString(forKey: "recent_colors", defaultVal: "")
-        
-        do {
-            if recentColorsJsonStr != "" {
-                let recentColorsArr = try JSONSerialization.jsonObject(with: recentColorsJsonStr.data(using: .utf8)!, options: []) as! [AnyObject]
-                let sizeDiff = SessionSettings.instance.numRecentColors - recentColorsArr.count
-                
-                if sizeDiff < 0 {
-                    for i in 0...SessionSettings.instance.numRecentColors - 1 {
-                        self.recentColors.append(recentColorsArr[-sizeDiff + i] as! Int32)
-                    }
-                }
-                else {
-                    for i in 0...recentColorsArr.count - 1 {
-                        self.recentColors.append(recentColorsArr[i] as! Int32)
-                    }
-                    
-                    if sizeDiff > 0 {
-                        let gridLineColor = self.getGridLineColor()
-                        for _ in 0...sizeDiff - 1 {
-                            self.recentColors.insert(gridLineColor, at: 0)
-                        }
-                    }
-                }
-            }
-            else {
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
-                self.recentColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
-            }
-        }
-        catch {
-            
-        }
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
+        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
     }
     
     func registerForSocketEvents(socket: SocketIOClient) {
