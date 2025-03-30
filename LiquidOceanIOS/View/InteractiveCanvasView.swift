@@ -203,13 +203,6 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 
                 paintActionDelegate?.notifyPaintActionStarted()
                 
-                if (location.x > view.frame.size.width - 50 && !SessionSettings.instance.rightHanded) ||
-                    (location.x < 50 && SessionSettings.instance.rightHanded || touchedCanvasEdge) {
-                    canvasEdgeTouchDelegate?.onTouchCanvasEdge()
-                    touchedCanvasEdge = true
-                    return
-                }
-                
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
                 interactiveCanvas.paintUnit(x: Int(unitPoint.x), y: Int(unitPoint.y))
                 
