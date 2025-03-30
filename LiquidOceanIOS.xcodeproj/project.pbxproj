@@ -1119,10 +1119,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C69133797B75247512FDC6F /* Pods-LiquidOceanIOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = PixelsTogether;
+				ASSETCATALOG_COMPILER_APPICON_NAME = PixelsTogether2;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = Y56N4MVTFC;
 				INFOPLIST_FILE = LiquidOceanIOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pixels: Together";
@@ -1145,10 +1145,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E99D39E07113D350CD95FFDB /* Pods-LiquidOceanIOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = PixelsTogether;
+				ASSETCATALOG_COMPILER_APPICON_NAME = PixelsTogether2;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = Y56N4MVTFC;
 				INFOPLIST_FILE = LiquidOceanIOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pixels: Together";
