@@ -43,6 +43,7 @@
 		0744E8822D61918F00C9DD29 /* green_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0744E87E2D61918E00C9DD29 /* green_circle.png */; };
 		0744E8832D61918F00C9DD29 /* red_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0744E87F2D61918E00C9DD29 /* red_circle.png */; };
 		0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744E8842D625E7300C9DD29 /* ErrorPixel.swift */; };
+		0746FCE22D9F8880006A45BC /* ColorPanelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCE12D9F8880006A45BC /* ColorPanelIcon.swift */; };
 		074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A76002D7179EB00D487EC /* CombinedGestureView.swift */; };
 		075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */; };
 		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
@@ -211,6 +212,7 @@
 		0744E87F2D61918E00C9DD29 /* red_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_circle.png; sourceTree = "<group>"; };
 		0744E8802D61918E00C9DD29 /* yellow_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_circle.png; sourceTree = "<group>"; };
 		0744E8842D625E7300C9DD29 /* ErrorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPixel.swift; sourceTree = "<group>"; };
+		0746FCE12D9F8880006A45BC /* ColorPanelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPanelIcon.swift; sourceTree = "<group>"; };
 		074A76002D7179EB00D487EC /* CombinedGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedGestureView.swift; sourceTree = "<group>"; };
 		075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 				0744E8842D625E7300C9DD29 /* ErrorPixel.swift */,
 				0707C5E52D63AAA5008E0120 /* PendingUndo.swift */,
 				078D406A2D72B9E8003C57F2 /* ClientInfo.swift */,
+				0746FCE12D9F8880006A45BC /* ColorPanelIcon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
 				075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */,
 				071ACA5F2D8F13A000490385 /* HelpViewModel.swift in Sources */,
+				0746FCE22D9F8880006A45BC /* ColorPanelIcon.swift in Sources */,
 				07A9B16E25ED2941009A47DF /* HowtoViewController.swift in Sources */,
 				07BBBABA2896E3B3008A6B9E /* QueueSocket.swift in Sources */,
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,

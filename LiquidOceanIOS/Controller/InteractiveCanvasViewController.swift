@@ -213,6 +213,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var bottomTextDisplay: UILabel!
     
     @IBOutlet weak var paintButtonBackgroundView: UIView!
+    @IBOutlet weak var paintButtonBackgroundOuterView: UIView!
     
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
@@ -247,6 +248,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     var lastPanTranslationY: CGFloat = 0
     
     var lastCanvasSummaryUpdate = 0.0
+    
+    var colorPanelIcons = [ColorPanelIcon]()
     
     var pixelHistoryViewController: PixelHistoryViewController!
     weak var recentColorsViewController: RecentColorsViewController!
@@ -308,6 +311,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.canvasEdgeTouchDelegate = self
         self.surfaceView.selectedObjectView = self
         self.surfaceView.selectedObjectMoveView = self
+        
+        // color panel icons
+        colorPanelIcons.append(ColorPanelIcon(name: "Edit Canvas", iconViews: [paintPanelButton, bottomTextDisplay], touchTargetView: paintButtonBackgroundView, outerBgView: paintButtonBackgroundOuterView, isSelected: {
+            self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting
+        }, onPress: {
+            
+        }))
         
         // surfaceView.setInitalScale()
         
@@ -1775,7 +1785,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             self.setupColorPalette(colors: SessionSettings.instance.palette.colors)
         }
         
-        self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
+        updateColorPanelIcons(color: SessionSettings.instance.paintColor)
     }
     
     func showPaletteColorRemoveAlert(color: Int32) {
@@ -2237,7 +2247,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         let color = selectedColor.argb()
         
         SessionSettings.instance.paintColor = color
-        self.adjustColorIndicatorViews(color: color)
+        updateColorPanelIcons(color: color)
         
         self.paintColorIndicator.setNeedsDisplay()
         
@@ -2248,38 +2258,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.syncPaletteAndColor()
     }
     
-    func adjustColorIndicatorViews(color: Int32) {
-        if Utils.isColorBright(UIColor(argb: color)) {
-            paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff000000")
-            bottomTextDisplay.textColor = UIColor.black
-            if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
-                paintButtonBackgroundView.backgroundColor = UIColor.clear
-                paintButtonBackgroundView.layer.borderWidth = 3
-                paintButtonBackgroundView.layer.borderColor = UIColor.white.cgColor
-                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
-            }
-            else {
-                paintButtonBackgroundView.backgroundColor = UIColor.clear
-                paintButtonBackgroundView.layer.borderWidth = 0
-                paintButtonBackgroundView.layer.borderColor = UIColor.clear.cgColor
-                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
-            }
-        }
-        else {
-            paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
-            bottomTextDisplay.textColor = UIColor.white
-            if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
-                paintButtonBackgroundView.backgroundColor = UIColor.clear
-                paintButtonBackgroundView.layer.borderWidth = 3
-                paintButtonBackgroundView.layer.borderColor = UIColor.white.cgColor
-                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
-            }
-            else {
-                paintButtonBackgroundView.backgroundColor = UIColor.clear
-                paintButtonBackgroundView.layer.borderWidth = 0
-                paintButtonBackgroundView.layer.borderColor = UIColor.clear.cgColor
-                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
-            }
+    func updateColorPanelIcons(color: Int32) {
+        for icon in colorPanelIcons {
+            icon.update(color: color)
         }
     }
     
@@ -2337,7 +2318,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // Interactive Canvas Mode Delegate
     func notifyChangedMode(mode: InteractiveCanvasView.Mode) {
-        self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
+        updateColorPanelIcons(color: SessionSettings.instance.paintColor)
     }
 }
 
