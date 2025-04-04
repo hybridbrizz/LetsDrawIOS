@@ -144,9 +144,6 @@ class ButtonFrame: UIView {
         let label = getLabel()
         
         if imageView != nil {
-            let image = imageView?.image
-            let templateImage = image?.withRenderingMode(.alwaysTemplate)
-            imageView?.image = templateImage
             imageView?.tintColor = UIColor(argb: color)
         }
         else if label != nil {

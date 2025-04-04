@@ -326,7 +326,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         colorPanelIcons.append(ColorPanelIcon(name: "Edit Canvas", iconViews: [paintPanelButton, bottomTextDisplay], touchTargetView: paintButtonBackgroundView, outerBgView: paintButtonBackgroundOuterView, isSelected: {
             self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting
         }, onPress: {
-            if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
+            if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring || self.surfaceView.mode == .erasing {
                 self.surfaceView.startPainting()
             }
             else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {

@@ -539,7 +539,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             interactiveCanvas.cancelMoveSelectedObject()
         }
         
-        if mode == .exploring {
+        if mode == .exploring || mode == .erasing {
             mode = .painting
         }
         else if mode == .paintSelectionExploring {
@@ -583,6 +583,10 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     }
     
     func startErasing() {
+        if mode == .paintSelectionExploring || mode == .paintSelectionPainting {
+            return
+        }
+        
         mode = .erasing
      
         removePan()
