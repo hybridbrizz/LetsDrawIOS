@@ -11,7 +11,7 @@ import FlexColorPicker
 import Kingfisher
 import SwiftUI
 
-class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
+class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, InteractiveCanvasModeDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
                                        InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate, ColorPicker2LayoutDelegate, HelpMessagesDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
@@ -303,6 +303,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.surfaceView.paintDelegate = self
         self.surfaceView.palettesDelegate = self
         self.surfaceView.gestureDelegate = self
+        self.surfaceView.modeDelegate = self
         self.surfaceView.canvasFrameDelegate = self
         self.surfaceView.canvasEdgeTouchDelegate = self
         self.surfaceView.selectedObjectView = self
@@ -974,13 +975,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @objc func didTapPaintButtonBackground() {
         if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
             self.surfaceView.startPainting()
-            
-            self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
         }
         else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
             self.surfaceView.endPainting(accept: true)
-                
-            self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
         }
     }
     
@@ -2256,23 +2253,34 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             paintPanelButton.color = Utils.int32FromColorHex(hex: "0xff000000")
             bottomTextDisplay.textColor = UIColor.black
             if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
-                paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55000000"))
+                paintButtonBackgroundView.backgroundColor = UIColor.clear
+                paintButtonBackgroundView.layer.borderWidth = 3
+                paintButtonBackgroundView.layer.borderColor = UIColor.white.cgColor
+                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
             }
             else {
                 paintButtonBackgroundView.backgroundColor = UIColor.clear
+                paintButtonBackgroundView.layer.borderWidth = 0
+                paintButtonBackgroundView.layer.borderColor = UIColor.clear.cgColor
+                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
             }
         }
         else {
             paintPanelButton.color = Utils.int32FromColorHex(hex: "0xffffffff")
             bottomTextDisplay.textColor = UIColor.white
             if surfaceView.mode == .painting || surfaceView.mode == .paintSelectionPainting {
-                paintButtonBackgroundView.backgroundColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x55ffffff"))
+                paintButtonBackgroundView.backgroundColor = UIColor.clear
+                paintButtonBackgroundView.layer.borderWidth = 3
+                paintButtonBackgroundView.layer.borderColor = UIColor.white.cgColor
+                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
             }
             else {
                 paintButtonBackgroundView.backgroundColor = UIColor.clear
+                paintButtonBackgroundView.layer.borderWidth = 0
+                paintButtonBackgroundView.layer.borderColor = UIColor.clear.cgColor
+                paintButtonBackgroundView.layer.cornerRadius = paintButtonBackgroundView.frame.size.width / 2
             }
         }
-        paintButtonBackgroundView.layer.cornerRadius = 50
     }
     
     // Color Picker 2 Layout Delegate
@@ -2325,6 +2333,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         SessionSettings.instance.showHelpMessages = false
         SessionSettings.instance.save()
         helpMessagesContainer.isHidden = true
+    }
+    
+    // Interactive Canvas Mode Delegate
+    func notifyChangedMode(mode: InteractiveCanvasView.Mode) {
+        self.adjustColorIndicatorViews(color: SessionSettings.instance.paintColor)
     }
 }
 

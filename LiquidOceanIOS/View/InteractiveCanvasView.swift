@@ -35,6 +35,10 @@ protocol InteractiveCanvasGestureDelegate: AnyObject {
     func notifyInteractiveCanvasDoubleTap()
 }
 
+protocol InteractiveCanvasModeDelegate: AnyObject {
+    func notifyChangedMode(mode: InteractiveCanvasView.Mode)
+}
+
 protocol CanvasFrameDelegate: AnyObject {
     func notifyToggleCanvasFrameView(canvasX: Int, canvasY: Int, screenPoint: CGPoint)
     func notifyCloseCanvasFrameView()
@@ -72,7 +76,16 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         case objectMoving
     }
     
-    var mode: Mode = .exploring
+    var _mode: Mode = .exploring
+    var mode: Mode {
+        set {
+            _mode = newValue
+            modeDelegate?.notifyChangedMode(mode: newValue)
+        }
+        get {
+            return _mode
+        }
+    }
     
     var scaleFactor = CGFloat(1.0)
     var oldScaleFactor: CGFloat!
@@ -95,6 +108,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
     weak var objectSelectionDelegate: ObjectSelectionDelegate?
     weak var palettesDelegate: InteractiveCanvasPalettesDelegate?
     weak var gestureDelegate: InteractiveCanvasGestureDelegate?
+    weak var modeDelegate: InteractiveCanvasModeDelegate?
     weak var canvasFrameDelegate: CanvasFrameDelegate?
     weak var canvasEdgeTouchDelegate: CanvasEdgeTouchDelegate?
     weak var selectedObjectView: InteractiveCanvasSelectedObjectViewDelegate?
