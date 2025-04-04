@@ -71,6 +71,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         case paintSelectionExploring
         case painting
         case paintSelectionPainting
+        case erasing
         case exporting
         case objectMoveSelection
         case objectMoving
@@ -573,6 +574,26 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
         else if mode == .paintSelectionPainting {
             mode = .paintSelectionExploring
         }
+        
+        removeDraw()
+        
+        addPan()
+        addTap()
+        addLongPress()
+    }
+    
+    func startErasing() {
+        mode = .erasing
+     
+        removePan()
+        removeTap()
+        removeLongPress()
+        
+        addDraw()
+    }
+    
+    func endErasing() {
+        mode = .exploring
         
         removeDraw()
         

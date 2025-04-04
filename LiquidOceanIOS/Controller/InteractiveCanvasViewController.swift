@@ -215,6 +215,16 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet weak var paintButtonBackgroundView: UIView!
     @IBOutlet weak var paintButtonBackgroundOuterView: UIView!
     
+    @IBOutlet weak var eraseButtonFrame: ButtonFrame!
+    @IBOutlet weak var eraseButtonBackgroundView: UIView!
+    @IBOutlet weak var eraseButtonBackgroundOuterView: UIView!
+    @IBOutlet var eraseButtonLeading: NSLayoutConstraint!
+    
+    @IBOutlet weak var colorSelectButtonFrame: ButtonFrame!
+    @IBOutlet weak var colorSelectButtonBackgroundView: UIView!
+    @IBOutlet weak var colorSelectButtonBackgroundOuterView: UIView!
+    @IBOutlet var colorSelectButtonTrailing: NSLayoutConstraint!
+    
     let showOptions = "ShowOptions"
     let showHowto = "ShowHowto"
     let unwindToLoading = "UnwindToLoading"
@@ -316,7 +326,36 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         colorPanelIcons.append(ColorPanelIcon(name: "Edit Canvas", iconViews: [paintPanelButton, bottomTextDisplay], touchTargetView: paintButtonBackgroundView, outerBgView: paintButtonBackgroundOuterView, isSelected: {
             self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting
         }, onPress: {
+            if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
+                self.surfaceView.startPainting()
+            }
+            else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
+                self.surfaceView.endPainting(accept: true)
+            }
+        }))
+        
+        colorPanelIcons.append(ColorPanelIcon(name: "Erase", iconViews: [eraseButtonFrame], touchTargetView: eraseButtonBackgroundView, outerBgView: eraseButtonBackgroundOuterView, isSelected: {
+            self.surfaceView.mode == .erasing
+        }, onPress: {
+            if self.surfaceView.mode == .erasing {
+                self.surfaceView.endErasing()
+            }
+            else {
+                self.surfaceView.startErasing()
+            }
+        }))
+        
+        colorPanelIcons.append(ColorPanelIcon(name: "Color Select", iconViews: [colorSelectButtonFrame], touchTargetView: colorSelectButtonBackgroundView, outerBgView: colorSelectButtonBackgroundOuterView, isSelected: {
+            !self.colorPickerFrame.isHidden
+        }, onPress: {
+            //self.previousColor = SessionSettings.instance.paintColor
             
+            if self.colorPickerFrame.isHidden {
+                self.openColorPicker()
+            }
+            else {
+                self.closeColorPicker()
+            }
         }))
         
         // surfaceView.setInitalScale()
@@ -397,20 +436,12 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         // paint panel
         self.paintPanel.isHidden = true
         
-        
-        self.paintButtonBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPaintButtonBackground)))
-            
-        
         self.paintPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPaintPanel)))
         
 //        // close paint panel
 //        self.closePaintPanelButton.setOnClickListener {
 //            self.togglePaintPanel(open: false)
 //        }
-        
-        // paint quantity meter
-        let paintIndicatorTap = UITapGestureRecognizer(target: self, action: #selector(didTapColorIndicator(sender:)))
-        self.paintColorIndicator.addGestureRecognizer(paintIndicatorTap)
         
         // palette
         paletteAddColorAction.type = .add
@@ -640,6 +671,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func layoutSubviews() {
+        
+        // color panel icons
+        let distToMiddleButtonLeading = view.frame.size.width / 2 - paintButtonBackgroundView.frame.width / 2
+        let distToMiddleButtonTrailing = view.frame.size.width - (distToMiddleButtonLeading + paintButtonBackgroundView.frame.width)
+        eraseButtonLeading.constant = (distToMiddleButtonLeading - eraseButtonBackgroundOuterView.frame.size.width) / 2
+        colorSelectButtonTrailing.constant = (distToMiddleButtonTrailing - eraseButtonBackgroundOuterView.frame.size.width) / 2
+        
         if SessionSettings.instance.rightHanded {
             // right-handed
             
@@ -982,15 +1020,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //        })
 //    }
     
-    @objc func didTapPaintButtonBackground() {
-        if self.surfaceView.mode == .exploring || self.surfaceView.mode == .paintSelectionExploring {
-            self.surfaceView.startPainting()
-        }
-        else if self.surfaceView.mode == .painting || self.surfaceView.mode == .paintSelectionPainting {
-            self.surfaceView.endPainting(accept: true)
-        }
-    }
-    
     func showDisconnectedMessage(type: Int) {
         // create the alert
         let alert = UIAlertController(title: nil, message: "Lost connection to world server (code=" + String(type) + ")", preferredStyle: UIAlertController.Style.alert)
@@ -1142,14 +1171,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // paint color indicator
     @objc func didTapColorIndicator(sender: UITapGestureRecognizer) {
-        self.previousColor = SessionSettings.instance.paintColor
         
-        if self.colorPickerFrame.isHidden {
-            openColorPicker()
-        }
-        else {
-            closeColorPicker()
-        }
         
 //        if self.previousColor == 0 {
 //            colorPickerViewController.selectedColor = UIColor.white
@@ -1215,6 +1237,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         } completion: { done in
             if done {
                 self.colorPickerFrame.isHidden = true
+                self.surfaceView.endPaintSelection()
             }
         }
         
@@ -1227,8 +1250,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //        if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
 //            self.closePaintPanelButton.isHidden = false
 //        }
-        
-        self.surfaceView.endPaintSelection()
     }
     
     func togglePaintPanel(open: Bool, softHide: Bool = false) {

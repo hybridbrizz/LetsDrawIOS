@@ -36,7 +36,7 @@ class ButtonFrame: UIView {
         }
     }
     
-    private var baseColor = Utils.int32FromColorHex(hex: "0xDDFFFFFF")
+    private var baseColor = Utils.int32FromColorHex(hex: "0xFFFFFFFF")
     private var highlightColor = Utils.int32FromColorHex(hex: "0xFFFAD452")
     
     private var _highlight = false
@@ -139,11 +139,14 @@ class ButtonFrame: UIView {
         }
     }
     
-    private func setTint(color: Int32) {
+    func setTint(color: Int32) {
         let imageView = getImageView()
         let label = getLabel()
         
         if imageView != nil {
+            let image = imageView?.image
+            let templateImage = image?.withRenderingMode(.alwaysTemplate)
+            imageView?.image = templateImage
             imageView?.tintColor = UIColor(argb: color)
         }
         else if label != nil {

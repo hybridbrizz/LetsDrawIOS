@@ -26,6 +26,8 @@ class ColorPanelIcon {
         self.outerBgView = outerBgView
         self.isSelected = isSelected
         self.onPress = onPress
+        
+        touchTargetView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTouchTarget)))
     }
     
     func update(color: Int32) {
@@ -71,12 +73,16 @@ class ColorPanelIcon {
             }
             else if iconView is ButtonFrame {
                 if Utils.isColorBright(UIColor(argb: color)) {
-                    (iconView as! ButtonFrame).color = UIColor.black.argb()
+                    (iconView as! ButtonFrame).setTint(color: UIColor.black.argb())
                 }
                 else {
-                    (iconView as! ButtonFrame).color = UIColor.white.argb()
+                    (iconView as! ButtonFrame).setTint(color: UIColor.white.argb())
                 }
             }
         }
+    }
+    
+    @objc func didTapTouchTarget() {
+        onPress()
     }
 }
