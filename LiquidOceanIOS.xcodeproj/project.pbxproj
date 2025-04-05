@@ -44,6 +44,7 @@
 		0744E8832D61918F00C9DD29 /* red_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0744E87F2D61918E00C9DD29 /* red_circle.png */; };
 		0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744E8842D625E7300C9DD29 /* ErrorPixel.swift */; };
 		0746FCE22D9F8880006A45BC /* ColorPanelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCE12D9F8880006A45BC /* ColorPanelIcon.swift */; };
+		0746FCE42DA174AA006A45BC /* PullToRefreshSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCE32DA174AA006A45BC /* PullToRefreshSwiftUI.swift */; };
 		074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A76002D7179EB00D487EC /* CombinedGestureView.swift */; };
 		075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */; };
 		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
@@ -213,6 +214,7 @@
 		0744E8802D61918E00C9DD29 /* yellow_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_circle.png; sourceTree = "<group>"; };
 		0744E8842D625E7300C9DD29 /* ErrorPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPixel.swift; sourceTree = "<group>"; };
 		0746FCE12D9F8880006A45BC /* ColorPanelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPanelIcon.swift; sourceTree = "<group>"; };
+		0746FCE32DA174AA006A45BC /* PullToRefreshSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshSwiftUI.swift; sourceTree = "<group>"; };
 		074A76002D7179EB00D487EC /* CombinedGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedGestureView.swift; sourceTree = "<group>"; };
 		075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		075DE9382D728815007C664D /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				0746FCE32DA174AA006A45BC /* PullToRefreshSwiftUI.swift */,
 				078891732D750E8800B4041B /* Menu */,
 				078891742D750E9300B4041B /* Canvas */,
 			);
@@ -952,6 +955,7 @@
 				0707C5E62D63AAA5008E0120 /* PendingUndo.swift in Sources */,
 				07FF5EFF25DF5833003E19AE /* ArtView.swift in Sources */,
 				07D0ED24272DCE5F00755C1D /* InteractiveCanvasSummaryView.swift in Sources */,
+				0746FCE42DA174AA006A45BC /* PullToRefreshSwiftUI.swift in Sources */,
 				07D0ED26272DFC9000755C1D /* DeviceViewportSummaryView.swift in Sources */,
 				076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */,
 				076E4EA82D7BAB9E004C363E /* HPalette.swift in Sources */,

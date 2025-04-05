@@ -42,7 +42,7 @@ struct PrivateServerListView: View {
                                 }
                                 ZStack {}
                                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))).opacity(0.5))
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -61,7 +61,7 @@ struct PrivateServerListView: View {
                                 }
                                 ZStack {}
                                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                             }
                             .frame(maxWidth: .infinity)
                         }

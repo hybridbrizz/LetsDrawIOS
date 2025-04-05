@@ -325,7 +325,7 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
                     serverListViewForPortrait = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: true)
                     if self.serverListsContainerPortrait != nil {
                         addSwiftUIViewToContainer(swiftUIView: serverListViewForPortrait!, containerView: self.serverListsContainerPortrait!)
-                        self.serverListsContainerPortrait!.backgroundColor = UIColor.darkGray
+                        self.serverListsContainerPortrait!.backgroundColor = UIColor.black
                     }
                 }
                 
@@ -337,7 +337,7 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
                     serverListViewForLandscape = ServerListsView(viewModel: serverListViewModel, serverSelectionDelegate: self, isPortrait: false)
                     if self.serverListsContainerLandscape != nil {
                         addSwiftUIViewToContainer(swiftUIView: serverListViewForLandscape!, containerView: self.serverListsContainerLandscape!)
-                        self.serverListsContainerLandscape!.backgroundColor = UIColor.darkGray
+                        self.serverListsContainerLandscape!.backgroundColor = UIColor.black
                     }
                 }
                 

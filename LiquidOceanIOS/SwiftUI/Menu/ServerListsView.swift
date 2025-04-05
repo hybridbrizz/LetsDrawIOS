@@ -21,12 +21,12 @@ struct ServerListsView: View {
             if !isPortrait {
                 ZStack {}
                     .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                 Spacer()
                     .frame(width: 10)
                 ZStack {}
                     .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
             }
             ZStack {
                 VStack(spacing: 0) {
@@ -35,7 +35,7 @@ struct ServerListsView: View {
                             ZStack {
                                 Text("PIXELS: TOGETHER")
                                     .foregroundStyle(.white)
-                                    .font(.custom("Inter", size: 15))
+                                    .font(.custom("Inter", size: 20))
                                     .fontWeight(.black)
                                     .padding(5)
                             }
@@ -46,80 +46,92 @@ struct ServerListsView: View {
                         .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFF90D5FF"))))
                     .clickable(bgColor: Color.clear, selectionColor: Color.clear) {
                         UIApplication.shared.endEditing()
                     }
                     
-                    ZStack {}
-                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    Spacer().frame(height: 10)
                     
                     HStack(spacing: 0) {
+                        let publicTextColor = showPublicServers ? Color.black : Color.white
+                        let publicBackground = showPublicServers ? Color.white : Color(red: 0.1, green: 0.1, blue: 0.1)
+                        
                         ZStack {
-                            Text("PUBLIC")
-                                .foregroundStyle(.white)
-                                .font(.custom("Inter", size: 13))
-                                .fontWeight(.bold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-                            showPublicServers = true
-                        }
-                        ZStack {
-                            Text("PRIVATE")
-                                .foregroundStyle(.white)
-                                .font(.custom("Inter", size: 13))
-                                .fontWeight(.bold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-                            showPublicServers = false
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    
-                    ZStack {}
-                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
-                    
-                    HStack(spacing: 0) {
-                        Spacer()
-                        Button(action: {
-                            if showPublicServers {
-                                viewModel.getPublicServers()
-                            }
-                            else {
-                                viewModel.getPrivateServers()
-                            }
-                        }) {
-                            Image(systemName: "arrow.clockwise")
-                                .resizable()
-                                .foregroundStyle(.white)
-                                .frame(width: 24, height: 24)
-                                .padding(10)
-                        }
-                        if !showPublicServers {
-                            Spacer().frame(width: 5)
                             Button(action: {
-                                showAddPrivateServerInput = true
-                            }) {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .foregroundStyle(.white)
-                                    .frame(width: 24, height: 24)
-                                    .padding(10)
-                            }
+                                showPublicServers = true
+                            }, label: {
+                                Text("Public")
+                                    .foregroundStyle(publicTextColor)
+                                    .font(.custom("Inter", size: 11))
+                                    .fontWeight(.regular)
+                            })
+                            .padding(10)
                         }
+                        .frame(maxWidth: .infinity)
+                        .background(publicBackground)
+                        
+                        Spacer().frame(width: 1, height: 32).background(.white)
+                        
+                        let privateTextColor = !showPublicServers ? Color.black : Color.white
+                        let privateBackground = !showPublicServers ? Color.white : Color(red: 0.1, green: 0.1, blue: 0.1)
+                        
+                        ZStack {
+                            Button(action: {
+                                showPublicServers = false
+                            }, label: {
+                                Text("Private")
+                                    .foregroundStyle(privateTextColor)
+                                    .font(.custom("Inter", size: 11))
+                                    .fontWeight(.regular)
+                            })
+                            .padding(10)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(privateBackground)
                     }
-                    .frame(maxWidth: .infinity)
-                    .background(.black.opacity(0.1))
+                    .frame(width: 160)
+                    .clipShape(RoundedRectangle(cornerRadius: 200))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 200).stroke(.white, lineWidth: 1)
+                    }
                     
-                    ZStack {}
-                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    Spacer().frame(height: 10)
+                    
+//                    HStack(spacing: 0) {
+//                        Spacer()
+//                        Button(action: {
+//                            if showPublicServers {
+//                                viewModel.getPublicServers()
+//                            }
+//                            else {
+//                                viewModel.getPrivateServers()
+//                            }
+//                        }) {
+//                            Image(systemName: "arrow.clockwise")
+//                                .resizable()
+//                                .foregroundStyle(.white)
+//                                .frame(width: 24, height: 24)
+//                                .padding(10)
+//                        }
+//                        if !showPublicServers {
+//                            Spacer().frame(width: 5)
+//                            Button(action: {
+//                                showAddPrivateServerInput = true
+//                            }) {
+//                                Image(systemName: "plus")
+//                                    .resizable()
+//                                    .foregroundStyle(.white)
+//                                    .frame(width: 24, height: 24)
+//                                    .padding(10)
+//                            }
+//                        }
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                    .background(.black.opacity(0.1))
+                    
+//                    ZStack {}
+//                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
+//                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                     
                     if showAddPrivateServerInput && !showPublicServers {
                         AddPrivateServerView(viewModel: viewModel) {
@@ -144,12 +156,12 @@ struct ServerListsView: View {
             if !isPortrait {
                 ZStack {}
                     .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                 Spacer()
                     .frame(width: 10)
                 ZStack {}
                     .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
             }
         }
         .clipped()

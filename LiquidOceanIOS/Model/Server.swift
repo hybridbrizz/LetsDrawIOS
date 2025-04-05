@@ -36,6 +36,7 @@ class Server: NSObject, Identifiable {
     var isOnline = false
     var isPublic = false
     var lastVisited = 0.0
+    var canvasImgUrl = ""
     
     override init() {
         super.init()
@@ -75,6 +76,8 @@ class Server: NSObject, Identifiable {
         isOnline = fromJson["online"] as? Bool ?? false
         isPublic = fromJson["public"] as? Bool ?? false
         lastVisited = fromJson["last_visited"] as? Double ?? 0.0
+        
+        canvasImgUrl = fromJson["canvas_img_url"] as? String ?? ""
     }
     
     func serviceUrl() -> String {
@@ -117,6 +120,7 @@ class Server: NSObject, Identifiable {
         jsonObj["online"] = isOnline
         jsonObj["public"] = isPublic
         jsonObj["last_visited"] = lastVisited
+        jsonObj["canvas_img_url"] = canvasImgUrl
         
         return jsonObj
     }

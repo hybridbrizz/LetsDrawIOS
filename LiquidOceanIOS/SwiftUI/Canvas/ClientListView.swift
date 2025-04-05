@@ -109,34 +109,9 @@ struct ClickableModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .contentShape(Rectangle())
-            .background(
-                GeometryReader { geometry in
-                    (isPressed ? selectionColor : bgColor).onAppear {
-                        self.viewFrame = geometry.frame(in: .local)
-                    }
-                }
-            )
-            // Thanks Claude!
-            .highPriorityGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        // Touch down - finger is on the screen
-                        withAnimation {
-                            isPressed = true
-                        }
-                    }
-                    .onEnded { gesture in
-                        // Touch up - finger lifted from screen
-                        withAnimation {
-                            isPressed = false
-                        }
-                        
-                        if viewFrame.contains(gesture.location) {
-                            // Execute your action here
-                            onClick()
-                        }
-                    }
-            )
+            .onTapGesture {
+                onClick()
+            }
     }
 }
 
