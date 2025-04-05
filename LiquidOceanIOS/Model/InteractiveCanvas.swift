@@ -763,7 +763,12 @@ class InteractiveCanvas: NSObject, ObservableObject {
         }
         
         print("erase pixels")
-        let sendStr = buildEraseString(uuid: SessionSettings.instance.lastVisitedServer?.uuid ?? "", xs: xs, ys: ys)
+        let sendStr = if server.isAdmin {
+            buildEraseString(uuid: server.adminKey, xs: xs, ys: ys)
+        }
+        else {
+            buildEraseString(uuid: SessionSettings.instance.lastVisitedServer?.uuid ?? "", xs: xs, ys: ys)
+        }
         InteractiveCanvasSocket.instance.socket!.emit("pixels_erase", sendStr, completion: nil)
         
         eraseRestorePoints.removeAll()
