@@ -18,7 +18,6 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     let showTermsOfService = "ShowTermsOfService"
     
     @IBOutlet var connectingLabel: UILabel!
-    @IBOutlet var statusLabel: UILabel!
     
     @IBOutlet weak var dotsLabel: UILabel!
     @IBOutlet weak var gameTipLabel: UILabel!
@@ -54,13 +53,14 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     @IBOutlet weak var topContributorAmt9: UILabel!
     @IBOutlet weak var topContributorAmt10: UILabel!
     
-    let gameTips = ["You can customize canvas background colors and other various things in Settings.",
-                    "All drawings can be exported. Simply choose the export tool, tap on an object, then select share or save.",
-                    "Anything you create on the canvas is shared in real time with others.",
-                    "Tap on any pixel on the canvas to view a history of edits.",
-                    "No harassment, racism, or hate symbols are allowed on the canvas.",
-                    "Anyone can get pixels to draw on the canvas in 3 minutes or less! Simply wait for the next paint cycle.",
-                    "Tap the palette icon to show and select from recently used colors."]
+    @IBOutlet weak var loadingBar: LoadingBar!
+    
+    let gameTips = [
+        "After first joining a canvas you will get steady pixels over time to draw with.",
+        "Check out the community link in the canvas menu for more information about the canvas.",
+        "Tap anyone on the server list to teleport to their location.",
+        "This canvs is interactive meaning your edits show in realtime for everyone."
+    ]
     
     var errorTypeServer = "server"
     var errorTypeSocket = "socket"
@@ -98,11 +98,18 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
         super.viewDidLoad()
         
         if server!.isAdmin {
-            self.connectingLabel.text = "Connecting to \(server!.name) (Mod)"
+            self.connectingLabel.text = "\(server!.name) (Mod)"
         }
         else {
-            self.connectingLabel.text = "Connecting to \(server!.name)"
+            self.connectingLabel.text = "\(server!.name)"
         }
+        
+        self.connectingLabel.isHidden = false
+        
+        loadingBar.layer.borderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0).cgColor
+        loadingBar.layer.borderWidth = 1
+        loadingBar.layer.cornerRadius = 12
+        loadingBar.clipsToBounds = true
         
         if server!.color != 0 {
             self.connectingLabel.textColor = UIColor(argb: server!.color)
@@ -140,31 +147,32 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
                 SessionSettings.instance.removeServer(server: self.server)
             }
             
-            self.canvasImage.alpha = 0
-            self.canvasImage.kf.setImage(
-                with: URL(string: "\(server!.serviceAltUrl())canvas"), options: [.forceRefresh]) { result in
-                    UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn) {
-                        self.canvasImage.alpha = 1
-                    }
-                }
-            
-            self.iconImage.alpha = 0
-            self.iconImage.layer.cornerRadius = 50
-//            self.iconImage.kf.setImage(
-//                with: URL(string: server!.iconUrl)) { result in
-//                    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
-//                        self.iconImage.alpha = 1
+//            self.canvasImage.alpha = 0
+//            self.canvasImage.kf.setImage(
+//                with: URL(string: "\(server!.serviceAltUrl())canvas"), options: [.forceRefresh]) { result in
+//                    UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn) {
+//                        self.canvasImage.alpha = 1
 //                    }
 //                }
+            
+            self.iconImage.alpha = 0
+            self.iconImage.kf.setImage(
+                with: URL(string: server!.iconUrl)) { result in
+                    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+                        self.iconImage.alpha = 1
+                    }
+                }
             
             //self.canvasImage.image = UIImage(named: "amb_2.png")
             
             if server!.isAdmin {
-                self.connectingLabel.text = "Connecting to \(server!.name) (Mod)"
+                self.connectingLabel.text = "\(server!.name) (Mod)"
             }
             else {
-                self.connectingLabel.text = "Connecting to \(server!.name)"
+                self.connectingLabel.text = "\(server!.name)"
             }
+            
+            self.connectingLabel.isHidden = false
             
             if server!.color != 0 {
                 self.connectingLabel.textColor = UIColor(argb: server!.color)
@@ -196,6 +204,7 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
             
             let rIndex = Int(arc4random() % UInt32(self.gameTips.count))
             self.gameTipLabel.text = self.gameTips[rIndex]
+            self.gameTipLabel.isHidden = false
             
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (tmr) in
                 if self.lastDotsStr.count < 3 {
@@ -442,11 +451,10 @@ class LoadingViewController: UIViewController, InteractiveCanvasSocketConnection
     }
     
     func downloadFinished() {
-        if realmId == 1 {
-            statusLabel.text = String(format: "%d / 8", getNumLoaded())
-        }
-        else {
-            statusLabel.text = String(format: "%d / 4", getNumLoaded())
+        loadingBar.progress = Double(getNumLoaded()) / 8.0
+        if loadingBar.progress >= 1.0 {
+            loadingBar.isHidden = true
+            gameTipLabel.isHidden = true
         }
         
         if loadingDone() {

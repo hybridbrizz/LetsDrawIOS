@@ -73,7 +73,7 @@ struct ServerListsView: View {
                             Button(action: {
                                 showPublicServers = true
                             }, label: {
-                                Text("Public")
+                                Text("Global")
                                     .foregroundStyle(publicTextColor)
                                     .font(.custom("Inter", size: 11))
                                     .fontWeight(.regular)
@@ -92,7 +92,7 @@ struct ServerListsView: View {
                             Button(action: {
                                 showPublicServers = false
                             }, label: {
-                                Text("Private")
+                                Text("Group")
                                     .foregroundStyle(privateTextColor)
                                     .font(.custom("Inter", size: 11))
                                     .fontWeight(.regular)

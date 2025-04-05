@@ -21,7 +21,7 @@ struct AddPrivateServerView: View {
         VStack(spacing: 0) {
             HStack {
                 TextField(
-                    "Access Key",
+                    "Group Code",
                     text: $key
                 )
                 .focused($keyFieldFocused)
@@ -39,7 +39,7 @@ struct AddPrivateServerView: View {
                 .textInputAutocapitalization(.characters)
                 .disableAutocorrection(true)
                 .submitLabel(.done)
-                .font(.custom("Inter", size: 24))
+                .font(.custom("Inter", size: 20))
                 .fontWeight(.semibold)
                 .foregroundStyle(.white)
                 .frame(width: 200, height: 50)

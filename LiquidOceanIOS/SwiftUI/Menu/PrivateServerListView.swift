@@ -11,7 +11,6 @@ import SwiftUI
 struct PrivateServerListView: View {
     @ObservedObject var viewModel: ServerListViewModel
     var selectionDelegate: ServerSelectionDelegate
-    let sections = ["Mod", "Private"]
     
     @State var editingMod = false
     @State var editingPrivate = false
@@ -27,7 +26,7 @@ struct PrivateServerListView: View {
             else {
                 if viewModel.adminServers.isEmpty && viewModel.privateServers.isEmpty {
                     ZStack {
-                        Text("No private servers yet.").font(.custom("Inter", size: 14)).foregroundStyle(.white)
+                        Text("No groups added yet.").font(.custom("Inter", size: 14)).foregroundStyle(.white)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -57,7 +56,7 @@ struct PrivateServerListView: View {
                         }
                         if !viewModel.privateServers.isEmpty {
                             Section(header: ZStack(alignment: .trailing) {
-                                Text("Private")
+                                Text("Groups")
                                     .frame(maxWidth: .infinity)
                                 
                                 Button(action: {
