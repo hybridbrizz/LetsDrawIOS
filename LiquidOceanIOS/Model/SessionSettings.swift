@@ -607,9 +607,20 @@ class SessionSettings: NSObject {
         }
     }
     
-    func addServer(server: Server) {
-        servers.append(server)
-        saveServers()
+    func addServer(server: Server) -> Bool {
+        let key = if server.isAdmin {
+            server.adminKey
+        }
+        else {
+            server.accessKey
+        }
+        
+        if !hasServer(accessKey: key) {
+            servers.append(server)
+            saveServers()
+            return true
+        }
+        return false
     }
     
     func removeServer(server: Server) {
@@ -673,6 +684,7 @@ class SessionSettings: NSObject {
                     server.connectionCount = remoteServer!.connectionCount
                     server.maxConnections = remoteServer!.maxConnections
                     server.size = remoteServer!.size
+                    server.canvasImgUrl = remoteServer!.canvasImgUrl
                 }
                 else {
                     if server.isAdmin {
@@ -696,6 +708,7 @@ class SessionSettings: NSObject {
                     server.connectionCount = remoteServer!.connectionCount
                     server.maxConnections = remoteServer!.maxConnections
                     server.size = remoteServer!.size
+                    server.canvasImgUrl = remoteServer!.canvasImgUrl
                 }
                 else {
                     if !server.isAdmin {

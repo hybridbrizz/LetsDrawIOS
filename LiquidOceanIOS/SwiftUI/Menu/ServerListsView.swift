@@ -30,20 +30,33 @@ struct ServerListsView: View {
             }
             ZStack {
                 VStack(spacing: 0) {
-                    ZStack {
+                    ZStack(alignment: .trailing) {
                         ZStack {
                             ZStack {
-                                Text("PIXELS: TOGETHER")
-                                    .foregroundStyle(.white)
-                                    .font(.custom("Inter", size: 20))
-                                    .fontWeight(.black)
-                                    .padding(5)
+                                ZStack {
+                                    Text("PIXELS: TOGETHER")
+                                        .foregroundStyle(.white)
+                                        .font(.custom("Inter", size: 20))
+                                        .fontWeight(.black)
+                                        .padding(5)
+                                }
+                                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
+                                .padding(5)
                             }
-                            .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
-                            .padding(5)
+                            .border(.white, width: 1)
+                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                         }
-                        .border(.white, width: 1)
-                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                        .frame(maxWidth: .infinity)
+                        
+                        if !showPublicServers && !showAddPrivateServerInput {
+                            Button(action: {
+                                showAddPrivateServerInput = true
+                            }, label: {
+                                Text("Add")
+                            })
+                            .tint(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))))
+                            .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30))
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .clickable(bgColor: Color.clear, selectionColor: Color.clear) {
@@ -96,42 +109,6 @@ struct ServerListsView: View {
                     }
                     
                     Spacer().frame(height: 10)
-                    
-//                    HStack(spacing: 0) {
-//                        Spacer()
-//                        Button(action: {
-//                            if showPublicServers {
-//                                viewModel.getPublicServers()
-//                            }
-//                            else {
-//                                viewModel.getPrivateServers()
-//                            }
-//                        }) {
-//                            Image(systemName: "arrow.clockwise")
-//                                .resizable()
-//                                .foregroundStyle(.white)
-//                                .frame(width: 24, height: 24)
-//                                .padding(10)
-//                        }
-//                        if !showPublicServers {
-//                            Spacer().frame(width: 5)
-//                            Button(action: {
-//                                showAddPrivateServerInput = true
-//                            }) {
-//                                Image(systemName: "plus")
-//                                    .resizable()
-//                                    .foregroundStyle(.white)
-//                                    .frame(width: 24, height: 24)
-//                                    .padding(10)
-//                            }
-//                        }
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                    .background(.black.opacity(0.1))
-                    
-//                    ZStack {}
-//                        .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-//                        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                     
                     if showAddPrivateServerInput && !showPublicServers {
                         AddPrivateServerView(viewModel: viewModel) {

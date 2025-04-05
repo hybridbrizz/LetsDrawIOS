@@ -14,19 +14,19 @@ class ServerListViewModel: ObservableObject {
     @Published var privateServers = [Server]()
     @Published var adminServers = [Server]()
     
-    @Published var isPublicLoading = false
-    @Published var isPrivateLoading = false
+    @Published var isPublicLoadingOnce = false
+    private var oncePublicLoading = true
+    
+    @Published var isPrivateLoadingOnce = false
+    private var oncePrivateLoading = true
     
     private var lastPublicDownload = 0.0
     private var lastPrivateDownload = 0.0
     
     func getPublicServers() {
-        let cTime = NSDate().timeIntervalSince1970
-        if cTime - lastPublicDownload < 15 {
-            return
+        if oncePublicLoading {
+            isPublicLoadingOnce = true
         }
-        
-        isPublicLoading = true
         
         URLSessionHandler.instance.getPublicServers { servers in
             let publicServerUniqueIds = SessionSettings.instance.publicServerUniqueIds
@@ -36,21 +36,20 @@ class ServerListViewModel: ObservableObject {
                 server.lastVisited = publicServerLastVisited["\(server.uid)"] ?? 0.0
             }
             self.publicServers = servers.sorted(by: { server, other in
-                server.lastVisited > other.lastVisited
+                server.uid < other.uid
             })
             
-            self.isPublicLoading = false
+            self.isPublicLoadingOnce = false
+            self.oncePublicLoading = false
+            
             self.lastPublicDownload = NSDate().timeIntervalSince1970
         }
     }
     
     func getPrivateServers() {
-        let cTime = NSDate().timeIntervalSince1970
-        if cTime - lastPrivateDownload < 15 {
-            return
+        if oncePrivateLoading {
+            isPrivateLoadingOnce = true
         }
-        
-        isPrivateLoading = true
         
         let servers = SessionSettings.instance.servers
         var accessKeys = [String]()
@@ -82,7 +81,8 @@ class ServerListViewModel: ObservableObject {
             self.privateServers = newPrivateServerList
             
             if downloadCount == 2 {
-                self.isPrivateLoading = false
+                self.isPrivateLoadingOnce = false
+                self.oncePrivateLoading = false
                 self.lastPrivateDownload = NSDate().timeIntervalSince1970
             }
         }
@@ -95,7 +95,6 @@ class ServerListViewModel: ObservableObject {
             var newPrivateServerList = [Server]()
             for server in SessionSettings.instance.servers {
                 if server.isAdmin {
-                    server.name = "\(server.name) (Mod)"
                     newPrivateServerList.append(server)
                 }
             }
@@ -103,26 +102,21 @@ class ServerListViewModel: ObservableObject {
             self.adminServers = newPrivateServerList
             
             if downloadCount == 2 {
-                self.isPrivateLoading = false
+                self.isPrivateLoadingOnce = false
+                self.oncePrivateLoading = false
                 self.lastPrivateDownload = NSDate().timeIntervalSince1970
             }
         }
     }
     
     func addPrivateServer(accessKey: String) {
-        isPrivateLoading = true
-        privateServers = []
-        adminServers = []
-        
         URLSessionHandler.instance.findServer(accessKey: accessKey) { success, statusCode, server in
             if let server = server {
-                SessionSettings.instance.addServer(server: server)
+                let added = SessionSettings.instance.addServer(server: server)
+                if added {
+                    self.getPrivateServers()
+                }
             }
-            
-            self.privateServers = SessionSettings.instance.privateServers()
-            self.adminServers = SessionSettings.instance.adminServers()
-            
-            self.isPrivateLoading = false
         }
     }
     

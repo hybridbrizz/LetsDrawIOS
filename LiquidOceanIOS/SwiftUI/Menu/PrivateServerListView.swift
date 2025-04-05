@@ -11,10 +11,14 @@ import SwiftUI
 struct PrivateServerListView: View {
     @ObservedObject var viewModel: ServerListViewModel
     var selectionDelegate: ServerSelectionDelegate
+    let sections = ["Mod", "Private"]
+    
+    @State var editingMod = false
+    @State var editingPrivate = false
     
     var body: some View {
         ZStack {
-            if viewModel.isPrivateLoading {
+            if viewModel.isPrivateLoadingOnce {
                 HStack {
                     ProgressView()
                 }
@@ -23,55 +27,63 @@ struct PrivateServerListView: View {
             else {
                 if viewModel.adminServers.isEmpty && viewModel.privateServers.isEmpty {
                     ZStack {
-                        Text("Enter an access key to add canvas.").font(.custom("Inter", size: 12)).foregroundStyle(.white)
+                        Text("No private servers yet.").font(.custom("Inter", size: 14)).foregroundStyle(.white)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        if viewModel.adminServers.count > 0 && viewModel.privateServers.count > 0 {
-                            VStack(spacing: 0) {
-                                HStack(spacing: 0) {
-                                    Text("Mod")
+                    LazyVGrid(columns: Array(repeating: .init(spacing: 20, alignment: .top), count: 2), spacing: 30) {
+                        if !viewModel.adminServers.isEmpty {
+                            Section(header: ZStack(alignment: .trailing) {
+                                Text("Mod")
+                                    .frame(maxWidth: .infinity)
+                                
+                                Button(action: {
+                                    editingMod = !editingMod
+                                }, label: {
+                                    Image(systemName: "pencil")
+                                        .resizable()
                                         .foregroundStyle(.white)
-                                        .font(.custom("Inter", size: 13))
-                                        .fontWeight(.bold)
-                                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                                    Spacer()
+                                        .frame(width: 20, height: 20)
+                                })
+                            }) {
+                                ForEach(viewModel.adminServers) { server in
+                                    ServerListItemView(viewModel: viewModel, server: server, selectionDelegate: selectionDelegate, showRemoveButton: editingMod, onRemove: {
+                                        editingMod = false
+                                    })
                                 }
-                                ZStack {}
-                                    .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))).opacity(0.5))
                             }
-                            .frame(maxWidth: .infinity)
                         }
-                        ForEach(viewModel.adminServers) { server in
-                            ServerListItemView(viewModel: viewModel, server: server, selectionDelegate: selectionDelegate, isPrivate: true)
-                        }
-                        if viewModel.adminServers.count > 0 && viewModel.privateServers.count > 0 {
-                            VStack(spacing: 0) {
-                                HStack(spacing: 0) {
-                                    Text("Private")
+                        if !viewModel.privateServers.isEmpty {
+                            Section(header: ZStack(alignment: .trailing) {
+                                Text("Private")
+                                    .frame(maxWidth: .infinity)
+                                
+                                Button(action: {
+                                    editingPrivate = !editingPrivate
+                                }, label: {
+                                    Image(systemName: "pencil")
+                                        .resizable()
                                         .foregroundStyle(.white)
-                                        .font(.custom("Inter", size: 13))
-                                        .fontWeight(.bold)
-                                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                                    Spacer()
+                                        .frame(width: 20, height: 20)
+                                })
+                            }) {
+                                ForEach(viewModel.privateServers) { server in
+                                    ServerListItemView(viewModel: viewModel, server: server, selectionDelegate: selectionDelegate, showRemoveButton: editingPrivate, onRemove: {
+                                        editingPrivate = false
+                                    })
                                 }
-                                ZStack {}
-                                    .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
                             }
-                            .frame(maxWidth: .infinity)
-                        }
-                        ForEach(viewModel.privateServers) { server in
-                            ServerListItemView(viewModel: viewModel, server: server, selectionDelegate: selectionDelegate, isPrivate: true)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(20)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .refreshable {
+                    viewModel.getPrivateServers()
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

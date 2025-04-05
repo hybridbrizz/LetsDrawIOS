@@ -20,7 +20,6 @@ struct AddPrivateServerView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Spacer().frame(width: 16)
                 TextField(
                     "Access Key",
                     text: $key
@@ -39,32 +38,29 @@ struct AddPrivateServerView: View {
                 })
                 .textInputAutocapitalization(.characters)
                 .disableAutocorrection(true)
-                .border(.secondary)
                 .submitLabel(.done)
                 .font(.custom("Inter", size: 24))
-                .fontWeight(.black)
-                .foregroundStyle(.blue)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
                 .frame(width: 200, height: 50)
                 
-                let color = self.addButtonActive ? .blue : Color(UIColor.lightGray)
-                
-                ZStack {
-                    Text("Add")
-                        .foregroundStyle(.white)
-                        .font(.custom("Inter", size: 14))
-                        .fontWeight(.bold)
-                }
-                .frame(width: 50, height: 34)
-                .background(color)
-                .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.3)) {
+                Button(action: {
                     viewModel.addPrivateServer(accessKey: key)
                     
                     UIApplication.shared.endEditing()
                     key = ""
                     
                     onClose()
-                }
+                }, label: {
+                    Text("Add")
+                        .foregroundStyle(.white)
+                        .font(.custom("Inter", size: 14))
+                        .fontWeight(.bold)
+                })
+                .buttonStyle(.bordered)
+                
                 Spacer()
+                
                 Button(action: {
                     UIApplication.shared.endEditing()
                     key = ""
@@ -75,13 +71,12 @@ struct AddPrivateServerView: View {
                         .resizable()
                         .foregroundStyle(.white)
                         .frame(width: 20, height: 20)
-                        .padding(10)
                 }
             }
-            
             ZStack {}
-                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFAD452"))).opacity(0.5))
+                .frame(maxWidth: .infinity, minHeight: 1 / UIScreen.main.scale, maxHeight: 1 / UIScreen.main.scale)
+                .background(.white)
         }
+        .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
     }
 }

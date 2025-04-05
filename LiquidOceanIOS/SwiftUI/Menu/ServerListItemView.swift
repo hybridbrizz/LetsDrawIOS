@@ -12,7 +12,8 @@ struct ServerListItemView: View {
     @ObservedObject var viewModel: ServerListViewModel
     var server: Server
     var selectionDelegate: ServerSelectionDelegate
-    var isPrivate: Bool
+    var showRemoveButton: Bool
+    var onRemove: (() -> Void)? = nil
     
     @State var showDeleteAlert = false
     
@@ -51,38 +52,41 @@ struct ServerListItemView: View {
             .frame(maxWidth: .infinity)
             .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
             
-            Button(action: {
-                selectionDelegate.onServerSelected(server: server)
-            }, label: {
-                Text("Connect")
-                    .frame(minWidth: 50)
-                    .foregroundStyle(.white)
-                    .font(.custom("Inter", size: 12))
-                    .fontWeight(.regular)
-            })
-            .buttonStyle(.bordered)
+            if showRemoveButton {
+                Button(role: .destructive, action: {
+                    showDeleteAlert = true
+                }, label: {
+                    Text("Remove")
+                        .frame(minWidth: 50)
+                        .foregroundStyle(.white)
+                        .font(.custom("Inter", size: 12))
+                        .fontWeight(.regular)
+                })
+                .buttonStyle(.bordered)
+                .tint(.red)
+            }
+            else {
+                Button(action: {
+                    selectionDelegate.onServerSelected(server: server)
+                }, label: {
+                    Text("Connect")
+                        .frame(minWidth: 50)
+                        .foregroundStyle(.white)
+                        .font(.custom("Inter", size: 12))
+                        .fontWeight(.regular)
+                })
+                .buttonStyle(.bordered)
+            }
         }
-        // Thanks Jensie - https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
-//        .simultaneousGesture(
-//            LongPressGesture()
-//                .onEnded { _ in
-//                    if isPrivate {
-//                        showDeleteAlert = true
-//                    }
-//                }
-//        )
-//        .clickable(bgColor: Color.clear, selectionColor: Color.black.opacity(0.2)) {
-//            
-//        }
-        // Thanks Cluade!
-        .alert("Remove", isPresented: $showDeleteAlert) {
+        .alert("", isPresented: $showDeleteAlert) {
             Button("Cancel", role: .cancel) {}
             
             Button("Remove", role: .destructive) {
                 viewModel.removePrivateServer(server: server)
+                onRemove?()
             }
         } message: {
-            Text("Are you sure you want to remove \(server.name)?")
+            Text("Remove \(server.name)?")
         }
     }
 }
