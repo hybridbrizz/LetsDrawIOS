@@ -684,10 +684,14 @@ class InteractiveCanvas: NSObject, ObservableObject {
         
         if restorePoint == nil {
             if x > -1 && x < cols && y > -1 && y < rows {
-                eraseRestorePoints.append(RestorePoint(x: x, y: y, color: -1, newColor: -1))
+                let unitColor = arr[y][x]
                 
-                cancelBatchEraseTask()
-                startBatchEraseTask()
+                if unitColor != 0 {
+                    eraseRestorePoints.append(RestorePoint(x: x, y: y, color: -1, newColor: -1))
+                    
+                    cancelBatchEraseTask()
+                    startBatchEraseTask()
+                }
             }
             else {
                 self.addErrorPixel(x: x, y: y)
