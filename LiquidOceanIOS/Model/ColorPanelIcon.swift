@@ -28,6 +28,7 @@ class ColorPanelIcon {
         self.onPress = onPress
         
         touchTargetView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapTouchTarget)))
+        touchTargetView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(didLongPressTouchTarget)))
     }
     
     func update(color: Int32) {
@@ -84,5 +85,9 @@ class ColorPanelIcon {
     
     @objc func didTapTouchTarget() {
         onPress()
+    }
+    
+    @objc func didLongPressTouchTarget() {
+        self.touchTargetView.showToast(message: name)
     }
 }
