@@ -1891,26 +1891,26 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func updateIconColors() {
-        if !SessionSettings.instance.darkIcons {
-            self.menuButton.isLight = true
-            self.paintPanelButton.isLight = true
-//            self.toolboxButton.isLight = true
-            self.recentColorsButton.isLight = true
-            self.exportButton.isLight = true
-//            self.changeBackgroundButton.isLight = true
-            self.gridLinesButton.isLight = true
-            self.summaryButton.isLight = true
-        }
-        else {
-            self.menuButton.isLight = false
-            self.paintPanelButton.isLight = false
-//            self.toolboxButton.isLight = false
-            self.recentColorsButton.isLight = false
-            self.exportButton.isLight = false
-//            self.changeBackgroundButton.isLight = false
-            self.gridLinesButton.isLight = false
-            self.summaryButton.isLight = false
-        }
+//        if !SessionSettings.instance.darkIcons {
+//            self.menuButton.isLight = true
+//            self.paintPanelButton.isLight = true
+////            self.toolboxButton.isLight = true
+//            self.recentColorsButton.isLight = true
+//            self.exportButton.isLight = true
+////            self.changeBackgroundButton.isLight = true
+//            self.gridLinesButton.isLight = true
+//            self.summaryButton.isLight = true
+//        }
+//        else {
+//            self.menuButton.isLight = false
+//            self.paintPanelButton.isLight = false
+////            self.toolboxButton.isLight = false
+//            self.recentColorsButton.isLight = false
+//            self.exportButton.isLight = false
+////            self.changeBackgroundButton.isLight = false
+//            self.gridLinesButton.isLight = false
+//            self.summaryButton.isLight = false
+//        }
     }
     
     // selected object view

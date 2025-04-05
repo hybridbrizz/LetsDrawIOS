@@ -21,15 +21,15 @@ class ButtonFrame: UIView {
     private var _isLight = false
     var isLight: Bool {
         set {
-            _isLight = newValue
-            
-            if newValue {
-                baseColor = Utils.int32FromColorHex(hex: "0xFFFFFFFF")
-            }
-            else {
-                baseColor = Utils.int32FromColorHex(hex: "0xFF000000")
-            }
-            select(selected: false)
+//            _isLight = newValue
+//            
+//            if newValue {
+//                baseColor = Utils.int32FromColorHex(hex: "0xFFFFFFFF")
+//            }
+//            else {
+//                baseColor = Utils.int32FromColorHex(hex: "0xFF000000")
+//            }
+//            select(selected: false)
         }
         get {
             return _isLight
