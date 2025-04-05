@@ -228,6 +228,10 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                     paintDelegate?.notifyPaintingEnded(accept: false)
                 }
             }
+            else if mode == .erasing {
+                let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
+                interactiveCanvas.eraseUnit(x: Int(unitPoint.x), y: Int(unitPoint.y))
+            }
             else if mode == .paintSelectionExploring || mode == .paintSelectionPainting {
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
                 let x = Int(unitPoint.x)
@@ -268,6 +272,10 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                 else if interactiveCanvas.restorePoints.count == 0 {
                     paintDelegate?.notifyPaintingEnded(accept: false)
                 }
+            }
+            else if mode == .erasing {
+                let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)
+                interactiveCanvas.eraseUnit(x: Int(unitPoint.x), y: Int(unitPoint.y))
             }
             else if mode == .exporting || mode == .objectMoveSelection {
                 let unitPoint = interactiveCanvas.unitForScreenPoint(x: location.x, y: location.y)

@@ -146,6 +146,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
     var connectionCount = 0
     
     private var batchPixelsTask: Task<(), any Error>? = nil
+    private var batchEraseTask: Task<(), any Error>? = nil
     
     private var _selectedPixels: [RestorePoint]?
     var selectedPixels: [RestorePoint]? {
@@ -676,6 +677,24 @@ class InteractiveCanvas: NSObject, ObservableObject {
         }
     }
     
+    private var eraseRestorePoints = [RestorePoint]()
+    
+    func eraseUnit(x: Int, y: Int) {
+        let restorePoint = unitInRestorePoints(x: x, y: y, restorePointsArr: self.eraseRestorePoints)
+        
+        if restorePoint == nil {
+            if x > -1 && x < cols && y > -1 && y < rows {
+                eraseRestorePoints.append(RestorePoint(x: x, y: y, color: -1, newColor: -1))
+                
+                cancelBatchEraseTask()
+                startBatchEraseTask()
+            }
+            else {
+                self.addErrorPixel(x: x, y: y)
+            }
+        }
+    }
+    
     private func addErrorPixel(x: Int, y: Int) {
         if self.errorPixels.first(where: { pixel in
             pixel.x == x && pixel.y == y
@@ -730,6 +749,26 @@ class InteractiveCanvas: NSObject, ObservableObject {
         clearRestorePoints()
     }
     
+    func commitErase() {
+        if eraseRestorePoints.isEmpty {
+            return
+        }
+        
+        var xs = [Int]()
+        var ys = [Int]()
+        
+        for restorePoint in self.eraseRestorePoints {
+            xs.append(restorePoint.x)
+            ys.append(restorePoint.y)
+        }
+        
+        print("erase pixels")
+        let sendStr = buildEraseString(uuid: SessionSettings.instance.lastVisitedServer?.uuid ?? "", xs: xs, ys: ys)
+        InteractiveCanvasSocket.instance.socket!.emit("pixels_erase", sendStr, completion: nil)
+        
+        eraseRestorePoints.removeAll()
+    }
+    
     func buildPixelsString(xs: [Int], ys: [Int], deviceId: Int, colors: [Int32], includeAdminKey: Bool) -> String {
         var str = "\(deviceId)"
         
@@ -744,6 +783,20 @@ class InteractiveCanvas: NSObject, ObservableObject {
         
         if server.isAdmin && includeAdminKey {
             str += "&\(server.adminKey)"
+        }
+        
+        return str
+    }
+    
+    func buildEraseString(uuid: String, xs: [Int], ys: [Int]) -> String {
+        var str = "\(uuid)"
+        
+        for i in 0...xs.count - 1 {
+            let x = xs[i]
+            let y = ys[i]
+            
+            let pixelId = y * cols + x
+            str += "&\(pixelId)"
         }
         
         return str
@@ -1410,7 +1463,7 @@ class InteractiveCanvas: NSObject, ObservableObject {
         }
         
         self.batchPixelsTask = Task {
-            try await Task.sleep(for: .milliseconds(2500))
+            try await Task.sleep(for: .milliseconds(250))
             
             if !Task.isCancelled {
                 commitPixels()
@@ -1421,6 +1474,25 @@ class InteractiveCanvas: NSObject, ObservableObject {
     func cancelBatchPixelsTask() {
         self.batchPixelsTask?.cancel()
         self.batchPixelsTask = nil
+    }
+    
+    func startBatchEraseTask() {
+        if self.batchEraseTask != nil {
+            return
+        }
+        
+        self.batchEraseTask = Task {
+            try await Task.sleep(for: .milliseconds(250))
+            
+            if !Task.isCancelled {
+                commitErase()
+            }
+        }
+    }
+    
+    func cancelBatchEraseTask() {
+        self.batchEraseTask?.cancel()
+        self.batchEraseTask = nil
     }
     
     func pixelId(x: CGFloat, y: CGFloat) -> Int {
