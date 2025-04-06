@@ -1102,7 +1102,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             colorPicker2ViewController = segue.destination as! ColorPicker2ViewController
             colorPicker2ViewController.colorSelectionDelegate = self
             colorPicker2ViewController.layoutDelegate = self
-            colorPicker2ViewController.setColor(color: UIColor(argb: SessionSettings.instance.paintColor))
         }
         else if segue.identifier == "PixelHistoryEmbed" {
             segue.destination.modalPresentationStyle = .overCurrentContext
@@ -1218,6 +1217,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func openColorPicker() {
+        colorPicker2ViewController.setColor(color: UIColor(argb: SessionSettings.instance.paintColor))
+        
         self.colorPickerFrame.isHidden = false
         self.colorPickerFrame.alpha = 0
         UIView.animate(withDuration: 0.2) {
@@ -1229,9 +1230,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     }
     
     func closeColorPicker() {
-        //self.colorPickerFrameWidth.constant = 0
+        colorPicker2ViewController.clearColor()
         
-//        self.colorPickerFrame.isHidden = true
         UIView.animate(withDuration: 0.2) {
             self.colorPickerFrame.alpha = 1
         } completion: { done in
@@ -1242,14 +1242,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.actionButtonContainer.isHidden = false
-        //self.paintColorAccept.isHidden = true
-        //self.paintColorCancel.isHidden = true
-        
-        //self.recentColorsButton.isHidden = false
-        
-//        if self.surfaceView.interactiveCanvas.restorePoints.count == 0 {
-//            self.closePaintPanelButton.isHidden = false
-//        }
     }
     
     func togglePaintPanel(open: Bool, softHide: Bool = false) {
@@ -2272,13 +2264,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.paintColorIndicator.setNeedsDisplay()
         
-        self.updatePaintColorAcceptColorMode(color: color)
-        
-        self.colorPicker2ViewController.colorHexTextField.text = selectedColor.hexString()
-        
-        self.colorPicker2ViewController.setColor(color: selectedColor)
-        
         self.syncPaletteAndColor()
+        
+        closeColorPicker()
+    }
+    
+    func onColorSelectionCancel() {
+        closeColorPicker()
     }
     
     func updateColorPanelIcons(color: Int32) {

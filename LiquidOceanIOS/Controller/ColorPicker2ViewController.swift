@@ -16,6 +16,7 @@ protocol ColorPicker2LayoutDelegate: AnyObject {
 
 protocol ColorSelectionDelegate: AnyObject {
     func onColorSelected(selectedColor: UIColor)
+    func onColorSelectionCancel()
 }
 
 class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSelectionDelegate,
@@ -72,6 +73,10 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
 //        hPalette.layer.borderWidth = 1
 //        hPalette.layer.borderColor = UIColor(argb: Utils.int32FromColorHex(hex: "0x99ffffff")).cgColor
         
+        hPalette.layer.cornerRadius = 5
+        sPalette.layer.cornerRadius = 5
+        bPalatte.layer.cornerRadius = 5
+        
         colorHexTextField.addTarget(self, action: #selector(hexTextFieldDidChange), for: .editingChanged)
         hueValueTextField.addTarget(self, action: #selector(hueTextFieldDidChange), for: .editingChanged)
         saturationValueTextField.addTarget(self, action: #selector(saturationTextFieldDidChange), for: .editingChanged)
@@ -80,6 +85,10 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     
     func setColor(color: UIColor) {
         setPCV(pcv: PickedColorValues(color: color))
+    }
+    
+    func clearColor() {
+        pcv = nil
     }
     
     func setPCV(pcv: PickedColorValues) {
@@ -251,5 +260,15 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @objc func keyboardWillHide(_ notification: Notification) {
         keyboardLiftViewHeight.constant = 0
         syncViews()
+    }
+    
+    @IBAction func onCancelPressed(_ sender: Any) {
+        colorSelectionDelegate?.onColorSelectionCancel()
+    }
+    
+    @IBAction func onSelectPressed(_ sender: Any) {
+        if let pcv = pcv {
+            colorSelectionDelegate?.onColorSelected(selectedColor: getUIColor(pcv: pcv))
+        }
     }
 }
