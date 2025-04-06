@@ -179,7 +179,7 @@ class PalettesViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         else {
             if palette.name == "Recent Color" {
-                cell.numColorsLabel.text = String(SessionSettings.instance.numRecentColors) + " colors"
+                cell.numColorsLabel.text = String(SessionSettings.instance.numPaletteColors) + " colors"
             }
             else {
                 cell.numColorsLabel.text = String(palette.colors.count) + " colors"

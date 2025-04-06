@@ -50,7 +50,7 @@ class HowtoViewController: UIViewController {
     @IBOutlet weak var recentColorsContainerWidth: NSLayoutConstraint!
     @IBOutlet weak var recentColorsContainerHeight: NSLayoutConstraint!
     
-    weak var recentColorsViewController: RecentColorsViewController!
+    weak var recentColorsViewController: PaletteColorsViewController!
     
     let unwindToCanvas = "UnwindToCanvas"
     

@@ -20,7 +20,8 @@ protocol ColorSelectionDelegate: AnyObject {
 }
 
 class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSelectionDelegate,
-                                    SatSelectionDelegate, BSelectionDelegate, UITextFieldDelegate {
+                                    SatSelectionDelegate, BSelectionDelegate, UITextFieldDelegate,
+                                  PaletteColorsLoadDelegate, PaletteColorsDelegate {
     
 //    @IBOutlet weak var sbPalette: SBPalette!
     @IBOutlet weak var rgbColorWheel: RGBColorWheel!
@@ -41,11 +42,14 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     
     @IBOutlet var keyboardLiftViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var paletteColorsView: PaletteColorsView!
+    
     var colorSelectionDelegate: ColorSelectionDelegate? = nil
     var layoutDelegate: ColorPicker2LayoutDelegate? = nil
     
     private var pendingStartPCV: PickedColorValues? = nil
     private var pcv: PickedColorValues? = nil
+    private var oldColor: UIColor? = nil
     
     var keyboardHeight = CGFloat(0)
     
@@ -58,6 +62,10 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         hPalette.hueSelectionDelegate = self
         sPalette.satSelectionDelegate = self
         bPalatte.bSelectionDelegate = self
+        paletteColorsView.loadDelegate = self
+        paletteColorsView.delegate = self
+        
+        oldColorIndicatorView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onOldColorIndicatorTap)))
         
         if pendingStartPCV != nil {
             setPCV(pcv: pendingStartPCV!)
@@ -98,7 +106,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         }
         
         if self.pcv == nil {
-            self.oldColorIndicatorView.backgroundColor = getUIColor(pcv: pcv)
+            oldColor = getUIColor(pcv: pcv)
+            self.oldColorIndicatorView.backgroundColor = oldColor
         }
         
         self.pcv = pcv
@@ -176,6 +185,19 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     func onBChanged() {
         rgbColorWheel.setNeedsDisplay()
         syncNonSpectrumViews()
+    }
+    
+    // Palette Colors Load Delegate
+    func onRequestLoadInto(index: Int) {
+        if let pcv = pcv {
+            SessionSettings.instance.loadColorIntoPalette(color: getUIColor(pcv: pcv).argb(), index: index)
+            paletteColorsView.mode = .select
+        }
+    }
+    
+    // Palette Colors Delegate
+    func notifyPaletteColorSelected(color: Int32) {
+        setColor(color: UIColor(argb: color))
     }
     
     @objc func hexTextFieldDidChange() {
@@ -269,6 +291,21 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @IBAction func onSelectPressed(_ sender: Any) {
         if let pcv = pcv {
             colorSelectionDelegate?.onColorSelected(selectedColor: getUIColor(pcv: pcv))
+        }
+    }
+    
+    @IBAction func onLoadColorPressed(_ sender: Any) {
+        if paletteColorsView.mode == .select {
+            paletteColorsView.mode = .load
+        }
+        else {
+            paletteColorsView.mode = .select
+        }
+    }
+    
+    @objc func onOldColorIndicatorTap() {
+        if let oldColor = oldColor {
+            setColor(color: oldColor)
         }
     }
 }

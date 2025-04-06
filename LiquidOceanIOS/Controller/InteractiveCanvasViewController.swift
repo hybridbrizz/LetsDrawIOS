@@ -11,7 +11,7 @@ import FlexColorPicker
 import Kingfisher
 import SwiftUI
 
-class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, InteractiveCanvasRecentColorsDelegate, RecentColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, InteractiveCanvasModeDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
+class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintDelegate, ColorPickerDelegate, InteractiveCanvasPixelHistoryDelegate, PaletteColorsDelegate, ExportViewControllerDelegate, InteractiveCanvasArtExportDelegate, AchievementListener, InteractiveCanvasSocketStatusDelegate, PaintActionDelegate, PaintQtyDelegate, ObjectSelectionDelegate, UITextFieldDelegate, ColorPickerLayoutDelegate, InteractiveCanvasPalettesDelegate, PalettesViewControllerDelegate, InteractiveCanvasGestureDelegate, InteractiveCanvasModeDelegate, CanvasFrameViewControllerDelegate, CanvasFrameDelegate, CanvasEdgeTouchDelegate, InteractiveCanvasSelectedObjectViewDelegate, InteractiveCanvasSelectedObjectMoveViewDelegate, MenuButtonDelegate,
                                        InteractiveCanvasSocketConnectionDelegate, SceneDelegateDeleage, InteractiveCanvasEraseDelegate, InteractiveCanvasSocketLatencyDelegate, InteractiveCanvasMenuDelegate, ColorSelectionDelegate, ColorPicker2LayoutDelegate, HelpMessagesDelegate {
     
     @IBOutlet var surfaceView: InteractiveCanvasView!
@@ -67,14 +67,14 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     @IBOutlet var recentColorsActionLeading: NSLayoutConstraint!
     @IBOutlet var recentColorsActionTrailing: NSLayoutConstraint!
     
-    @IBOutlet weak var recentColorsContainer: UIView!
+    @IBOutlet weak var paletteColorsContainer: UIView!
     @IBOutlet weak var recentColorsImage: UIImageView!
     
     @IBOutlet weak var pixelHistoryView: UIView!
     
     @IBOutlet weak var recentColorsContainerWidth: NSLayoutConstraint!
     @IBOutlet weak var recentColorsContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak var recentColorsContainerAspectRatio: NSLayoutConstraint!
+    @IBOutlet weak var paletteColorsContainerAspectRatio: NSLayoutConstraint!
     
     @IBOutlet weak var exportContainer: UIView!
     
@@ -262,7 +262,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     var colorPanelIcons = [ColorPanelIcon]()
     
     var pixelHistoryViewController: PixelHistoryViewController!
-    weak var recentColorsViewController: RecentColorsViewController!
+    weak var paletteColorsViewController: PaletteColorsViewController!
     weak var exportViewController: ExportViewController!
     weak var colorPickerViewController: ColorPickerOutletsViewController!
     weak var colorPicker2ViewController: ColorPicker2ViewController!
@@ -308,7 +308,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         surfaceView.objectSelectionDelegate = self
         
         self.surfaceView.interactiveCanvas.pixelHistoryDelegate = self
-        self.surfaceView.interactiveCanvas.recentColorsDelegate = self
         self.surfaceView.interactiveCanvas.artExportDelegate = self
         self.surfaceView.interactiveCanvas.eraseDelegate = self
         self.surfaceView.interactiveCanvas.latencyDelegate = self
@@ -678,6 +677,10 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         eraseButtonLeading.constant = (distToMiddleButtonLeading - eraseButtonBackgroundOuterView.frame.size.width) / 2
         colorSelectButtonTrailing.constant = (distToMiddleButtonTrailing - eraseButtonBackgroundOuterView.frame.size.width) / 2
         
+        // color palette
+        self.paletteColorsViewController.paletteColorsView.delegate = self
+        self.paletteColorsViewController.paletteColorsView.setNeedsDisplay()
+        
         if SessionSettings.instance.rightHanded {
             // right-handed
             
@@ -914,9 +917,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 //            closePaintPanelButton.color = SessionSettings.instance.paintPanelCloseButtonColor
 //        }
         
-        self.surfaceView.interactiveCanvas.updateRecentColors()
-        self.setupColorPalette(colors: self.surfaceView.interactiveCanvas.recentColors)
-        
         self.summaryView.setNeedsDisplay()
         self.deviceViewportSummaryView.setNeedsDisplay()
         
@@ -1109,7 +1109,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             self.pixelHistoryViewController.server = server
         }
         else if segue.identifier == "RecentColorsEmbed" {
-            self.recentColorsViewController = segue.destination as? RecentColorsViewController
+            self.paletteColorsViewController = segue.destination as? PaletteColorsViewController
         }
         else if segue.identifier == "ExportEmbed" {
             self.exportViewController = segue.destination as? ExportViewController
@@ -1134,6 +1134,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             //surfaceView.interactiveCanvas.saveDeviceViewport()
             
             SessionSettings.instance.save()
+            SessionSettings.instance.clearDelegates()
             
             StatTracker.instance.achievementListener = nil
             
@@ -1242,6 +1243,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         
         self.actionButtonContainer.isHidden = false
+        self.updateColorPanelIcons(color: SessionSettings.instance.paintColor)
     }
     
     func togglePaintPanel(open: Bool, softHide: Bool = false) {
@@ -1346,7 +1348,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     func toggleRecentColors(open: Bool) {
         if open {
             self.recentColorsImage.isHidden = true
-            self.recentColorsContainer.isHidden = false
+            self.paletteColorsContainer.isHidden = false
             
             if (paintPanel.isHidden) {
                 self.togglePaintPanel(open: true)
@@ -1354,7 +1356,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
         else {
             self.recentColorsImage.isHidden = false
-            self.recentColorsContainer.isHidden = true
+            self.paletteColorsContainer.isHidden = true
         }
     }
     
@@ -1497,30 +1499,22 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.pixelHistoryView.isHidden = true
     }
     
-    // recent colors delegate
-    func notifyNewRecentColors(recentColors: [Int32]) {
-        if SessionSettings.instance.selectedPaletteIndex == 0 {
-            self.setupColorPalette(colors: recentColors)
-        }
-    }
-    
     func setupColorPalette(colors: [Int32]) {
         let isTablet = UIDevice.current.userInterfaceIdiom == .pad
-        self.recentColorsViewController.recentColorsView.delegate = self
-        self.recentColorsViewController.recentColorsView.isTablet = isTablet
-        self.recentColorsViewController.recentColorsView.recentColors = colors.reversed()
+        self.paletteColorsViewController.paletteColorsView.delegate = self
+        self.paletteColorsViewController.paletteColorsView.isTablet = isTablet
         
         if isTablet {
             // By Claude
             // Remove the existing constraint
-            self.recentColorsContainerAspectRatio.isActive = false
+            self.paletteColorsContainerAspectRatio.isActive = false
 
             // Create a new constraint with the desired aspect ratio
             let newAspectRatio = NSLayoutConstraint(
-                item: recentColorsContainer,
+                item: paletteColorsContainer,
                 attribute: .width,
                 relatedBy: .equal,
-                toItem: recentColorsContainer,
+                toItem: paletteColorsContainer,
                 attribute: .height,
                 multiplier: 16, // or just 8.0 for 16:2
                 constant: 0
@@ -1528,12 +1522,12 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
 
             // Add and activate the new constraint
             newAspectRatio.isActive = true
-            self.recentColorsContainerAspectRatio = newAspectRatio
+            self.paletteColorsContainerAspectRatio = newAspectRatio
         }
     }
     
     // recent colors delegate
-    func notifyRecentColorSelected(color: Int32) {
+    func notifyPaletteColorSelected(color: Int32) {
         self.notifyPaintColorUpdate()
         self.colorPickerViewController.selectedColor = UIColor(argb: color)
         
@@ -1780,8 +1774,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             paletteRemoveColor.isHidden = true
             
             self.lockPaintPanelCenterX.constant = 0
-            
-            self.setupColorPalette(colors: self.surfaceView.interactiveCanvas.recentColors)
         }
         else {
             if SessionSettings.instance.palette.colors.contains(SessionSettings.instance.paintColor) {
@@ -1794,8 +1786,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
             }
             
             self.lockPaintPanelCenterX.constant = 20
-            
-            self.setupColorPalette(colors: SessionSettings.instance.palette.colors)
         }
         
         updateColorPanelIcons(color: SessionSettings.instance.paintColor)

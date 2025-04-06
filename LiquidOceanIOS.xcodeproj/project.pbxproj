@@ -27,7 +27,7 @@
 		070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DA9DC2732B97800D76775 /* CanvasImportViewController.swift */; };
 		070DA9DF2732B98500D76775 /* CanvasExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */; };
 		0712053625DEDF1100AE0F52 /* ActionButtonFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053525DEDF1100AE0F52 /* ActionButtonFrame.swift */; };
-		0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053725DF2D5100AE0F52 /* RecentColorsViewController.swift */; };
+		0712053825DF2D5100AE0F52 /* PaletteColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053725DF2D5100AE0F52 /* PaletteColorsViewController.swift */; };
 		0712053A25DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0712053925DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift */; };
 		071ACA5D2D8F131200490385 /* HelpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA5C2D8F131200490385 /* HelpListView.swift */; };
 		071ACA5F2D8F13A000490385 /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ACA5E2D8F13A000490385 /* HelpViewModel.swift */; };
@@ -136,7 +136,7 @@
 		07DA42F02D78C34100275BC2 /* PrivateServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */; };
 		07DA42F22D793E4E00275BC2 /* AddPrivateServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */; };
 		07E5FAAB28BAA3C700C4717D /* Solid_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E5FAAA28BAA3C700C4717D /* Solid_black.png */; };
-		07EF25572D8CD25A0083163B /* RecentColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF25562D8CD25A0083163B /* RecentColorsView.swift */; };
+		07EF25572D8CD25A0083163B /* PaletteColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF25562D8CD25A0083163B /* PaletteColorsView.swift */; };
 		07F573C8289EA65D00D4C9EF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F573C7289EA65D00D4C9EF /* Server.swift */; };
 		07FF5EFF25DF5833003E19AE /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF5EFE25DF5833003E19AE /* ArtView.swift */; };
 		07FF5F0125DF616A003E19AE /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF5F0025DF616A003E19AE /* ExportViewController.swift */; };
@@ -203,7 +203,7 @@
 		070DA9DC2732B97800D76775 /* CanvasImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasImportViewController.swift; sourceTree = "<group>"; };
 		070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasExportViewController.swift; sourceTree = "<group>"; };
 		0712053525DEDF1100AE0F52 /* ActionButtonFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonFrame.swift; sourceTree = "<group>"; };
-		0712053725DF2D5100AE0F52 /* RecentColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorsViewController.swift; sourceTree = "<group>"; };
+		0712053725DF2D5100AE0F52 /* PaletteColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteColorsViewController.swift; sourceTree = "<group>"; };
 		0712053925DF2F0700AE0F52 /* RecentColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		071ACA5C2D8F131200490385 /* HelpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpListView.swift; sourceTree = "<group>"; };
 		071ACA5E2D8F13A000490385 /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 		07DA42EF2D78C34100275BC2 /* PrivateServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerListView.swift; sourceTree = "<group>"; };
 		07DA42F12D793E4E00275BC2 /* AddPrivateServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrivateServerView.swift; sourceTree = "<group>"; };
 		07E5FAAA28BAA3C700C4717D /* Solid_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Solid_black.png; sourceTree = "<group>"; };
-		07EF25562D8CD25A0083163B /* RecentColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorsView.swift; sourceTree = "<group>"; };
+		07EF25562D8CD25A0083163B /* PaletteColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteColorsView.swift; sourceTree = "<group>"; };
 		07F573C7289EA65D00D4C9EF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		07FF5EFE25DF5833003E19AE /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		07FF5F0025DF616A003E19AE /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
@@ -379,7 +379,7 @@
 				07A246D525D4A83500C73CA6 /* LoadingViewController.swift */,
 				07006C4125DCB6D400DF9A64 /* PixelHistoryViewController.swift */,
 				07BD25CA25D43FB500CF812E /* InteractiveCanvasViewController.swift */,
-				0712053725DF2D5100AE0F52 /* RecentColorsViewController.swift */,
+				0712053725DF2D5100AE0F52 /* PaletteColorsViewController.swift */,
 				07FF5F0025DF616A003E19AE /* ExportViewController.swift */,
 				07FF5F0225E41EF9003E19AE /* StatsViewController.swift */,
 				07FF5F0C25E54DCF003E19AE /* SignInViewController.swift */,
@@ -624,7 +624,7 @@
 				0731602A28A0159B00466BC4 /* ButtonFrame.swift */,
 				07D6934428BA993C00F2EBE7 /* OptionContainerView.swift */,
 				074A76002D7179EB00D487EC /* CombinedGestureView.swift */,
-				07EF25562D8CD25A0083163B /* RecentColorsView.swift */,
+				07EF25562D8CD25A0083163B /* PaletteColorsView.swift */,
 				071ACA622D8F231300490385 /* HelpMessageViewCell.swift */,
 				0746FCED2DA1EDD7006A45BC /* UIView+showToast.swift */,
 			);
@@ -899,7 +899,7 @@
 				0712053625DEDF1100AE0F52 /* ActionButtonFrame.swift in Sources */,
 				07DA42F22D793E4E00275BC2 /* AddPrivateServerView.swift in Sources */,
 				070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */,
-				0712053825DF2D5100AE0F52 /* RecentColorsViewController.swift in Sources */,
+				0712053825DF2D5100AE0F52 /* PaletteColorsViewController.swift in Sources */,
 				07BD25ED25D440DD00CF812E /* InteractiveCanvasView.swift in Sources */,
 				075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */,
 				0746FCE62DA1BADC006A45BC /* LoadingBar.swift in Sources */,
@@ -918,7 +918,7 @@
 				0746FCF22DA232B3006A45BC /* BPalette.swift in Sources */,
 				07BD25D125D43FB500CF812E /* LiquidOceanIOS.xcdatamodeld in Sources */,
 				07D6934328BA57A300F2EBE7 /* TermsOfUseViewController.swift in Sources */,
-				07EF25572D8CD25A0083163B /* RecentColorsView.swift in Sources */,
+				07EF25572D8CD25A0083163B /* PaletteColorsView.swift in Sources */,
 				07FF5F0F25E54EE7003E19AE /* OptionsViewController.swift in Sources */,
 				078AF007260119DE00AB4CE4 /* InteractiveCanvasSocket.swift in Sources */,
 				07BD25F525D44F2A00CF812E /* Utils.swift in Sources */,

@@ -23,10 +23,6 @@ protocol InteractiveCanvasPixelHistoryDelegate: AnyObject {
     func notifyHidePixelHistory()
 }
 
-protocol InteractiveCanvasRecentColorsDelegate: AnyObject {
-    func notifyNewRecentColors(recentColors: [Int32])
-}
-
 protocol InteractiveCanvasArtExportDelegate: AnyObject {
     func notifyArtExported(art: [InteractiveCanvas.RestorePoint])
 }
@@ -102,7 +98,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
     weak var drawCallback: InteractiveCanvasDrawCallback?
     weak var scaleCallback: InteractiveCanvasScaleCallback?
     weak var pixelHistoryDelegate: InteractiveCanvasPixelHistoryDelegate?
-    weak var recentColorsDelegate: InteractiveCanvasRecentColorsDelegate?
     weak var artExportDelegate: InteractiveCanvasArtExportDelegate?
     weak var deviceViewportResetDelegate: InteractiveCanvasDeviceViewportResetDelegate?
     weak var selectedObjectDelegate: InteractiveCanvasSelectedObjectDelegate?
@@ -115,8 +110,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
     let maxScaleFactor = CGFloat(7)
     
     var scaleFactor = CGFloat(0.2)
-    
-    var recentColors = [Int32]()
     
     static let backgroundBlack = 0
     static let backgroundWhite = 1
@@ -302,25 +295,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
             
             arr[y][x] = shortTermPixel.restorePoint.color
         }
-        
-        recentColors = [Int32]()
-        
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
-        self.recentColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
     }
     
     func registerForSocketEvents(socket: SocketIOClient) {
@@ -646,9 +620,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
                         
                         cancelBatchPixelsTask()
                         startBatchPixelsTask()
-                        
-                        updateRecentColors()
-                        self.recentColorsDelegate?.notifyNewRecentColors(recentColors: self.recentColors)
                     }
                 }
                 else {
@@ -809,39 +780,6 @@ class InteractiveCanvas: NSObject, ObservableObject {
         }
         
         return str
-    }
-    
-    func updateRecentColors() {
-        var colorIndex = -1
-        for restorePoint in self.restorePoints {
-            var contains = false
-            for i in 0...recentColors.count - 1 {
-                if restorePoint.newColor == self.recentColors[i] {
-                    contains = true
-                    colorIndex = i
-                }
-            }
-            if !contains {
-                if self.recentColors.count == SessionSettings.instance.numRecentColors {
-                    recentColors.remove(at: 0)
-                }
-                self.recentColors.append(restorePoint.newColor)
-            }
-            else {
-                self.recentColors.remove(at: colorIndex)
-                self.recentColors.append(restorePoint.newColor)
-            }
-        }
-        
-        do {
-            let data = try JSONSerialization.data(withJSONObject: self.recentColors, options: [])
-            let str = String(data: data, encoding: .utf8)
-            
-            SessionSettings.instance.userDefaults().set(str, forKey: "recent_colors")
-        }
-        catch {
-            
-        }
     }
     
     func getGridLineColor() -> Int32 {

@@ -2562,17 +2562,17 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoZ-vF-uEO">
-                                <rect key="frame" x="0.0" y="-306" width="896" height="720"/>
+                                <rect key="frame" x="0.0" y="-326" width="896" height="740"/>
                                 <subviews>
                                     <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpT-yf-Thz">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="720"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
                                         <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="0.81000000000000005" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="vlp-4O-A3P" kind="embed" identifier="ColorPickerEmbed" id="WcB-8f-H9a"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMH-ZX-iiz">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="720"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
                                         <connections>
                                             <segue destination="J99-Ay-ID7" kind="embed" identifier="ColorPicker2Embed" id="PSG-Js-OXX"/>
                                         </connections>
@@ -2584,7 +2584,7 @@
                                     <constraint firstItem="lpT-yf-Thz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="EIl-b3-eR0"/>
                                     <constraint firstAttribute="bottom" secondItem="oMH-ZX-iiz" secondAttribute="bottom" id="JzB-cc-1FT"/>
                                     <constraint firstAttribute="trailing" secondItem="oMH-ZX-iiz" secondAttribute="trailing" id="Oeg-iY-NZh"/>
-                                    <constraint firstAttribute="height" constant="720" id="RjT-v4-7fj"/>
+                                    <constraint firstAttribute="height" constant="740" id="RjT-v4-7fj"/>
                                     <constraint firstAttribute="trailing" secondItem="lpT-yf-Thz" secondAttribute="trailing" id="Tfq-b0-dM2"/>
                                     <constraint firstAttribute="bottom" secondItem="lpT-yf-Thz" secondAttribute="bottom" id="bQb-Wu-1Hn"/>
                                     <constraint firstItem="oMH-ZX-iiz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="cNi-8G-JZu"/>
@@ -3046,6 +3046,8 @@
                         <outlet property="paintQuantityCircle" destination="b36-UU-QMQ" id="men-yW-Ws9"/>
                         <outlet property="paletteAddColor" destination="TsI-8M-V1b" id="173-Zc-0hA"/>
                         <outlet property="paletteAddColorAction" destination="4aY-mC-okY" id="gFb-Hp-Ivh"/>
+                        <outlet property="paletteColorsContainer" destination="1T9-L7-JKj" id="XI8-Dv-ZSM"/>
+                        <outlet property="paletteColorsContainerAspectRatio" destination="MaV-pP-PyW" id="wvY-Rl-Ssj"/>
                         <outlet property="paletteRemoveColor" destination="P8k-XK-aMp" id="Ogr-7R-oap"/>
                         <outlet property="paletteRemoveColorAction" destination="2aL-ak-Gh8" id="vCB-Ks-de2"/>
                         <outlet property="palettesView" destination="0bh-it-Xd2" id="Xtd-8L-sSV"/>
@@ -3056,8 +3058,6 @@
                         <outlet property="recentColorsButton" destination="3Wc-83-toh" id="oja-Xv-NAt"/>
                         <outlet property="recentColorsButtonLeading" destination="LbT-aO-inW" id="nah-r4-AS8"/>
                         <outlet property="recentColorsButtonTrailing" destination="GnW-Xy-fqt" id="pjP-Vs-IAS"/>
-                        <outlet property="recentColorsContainer" destination="1T9-L7-JKj" id="XI8-Dv-ZSM"/>
-                        <outlet property="recentColorsContainerAspectRatio" destination="MaV-pP-PyW" id="wvY-Rl-Ssj"/>
                         <outlet property="recentColorsImage" destination="2ag-ni-Ii1" id="wLZ-ok-bad"/>
                         <outlet property="selectedObjectNoAction" destination="sRO-h5-UP1" id="RZC-v8-OyU"/>
                         <outlet property="selectedObjectNoButton" destination="Rgv-lh-rti" id="qtb-ei-WkT"/>
@@ -3086,7 +3086,7 @@
             <objects>
                 <viewController id="vlp-4O-A3P" customClass="ColorPickerOutletsViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5r5-D9-GHB">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="720"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-Yu-uP0" customClass="ActionButtonFrame" customModule="LiquidOceanIOS" customModuleProvider="target">
@@ -3130,7 +3130,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQc-ZZ-5IN" customClass="RadialPaletteControl" customModule="FlexColorPicker">
-                                <rect key="frame" x="328" y="240" width="240" height="240"/>
+                                <rect key="frame" x="328" y="250" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="SPU-B7-fss"/>
@@ -3138,7 +3138,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2Z-sl-HLi" customClass="BrightnessSliderControl" customModule="FlexColorPicker">
-                                <rect key="frame" x="328" y="512" width="240" height="15"/>
+                                <rect key="frame" x="328" y="522" width="240" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="6dJ-mr-B18"/>
@@ -3294,15 +3294,15 @@
             </objects>
             <point key="canvasLocation" x="246" y="929"/>
         </scene>
-        <!--Recent Colors View Controller-->
+        <!--Palette Colors View Controller-->
         <scene sceneID="p0V-LI-OfY">
             <objects>
-                <viewController id="4Eu-IR-h8h" customClass="RecentColorsViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4Eu-IR-h8h" customClass="PaletteColorsViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m54-ZD-Z77">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="224"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGI-Az-Bef" customClass="RecentColorsView" customModule="LiquidOceanIOS" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGI-Az-Bef" customClass="PaletteColorsView" customModule="LiquidOceanIOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="224"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -3317,7 +3317,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="recentColorsView" destination="MGI-Az-Bef" id="9Z3-MW-OLA"/>
+                        <outlet property="paletteColorsView" destination="MGI-Az-Bef" id="9Z3-MW-OLA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xqp-Fe-c3G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4651,11 +4651,19 @@ If any person on any canvas uses pixels to give out any personal information abo
             <objects>
                 <viewController id="J99-Ay-ID7" customClass="ColorPicker2ViewController" customModule="LiquidOceanIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="jv7-2W-5qR">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="720"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFJ-33-dDy" customClass="PaletteColorsView" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                <rect key="frame" x="288" y="16" width="320" height="80"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="UDe-oI-3k7"/>
+                                    <constraint firstAttribute="height" constant="80" id="hg3-S5-BoB"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ei9-pC-CvA" customClass="RGBColorWheel" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="328" y="246" width="240" height="240"/>
+                                <rect key="frame" x="328" y="266" width="240" height="240"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="Ati-n9-TmQ"/>
@@ -4663,42 +4671,42 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0N-sp-If7" customClass="HPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="40" y="506" width="748" height="20"/>
+                                <rect key="frame" x="40" y="526" width="748" height="20"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="RpH-0F-Vc7"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-7p-UKO" customClass="SPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="40" y="546" width="748" height="20"/>
+                                <rect key="frame" x="40" y="566" width="748" height="20"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="69c-8w-yG4"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCg-aQ-1VC" customClass="BPalette" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="40" y="586" width="748" height="20"/>
+                                <rect key="frame" x="40" y="606" width="748" height="20"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="OWZ-7z-BJv"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inL-Wg-wBW">
-                                <rect key="frame" x="40" y="146" width="816" height="40"/>
+                                <rect key="frame" x="40" y="166" width="816" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="11z-sH-9En"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sc2-1d-Ncl">
-                                <rect key="frame" x="40" y="186" width="816" height="40"/>
+                                <rect key="frame" x="40" y="206" width="816" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ia4-JE-i3G"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJj-dd-cXe">
-                                <rect key="frame" x="786" y="92" width="70" height="34"/>
+                                <rect key="frame" x="786" y="112" width="70" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="C1q-Ge-oyY"/>
                                     <constraint firstAttribute="width" constant="70" id="bD1-Y2-K0e"/>
@@ -4710,7 +4718,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28z-Af-cko">
-                                <rect key="frame" x="811" y="499" width="45" height="34"/>
+                                <rect key="frame" x="811" y="519" width="45" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="EH1-ry-61y"/>
                                     <constraint firstAttribute="width" constant="45" id="qFO-Ty-rWM"/>
@@ -4722,7 +4730,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y66-zh-NIU">
-                                <rect key="frame" x="811" y="539" width="45" height="34"/>
+                                <rect key="frame" x="811" y="559" width="45" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="7ZT-cJ-uBy"/>
                                     <constraint firstAttribute="height" constant="34" id="HDX-Ge-JOK"/>
@@ -4734,7 +4742,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Ft-3z-ZNp">
-                                <rect key="frame" x="811" y="579" width="45" height="34"/>
+                                <rect key="frame" x="811" y="599" width="45" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="9v6-7N-xrZ"/>
                                     <constraint firstAttribute="height" constant="34" id="AYg-Ws-ddp"/>
@@ -4746,14 +4754,14 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-9o-8dA">
-                                <rect key="frame" x="40" y="622" width="816" height="0.0"/>
+                                <rect key="frame" x="40" y="642" width="816" height="0.0"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="1Ep-sZ-gXu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhx-NH-k3X">
-                                <rect key="frame" x="278" y="635" width="340" height="35"/>
+                                <rect key="frame" x="278" y="655" width="340" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYf-Tg-fYU">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
@@ -4791,6 +4799,18 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstAttribute="bottom" secondItem="GDV-Oh-gg5" secondAttribute="bottom" id="xiZ-Rj-uOw"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7P-v0-6qV">
+                                <rect key="frame" x="368" y="111" width="160" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Gaf-27-dqU"/>
+                                    <constraint firstAttribute="height" constant="35" id="zq0-oK-5Qf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="^"/>
+                                <connections>
+                                    <action selector="onLoadColorPressed:" destination="J99-Ay-ID7" eventType="touchUpInside" id="70F-91-kUg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DeZ-vW-XnC"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4806,6 +4826,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="h0N-sp-If7" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="40" id="ITf-sf-zx6"/>
                             <constraint firstAttribute="trailing" secondItem="28z-Af-cko" secondAttribute="trailing" constant="40" id="KBr-Tq-4lB"/>
                             <constraint firstAttribute="trailing" secondItem="5Ft-3z-ZNp" secondAttribute="trailing" constant="40" id="KVk-az-nSM"/>
+                            <constraint firstItem="inL-Wg-wBW" firstAttribute="top" secondItem="tFJ-33-dDy" secondAttribute="bottom" constant="70" id="NBl-iD-Yqb"/>
                             <constraint firstItem="rhx-NH-k3X" firstAttribute="centerX" secondItem="jv7-2W-5qR" secondAttribute="centerX" id="P8v-e4-0YN"/>
                             <constraint firstAttribute="bottom" secondItem="rhx-NH-k3X" secondAttribute="bottom" constant="50" id="QkQ-dx-nx9"/>
                             <constraint firstItem="5Ft-3z-ZNp" firstAttribute="leading" secondItem="QCg-aQ-1VC" secondAttribute="trailing" constant="23" id="RGG-aS-18w"/>
@@ -4814,13 +4835,16 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="rhx-NH-k3X" firstAttribute="top" secondItem="lvi-9o-8dA" secondAttribute="bottom" constant="13" id="VKv-wc-gga"/>
                             <constraint firstItem="Sc2-1d-Ncl" firstAttribute="top" secondItem="inL-Wg-wBW" secondAttribute="bottom" id="Vea-iM-1KM"/>
                             <constraint firstItem="lvi-9o-8dA" firstAttribute="trailing" secondItem="5Ft-3z-ZNp" secondAttribute="trailing" id="WwH-LI-Cuq"/>
+                            <constraint firstItem="U7P-v0-6qV" firstAttribute="centerX" secondItem="jv7-2W-5qR" secondAttribute="centerX" id="aiR-e9-nJd"/>
                             <constraint firstItem="5Ft-3z-ZNp" firstAttribute="centerY" secondItem="QCg-aQ-1VC" secondAttribute="centerY" id="eSn-yj-urz"/>
                             <constraint firstItem="h0N-sp-If7" firstAttribute="top" secondItem="Ei9-pC-CvA" secondAttribute="bottom" constant="20" id="fcl-6y-vNb"/>
                             <constraint firstItem="28z-Af-cko" firstAttribute="leading" secondItem="h0N-sp-If7" secondAttribute="trailing" constant="23" id="hoq-4l-Ost"/>
                             <constraint firstItem="Y66-zh-NIU" firstAttribute="centerY" secondItem="1jO-7p-UKO" secondAttribute="centerY" id="jGV-YL-i0C"/>
                             <constraint firstItem="lvi-9o-8dA" firstAttribute="leading" secondItem="QCg-aQ-1VC" secondAttribute="leading" id="lIV-3J-QHU"/>
                             <constraint firstItem="QCg-aQ-1VC" firstAttribute="top" secondItem="1jO-7p-UKO" secondAttribute="bottom" constant="20" id="nLf-To-uFE"/>
+                            <constraint firstItem="inL-Wg-wBW" firstAttribute="top" secondItem="U7P-v0-6qV" secondAttribute="bottom" constant="20" id="nzL-Au-uNu"/>
                             <constraint firstAttribute="trailing" secondItem="mJj-dd-cXe" secondAttribute="trailing" constant="40" id="oad-hG-B6B"/>
+                            <constraint firstItem="tFJ-33-dDy" firstAttribute="centerX" secondItem="jv7-2W-5qR" secondAttribute="centerX" id="qtu-Hd-olN"/>
                             <constraint firstItem="28z-Af-cko" firstAttribute="centerY" secondItem="h0N-sp-If7" secondAttribute="centerY" id="w5B-Xr-YKm"/>
                             <constraint firstItem="Y66-zh-NIU" firstAttribute="leading" secondItem="1jO-7p-UKO" secondAttribute="trailing" constant="23" id="wTL-ah-3mJ"/>
                             <constraint firstItem="Sc2-1d-Ncl" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="40" id="wTs-y2-tGx"/>
@@ -4837,6 +4861,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <outlet property="hueValueTextField" destination="28z-Af-cko" id="cqY-vX-nte"/>
                         <outlet property="keyboardLiftViewHeight" destination="1Ep-sZ-gXu" id="fDH-9y-zeW"/>
                         <outlet property="oldColorIndicatorView" destination="Sc2-1d-Ncl" id="PMk-7r-9fP"/>
+                        <outlet property="paletteColorsView" destination="tFJ-33-dDy" id="pA4-XC-k5S"/>
                         <outlet property="rgbColorWheel" destination="Ei9-pC-CvA" id="Wzr-wX-5b8"/>
                         <outlet property="sPalette" destination="1jO-7p-UKO" id="eaP-V3-Lr4"/>
                         <outlet property="saturationValueTextField" destination="Y66-zh-NIU" id="Eb4-qG-URS"/>

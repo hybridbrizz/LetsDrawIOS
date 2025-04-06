@@ -13,6 +13,10 @@ protocol PaintQtyDelegate {
     func notifyPaintQtyChanged(qty: Int)
 }
 
+protocol PaletteColorsChangedDelegate: AnyObject {
+    func onPaletteColorsChanged(paletteColors: [Int32])
+}
+
 protocol SceneDelegateDeleage {
     func sceneWillEnterForeground()
 }
@@ -58,7 +62,22 @@ class SessionSettings: NSObject {
     
     var paintQtyDelegates = [PaintQtyDelegate]()
     
-    var numRecentColors = 16
+    var paletteColorsChangedDelegates = [PaletteColorsChangedDelegate]()
+    
+    var numPaletteColors = 16
+    
+    private var _paletteColors = [Int32]()
+    var paletteColors: [Int32] {
+        set {
+            _paletteColors = newValue
+            for delegate in paletteColorsChangedDelegates {
+                delegate.onPaletteColorsChanged(paletteColors: newValue)
+            }
+        }
+        get {
+            return _paletteColors
+        }
+    }
     
     var xp = 0
     
@@ -243,6 +262,8 @@ class SessionSettings: NSObject {
         
         let publicServerLastVisitedStr = try! JSONSerialization.data(withJSONObject: publicServerLastVisitedTimes, options: [])
         userDefaults().set(String(data: publicServerLastVisitedStr, encoding: .utf8)!, forKey: "public_server_last_visited_times")
+        
+        savePaletteColors()
     }
     
     func quickSave() {
@@ -364,6 +385,13 @@ class SessionSettings: NSObject {
         
         let publicServerLastVisitedStr = userDefaultsString(forKey: "public_server_last_visited_times", defaultVal: "{}")
         publicServerLastVisitedTimes = try! JSONSerialization.jsonObject(with: publicServerLastVisitedStr.data(using: .utf8)!, options: []) as! [String: Double]
+        
+        let paletteColorsStr = userDefaultsString(forKey: "palette_colors", defaultVal: "[]")
+        paletteColors = try! JSONSerialization.jsonObject(with: paletteColorsStr.data(using: .utf8)!, options: []) as! [Int32]
+        
+        if paletteColors.count < numPaletteColors {
+            initPaletteColors()
+        }
     }
     
     func userDefaults() -> UserDefaults {
@@ -772,5 +800,46 @@ class SessionSettings: NSObject {
         messages.append("Number shows remaining edits")
         messages.append("Edits accrue for everyone")
         return messages
+    }
+    
+    func initPaletteColors() {
+        paletteColors.removeAll()
+        
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
+        paletteColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
+    }
+    
+    func loadColorIntoPalette(color: Int32, index: Int) {
+        if index >= 0 && index < paletteColors.count {
+            paletteColors[index] = color
+            savePaletteColors()
+            for delegate in paletteColorsChangedDelegates {
+                delegate.onPaletteColorsChanged(paletteColors: paletteColors)
+            }
+        }
+    }
+    
+    func savePaletteColors() {
+        let paletteColorsStr = try! JSONSerialization.data(withJSONObject: paletteColors, options: [])
+        userDefaults().set(String(data: paletteColorsStr, encoding: .utf8)!, forKey: "palette_colors")
+    }
+    
+    func clearDelegates() {
+        paintQtyDelegates.removeAll()
+        paletteColorsChangedDelegates.removeAll()
     }
 }
