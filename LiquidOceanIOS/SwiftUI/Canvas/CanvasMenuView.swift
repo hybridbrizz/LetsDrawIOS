@@ -107,7 +107,7 @@ struct CanvasMenuView: View {
                     .fixedSize()
                 }
                 .padding(16)
-                .background(Color(UIColor.darkGray))
+                .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFF1b1b1b"))))
                 .cornerRadius(10)
                 
                 Spacer()

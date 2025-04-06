@@ -34,7 +34,7 @@ struct CanvasMenuItemView: View {
             }
         }
         .frame(width: 100)
-        .background(Color(UIColor.darkGray))
+        .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFF1b1b1b"))))
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
