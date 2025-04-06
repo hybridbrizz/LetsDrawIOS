@@ -1423,16 +1423,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         }
     }
     
-    func notifyPaintColorUpdate() {
-        self.paintColorIndicator.setPaintColor(color: SessionSettings.instance.paintColor)
-        colorPickerViewController.selectedColor = UIColor(argb: SessionSettings.instance.paintColor)
-        
-        self.colorPicker(self.colorPickerViewController.colorPicker, selectedColor: self.colorPickerViewController.selectedColor, usingControl: self.colorPickerViewController.colorPicker.radialHsbPalette!)
-        
-        let color = UIColor(argb: SessionSettings.instance.paintColor)
-        
+    func notifyPaintColorUpdate(color: UIColor) {
         colorPicker2ViewController.setColor(color: color)
-        onColorSelected(selectedColor: color)
     }
     
     // color picker delegate
@@ -1528,10 +1520,12 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     // recent colors delegate
     func notifyPaletteColorSelected(color: Int32) {
-        self.notifyPaintColorUpdate()
-        self.colorPickerViewController.selectedColor = UIColor(argb: color)
+//        self.notifyPaintColorUpdate()
+//        self.colorPickerViewController.selectedColor = UIColor(argb: color)
         
         //self.toggleRecentColors(open: false)
+        
+        syncNewColor(newColor: UIColor(argb: color))
     }
     
     // export view controller delegate
@@ -2247,7 +2241,13 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     // Color Selection Delegate (ColorPicker2)
     
     func onColorSelected(selectedColor: UIColor) {
-        let color = selectedColor.argb()
+        syncNewColor(newColor: selectedColor)
+        
+        closeColorPicker()
+    }
+    
+    private func syncNewColor(newColor: UIColor) {
+        let color = newColor.argb()
         
         SessionSettings.instance.paintColor = color
         updateColorPanelIcons(color: color)
@@ -2255,8 +2255,6 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         self.paintColorIndicator.setNeedsDisplay()
         
         self.syncPaletteAndColor()
-        
-        closeColorPicker()
     }
     
     func onColorSelectionCancel() {

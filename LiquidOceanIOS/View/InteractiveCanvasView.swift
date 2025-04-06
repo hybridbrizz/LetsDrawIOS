@@ -15,7 +15,7 @@ protocol PaintActionDelegate: AnyObject {
 protocol InteractiveCanvasPaintDelegate: AnyObject {
     func notifyPaintingStarted()
     func notifyPaintingEnded(accept: Bool)
-    func notifyPaintColorUpdate()
+    func notifyPaintColorUpdate(color: UIColor)
 }
 
 protocol ObjectSelectionDelegate: AnyObject {
@@ -242,8 +242,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
                     if color == 0 {
                         color = UIColor.black.argb()
                     }
-                    SessionSettings.instance.paintColor = color
-                    paintDelegate?.notifyPaintColorUpdate()
+                    paintDelegate?.notifyPaintColorUpdate(color: UIColor(argb: color))
                 }
             }
             else if mode == .exporting || mode == .objectMoveSelection {
@@ -488,8 +487,7 @@ class InteractiveCanvasView: UIView, InteractiveCanvasDrawCallback, InteractiveC
             if color == 0 {
                 color = UIColor.black.argb()
             }
-            SessionSettings.instance.paintColor = color
-            paintDelegate?.notifyPaintColorUpdate()
+            paintDelegate?.notifyPaintColorUpdate(color: UIColor(argb: color))
         }
     }
     

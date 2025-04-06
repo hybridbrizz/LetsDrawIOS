@@ -4770,7 +4770,9 @@ If any person on any canvas uses pixels to give out any personal information abo
                                             <constraint firstAttribute="width" constant="160" id="c8J-Fr-PKe"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Cancel"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Cancel">
+                                            <color key="baseBackgroundColor" red="0.10588235294117647" green="0.10588235294117647" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="onCancelPressed:" destination="J99-Ay-ID7" eventType="touchUpInside" id="U3o-xs-VVF"/>
                                         </connections>
@@ -4782,7 +4784,9 @@ If any person on any canvas uses pixels to give out any personal information abo
                                             <constraint firstAttribute="width" constant="160" id="de2-UR-F3m"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Select"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="OK">
+                                            <color key="baseBackgroundColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="onSelectPressed:" destination="J99-Ay-ID7" eventType="touchUpInside" id="kyt-4x-apj"/>
                                         </connections>
@@ -4806,7 +4810,9 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstAttribute="height" constant="35" id="zq0-oK-5Qf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="^"/>
+                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                    <color key="baseBackgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="onLoadColorPressed:" destination="J99-Ay-ID7" eventType="touchUpInside" id="70F-91-kUg"/>
                                 </connections>
@@ -4983,6 +4989,7 @@ If any person on any canvas uses pixels to give out any personal information abo
         <image name="Palette 1" width="48" height="48"/>
         <image name="add" width="24" height="24"/>
         <image name="back" width="24" height="24"/>
+        <image name="chevron.up" catalog="system" width="128" height="70"/>
         <image name="export" width="24" height="24"/>
         <image name="grid" width="24" height="24"/>
         <image name="menu" width="24" height="24"/>
