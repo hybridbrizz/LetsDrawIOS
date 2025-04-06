@@ -4664,7 +4664,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ei9-pC-CvA" customClass="RGBColorWheel" customModule="LiquidOceanIOS" customModuleProvider="target">
                                 <rect key="frame" x="328" y="266" width="240" height="240"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="Ati-n9-TmQ"/>
                                     <constraint firstAttribute="width" constant="240" id="q0Z-KP-x55"/>

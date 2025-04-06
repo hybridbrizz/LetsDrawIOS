@@ -21,8 +21,8 @@ class PaletteColorsView: UIView, PaletteColorsChangedDelegate {
         case select
     }
     
-    private var rows = 2
-    private var cols = 8
+    var rows = 2
+    var cols = 8
     
     var _delegate: PaletteColorsDelegate? = nil
     var delegate: PaletteColorsDelegate? {

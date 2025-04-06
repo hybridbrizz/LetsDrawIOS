@@ -679,6 +679,29 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         // color palette
         self.paletteColorsViewController.paletteColorsView.delegate = self
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.paletteColorsViewController.paletteColorsView.rows = 1
+            self.paletteColorsViewController.paletteColorsView.cols = 16
+            
+            // By Claude
+            // Remove the existing constraint
+            self.paletteColorsContainerAspectRatio.isActive = false
+
+            // Create a new constraint with the desired aspect ratio
+            let newAspectRatio = NSLayoutConstraint(
+                item: paletteColorsContainer,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: paletteColorsContainer,
+                attribute: .height,
+                multiplier: 16, // or just 8.0 for 16:2
+                constant: 0
+            )
+
+            // Add and activate the new constraint
+            newAspectRatio.isActive = true
+            self.paletteColorsContainerAspectRatio = newAspectRatio
+        }
         self.paletteColorsViewController.paletteColorsView.setNeedsDisplay()
         
         if SessionSettings.instance.rightHanded {
