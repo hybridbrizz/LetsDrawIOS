@@ -47,6 +47,10 @@
 		0746FCE42DA174AA006A45BC /* PullToRefreshSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCE32DA174AA006A45BC /* PullToRefreshSwiftUI.swift */; };
 		0746FCE62DA1BADC006A45BC /* LoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCE52DA1BADC006A45BC /* LoadingBar.swift */; };
 		0746FCEE2DA1EDD7006A45BC /* UIView+showToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCED2DA1EDD7006A45BC /* UIView+showToast.swift */; };
+		0746FCF02DA22B98006A45BC /* SPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCEF2DA22B98006A45BC /* SPalette.swift */; };
+		0746FCF22DA232B3006A45BC /* BPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCF12DA232B3006A45BC /* BPalette.swift */; };
+		0746FCF42DA2C421006A45BC /* PickedColorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCF32DA2C421006A45BC /* PickedColorValues.swift */; };
+		0746FCF62DA2EF81006A45BC /* RGBColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0746FCF52DA2EF81006A45BC /* RGBColorWheel.swift */; };
 		074A76012D7179EB00D487EC /* CombinedGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A76002D7179EB00D487EC /* CombinedGestureView.swift */; };
 		075DE94A2D7288A8007C664D /* CanvasClientIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */; };
 		076120DE2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */; };
@@ -219,6 +223,10 @@
 		0746FCE32DA174AA006A45BC /* PullToRefreshSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshSwiftUI.swift; sourceTree = "<group>"; };
 		0746FCE52DA1BADC006A45BC /* LoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBar.swift; sourceTree = "<group>"; };
 		0746FCED2DA1EDD7006A45BC /* UIView+showToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+showToast.swift"; sourceTree = "<group>"; };
+		0746FCEF2DA22B98006A45BC /* SPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPalette.swift; sourceTree = "<group>"; };
+		0746FCF12DA232B3006A45BC /* BPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPalette.swift; sourceTree = "<group>"; };
+		0746FCF32DA2C421006A45BC /* PickedColorValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedColorValues.swift; sourceTree = "<group>"; };
+		0746FCF52DA2EF81006A45BC /* RGBColorWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBColorWheel.swift; sourceTree = "<group>"; };
 		074A76002D7179EB00D487EC /* CombinedGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedGestureView.swift; sourceTree = "<group>"; };
 		075DE9492D7288A8007C664D /* CanvasClientIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClientIndicatorsView.swift; sourceTree = "<group>"; };
 		076120DD2D738FF40030DAA9 /* UIViewController+SwiftUIHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+SwiftUIHosting.swift"; sourceTree = "<group>"; };
@@ -526,8 +534,12 @@
 			children = (
 				07B691222D7AB39A00BA4D9C /* SBPalette.swift */,
 				076E4EA72D7BAB9E004C363E /* HPalette.swift */,
+				0746FCEF2DA22B98006A45BC /* SPalette.swift */,
+				0746FCF12DA232B3006A45BC /* BPalette.swift */,
 				076E4EA92D7BB254004C363E /* SBIndicator.swift */,
 				076E4EAB2D7BBBAA004C363E /* HIndicator.swift */,
+				0746FCF32DA2C421006A45BC /* PickedColorValues.swift */,
+				0746FCF52DA2EF81006A45BC /* RGBColorWheel.swift */,
 			);
 			path = ColorPicker;
 			sourceTree = "<group>";
@@ -898,10 +910,12 @@
 				0744E8852D625E7300C9DD29 /* ErrorPixel.swift in Sources */,
 				070DA9DF2732B98500D76775 /* CanvasExportViewController.swift in Sources */,
 				07006C4425DCB98E00DF9A64 /* PixelHistoryCollectionViewCell.swift in Sources */,
+				0746FCF62DA2EF81006A45BC /* RGBColorWheel.swift in Sources */,
 				076E4EAC2D7BBBAA004C363E /* HIndicator.swift in Sources */,
 				07006C4225DCB6D400DF9A64 /* PixelHistoryViewController.swift in Sources */,
 				07FF5F0125DF616A003E19AE /* ExportViewController.swift in Sources */,
 				07FF5F0925E4354B003E19AE /* StatTracker.swift in Sources */,
+				0746FCF22DA232B3006A45BC /* BPalette.swift in Sources */,
 				07BD25D125D43FB500CF812E /* LiquidOceanIOS.xcdatamodeld in Sources */,
 				07D6934328BA57A300F2EBE7 /* TermsOfUseViewController.swift in Sources */,
 				07EF25572D8CD25A0083163B /* RecentColorsView.swift in Sources */,
@@ -927,6 +941,7 @@
 				07270EE2272C214300DB35CE /* Palette.swift in Sources */,
 				07C9CCE6272ECA2900C9D0A1 /* CanvasFrameViewController.swift in Sources */,
 				07006C4025D6CEF200DF9A64 /* MenuViewController.swift in Sources */,
+				0746FCF02DA22B98006A45BC /* SPalette.swift in Sources */,
 				078891722D750E5300B4041B /* ServerListViewModel.swift in Sources */,
 				071ACA612D8F21F000490385 /* HelpMessagesViewController.swift in Sources */,
 				07270EE4272C333A00DB35CE /* PaletteCollectionViewCell.swift in Sources */,
@@ -958,6 +973,7 @@
 				07BD25C925D43FB500CF812E /* SceneDelegate.swift in Sources */,
 				07B691232D7AB39A00BA4D9C /* SBPalette.swift in Sources */,
 				07AE665F289ED5BE00E2E9FC /* ServerCell.swift in Sources */,
+				0746FCF42DA2C421006A45BC /* PickedColorValues.swift in Sources */,
 				07A9B17025ED611C009A47DF /* PanelThemeConfig.swift in Sources */,
 				078AF00926016CCB00AB4CE4 /* PaintQuantityCircle.swift in Sources */,
 				0707C5E62D63AAA5008E0120 /* PendingUndo.swift in Sources */,

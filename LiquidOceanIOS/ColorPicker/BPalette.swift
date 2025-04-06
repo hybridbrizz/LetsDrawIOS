@@ -2,7 +2,7 @@
 //  HPalette.swift
 //  LiquidOceanIOS
 //
-//  Created by Eric Versteeg on 3/7/25.
+//  Created by Eric Versteeg on 4/5/25.
 //  Copyright © 2025 Eric Versteeg. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-protocol HueSelectionDelegate: AnyObject {
-    func onHueChanged()
+protocol BSelectionDelegate: AnyObject {
+    func onBChanged()
 }
 
-class HPalette: UIView {
+class BPalette: UIView {
     
     private var w: Int = 0
     private var h: Int = 0
@@ -22,7 +22,7 @@ class HPalette: UIView {
     private var indicator: SBIndicator
     private var indicatorSize: CGFloat = 20
     
-    var hueSelectionDelegate: HueSelectionDelegate? = nil
+    var bSelectionDelegate: BSelectionDelegate? = nil
     
     private var pcv: PickedColorValues? = nil
     
@@ -63,23 +63,24 @@ class HPalette: UIView {
         
         let ctx = UIGraphicsGetCurrentContext()!
         if let pcv = pcv {
-            drawHuePalette(on: ctx, pcv: pcv)
+            drawBPalette(on: ctx, pcv: pcv)
         }
         
         moveIndicator()
     }
     
     // Converted from Kotlin by Claude
-    private func drawHuePalette(on context: CGContext, pcv: PickedColorValues) {
+    private func drawBPalette(on context: CGContext, pcv: PickedColorValues) {
+
         let wf = CGFloat(w)
         
         var pixels = [UInt32](repeating: 0, count: w * h)
         
         for x in 0..<w {
-            let h = CGFloat(x) / wf * pcv.maxValue
+            let b = CGFloat(x) / wf * pcv.maxValue
             
             // Convert hue to UIColor using HSB color space
-            let color = UIColor(hue: h, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+            let color = UIColor(hue: pcv.h, saturation: pcv.s, brightness: b, alpha: 1.0)
             
             // Convert UIColor to RGBA format
             var red: CGFloat = 0
@@ -92,11 +93,11 @@ class HPalette: UIView {
             // Pack RGBA values into UInt32
             let r = UInt32(red * 255.0)
             let g = UInt32(green * 255.0)
-            let b = UInt32(blue * 255.0)
+            let br = UInt32(blue * 255.0)
             let a = UInt32(alpha * 255.0)
             
             // RGBA8888 format
-            pixels[x] = (a << 24) | (b << 16) | (g << 8) | r
+            pixels[x] = (a << 24) | (br << 16) | (g << 8) | r
         }
         
         // Create a bitmap from the pixel data
@@ -135,11 +136,11 @@ class HPalette: UIView {
 
         if sender.state == .began || sender.state == .changed {
             if let pcv = pcv {
-                pcv.h = max(min(location.x / CGFloat(w) * pcv.maxValue, pcv.maxValue), pcv.minValue)
+                pcv.b = max(min(location.x / CGFloat(w) * pcv.maxValue, pcv.maxValue), pcv.minValue)
                 
-                print("h = \(pcv.h)")
+                print("b = \(pcv.b)")
                 
-                hueSelectionDelegate?.onHueChanged()
+                bSelectionDelegate?.onBChanged()
                 
                 moveIndicator()
             }
@@ -148,7 +149,7 @@ class HPalette: UIView {
     
     func moveIndicator() {
         if let pcv = pcv {
-            indicator.frame = CGRect(x: CGFloat(w) * (pcv.h / pcv.maxValue) - indicatorSize / 2,
+            indicator.frame = CGRect(x: CGFloat(w) * (pcv.b / pcv.maxValue) - indicatorSize / 2,
                                      y: 0, width: indicatorSize, height: frame.height)
             indicator.setNeedsDisplay()
         }

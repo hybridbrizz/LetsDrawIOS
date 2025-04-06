@@ -1450,7 +1450,7 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.updatePaintColorAcceptColorMode(color: color)
         
-        self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
+        //self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
         
         self.syncPaletteAndColor()
     }
@@ -2274,7 +2274,9 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
         
         self.updatePaintColorAcceptColorMode(color: color)
         
-        self.colorPicker2ViewController.colorHexTextField.text = UIColor(argb: color).hexString()
+        self.colorPicker2ViewController.colorHexTextField.text = selectedColor.hexString()
+        
+        self.colorPicker2ViewController.setColor(color: selectedColor)
         
         self.syncPaletteAndColor()
     }

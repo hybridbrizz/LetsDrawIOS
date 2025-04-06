@@ -10,29 +10,22 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-protocol ColorSelectionDelegate: AnyObject {
-    func onColorSelected(selectedColor: UIColor)
+protocol SBSelectionDelegate: AnyObject {
+    func onSBChanged()
 }
 
-class SBPalette: UIView, HueSelectionDelegate {
+class SBPalette: UIView {
     
     private var w: Int = 0
     private var h: Int = 0
-    
-    private var minSb: CGFloat = 0
-    private var maxSb: CGFloat = 1
-    
-    private var s: CGFloat = 0.5
-    private var b: CGFloat = 0.5
     
     private var indicatorSize: CGFloat = 20
     
     private var indicator: SBIndicator
     
-    private var hue: CGFloat = 0
-    private var maxHue: CGFloat = 360
+    var sbSelectionDelegate: SBSelectionDelegate? = nil
     
-    var colorSelectionDelegate: ColorSelectionDelegate? = nil
+    private var pcv: PickedColorValues? = nil
     
     required override init(frame: CGRect) {
         indicator = SBIndicator(frame: CGRect(x: 0, y: 0, width: indicatorSize, height: indicatorSize))
@@ -70,13 +63,16 @@ class SBPalette: UIView, HueSelectionDelegate {
         super.draw(rect)
         
         let ctx = UIGraphicsGetCurrentContext()!
-        drawSBSquare(hue: hue, context: ctx)
+        
+        if let pcv = pcv {
+            drawSBSquare(context: ctx, pcv: pcv)
+        }
         
         moveIndicator()
     }
     
     // Converted from Kotlin by Claude
-    private func drawSBSquare(hue: CGFloat, context: CGContext) {
+    private func drawSBSquare(context: CGContext, pcv: PickedColorValues) {
         if w == 0 || h == 0 { return }
         
         let wf = CGFloat(w)
@@ -87,13 +83,13 @@ class SBPalette: UIView, HueSelectionDelegate {
         for y in 0..<h {
             for x in 0..<w {
                 let s = CGFloat(x) / wf
-                let br = maxSb - (CGFloat(h - y) / hf)
+                let br = pcv.maxValue - (CGFloat(h - y) / hf)
                 
                 // Convert HSB to RGB directly
-                let color = UIColor(hue: CGFloat(hue),
+                let color = UIColor(hue: pcv.h,
                                    saturation: CGFloat(s),
                                    brightness: CGFloat(br),
-                                   alpha: 1.0)
+                                    alpha: 1.0)
                 
                 // Convert UIColor to RGBA format
                 var red: CGFloat = 0
@@ -150,48 +146,30 @@ class SBPalette: UIView, HueSelectionDelegate {
         let location = sender.location(in: self)
 
         if sender.state == .began || sender.state == .changed {
-            s = max(min(location.x / CGFloat(w), maxSb), minSb)
-            b = max(min(1 - (location.y / CGFloat(h)), maxSb), minSb)
-            
-            colorSelectionDelegate?.onColorSelected(selectedColor: UIColor(hue: hue,
-                                                                   saturation: s,
-                                                                   brightness: b,
-                                                                   alpha: 1.0))
-            
-            print("s = \(s), b = \(b)")
-            
-            moveIndicator()
+            if let pcv = pcv {
+                pcv.s = max(min(location.x / CGFloat(w), pcv.maxValue), pcv.minValue)
+                pcv.b = max(min(1 - (location.y / CGFloat(h)), pcv.maxValue), pcv.minValue)
+                
+                print("s = \(pcv.s), b = \(pcv.b)")
+                
+                moveIndicator()
+                
+                sbSelectionDelegate?.onSBChanged()
+            }
         }
     }
     
     private func moveIndicator() {
-        indicator.frame = CGRect(x: CGFloat(w) * s - indicatorSize / 2,
-                                 y: CGFloat(h) - CGFloat(h) * b - indicatorSize / 2, width: indicatorSize, height: indicatorSize)
-        indicator.setNeedsDisplay()
+        if let pcv = pcv {
+            indicator.frame = CGRect(x: CGFloat(w) * pcv.s - indicatorSize / 2,
+                                     y: CGFloat(h) - CGFloat(h) * pcv.b - indicatorSize / 2, width: indicatorSize, height: indicatorSize)
+            indicator.setNeedsDisplay()
+        }
     }
     
-    func setColor(color: UIColor) {
-        var hue: CGFloat = 0
-        var saturation: CGFloat = 0
-        var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
-        
-        color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        
-        s = saturation
-        b = brightness
-        self.hue = hue
-        
+    func setPCV(pcv: PickedColorValues) {
+        self.pcv = pcv
         setNeedsDisplay()
-    }
-    
-    // Hue Selection
-    func onHueSelected(hue: CGFloat) {
-        self.hue = hue / CGFloat(maxHue)
-        colorSelectionDelegate?.onColorSelected(selectedColor: UIColor(hue: self.hue,
-                                                               saturation: s,
-                                                               brightness: b,
-                                                               alpha: 1.0))
-        setNeedsDisplay()
+        moveIndicator()
     }
 }
