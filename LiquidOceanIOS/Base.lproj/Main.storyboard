@@ -4655,11 +4655,11 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFJ-33-dDy" customClass="PaletteColorsView" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="288" y="16" width="320" height="80"/>
+                                <rect key="frame" x="298" y="21" width="300" height="75"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="UDe-oI-3k7"/>
-                                    <constraint firstAttribute="height" constant="80" id="hg3-S5-BoB"/>
+                                    <constraint firstAttribute="width" secondItem="tFJ-33-dDy" secondAttribute="height" multiplier="4:1" id="29n-cp-trf"/>
+                                    <constraint firstAttribute="width" constant="300" id="UDe-oI-3k7"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ei9-pC-CvA" customClass="RGBColorWheel" customModule="LiquidOceanIOS" customModuleProvider="target">
@@ -4804,7 +4804,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7P-v0-6qV">
-                                <rect key="frame" x="368" y="111" width="160" height="35"/>
+                                <rect key="frame" x="40" y="111" width="160" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="Gaf-27-dqU"/>
                                     <constraint firstAttribute="height" constant="35" id="zq0-oK-5Qf"/>
@@ -4841,7 +4841,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="rhx-NH-k3X" firstAttribute="top" secondItem="lvi-9o-8dA" secondAttribute="bottom" constant="13" id="VKv-wc-gga"/>
                             <constraint firstItem="Sc2-1d-Ncl" firstAttribute="top" secondItem="inL-Wg-wBW" secondAttribute="bottom" id="Vea-iM-1KM"/>
                             <constraint firstItem="lvi-9o-8dA" firstAttribute="trailing" secondItem="5Ft-3z-ZNp" secondAttribute="trailing" id="WwH-LI-Cuq"/>
-                            <constraint firstItem="U7P-v0-6qV" firstAttribute="centerX" secondItem="jv7-2W-5qR" secondAttribute="centerX" id="aiR-e9-nJd"/>
+                            <constraint firstItem="U7P-v0-6qV" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="40" id="dTc-ti-zWn"/>
                             <constraint firstItem="5Ft-3z-ZNp" firstAttribute="centerY" secondItem="QCg-aQ-1VC" secondAttribute="centerY" id="eSn-yj-urz"/>
                             <constraint firstItem="h0N-sp-If7" firstAttribute="top" secondItem="Ei9-pC-CvA" secondAttribute="bottom" constant="20" id="fcl-6y-vNb"/>
                             <constraint firstItem="28z-Af-cko" firstAttribute="leading" secondItem="h0N-sp-If7" secondAttribute="trailing" constant="23" id="hoq-4l-Ost"/>
@@ -4861,13 +4861,18 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <outlet property="bPalatte" destination="QCg-aQ-1VC" id="OET-Va-Kij"/>
                         <outlet property="brightnessValueTextField" destination="5Ft-3z-ZNp" id="UuD-T9-tfm"/>
                         <outlet property="cancelButton" destination="KYf-Tg-fYU" id="pMn-su-Kee"/>
+                        <outlet property="cancelButtonWidth" destination="c8J-Fr-PKe" id="6cH-Dw-xZs"/>
                         <outlet property="colorHexTextField" destination="mJj-dd-cXe" id="6fl-IF-z67"/>
                         <outlet property="colorIndicatorView" destination="inL-Wg-wBW" id="lF0-Gp-t7j"/>
                         <outlet property="hPalette" destination="h0N-sp-If7" id="jIK-iJ-saX"/>
                         <outlet property="hueValueTextField" destination="28z-Af-cko" id="cqY-vX-nte"/>
                         <outlet property="keyboardLiftViewHeight" destination="1Ep-sZ-gXu" id="fDH-9y-zeW"/>
+                        <outlet property="loadPaletteButtonWidth" destination="Gaf-27-dqU" id="kHQ-Cy-Az3"/>
+                        <outlet property="okButtonWidth" destination="de2-UR-F3m" id="IMC-S7-gLx"/>
                         <outlet property="oldColorIndicatorView" destination="Sc2-1d-Ncl" id="PMk-7r-9fP"/>
+                        <outlet property="paletteAspectRatio" destination="29n-cp-trf" id="NxK-Ae-FiO"/>
                         <outlet property="paletteColorsView" destination="tFJ-33-dDy" id="pA4-XC-k5S"/>
+                        <outlet property="paletteWidth" destination="UDe-oI-3k7" id="9A3-Xn-dHy"/>
                         <outlet property="rgbColorWheel" destination="Ei9-pC-CvA" id="Wzr-wX-5b8"/>
                         <outlet property="sPalette" destination="1jO-7p-UKO" id="eaP-V3-Lr4"/>
                         <outlet property="saturationValueTextField" destination="Y66-zh-NIU" id="Eb4-qG-URS"/>

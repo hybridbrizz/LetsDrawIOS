@@ -44,6 +44,13 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     
     @IBOutlet weak var paletteColorsView: PaletteColorsView!
     
+    @IBOutlet weak var paletteAspectRatio: NSLayoutConstraint!
+    @IBOutlet weak var paletteWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var cancelButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var okButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var loadPaletteButtonWidth: NSLayoutConstraint!
+    
     var colorSelectionDelegate: ColorSelectionDelegate? = nil
     var layoutDelegate: ColorPicker2LayoutDelegate? = nil
     
@@ -89,6 +96,14 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         hueValueTextField.addTarget(self, action: #selector(hueTextFieldDidChange), for: .editingChanged)
         saturationValueTextField.addTarget(self, action: #selector(saturationTextFieldDidChange), for: .editingChanged)
         brightnessValueTextField.addTarget(self, action: #selector(brightnessTextFieldDidChange), for: .editingChanged)
+        
+        let width = view.frame.width
+        paletteWidth.constant = width - 80
+        
+        let buttonWidth = (width - 80 - 20) / 2
+        cancelButtonWidth.constant = buttonWidth
+        okButtonWidth.constant = buttonWidth
+        loadPaletteButtonWidth.constant = buttonWidth
     }
     
     func setColor(color: UIColor) {
