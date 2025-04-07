@@ -17,6 +17,7 @@ protocol ColorPicker2LayoutDelegate: AnyObject {
 protocol ColorSelectionDelegate: AnyObject {
     func onColorSelected(selectedColor: UIColor)
     func onColorSelectionCancel()
+    func onPickCanvas()
 }
 
 class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSelectionDelegate,
@@ -316,6 +317,10 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         else {
             paletteColorsView.mode = .select
         }
+    }
+    
+    @IBAction func onPickCanvas(_ sender: Any) {
+        colorSelectionDelegate?.onPickCanvas()
     }
     
     @objc func onOldColorIndicatorTap() {

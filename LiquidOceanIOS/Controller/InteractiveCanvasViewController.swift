@@ -273,6 +273,8 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     var landscapeLockTask: Task<(), any Error>? = nil
     
+    var pickingColor = false
+    
     override func viewWillAppear(_ animated: Bool) {
         AppDelegate.OrientationUtility.lockOrientation(UIInterfaceOrientationMask.landscape)
         
@@ -1448,6 +1450,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func notifyPaintColorUpdate(color: UIColor) {
         colorPicker2ViewController.setColor(color: color)
+        
+        if pickingColor {
+            colorPickerFrame.isHidden = false
+            pickingColor = false
+        }
     }
     
     // color picker delegate
@@ -2282,6 +2289,11 @@ class InteractiveCanvasViewController: UIViewController, InteractiveCanvasPaintD
     
     func onColorSelectionCancel() {
         closeColorPicker()
+    }
+    
+    func onPickCanvas() {
+        colorPickerFrame.isHidden = true
+        pickingColor = true
     }
     
     func updateColorPanelIcons(color: Int32) {

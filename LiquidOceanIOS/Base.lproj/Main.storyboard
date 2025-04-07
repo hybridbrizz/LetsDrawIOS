@@ -4817,6 +4817,20 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <action selector="onLoadColorPressed:" destination="J99-Ay-ID7" eventType="touchUpInside" id="70F-91-kUg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FW7-20-Btv">
+                                <rect key="frame" x="731" y="111" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Qdi-ad-6DM"/>
+                                    <constraint firstAttribute="height" constant="35" id="TrC-0L-0vo"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="Colorize">
+                                    <color key="baseBackgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="onPickCanvas:" destination="J99-Ay-ID7" eventType="touchUpInside" id="mXO-BA-5U7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DeZ-vW-XnC"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4832,6 +4846,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="h0N-sp-If7" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="40" id="ITf-sf-zx6"/>
                             <constraint firstAttribute="trailing" secondItem="28z-Af-cko" secondAttribute="trailing" constant="40" id="KBr-Tq-4lB"/>
                             <constraint firstAttribute="trailing" secondItem="5Ft-3z-ZNp" secondAttribute="trailing" constant="40" id="KVk-az-nSM"/>
+                            <constraint firstItem="FW7-20-Btv" firstAttribute="centerY" secondItem="U7P-v0-6qV" secondAttribute="centerY" id="M16-so-O9b"/>
                             <constraint firstItem="inL-Wg-wBW" firstAttribute="top" secondItem="tFJ-33-dDy" secondAttribute="bottom" constant="70" id="NBl-iD-Yqb"/>
                             <constraint firstItem="rhx-NH-k3X" firstAttribute="centerX" secondItem="jv7-2W-5qR" secondAttribute="centerX" id="P8v-e4-0YN"/>
                             <constraint firstAttribute="bottom" secondItem="rhx-NH-k3X" secondAttribute="bottom" constant="50" id="QkQ-dx-nx9"/>
@@ -4841,6 +4856,8 @@ If any person on any canvas uses pixels to give out any personal information abo
                             <constraint firstItem="rhx-NH-k3X" firstAttribute="top" secondItem="lvi-9o-8dA" secondAttribute="bottom" constant="13" id="VKv-wc-gga"/>
                             <constraint firstItem="Sc2-1d-Ncl" firstAttribute="top" secondItem="inL-Wg-wBW" secondAttribute="bottom" id="Vea-iM-1KM"/>
                             <constraint firstItem="lvi-9o-8dA" firstAttribute="trailing" secondItem="5Ft-3z-ZNp" secondAttribute="trailing" id="WwH-LI-Cuq"/>
+                            <constraint firstItem="inL-Wg-wBW" firstAttribute="top" secondItem="FW7-20-Btv" secondAttribute="bottom" constant="20" id="aqo-cG-yfV"/>
+                            <constraint firstItem="mJj-dd-cXe" firstAttribute="leading" secondItem="FW7-20-Btv" secondAttribute="trailing" constant="20" id="dCD-m5-rIk"/>
                             <constraint firstItem="U7P-v0-6qV" firstAttribute="leading" secondItem="jv7-2W-5qR" secondAttribute="leading" constant="40" id="dTc-ti-zWn"/>
                             <constraint firstItem="5Ft-3z-ZNp" firstAttribute="centerY" secondItem="QCg-aQ-1VC" secondAttribute="centerY" id="eSn-yj-urz"/>
                             <constraint firstItem="h0N-sp-If7" firstAttribute="top" secondItem="Ei9-pC-CvA" secondAttribute="bottom" constant="20" id="fcl-6y-vNb"/>
@@ -4990,6 +5007,7 @@ If any person on any canvas uses pixels to give out any personal information abo
         <segue reference="N4G-oK-EKi"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Colorize" width="24" height="24"/>
         <image name="Erase" width="11" height="11"/>
         <image name="Palette 1" width="48" height="48"/>
         <image name="add" width="24" height="24"/>
