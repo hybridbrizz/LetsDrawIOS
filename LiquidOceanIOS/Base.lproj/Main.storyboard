@@ -4839,7 +4839,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-9o-8dA">
                                                 <rect key="frame" x="40" y="761" width="816" height="0.0"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="1Ep-sZ-gXu"/>
                                                 </constraints>

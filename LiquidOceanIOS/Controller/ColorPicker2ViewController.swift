@@ -102,10 +102,18 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         saturationValueTextField.addTarget(self, action: #selector(saturationTextFieldDidChange), for: .editingChanged)
         brightnessValueTextField.addTarget(self, action: #selector(brightnessTextFieldDidChange), for: .editingChanged)
         
-        colorHexTextField.backgroundColor = UIColor.black
-        colorHexTextField.layer.borderWidth = 1
-        colorHexTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
-        colorHexTextField.layer.cornerRadius = 5
+        let textFields = [colorHexTextField, hueValueTextField, saturationValueTextField, brightnessValueTextField]
+        
+        for textField in textFields {
+            if let textField = textField {
+                textField.backgroundColor = UIColor.black
+                textField.layer.borderWidth = 1
+                textField.layer.borderColor = UIColor.white.withAlphaComponent(0.15).cgColor
+                textField.layer.cornerRadius = 5
+                
+                textField.textColor = UIColor.white
+            }
+        }
         
         let width = view.frame.width
         paletteWidth.constant = width - 80
@@ -153,8 +161,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
             topViewHeight.constant = 0
         }
         
-        // By Ben Gotow
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom), animated: false)
+        scrollToBottom()
     }
     
     func getUIColor(pcv: PickedColorValues) -> UIColor {
@@ -313,6 +320,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height
             keyboardLiftViewHeight.constant = keyboardHeight
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom + keyboardHeight), animated: true)
         }
     }
     
@@ -348,5 +356,10 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         if let oldColor = oldColor {
             setColor(color: oldColor)
         }
+    }
+    
+    func scrollToBottom() {
+        // By Ben Gotow
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom), animated: true)
     }
 }
