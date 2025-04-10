@@ -98,6 +98,11 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         saturationValueTextField.addTarget(self, action: #selector(saturationTextFieldDidChange), for: .editingChanged)
         brightnessValueTextField.addTarget(self, action: #selector(brightnessTextFieldDidChange), for: .editingChanged)
         
+        colorHexTextField.backgroundColor = UIColor.black
+        colorHexTextField.layer.borderWidth = 1
+        colorHexTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        colorHexTextField.layer.cornerRadius = 5
+        
         let width = view.frame.width
         paletteWidth.constant = width - 80
         
