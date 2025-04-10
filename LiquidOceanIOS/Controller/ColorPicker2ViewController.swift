@@ -24,7 +24,9 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
                                     SatSelectionDelegate, BSelectionDelegate, UITextFieldDelegate,
                                   PaletteColorsLoadDelegate, PaletteColorsDelegate {
     
-//    @IBOutlet weak var sbPalette: SBPalette!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
     @IBOutlet weak var rgbColorWheel: RGBColorWheel!
     @IBOutlet weak var hPalette: HPalette!
     @IBOutlet weak var sPalette: SPalette!
@@ -51,6 +53,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @IBOutlet weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var okButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var loadPaletteButtonWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     
     var colorSelectionDelegate: ColorSelectionDelegate? = nil
     var layoutDelegate: ColorPicker2LayoutDelegate? = nil
@@ -140,6 +144,17 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         bPalatte.setPCV(pcv: pcv)
         
         syncViews()
+        
+        let scrollHeightDiff = scrollView.frame.size.height - contentView.frame.size.height
+        if scrollHeightDiff > 0 {
+            topViewHeight.constant = scrollHeightDiff
+        }
+        else {
+            topViewHeight.constant = 0
+        }
+        
+        // By Ben Gotow
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom), animated: false)
     }
     
     func getUIColor(pcv: PickedColorValues) -> UIColor {
