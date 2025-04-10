@@ -132,6 +132,9 @@ class RGBColorWheel: UIView {
             context.restoreGState()
         }
         
+        context.setAllowsAntialiasing(true)
+        context.setShouldAntialias(true)
+        
         // Optional: draw a subtle border around the wheel for definition
         context.setStrokeColor(UIColor.white.cgColor)
         context.setLineWidth(1 / UIScreen.main.scale)

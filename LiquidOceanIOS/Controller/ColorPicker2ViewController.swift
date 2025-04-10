@@ -122,6 +122,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         cancelButtonWidth.constant = buttonWidth
         okButtonWidth.constant = buttonWidth
         loadPaletteButtonWidth.constant = buttonWidth
+        
+        applyTopFrame()
     }
     
     func setColor(color: UIColor) {
@@ -152,17 +154,20 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         bPalatte.setPCV(pcv: pcv)
         
         syncViews()
-        
+        applyTopFrame()
+    }
+    
+    func applyTopFrame() {
         let scrollHeightDiff = scrollView.frame.size.height - contentView.frame.size.height
         if scrollHeightDiff > 0 {
             topViewHeight.constant = scrollHeightDiff
         }
         else {
             topViewHeight.constant = 0
+            scrollToBottom()
         }
-        
-        scrollToBottom()
     }
+
     
     func getUIColor(pcv: PickedColorValues) -> UIColor {
         return UIColor(hue: pcv.h, saturation: pcv.s, brightness: pcv.b, alpha: 1.0)
