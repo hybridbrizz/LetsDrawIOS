@@ -2562,17 +2562,17 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoZ-vF-uEO">
-                                <rect key="frame" x="0.0" y="-326" width="896" height="740"/>
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <subviews>
                                     <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpT-yf-Thz">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                         <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="0.81000000000000005" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="vlp-4O-A3P" kind="embed" identifier="ColorPickerEmbed" id="WcB-8f-H9a"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMH-ZX-iiz">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="740"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                         <connections>
                                             <segue destination="J99-Ay-ID7" kind="embed" identifier="ColorPicker2Embed" id="PSG-Js-OXX"/>
                                         </connections>
@@ -2584,7 +2584,6 @@
                                     <constraint firstItem="lpT-yf-Thz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="EIl-b3-eR0"/>
                                     <constraint firstAttribute="bottom" secondItem="oMH-ZX-iiz" secondAttribute="bottom" id="JzB-cc-1FT"/>
                                     <constraint firstAttribute="trailing" secondItem="oMH-ZX-iiz" secondAttribute="trailing" id="Oeg-iY-NZh"/>
-                                    <constraint firstAttribute="height" constant="740" id="RjT-v4-7fj"/>
                                     <constraint firstAttribute="trailing" secondItem="lpT-yf-Thz" secondAttribute="trailing" id="Tfq-b0-dM2"/>
                                     <constraint firstAttribute="bottom" secondItem="lpT-yf-Thz" secondAttribute="bottom" id="bQb-Wu-1Hn"/>
                                     <constraint firstItem="oMH-ZX-iiz" firstAttribute="leading" secondItem="xoZ-vF-uEO" secondAttribute="leading" id="cNi-8G-JZu"/>
@@ -2943,6 +2942,7 @@
                             <constraint firstItem="Xy2-vk-Qhk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fhI-VV-iE3"/>
                             <constraint firstItem="okW-yE-v0s" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="h9O-tS-eQI"/>
                             <constraint firstAttribute="trailing" secondItem="Yzu-bO-Iw1" secondAttribute="trailing" id="hLN-vm-YbT"/>
+                            <constraint firstItem="xoZ-vF-uEO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hv7-Uy-t2H"/>
                             <constraint firstAttribute="bottom" secondItem="UYW-Te-7QB" secondAttribute="bottom" id="iYx-f0-fMa"/>
                             <constraint firstAttribute="trailing" secondItem="tjQ-fj-IaW" secondAttribute="trailing" id="mAe-R8-kMC"/>
                             <constraint firstItem="ji3-kJ-24b" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="muC-SQ-6KY"/>
@@ -4913,7 +4913,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bew-4D-6bF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573" y="-1441"/>
+            <point key="canvasLocation" x="571" y="-1619"/>
         </scene>
         <!--Help Messages View Controller-->
         <scene sceneID="sex-f2-02p">
