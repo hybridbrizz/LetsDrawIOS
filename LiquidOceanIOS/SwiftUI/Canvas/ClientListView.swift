@@ -51,7 +51,7 @@ struct ClientListView: View {
                                     .background(Color(UIColor(argb: info.color)), in: Circle())
                                     Spacer().frame(width: 8)
                                     
-                                    let name = info.name == cClientName ? "\(info.name) (me)" : info.name
+                                    let name = info.name == cClientName ? "\(info.name) (you)" : info.name
                                     
                                     Text(name)
                                         .foregroundStyle(.white)
