@@ -281,7 +281,7 @@ class SessionSettings: NSObject {
     func load() {
         sentUniqueId = userDefaultsBool(forKey: "sent_unique_id", defaultVal: false)
         
-        paintColor = userDefaultsInt32(forKey: "paint_color", defaultVal: Utils.int32FromColorHex(hex: "0xff023020"))
+        paintColor = userDefaultsInt32(forKey: "paint_color", defaultVal: Utils.int32FromColorHex(hex: "0xffffffff"))
         
         darkIcons = userDefaultsBool(forKey: "dark_icons", defaultVal: false)
         
@@ -793,34 +793,23 @@ class SessionSettings: NSObject {
     
     func getStartingHelpMessages() -> [String] {
         var messages = [String]()
-        messages.append("Double tap canvas for menu")
-        messages.append("Long press pixel for edit history")
-        messages.append("Tap color area for color selection")
-        messages.append("Tap brush to edit canvas")
-        messages.append("Number shows remaining edits")
-        messages.append("Edits accrue for everyone")
+        messages.append("Double tap the canvas for a menu")
+        messages.append("Pick a color by pressing the palette icon")
+        messages.append("Load your palette colors inside the color picker")
+        messages.append("Edit the canvas by pressing the paint icon")
+        messages.append("The number shows remaining edits")
+        messages.append("Erase the canvas by pressing the erase icon")
+        messages.append("Long press a pixel for an edit history")
+    
         return messages
     }
     
     func initPaletteColors() {
         paletteColors.removeAll()
         
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffffff"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff999999"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff000000"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffff0000"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff00ff00"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff0000ff"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffff00"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffff00ff"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff00ffff"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffFFA500"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xffffc0cb"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff964b00"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff000040"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff8B0000"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff800080"))
-        paletteColors.append(Utils.int32FromColorHex(hex: "0xff023020"))
+        for i in 0..<16 {
+            paletteColors.append(Utils.int32FromColorHex(hex: "0xFFFFFFFF"))
+        }
     }
     
     func loadColorIntoPalette(color: Int32, index: Int) {

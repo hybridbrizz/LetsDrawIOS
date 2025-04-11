@@ -1693,10 +1693,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2G2-T6-VzL">
-                                <rect key="frame" x="348" y="107" width="200" height="200"/>
+                                <rect key="frame" x="298" y="57" width="300" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="LcS-qW-kRO"/>
-                                    <constraint firstAttribute="height" constant="200" id="b9q-b6-pNH"/>
+                                    <constraint firstAttribute="width" constant="300" id="LcS-qW-kRO"/>
+                                    <constraint firstAttribute="height" constant="300" id="b9q-b6-pNH"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting to world server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h2i-AB-1jL">
@@ -1720,7 +1720,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROJ-rR-h5F" customClass="LoadingBar" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                <rect key="frame" x="328" y="310" width="240" height="24"/>
+                                <rect key="frame" x="328" y="260" width="240" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="3Q1-RW-fkX"/>
@@ -1728,7 +1728,7 @@
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game tip here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="HQe-ix-IAx">
-                                <rect key="frame" x="20" y="344" width="856" height="50"/>
+                                <rect key="frame" x="20" y="314" width="856" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NWo-t9-W5m"/>
                                 </constraints>
@@ -2026,7 +2026,7 @@
                             <constraint firstItem="ePI-JI-B43" firstAttribute="centerY" secondItem="ox1-JT-C2l" secondAttribute="centerY" id="G9e-5Q-Kc6"/>
                             <constraint firstItem="HQe-ix-IAx" firstAttribute="leading" secondItem="IBZ-1L-lqc" secondAttribute="leading" constant="20" id="HEn-tt-lhg"/>
                             <constraint firstItem="U5e-vE-uKA" firstAttribute="leading" secondItem="h2i-AB-1jL" secondAttribute="trailing" constant="4" id="Jea-P4-ZQt"/>
-                            <constraint firstItem="HQe-ix-IAx" firstAttribute="top" secondItem="ROJ-rR-h5F" secondAttribute="bottom" constant="10" id="K2e-UT-HTS"/>
+                            <constraint firstItem="HQe-ix-IAx" firstAttribute="top" secondItem="ROJ-rR-h5F" secondAttribute="bottom" constant="30" id="K2e-UT-HTS"/>
                             <constraint firstItem="vaK-z4-Ul6" firstAttribute="top" secondItem="ox1-JT-C2l" secondAttribute="top" constant="32" id="Ljv-1g-jtj"/>
                             <constraint firstItem="3bq-uc-vfw" firstAttribute="centerY" secondItem="ox1-JT-C2l" secondAttribute="centerY" id="Pmb-4u-S0b"/>
                             <constraint firstAttribute="trailing" secondItem="3bq-uc-vfw" secondAttribute="trailing" constant="50" id="RRX-Uo-a3O"/>
@@ -2035,7 +2035,7 @@
                             <constraint firstItem="IBZ-1L-lqc" firstAttribute="trailing" secondItem="HQe-ix-IAx" secondAttribute="trailing" constant="20" id="YmV-b0-NAF"/>
                             <constraint firstItem="ePI-JI-B43" firstAttribute="centerX" secondItem="ox1-JT-C2l" secondAttribute="centerX" id="bAf-Dh-ZnX"/>
                             <constraint firstItem="2G2-T6-VzL" firstAttribute="centerX" secondItem="ox1-JT-C2l" secondAttribute="centerX" id="g9T-My-1ZI"/>
-                            <constraint firstAttribute="bottom" secondItem="HQe-ix-IAx" secondAttribute="bottom" constant="20" id="geQ-rT-CQ2"/>
+                            <constraint firstAttribute="bottom" secondItem="HQe-ix-IAx" secondAttribute="bottom" constant="50" id="geQ-rT-CQ2"/>
                             <constraint firstItem="U5e-vE-uKA" firstAttribute="bottom" secondItem="h2i-AB-1jL" secondAttribute="bottom" id="jV5-0j-HZ7"/>
                             <constraint firstItem="Hdm-Ql-wnR" firstAttribute="centerY" secondItem="ox1-JT-C2l" secondAttribute="centerY" id="kd9-U1-Kij"/>
                             <constraint firstItem="yPz-Xf-tw3" firstAttribute="centerY" secondItem="ox1-JT-C2l" secondAttribute="centerY" id="pmk-bH-fxV"/>
@@ -3734,7 +3734,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvk-dJ-XaX">
                                                 <rect key="frame" x="40" y="0.0" width="816" height="1000"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <string key="text">Terms of Service
+                                                <mutableString key="text">Terms of Use
 
 Pixels: Together ("software", “service”, “app”) is provided by Matrix Warez Ltd. ("developer", "publisher") as is whereby any feature, bug or issue with the app is not the responsibility of the developers or publishers of the service to withhold or upkeep. You must be at least 13 years of age to use this service.
 
@@ -3756,8 +3756,8 @@ If any person on any canvas uses pixels to give out any personal information abo
 
 
 
-</string>
-                                                <color key="textColor" red="0.33725490200000002" green="0.83921568629999999" blue="0.46931997710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</mutableString>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -4965,30 +4965,30 @@ If any person on any canvas uses pixels to give out any personal information abo
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YnZ-s5-aA6">
                                 <rect key="frame" x="0.0" y="50" width="320" height="360"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="a7t-n2-dEf">
-                                    <size key="itemSize" width="240" height="45"/>
-                                    <size key="estimatedItemSize" width="240" height="45"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="itemSize" width="240" height="80"/>
+                                    <size key="estimatedItemSize" width="240" height="80"/>
+                                    <size key="headerReferenceSize" width="240" height="60"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HelpMessageView" id="9UB-eE-EKD" customClass="HelpMessageViewCell" customModule="LiquidOceanIOS" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="0.0" width="240" height="45"/>
+                                        <rect key="frame" x="40" y="60" width="240" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DwC-2v-TvF">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-Wm-g2t">
-                                                    <rect key="frame" x="10" y="1.5" width="220" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the long messge that will be on two lines" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-Wm-g2t">
+                                                    <rect key="frame" x="10" y="0.0" width="220" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="220" id="Pyg-0g-T3P"/>
-                                                        <constraint firstAttribute="height" constant="42" id="ZDP-HT-j4C"/>
+                                                        <constraint firstAttribute="height" constant="80" id="ZDP-HT-j4C"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -4998,12 +4998,33 @@ If any person on any canvas uses pixels to give out any personal information abo
                                                 <constraint firstItem="3uZ-Wm-g2t" firstAttribute="leading" secondItem="DwC-2v-TvF" secondAttribute="leading" constant="10" id="zQ4-hL-hCp"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="240" height="45"/>
+                                        <size key="customSize" width="240" height="80"/>
                                         <connections>
                                             <outlet property="msg" destination="3uZ-Wm-g2t" id="FKn-DQ-61u"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HelpHeaderView" id="YG9-iI-VFM" customClass="HelpHeaderView" customModule="LiquidOceanIOS" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A few tip to help you get started." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2C-vX-geM">
+                                            <rect key="frame" x="40" y="0.0" width="240" height="60"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="B2C-vX-geM" secondAttribute="trailing" constant="40" id="0VU-rU-Ect"/>
+                                        <constraint firstItem="B2C-vX-geM" firstAttribute="leading" secondItem="YG9-iI-VFM" secondAttribute="leading" constant="40" id="53j-ia-LkV"/>
+                                        <constraint firstAttribute="bottom" secondItem="B2C-vX-geM" secondAttribute="bottom" id="Lo8-vI-lgE"/>
+                                        <constraint firstItem="B2C-vX-geM" firstAttribute="top" secondItem="YG9-iI-VFM" secondAttribute="top" id="g1k-fd-V1B"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="B2C-vX-geM" id="Ltx-QB-oy1"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="guW-4W-tmi" id="47C-ff-xp4"/>
                                     <outlet property="delegate" destination="guW-4W-tmi" id="njC-8S-wnQ"/>
@@ -5016,12 +5037,12 @@ If any person on any canvas uses pixels to give out any personal information abo
                                     <constraint firstAttribute="width" constant="50" id="biU-pb-xVg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NfB-xu-thU"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YnZ-s5-aA6" firstAttribute="top" secondItem="38p-Im-DIP" secondAttribute="top" constant="50" id="3or-TO-s45"/>
                             <constraint firstAttribute="trailing" secondItem="yTu-1i-asL" secondAttribute="trailing" id="Crx-Yd-6ru"/>

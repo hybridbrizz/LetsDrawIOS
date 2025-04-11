@@ -121,8 +121,22 @@ class PaletteColorsView: UIView, PaletteColorsChangedDelegate {
         }
         
         if mode == .load {
-            ctx.setStrokeColor(UIColor.white.cgColor)
-            ctx.setLineWidth(2)
+            var count = 0
+            let whiteColor = Utils.int32FromColorHex(hex: "0xffffffff")
+            for color in paletteColors {
+                if color == whiteColor {
+                    count += 1
+                }
+            }
+            
+            if count > 7 {
+                ctx.setStrokeColor(UIColor.black.cgColor)
+            }
+            else {
+                ctx.setStrokeColor(UIColor.white.cgColor)
+            }
+            
+            ctx.setLineWidth(1)
             
             for i in 0..<rows {
                 for j in 0..<cols {

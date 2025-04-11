@@ -23,6 +23,7 @@
 		0704FB98273984C9009799E1 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0704FB8F273984C8009799E1 /* Inter-Light.ttf */; };
 		0704FB99273984C9009799E1 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0704FB90273984C9009799E1 /* Inter-ExtraBold.ttf */; };
 		0704FB9B2739A511009799E1 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704FB9A2739A511009799E1 /* InsetLabel.swift */; };
+		070521AA2DA8C6CA00614F93 /* HelpHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070521A92DA8C6CA00614F93 /* HelpHeaderView.swift */; };
 		0707C5E62D63AAA5008E0120 /* PendingUndo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0707C5E52D63AAA5008E0120 /* PendingUndo.swift */; };
 		070DA9DD2732B97800D76775 /* CanvasImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DA9DC2732B97800D76775 /* CanvasImportViewController.swift */; };
 		070DA9DF2732B98500D76775 /* CanvasExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */; };
@@ -199,6 +200,7 @@
 		0704FB8F273984C8009799E1 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
 		0704FB90273984C9009799E1 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
 		0704FB9A2739A511009799E1 /* InsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
+		070521A92DA8C6CA00614F93 /* HelpHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpHeaderView.swift; sourceTree = "<group>"; };
 		0707C5E52D63AAA5008E0120 /* PendingUndo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingUndo.swift; sourceTree = "<group>"; };
 		070DA9DC2732B97800D76775 /* CanvasImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasImportViewController.swift; sourceTree = "<group>"; };
 		070DA9DE2732B98500D76775 /* CanvasExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasExportViewController.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 				07EF25562D8CD25A0083163B /* PaletteColorsView.swift */,
 				071ACA622D8F231300490385 /* HelpMessageViewCell.swift */,
 				0746FCED2DA1EDD7006A45BC /* UIView+showToast.swift */,
+				070521A92DA8C6CA00614F93 /* HelpHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				071ACA5D2D8F131200490385 /* HelpListView.swift in Sources */,
 				0704FB9B2739A511009799E1 /* InsetLabel.swift in Sources */,
 				0788916B2D74AF4700B4041B /* CanvasMenuView.swift in Sources */,
+				070521AA2DA8C6CA00614F93 /* HelpHeaderView.swift in Sources */,
 				076E4EA62D7BA7B0004C363E /* ColorPicker2ViewController.swift in Sources */,
 				0731602B28A0159B00466BC4 /* ButtonFrame.swift in Sources */,
 				07BD25C725D43FB500CF812E /* AppDelegate.swift in Sources */,

@@ -43,10 +43,22 @@ class HelpMessagesViewController: UIViewController, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpMessageView", for: indexPath) as! HelpMessageViewCell
         
-        cell.msg.text = helpMessages[indexPath.item].msg
+        cell.msg.text = "\(indexPath.item + 1).) \(helpMessages[indexPath.item].msg)"
         cell.msg.font = UIFont(name: "Inter-Medium", size: 14)!
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HelpHeaderView", for: indexPath) as! HelpHeaderView
+        
+        headerView.titleLabel.text = "A few tips to help you get started."
+        
+        return headerView
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 240, height: 80)
     }
     
     @objc func didTapClose() {
