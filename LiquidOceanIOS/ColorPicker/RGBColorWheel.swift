@@ -137,8 +137,8 @@ class RGBColorWheel: UIView {
         
         // Optional: draw a subtle border around the wheel for definition
         context.setStrokeColor(UIColor.white.cgColor)
-        context.setLineWidth(1 / UIScreen.main.scale)
-        context.addArc(center: center, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: false)
+        context.setLineWidth(1)
+        context.addArc(center: center, radius: radius - 1, startAngle: 0, endAngle: 2 * .pi, clockwise: false)
         context.strokePath()
     }
     

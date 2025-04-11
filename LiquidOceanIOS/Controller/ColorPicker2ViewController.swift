@@ -254,10 +254,12 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         let range = NSRange(location: 0, length: textField.text!.count)
         let regex = try! NSRegularExpression(pattern: "[A-F0-9]{6}")
         
-        let result = regex.firstMatch(in: textField.text!, options: [], range: range)
+        let text = textField.text!.uppercased()
+        
+        let result = regex.firstMatch(in: text, options: [], range: range)
     
-        if result != nil && textField.text!.count == 6 {
-            setColor(color: UIColor(hexString: textField.text!))
+        if result != nil && text.count == 6 {
+            setColor(color: UIColor(hexString: text))
             textField.resignFirstResponder()
         }
     }
