@@ -18,16 +18,6 @@ struct ServerListsView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            if !isPortrait {
-                ZStack {}
-                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
-                Spacer()
-                    .frame(width: 10)
-                ZStack {}
-                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
-            }
             ZStack {
                 VStack(spacing: 0) {
                     ZStack(alignment: .trailing) {
@@ -129,16 +119,6 @@ struct ServerListsView: View {
                         )
                     }
                 }
-            }
-            if !isPortrait {
-                ZStack {}
-                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
-                Spacer()
-                    .frame(width: 10)
-                ZStack {}
-                    .frame(minWidth: 1, maxWidth: 1, maxHeight: .infinity)
-                    .background(Color(UIColor(argb: Utils.int32FromColorHex(hex: "0xFFFF4D00"))))
             }
         }
         .clipped()

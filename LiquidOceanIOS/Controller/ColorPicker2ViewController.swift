@@ -84,6 +84,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
             
             pendingStartPCV = nil
         }
+        
+        applyColorPaletteAspectRatio()
     }
     
     override func viewDidLayoutSubviews() {
@@ -373,5 +375,35 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     func scrollToBottom() {
         // By Ben Gotow
         self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom), animated: true)
+    }
+    
+    func applyColorPaletteAspectRatio() {
+        let isTablet = UIDevice.current.userInterfaceIdiom == .pad
+        
+        if isTablet {
+            paletteColorsView.rows = 1
+            paletteColorsView.cols = 16
+            
+            // By Claude
+            // Remove the existing constraint
+            self.paletteAspectRatio.isActive = false
+
+            // Create a new constraint with the desired aspect ratio
+            let newAspectRatio = NSLayoutConstraint(
+                item: paletteColorsView,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: paletteColorsView,
+                attribute: .height,
+                multiplier: 16, // or just 8.0 for 16:2
+                constant: 0
+            )
+
+            // Add and activate the new constraint
+            newAspectRatio.isActive = true
+            self.paletteAspectRatio = newAspectRatio
+            
+            paletteColorsView.setNeedsLayout()
+        }
     }
 }
