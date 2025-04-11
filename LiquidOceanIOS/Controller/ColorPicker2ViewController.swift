@@ -212,6 +212,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     func onRGBChanged() {
         hPalette.moveIndicator()
         sPalette.setNeedsDisplay()
+        bPalatte.setNeedsDisplay()
         syncNonSpectrumViews()
     }
     
@@ -233,6 +234,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     // B Selection Delegate
     func onBChanged() {
         rgbColorWheel.setNeedsDisplay()
+        sPalette.setNeedsDisplay()
         syncNonSpectrumViews()
     }
     

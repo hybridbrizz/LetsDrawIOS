@@ -30,6 +30,8 @@ class HelpMessagesViewController: UIViewController, UICollectionViewDataSource, 
         
         let closeTGR = UITapGestureRecognizer(target: self, action: #selector(didTapClose))
         closeLabel.addGestureRecognizer(closeTGR)
+        
+        collectionView.backgroundColor = UIColor.white
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

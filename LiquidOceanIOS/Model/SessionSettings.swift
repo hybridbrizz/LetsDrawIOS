@@ -299,7 +299,7 @@ class SessionSettings: NSObject {
         
         panelBackgroundName = userDefaultsString(forKey: "panel_background", defaultVal: "wood_texture_light.jpg")
         
-        showGridLines = userDefaultsBool(forKey: "show_grid_lines", defaultVal: true)
+        showGridLines = userDefaultsBool(forKey: "show_grid_lines", defaultVal: false)
         
         paintIndicatorFill = userDefaultsBool(forKey: "paint_indicator_fill", defaultVal: false)
         
@@ -793,12 +793,12 @@ class SessionSettings: NSObject {
     
     func getStartingHelpMessages() -> [String] {
         var messages = [String]()
-        messages.append("Double tap the canvas for a menu")
-        messages.append("Pick a color by pressing the palette icon")
+        messages.append("Double tap the canvas for a menu. Tap under to close")
+        messages.append("Pick colors by pressing the palette icon")
         messages.append("Load your palette colors inside the color picker")
-        messages.append("Edit the canvas by pressing the paint icon")
-        messages.append("The number shows remaining edits")
-        messages.append("Erase the canvas by pressing the erase icon")
+        messages.append("Edit the canvas by pressing the paint icon then drawing")
+        messages.append("The number shows your current remaining edits")
+        messages.append("Erase the canvas by pressing the erase icon then drawing")
         messages.append("Long press a pixel for an edit history")
     
         return messages
