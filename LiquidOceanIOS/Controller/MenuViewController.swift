@@ -878,6 +878,10 @@ class MenuViewController: UIViewController, AchievementListener, ServerSelection
     
     func onServerSelected(server: Server) {
         self.selectedServer = server
+        if self.selectedServer.isPublic {
+            let uuid = SessionSettings.instance.publicServerUniqueIds["\(selectedServer.uid)"] ?? ""
+            self.selectedServer.uuid = uuid
+        }
         self.performSegue(withIdentifier: showLoadingScreen, sender: nil)
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(afterServerLoadStarted), userInfo: nil, repeats: false)
     }
