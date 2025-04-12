@@ -86,6 +86,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         }
         
         applyColorPaletteAspectRatio()
+        
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContentView)))
     }
     
     override func viewDidLayoutSubviews() {
@@ -124,8 +126,6 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
         cancelButtonWidth.constant = buttonWidth
         okButtonWidth.constant = buttonWidth
         loadPaletteButtonWidth.constant = buttonWidth
-        
-        applyTopFrame()
     }
     
     func setColor(color: UIColor) {
@@ -259,13 +259,19 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @objc func hexTextFieldDidChange() {
         let textField = colorHexTextField!
         let range = NSRange(location: 0, length: textField.text!.count)
-        let regex = try! NSRegularExpression(pattern: "[A-F0-9]{6}")
+        let regex = try! NSRegularExpression(pattern: "^[A-F0-9]{6}$")
+        let regex2 = try! NSRegularExpression(pattern: "^#[A-F0-9]{6}$")
         
         let text = textField.text!.uppercased()
         
         let result = regex.firstMatch(in: text, options: [], range: range)
+        let result2 = regex2.firstMatch(in: text, options: [], range: range)
     
-        if result != nil && text.count == 6 {
+        if result != nil {
+            setColor(color: UIColor(hexString: "#\(text)"))
+            textField.resignFirstResponder()
+        }
+        else if result2 != nil {
             setColor(color: UIColor(hexString: text))
             textField.resignFirstResponder()
         }
@@ -274,7 +280,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @objc func hueTextFieldDidChange() {
         let textField = hueValueTextField!
         let range = NSRange(location: 0, length: textField.text!.count)
-        let regex = try! NSRegularExpression(pattern: "[0-9]{1,3}")
+        let regex = try! NSRegularExpression(pattern: "^[0-9]{1,3}$")
         
         let result = regex.firstMatch(in: textField.text!, options: [], range: range)
     
@@ -290,7 +296,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @objc func saturationTextFieldDidChange() {
         let textField = saturationValueTextField!
         let range = NSRange(location: 0, length: textField.text!.count)
-        let regex = try! NSRegularExpression(pattern: "[0-9]{1,3}")
+        let regex = try! NSRegularExpression(pattern: "^[0-9]{1,3}$")
         
         let result = regex.firstMatch(in: textField.text!, options: [], range: range)
     
@@ -306,7 +312,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     @objc func brightnessTextFieldDidChange() {
         let textField = brightnessValueTextField!
         let range = NSRange(location: 0, length: textField.text!.count)
-        let regex = try! NSRegularExpression(pattern: "[0-9]{1,3}")
+        let regex = try! NSRegularExpression(pattern: "^[0-9]{1,3}$")
         
         let result = regex.firstMatch(in: textField.text!, options: [], range: range)
     
@@ -335,6 +341,7 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
             keyboardHeight = keyboardRectangle.height
             keyboardLiftViewHeight.constant = keyboardHeight
             self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom + keyboardHeight), animated: true)
+            print("here test test!!!")
         }
     }
     
@@ -375,6 +382,8 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
     func scrollToBottom() {
         // By Ben Gotow
         self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom), animated: true)
+        
+        print("here test 2!!!")
     }
     
     func applyColorPaletteAspectRatio() {
@@ -405,5 +414,12 @@ class ColorPicker2ViewController: UIViewController, RGBSelectionDelegate, HueSel
             
             paletteColorsView.setNeedsLayout()
         }
+    }
+    
+    @objc func didTapContentView() {
+        colorHexTextField.resignFirstResponder()
+        hueValueTextField.resignFirstResponder()
+        saturationValueTextField.resignFirstResponder()
+        brightnessValueTextField.resignFirstResponder()
     }
 }

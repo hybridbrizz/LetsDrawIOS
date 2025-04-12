@@ -4690,7 +4690,7 @@ If any person on any canvas uses pixels to give out any personal information abo
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FW7-20-Btv">
-                                                <rect key="frame" x="731" y="134.5" width="35" height="35"/>
+                                                <rect key="frame" x="721" y="134.5" width="35" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="Qdi-ad-6DM"/>
                                                     <constraint firstAttribute="height" constant="35" id="TrC-0L-0vo"/>
@@ -4704,10 +4704,10 @@ If any person on any canvas uses pixels to give out any personal information abo
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJj-dd-cXe">
-                                                <rect key="frame" x="786" y="135" width="70" height="34"/>
+                                                <rect key="frame" x="776" y="135" width="80" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="C1q-Ge-oyY"/>
-                                                    <constraint firstAttribute="width" constant="70" id="bD1-Y2-K0e"/>
+                                                    <constraint firstAttribute="width" constant="80" id="bD1-Y2-K0e"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>

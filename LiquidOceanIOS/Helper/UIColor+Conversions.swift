@@ -39,7 +39,9 @@ extension UIColor {
         var firstVal: Int32 = 0
         var secondVal: Int32 = 0
         
-        for char in hexString.uppercased() {
+        var str = String(hexString.suffix(6))
+        
+        for char in str.uppercased() {
             if i % 2 == 0 {
                 firstVal = UIColor.numberForCharacter(char: char)
             }
@@ -106,7 +108,7 @@ extension UIColor {
             let b = Int32(fBlue * 255.0)
             let a = Int32(fAlpha * 255.0)
             
-            return chHexString(value: r) + chHexString(value: g) + chHexString(value: b)
+            return "#" + chHexString(value: r) + chHexString(value: g) + chHexString(value: b)
         } else {
             // Could not extract RGBA components:
             return ""
